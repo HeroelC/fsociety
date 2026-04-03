@@ -1,0 +1,455 @@
+// =============================================================================
+// fsociety · _tokens.scss
+// Color scale engine + alias tokens de estado
+// =============================================================================
+//
+// USO:
+//   @use 'tokens' as t;
+//   background: t.$primary-base;
+//   background: var(--fs-primary-hover);   // CSS custom properties
+//
+// ESCALA:
+//   50  → muted      (badge bg, alert sutil, chip bg)
+//   100 → subtle     (hover bg ghost, row highlight)
+//   200 → tint       (selected bg, focus ring fill)
+//   300 → light      (borders en elementos claros)
+//   400 → soft       (íconos, placeholders, disabled)
+//   500 → base       (color principal del token)
+//   600 → hover      (hover en solid buttons)
+//   700 → active     (pressed / active state)
+//   800 → emphasis   (texto sobre fondos del mismo color)
+//   900 → contrast   (texto dark, headings sobre tint/muted)
+// =============================================================================
+
+
+// -----------------------------------------------------------------------------
+// 1. CONFIGURACIÓN — colores base de la librería
+// -----------------------------------------------------------------------------
+
+$fs-primary-hex:   #2563eb !default;
+$fs-secondary-hex: #0ea5e9 !default;
+$fs-tertiary-hex:  #22d3ee !default;
+$fs-neutral-hex:   #64748b !default;
+$fs-success-hex:   #22c55e !default;
+$fs-warning-hex:   #f59e0b !default;
+$fs-danger-hex:    #f43f5e !default;
+
+// Color de mezcla para stops oscuros (en vez de negro puro)
+$fs-dark-mix:  #0f172a !default;
+$fs-light-mix: #ffffff !default;
+
+
+// -----------------------------------------------------------------------------
+// 2. FUNCIÓN PRINCIPAL — generate-scale()
+// -----------------------------------------------------------------------------
+//
+// Genera un color interpolado dentro de la escala de 10 stops.
+// Los stops 50-400 mezclan hacia blanco (más suave que usar lighten()).
+// El stop 500 es el color base puro.
+// Los stops 600-900 mezclan hacia $fs-dark-mix para oscurecer con más riqueza.
+//
+// @param  $base  — color hex base
+// @param  $stop  — número del stop: 50 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900
+// @return color
+
+@function generate-scale($base, $stop) {
+  @if $stop == 50  { @return mix($fs-light-mix, $base, 92%); }
+  @if $stop == 100 { @return mix($fs-light-mix, $base, 80%); }
+  @if $stop == 200 { @return mix($fs-light-mix, $base, 64%); }
+  @if $stop == 300 { @return mix($fs-light-mix, $base, 44%); }
+  @if $stop == 400 { @return mix($fs-light-mix, $base, 22%); }
+  @if $stop == 500 { @return $base; }
+  @if $stop == 600 { @return mix($fs-dark-mix, $base, 16%); }
+  @if $stop == 700 { @return mix($fs-dark-mix, $base, 34%); }
+  @if $stop == 800 { @return mix($fs-dark-mix, $base, 54%); }
+  @if $stop == 900 { @return mix($fs-dark-mix, $base, 72%); }
+
+  @warn "generate-scale(): stop #{$stop} no válido. Usá: 50 100 200 300 400 500 600 700 800 900";
+  @return $base;
+}
+
+
+// -----------------------------------------------------------------------------
+// 3. MIXIN — emit-scale()
+// -----------------------------------------------------------------------------
+//
+// Emite todas las CSS custom properties de una escala completa.
+// Se usa internamente en :root para registrar los tokens.
+//
+// @param $name  — nombre del token: 'primary' | 'secondary' | etc.
+// @param $base  — color hex base
+
+@mixin emit-scale($name, $base) {
+  --fs-#{$name}-50:  #{generate-scale($base, 50)};
+  --fs-#{$name}-100: #{generate-scale($base, 100)};
+  --fs-#{$name}-200: #{generate-scale($base, 200)};
+  --fs-#{$name}-300: #{generate-scale($base, 300)};
+  --fs-#{$name}-400: #{generate-scale($base, 400)};
+  --fs-#{$name}-500: #{generate-scale($base, 500)};
+  --fs-#{$name}-600: #{generate-scale($base, 600)};
+  --fs-#{$name}-700: #{generate-scale($base, 700)};
+  --fs-#{$name}-800: #{generate-scale($base, 800)};
+  --fs-#{$name}-900: #{generate-scale($base, 900)};
+}
+
+
+// -----------------------------------------------------------------------------
+// 4. MIXIN — emit-alias-tokens()
+// -----------------------------------------------------------------------------
+//
+// Emite los alias semánticos que apuntan a los stops de la escala.
+// Estos son los tokens que se usan en los componentes.
+// NUNCA uses los stops numerados directamente en componentes —
+// usá siempre los alias para que el theming funcione.
+//
+// @param $name — nombre del token: 'primary' | 'secondary' | etc.
+
+@mixin emit-alias-tokens($name) {
+  // Estados interactivos
+  --fs-#{$name}-muted:    var(--fs-#{$name}-50);   // badge bg, chip, alert sutil
+  --fs-#{$name}-subtle:   var(--fs-#{$name}-100);  // ghost hover bg, row hover
+  --fs-#{$name}-tint:     var(--fs-#{$name}-200);  // selected bg, focus fill
+  --fs-#{$name}-light:    var(--fs-#{$name}-300);  // borders sobre fondos claros
+  --fs-#{$name}-soft:     var(--fs-#{$name}-400);  // íconos, placeholder, disabled
+  --fs-#{$name}-base:     var(--fs-#{$name}-500);  // color principal
+  --fs-#{$name}-hover:    var(--fs-#{$name}-600);  // hover en solid buttons
+  --fs-#{$name}-active:   var(--fs-#{$name}-700);  // pressed / active
+  --fs-#{$name}-emphasis: var(--fs-#{$name}-800);  // texto sobre fondos del mismo color
+  --fs-#{$name}-contrast: var(--fs-#{$name}-900);  // texto dark, headings sobre muted/tint
+}
+
+
+// -----------------------------------------------------------------------------
+// 5. VARIABLES SASS — acceso directo en tiempo de compilación
+// -----------------------------------------------------------------------------
+//
+// Para usar en valores de mixins, @each, maps, cálculos SCSS.
+// No disponibles como CSS custom properties.
+
+$primary-muted:    generate-scale($fs-primary-hex, 50);
+$primary-subtle:   generate-scale($fs-primary-hex, 100);
+$primary-tint:     generate-scale($fs-primary-hex, 200);
+$primary-light:    generate-scale($fs-primary-hex, 300);
+$primary-soft:     generate-scale($fs-primary-hex, 400);
+$primary-base:     generate-scale($fs-primary-hex, 500);
+$primary-hover:    generate-scale($fs-primary-hex, 600);
+$primary-active:   generate-scale($fs-primary-hex, 700);
+$primary-emphasis: generate-scale($fs-primary-hex, 800);
+$primary-contrast: generate-scale($fs-primary-hex, 900);
+
+$secondary-muted:    generate-scale($fs-secondary-hex, 50);
+$secondary-subtle:   generate-scale($fs-secondary-hex, 100);
+$secondary-tint:     generate-scale($fs-secondary-hex, 200);
+$secondary-light:    generate-scale($fs-secondary-hex, 300);
+$secondary-soft:     generate-scale($fs-secondary-hex, 400);
+$secondary-base:     generate-scale($fs-secondary-hex, 500);
+$secondary-hover:    generate-scale($fs-secondary-hex, 600);
+$secondary-active:   generate-scale($fs-secondary-hex, 700);
+$secondary-emphasis: generate-scale($fs-secondary-hex, 800);
+$secondary-contrast: generate-scale($fs-secondary-hex, 900);
+
+$tertiary-muted:    generate-scale($fs-tertiary-hex, 50);
+$tertiary-subtle:   generate-scale($fs-tertiary-hex, 100);
+$tertiary-tint:     generate-scale($fs-tertiary-hex, 200);
+$tertiary-light:    generate-scale($fs-tertiary-hex, 300);
+$tertiary-soft:     generate-scale($fs-tertiary-hex, 400);
+$tertiary-base:     generate-scale($fs-tertiary-hex, 500);
+$tertiary-hover:    generate-scale($fs-tertiary-hex, 600);
+$tertiary-active:   generate-scale($fs-tertiary-hex, 700);
+$tertiary-emphasis: generate-scale($fs-tertiary-hex, 800);
+$tertiary-contrast: generate-scale($fs-tertiary-hex, 900);
+
+$neutral-muted:    generate-scale($fs-neutral-hex, 50);
+$neutral-subtle:   generate-scale($fs-neutral-hex, 100);
+$neutral-tint:     generate-scale($fs-neutral-hex, 200);
+$neutral-light:    generate-scale($fs-neutral-hex, 300);
+$neutral-soft:     generate-scale($fs-neutral-hex, 400);
+$neutral-base:     generate-scale($fs-neutral-hex, 500);
+$neutral-hover:    generate-scale($fs-neutral-hex, 600);
+$neutral-active:   generate-scale($fs-neutral-hex, 700);
+$neutral-emphasis: generate-scale($fs-neutral-hex, 800);
+$neutral-contrast: generate-scale($fs-neutral-hex, 900);
+
+$success-muted:    generate-scale($fs-success-hex, 50);
+$success-base:     generate-scale($fs-success-hex, 500);
+$success-hover:    generate-scale($fs-success-hex, 600);
+$success-active:   generate-scale($fs-success-hex, 700);
+$success-contrast: generate-scale($fs-success-hex, 900);
+
+$warning-muted:    generate-scale($fs-warning-hex, 50);
+$warning-base:     generate-scale($fs-warning-hex, 500);
+$warning-hover:    generate-scale($fs-warning-hex, 600);
+$warning-active:   generate-scale($fs-warning-hex, 700);
+$warning-contrast: generate-scale($fs-warning-hex, 900);
+
+$danger-muted:    generate-scale($fs-danger-hex, 50);
+$danger-base:     generate-scale($fs-danger-hex, 500);
+$danger-hover:    generate-scale($fs-danger-hex, 600);
+$danger-active:   generate-scale($fs-danger-hex, 700);
+$danger-contrast: generate-scale($fs-danger-hex, 900);
+
+
+// -----------------------------------------------------------------------------
+// 6. TOKENS DE TIPOGRAFÍA
+// -----------------------------------------------------------------------------
+
+$fs-font-sans:  'Inter', 'Segoe UI', system-ui, sans-serif !default;
+$fs-font-mono:  'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace !default;
+$fs-font-serif: 'Georgia', serif !default;
+
+$fs-text-xs:   0.75rem;   // 12px
+$fs-text-sm:   0.875rem;  // 14px
+$fs-text-base: 1rem;      // 16px
+$fs-text-lg:   1.125rem;  // 18px
+$fs-text-xl:   1.25rem;   // 20px
+$fs-text-2xl:  1.5rem;    // 24px
+$fs-text-3xl:  1.875rem;  // 30px
+
+$fs-font-regular: 400;
+$fs-font-medium:  500;
+$fs-font-semi:    600;
+$fs-font-bold:    700;
+
+$fs-leading-tight:  1.25;
+$fs-leading-normal: 1.5;
+$fs-leading-relaxed: 1.75;
+
+$fs-tracking-tight:  -0.025em;
+$fs-tracking-normal:  0em;
+$fs-tracking-wide:    0.05em;
+$fs-tracking-wider:   0.1em;
+
+
+// -----------------------------------------------------------------------------
+// 7. TOKENS DE ESPACIADO
+// -----------------------------------------------------------------------------
+
+$fs-space-1:  0.25rem;   // 4px
+$fs-space-2:  0.5rem;    // 8px
+$fs-space-3:  0.75rem;   // 12px
+$fs-space-4:  1rem;      // 16px
+$fs-space-5:  1.25rem;   // 20px
+$fs-space-6:  1.5rem;    // 24px
+$fs-space-8:  2rem;      // 32px
+$fs-space-10: 2.5rem;    // 40px
+$fs-space-12: 3rem;      // 48px
+$fs-space-16: 4rem;      // 64px
+
+
+// -----------------------------------------------------------------------------
+// 8. TOKENS DE BORDER RADIUS
+// -----------------------------------------------------------------------------
+
+$fs-radius-sm:   4px;
+$fs-radius-md:   6px;
+$fs-radius-lg:   8px;
+$fs-radius-xl:   12px;
+$fs-radius-2xl:  16px;
+$fs-radius-full: 9999px;
+
+
+// -----------------------------------------------------------------------------
+// 9. TOKENS DE TRANSICIÓN
+// -----------------------------------------------------------------------------
+
+$fs-duration-fast:   100ms;
+$fs-duration-normal: 200ms;
+$fs-duration-slow:   350ms;
+
+$fs-ease-default: cubic-bezier(0.4, 0, 0.2, 1);
+$fs-ease-in:      cubic-bezier(0.4, 0, 1, 1);
+$fs-ease-out:     cubic-bezier(0, 0, 0.2, 1);
+$fs-ease-bounce:  cubic-bezier(0.34, 1.56, 0.64, 1);
+
+$fs-transition-base:    all $fs-duration-normal $fs-ease-default;
+$fs-transition-colors:  background-color $fs-duration-fast $fs-ease-default,
+                        border-color     $fs-duration-fast $fs-ease-default,
+                        color            $fs-duration-fast $fs-ease-default;
+$fs-transition-transform: transform $fs-duration-normal $fs-ease-bounce;
+
+
+// -----------------------------------------------------------------------------
+// 10. TOKENS DE ELEVACIÓN (box-shadow)
+// -----------------------------------------------------------------------------
+
+$fs-shadow-sm:  0 1px 2px rgba(0, 0, 0, 0.06);
+$fs-shadow-md:  0 4px 6px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.04);
+$fs-shadow-lg:  0 10px 15px rgba(0, 0, 0, 0.08), 0 4px 6px rgba(0, 0, 0, 0.04);
+$fs-shadow-xl:  0 20px 25px rgba(0, 0, 0, 0.09), 0 8px 10px rgba(0, 0, 0, 0.04);
+$fs-shadow-none: none;
+
+// Focus ring — siempre del color del token activo
+@mixin focus-ring($color: $primary-base, $offset: 2px) {
+  outline: none;
+  box-shadow: 0 0 0 $offset white, 0 0 0 ($offset + 2px) $color;
+}
+
+
+// -----------------------------------------------------------------------------
+// 11. TOKENS DE Z-INDEX
+// -----------------------------------------------------------------------------
+
+$fs-z-base:    0;
+$fs-z-raised:  10;
+$fs-z-dropdown: 100;
+$fs-z-sticky:  200;
+$fs-z-overlay: 300;
+$fs-z-modal:   400;
+$fs-z-toast:   500;
+$fs-z-tooltip: 600;
+
+
+// -----------------------------------------------------------------------------
+// 12. REGISTRO EN :root — CSS Custom Properties
+// -----------------------------------------------------------------------------
+//
+// Esto emite TODAS las variables CSS disponibles en runtime.
+// Los componentes Angular usan var(--fs-primary-hover) etc.
+
+:root {
+  // Escalas completas (stops numéricos — uso interno / debugging)
+  @include emit-scale('primary',   $fs-primary-hex);
+  @include emit-scale('secondary', $fs-secondary-hex);
+  @include emit-scale('tertiary',  $fs-tertiary-hex);
+  @include emit-scale('neutral',   $fs-neutral-hex);
+  @include emit-scale('success',   $fs-success-hex);
+  @include emit-scale('warning',   $fs-warning-hex);
+  @include emit-scale('danger',    $fs-danger-hex);
+
+  // Alias tokens de estado (USO EN COMPONENTES)
+  @include emit-alias-tokens('primary');
+  @include emit-alias-tokens('secondary');
+  @include emit-alias-tokens('tertiary');
+  @include emit-alias-tokens('neutral');
+  @include emit-alias-tokens('success');
+  @include emit-alias-tokens('warning');
+  @include emit-alias-tokens('danger');
+
+  // Tipografía
+  --fs-font-sans:  #{$fs-font-sans};
+  --fs-font-mono:  #{$fs-font-mono};
+  --fs-font-serif: #{$fs-font-serif};
+
+  // Radios
+  --fs-radius-sm:   #{$fs-radius-sm};
+  --fs-radius-md:   #{$fs-radius-md};
+  --fs-radius-lg:   #{$fs-radius-lg};
+  --fs-radius-xl:   #{$fs-radius-xl};
+  --fs-radius-full: #{$fs-radius-full};
+
+  // Transiciones
+  --fs-duration-fast:   #{$fs-duration-fast};
+  --fs-duration-normal: #{$fs-duration-normal};
+  --fs-duration-slow:   #{$fs-duration-slow};
+
+  // Elevaciones
+  --fs-shadow-sm: #{$fs-shadow-sm};
+  --fs-shadow-md: #{$fs-shadow-md};
+  --fs-shadow-lg: #{$fs-shadow-lg};
+
+  // Espaciado
+  --fs-space-1:  #{$fs-space-1};
+  --fs-space-2:  #{$fs-space-2};
+  --fs-space-3:  #{$fs-space-3};
+  --fs-space-4:  #{$fs-space-4};
+  --fs-space-6:  #{$fs-space-6};
+  --fs-space-8:  #{$fs-space-8};
+}
+
+
+// -----------------------------------------------------------------------------
+// 13. OVERRIDE DE TEMA — theming por aplicación
+// -----------------------------------------------------------------------------
+//
+// Para sobreescribir los colores base en una app consumidora:
+//
+//   // en styles.scss de tu app Angular:
+//   @use '@fsociety/tokens' with (
+//     $fs-primary-hex:   #7c3aed,   // purple
+//     $fs-secondary-hex: #0891b2,
+//     $fs-tertiary-hex:  #0d9488,
+//   );
+//
+// Todos los tokens se regeneran automáticamente con la nueva escala.
+
+
+// -----------------------------------------------------------------------------
+// 14. DARK MODE
+// -----------------------------------------------------------------------------
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    // En dark mode los alias invierten su lógica visual:
+    // el "muted" que era casi blanco pasa a ser casi negro,
+    // y el "contrast" que era muy oscuro pasa a ser casi blanco.
+
+    @include emit-scale('primary',   $fs-primary-hex);
+    @include emit-scale('secondary', $fs-secondary-hex);
+    @include emit-scale('tertiary',  $fs-tertiary-hex);
+    @include emit-scale('neutral',   $fs-neutral-hex);
+    @include emit-scale('success',   $fs-success-hex);
+    @include emit-scale('warning',   $fs-warning-hex);
+    @include emit-scale('danger',    $fs-danger-hex);
+
+    // Alias invertidos para dark
+    --fs-primary-muted:    var(--fs-primary-900);
+    --fs-primary-subtle:   var(--fs-primary-800);
+    --fs-primary-tint:     var(--fs-primary-700);
+    --fs-primary-light:    var(--fs-primary-600);
+    --fs-primary-soft:     var(--fs-primary-400);
+    --fs-primary-base:     var(--fs-primary-500);
+    --fs-primary-hover:    var(--fs-primary-400);
+    --fs-primary-active:   var(--fs-primary-300);
+    --fs-primary-emphasis: var(--fs-primary-200);
+    --fs-primary-contrast: var(--fs-primary-50);
+
+    --fs-secondary-muted:    var(--fs-secondary-900);
+    --fs-secondary-subtle:   var(--fs-secondary-800);
+    --fs-secondary-tint:     var(--fs-secondary-700);
+    --fs-secondary-light:    var(--fs-secondary-600);
+    --fs-secondary-soft:     var(--fs-secondary-400);
+    --fs-secondary-base:     var(--fs-secondary-500);
+    --fs-secondary-hover:    var(--fs-secondary-400);
+    --fs-secondary-active:   var(--fs-secondary-300);
+    --fs-secondary-emphasis: var(--fs-secondary-200);
+    --fs-secondary-contrast: var(--fs-secondary-50);
+
+    --fs-tertiary-muted:    var(--fs-tertiary-900);
+    --fs-tertiary-subtle:   var(--fs-tertiary-800);
+    --fs-tertiary-tint:     var(--fs-tertiary-700);
+    --fs-tertiary-light:    var(--fs-tertiary-600);
+    --fs-tertiary-soft:     var(--fs-tertiary-400);
+    --fs-tertiary-base:     var(--fs-tertiary-500);
+    --fs-tertiary-hover:    var(--fs-tertiary-400);
+    --fs-tertiary-active:   var(--fs-tertiary-300);
+    --fs-tertiary-emphasis: var(--fs-tertiary-200);
+    --fs-tertiary-contrast: var(--fs-tertiary-50);
+
+    --fs-neutral-muted:    var(--fs-neutral-900);
+    --fs-neutral-subtle:   var(--fs-neutral-800);
+    --fs-neutral-base:     var(--fs-neutral-500);
+    --fs-neutral-hover:    var(--fs-neutral-400);
+    --fs-neutral-active:   var(--fs-neutral-300);
+    --fs-neutral-contrast: var(--fs-neutral-50);
+
+    --fs-danger-muted:    var(--fs-danger-900);
+    --fs-danger-base:     var(--fs-danger-500);
+    --fs-danger-hover:    var(--fs-danger-400);
+    --fs-danger-contrast: var(--fs-danger-50);
+
+    --fs-success-muted:    var(--fs-success-900);
+    --fs-success-base:     var(--fs-success-500);
+    --fs-success-hover:    var(--fs-success-400);
+    --fs-success-contrast: var(--fs-success-50);
+
+    --fs-warning-muted:    var(--fs-warning-900);
+    --fs-warning-base:     var(--fs-warning-500);
+    --fs-warning-hover:    var(--fs-warning-400);
+    --fs-warning-contrast: var(--fs-warning-50);
+  }
+}
+
+// Soporte para clase manual [data-theme="dark"] en Angular
+[data-theme='dark'] {
+  @extend :root; // hereda todo el bloque de dark mode arriba si se necesita
+}

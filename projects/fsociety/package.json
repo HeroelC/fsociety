@@ -1,0 +1,42 @@
+{
+  "name": "@heroelc/fsociety",
+  "version": "0.0.1",
+  "description": "Angular component library with design system tokens, mixins and UI components",
+  "author": "Heroel Carpinetti <heroeljcarpinetti@gmail.com>",
+  "license": "MIT",
+  "keywords": [
+    "angular",
+    "components",
+    "design-system",
+    "ui-library",
+    "scss",
+    "tokens"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/heroelc/fsociety.git"
+  },
+  "bugs": {
+    "url": "https://github.com/heroelc/fsociety/issues"
+  },
+  "homepage": "https://github.com/heroelc/fsociety#readme",
+  "peerDependencies": {
+    "@angular/common": "^19.2.0",
+    "@angular/core": "^19.2.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "sideEffects": false,
+  "exports": {
+    "./styles/tokens": {
+      "sass": "./_tokens.scss"
+    },
+    "./styles/mixins": {
+      "sass": "./_mixins.scss"
+    },
+    "./styles": {
+      "sass": "./_index.scss"
+    }
+  }
+}

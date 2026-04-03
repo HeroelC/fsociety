@@ -1,0 +1,8 @@
+@use '../../styles/tokens' as t;
+.fs-button {
+  background: var(--fs-primary-base);
+  transition: t.$fs-transition-colors;
+  &:hover  { background: var(--fs-primary-hover);  }
+  &:active { background: var(--fs-primary-active); }
+  &:focus  { @include t.focus-ring; }
+}

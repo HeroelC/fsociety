@@ -1,13 +1,18 @@
 {
   "name": "fsociety-workspace",
-  "version": "0.0.0",
-  "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test"
-  },
+  "version": "0.0.1",
+"scripts": {
+  "ng": "ng",
+  "start": "ng serve",
+  "build": "ng build",
+  "watch": "ng build --watch --configuration development",
+  "test": "ng test",
+  "storybook": "ng run fsociety:storybook",
+  "build-storybook": "ng run fsociety:build-storybook",
+  "build:lib": "ng build fsociety",
+  "release": "release-it",
+  "release:dry": "release-it --dry-run"
+},
   "private": true,
   "dependencies": {
     "@angular/animations": "^19.0.0",
@@ -23,8 +28,16 @@
     "zone.js": "~0.15.0"
   },
   "devDependencies": {
+    "@angular-devkit/architect": "^0.1900.0",
+    "@angular-devkit/build-angular": "^19.2.23",
+    "@angular-devkit/core": "^19.0.0",
     "@angular/cli": "^19.0.5",
     "@angular/compiler-cli": "^19.0.0",
+    "@compodoc/compodoc": "^1.2.1",
+    "@release-it/conventional-changelog": "^10.0.6",
+    "@storybook/addon-a11y": "^10.3.4",
+    "@storybook/addon-docs": "^10.3.4",
+    "@storybook/angular": "^10.3.4",
     "@types/jasmine": "~5.1.0",
     "jasmine-core": "~5.4.0",
     "karma": "~6.4.0",
@@ -32,6 +45,9 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "ng-packagr": "^19.2.0",
+    "release-it": "^19.2.4",
+    "storybook": "^10.3.4",
     "typescript": "~5.6.2"
   }
 }

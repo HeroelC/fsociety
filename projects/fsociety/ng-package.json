@@ -1,0 +1,13 @@
+{
+  "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
+  "dest": "../../dist/fsociety",
+  "lib": {
+    "entryFile": "src/public-api.ts",
+    "styleIncludePaths": ["src/styles"]
+  },
+  "assets": [
+    "src/styles/_tokens.scss",
+    "src/styles/_mixins.scss",
+    "src/styles/_index.scss"
+  ]
+}
