@@ -1,0 +1,126 @@
+@use '../../styles/tokens' as t;
+
+// ---------------------------------------------------------------------------
+// fs-tabs — CSS custom properties configurables
+//
+// Sobreescribir desde la app consumidora:
+//
+//   fs-tabs {
+//     --fs-tab-bg:             #1a1f2e;
+//     --fs-tab-color:          rgba(255,255,255,0.5);
+//     --fs-tab-color-hover:    rgba(255,255,255,0.8);
+//     --fs-tab-color-active:   #ffffff;
+//     --fs-tab-border:         rgba(255,255,255,0.1);
+//     --fs-tab-indicator-from: #7c3aed;
+//     --fs-tab-indicator-to:   #06b6d4;
+//   }
+//
+// O a nivel global en styles.scss para cambiar todos los fs-tabs de la app.
+// ---------------------------------------------------------------------------
+
+.fs-tabs {
+  // Valores por defecto — se pueden pisar desde fuera sin tocar la lib
+  --fs-tab-bg:             #0d1117;
+  --fs-tab-color:          rgba(255, 255, 255, 0.40);
+  --fs-tab-color-hover:    rgba(255, 255, 255, 0.70);
+  --fs-tab-color-active:   #ffffff;
+  --fs-tab-border:         rgba(255, 255, 255, 0.08);
+  --fs-tab-hover-bg:       rgba(255, 255, 255, 0.03);
+  --fs-tab-indicator-from: var(--fs-primary-base);
+  --fs-tab-indicator-to:   var(--fs-tertiary-base);
+  --fs-tab-indicator-glow: rgba(34, 211, 238, 0.45);
+  --fs-tab-radius:         #{t.$fs-radius-lg};
+
+  display:        flex;
+  flex-direction: column;
+  width:          100%;
+
+  // -------------------------------------------------------------------------
+  // Header
+  // -------------------------------------------------------------------------
+
+  &__header {
+    display:       flex;
+    position:      relative;
+    width:         100%;
+    background:    var(--fs-tab-bg);
+    border-radius: var(--fs-tab-radius) var(--fs-tab-radius) 0 0;
+    border-bottom: 1px solid var(--fs-tab-border);
+    overflow:      hidden;
+  }
+
+  // -------------------------------------------------------------------------
+  // Cada tab — flex: 1 distribuye el 100% entre todas
+  // -------------------------------------------------------------------------
+
+  &__item {
+    flex:           1;
+    padding:        14px 8px;
+    font-size:      t.$fs-text-sm;
+    font-weight:    t.$fs-font-medium;
+    color:          var(--fs-tab-color);
+    background:     transparent;
+    border:         none;
+    cursor:         pointer;
+    font-family:    t.$fs-font-sans;
+    white-space:    nowrap;
+    overflow:       hidden;
+    text-overflow:  ellipsis;
+    text-align:     center;
+    position:       relative;
+    z-index:        1;
+    transition:     color     t.$fs-duration-normal t.$fs-ease-default,
+                    background t.$fs-duration-fast  t.$fs-ease-default;
+    user-select:    none;
+    line-height:    1;
+
+    &:hover:not(&--disabled):not(&--active) {
+      color:      var(--fs-tab-color-hover);
+      background: var(--fs-tab-hover-bg);
+    }
+
+    &--active {
+      color:       var(--fs-tab-color-active);
+      font-weight: t.$fs-font-semi;
+    }
+
+    &--disabled {
+      opacity:        0.3;
+      cursor:         not-allowed;
+      pointer-events: none;
+    }
+
+    &:focus-visible {
+      @include t.focus-ring($color: var(--fs-primary-base));
+    }
+  }
+
+  // -------------------------------------------------------------------------
+  // Indicator
+  // -------------------------------------------------------------------------
+
+  &__indicator {
+    position:      absolute;
+    bottom:        0;
+    height:        2px;
+    border-radius: 2px 2px 0 0;
+    background:    linear-gradient(
+      90deg,
+      var(--fs-tab-indicator-from) 0%,
+      var(--fs-tab-indicator-to)   100%
+    );
+    box-shadow: 0 0 10px var(--fs-tab-indicator-glow);
+    transition:
+      left  260ms #{t.$fs-ease-default},
+      width 260ms #{t.$fs-ease-default};
+  }
+
+  // -------------------------------------------------------------------------
+  // Contenido
+  // -------------------------------------------------------------------------
+
+  &__content {
+    flex:  1;
+    width: 100%;
+  }
+}

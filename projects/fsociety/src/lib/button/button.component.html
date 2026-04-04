@@ -1,1 +1,38 @@
-<p>button works!</p>
+<button
+  class="fs-btn"
+  [ngClass]="classes"
+  [type]="type"
+  [disabled]="isDisabled"
+  [attr.aria-disabled]="isDisabled"
+  [attr.aria-busy]="loading"
+  (click)="onClick($event)"
+>
+  <!-- spinner (solo cuando loading) -->
+  <span *ngIf="loading" class="fs-btn__spinner" aria-hidden="true">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+      <circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+        stroke-dasharray="28" stroke-dashoffset="10" />
+    </svg>
+  </span>
+
+  <!-- ícono izquierdo -->
+  <span *ngIf="iconLeft && !loading" class="fs-btn__icon fs-btn__icon--left" aria-hidden="true">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+      <path [attr.d]="iconLeft" stroke="currentColor" stroke-width="1.5"
+        stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </span>
+
+  <!-- label vía input o content projection -->
+  <span class="fs-btn__label">
+    <ng-content>{{ label }}</ng-content>
+  </span>
+
+  <!-- ícono derecho -->
+  <span *ngIf="iconRight && !loading" class="fs-btn__icon fs-btn__icon--right" aria-hidden="true">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+      <path [attr.d]="iconRight" stroke="currentColor" stroke-width="1.5"
+        stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </span>
+</button>

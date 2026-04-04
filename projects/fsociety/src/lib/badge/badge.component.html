@@ -1,0 +1,40 @@
+<span class="fs-badge" [ngClass]="classes">
+
+  <!-- dot de estado -->
+  <span *ngIf="dot" class="fs-badge__dot" aria-hidden="true"></span>
+
+  <!-- ícono izquierdo -->
+  <span *ngIf="iconLeft" class="fs-badge__icon fs-badge__icon--left" aria-hidden="true">
+    <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
+      <path [attr.d]="iconLeft" stroke="currentColor" stroke-width="1.5"
+        stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </span>
+
+  <!-- label — oculto en iconOnly -->
+  <span *ngIf="!iconOnly" class="fs-badge__label">
+    <ng-content>{{ label }}</ng-content>
+  </span>
+
+  <!-- ícono derecho -->
+  <span *ngIf="iconRight" class="fs-badge__icon fs-badge__icon--right" aria-hidden="true">
+    <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
+      <path [attr.d]="iconRight" stroke="currentColor" stroke-width="1.5"
+        stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </span>
+
+  <!-- botón remove -->
+  <button
+    *ngIf="removable"
+    class="fs-badge__remove"
+    type="button"
+    aria-label="Remover"
+    (click)="onRemove($event)"
+  >
+    <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+      <path d="M2 2l6 6M8 2L2 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+    </svg>
+  </button>
+
+</span>

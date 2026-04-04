@@ -1,0 +1,35 @@
+<div class="fs-tabs">
+
+  <!-- encabezado -->
+  <div class="fs-tabs__header" #tabsRow role="tablist">
+
+    <button
+      *ngFor="let tab of tabs"
+      class="fs-tabs__item"
+      [class.fs-tabs__item--active]="isActive(tab)"
+      [class.fs-tabs__item--disabled]="tab.disabled"
+      role="tab"
+      [attr.aria-selected]="isActive(tab)"
+      [attr.aria-disabled]="tab.disabled"
+      [disabled]="tab.disabled"
+      (click)="selectTab(tab)"
+    >
+      {{ tab.label }}
+    </button>
+
+    <!-- indicator deslizante -->
+    <span
+      class="fs-tabs__indicator"
+      [style.left.px]="indicatorLeft"
+      [style.width.px]="indicatorWidth"
+      aria-hidden="true"
+    ></span>
+
+  </div>
+
+  <!-- contenido vía content projection -->
+  <div class="fs-tabs__content" role="tabpanel">
+    <ng-content></ng-content>
+  </div>
+
+</div>

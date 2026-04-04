@@ -1,0 +1,266 @@
+@use '../../styles/tokens' as t;
+
+// ---------------------------------------------------------------------------
+// Tokens del componente — configurables desde fuera
+// ---------------------------------------------------------------------------
+
+.fs-exp {
+  --fs-exp-bg:           #0d1117;
+  --fs-exp-border:       rgba(255, 255, 255, 0.08);
+  --fs-exp-company:      rgba(255, 255, 255, 0.45);
+  --fs-exp-role:         #ffffff;
+  --fs-exp-date:         rgba(255, 255, 255, 0.35);
+  --fs-exp-duration:     rgba(255, 255, 255, 0.20);
+  --fs-exp-bullet:       rgba(255, 255, 255, 0.50);
+  --fs-exp-bullet-arrow: var(--fs-primary-base);
+  --fs-exp-divider:      rgba(255, 255, 255, 0.06);
+  --fs-exp-logo-bg:      #161b22;
+  --fs-exp-logo-border:  rgba(255, 255, 255, 0.10);
+  --fs-exp-logo-text:    rgba(255, 255, 255, 0.45);
+  --fs-exp-toggle:       var(--fs-primary-base);
+  --fs-exp-dot-current:  var(--fs-success-base);
+  --fs-exp-dot-past:     rgba(255, 255, 255, 0.20);
+
+  position:       relative;
+  width:          100%;
+  display:        flex;
+  gap:            16px;
+
+  // -------------------------------------------------------------------------
+  // Timeline
+  // -------------------------------------------------------------------------
+
+  &--timeline {
+    padding-left: 28px;
+  }
+
+  &__timeline-line {
+    position:   absolute;
+    left:       8px;
+    top:        20px;
+    bottom:     -16px;
+    width:      1px;
+    background: var(--fs-exp-border);
+
+    .fs-exp--timeline-last & {
+      display: none;
+    }
+  }
+
+  &__timeline-dot {
+    position:     absolute;
+    left:         4px;
+    top:          18px;
+    width:        9px;
+    height:       9px;
+    border-radius: t.$fs-radius-full;
+    background:   var(--fs-exp-dot-past);
+    border:       2px solid var(--fs-exp-bg);
+    flex-shrink:  0;
+
+    &--current {
+      background: var(--fs-exp-dot-current);
+      box-shadow: 0 0 6px rgba(34, 197, 94, 0.5);
+    }
+  }
+
+  // -------------------------------------------------------------------------
+  // Card
+  // -------------------------------------------------------------------------
+
+  &__card {
+    flex:          1;
+    background:    var(--fs-exp-bg);
+    border:        0.5px solid var(--fs-exp-border);
+    border-radius: t.$fs-radius-xl;
+    padding:       t.$fs-space-5;
+    transition:    border-color t.$fs-duration-fast t.$fs-ease-default;
+
+    &:hover {
+      border-color: rgba(255, 255, 255, 0.14);
+    }
+  }
+
+  // -------------------------------------------------------------------------
+  // Header
+  // -------------------------------------------------------------------------
+
+  &__header {
+    display:        flex;
+    gap:            t.$fs-space-4;
+    align-items:    flex-start;
+    margin-bottom:  t.$fs-space-4;
+
+    .fs-exp--compact & {
+      margin-bottom: 0;
+    }
+  }
+
+  &__logo {
+    width:           44px;
+    height:          44px;
+    border-radius:   t.$fs-radius-lg;
+    background:      var(--fs-exp-logo-bg);
+    border:          0.5px solid var(--fs-exp-logo-border);
+    display:         flex;
+    align-items:     center;
+    justify-content: center;
+    flex-shrink:     0;
+    overflow:        hidden;
+  }
+
+  &__logo-img {
+    width:      100%;
+    height:     100%;
+    object-fit: contain;
+    padding:    4px;
+  }
+
+  &__logo-text {
+    font-size:      9px;
+    font-weight:    t.$fs-font-bold;
+    color:          var(--fs-exp-logo-text);
+    letter-spacing: -0.5px;
+    text-align:     center;
+    line-height:    1.2;
+    padding:        4px;
+    font-family:    t.$fs-font-sans;
+  }
+
+  &__info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__company {
+    font-size:     t.$fs-text-xs;
+    color:         var(--fs-exp-company);
+    margin-bottom: 2px;
+    font-family:   t.$fs-font-sans;
+  }
+
+  &__role {
+    font-size:     t.$fs-text-base;
+    font-weight:   t.$fs-font-semi;
+    color:         var(--fs-exp-role);
+    margin-bottom: t.$fs-space-1;
+    font-family:   t.$fs-font-sans;
+    white-space:   nowrap;
+    overflow:      hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__date {
+    font-size:   t.$fs-text-xs;
+    color:       var(--fs-exp-date);
+    display:     flex;
+    align-items: center;
+    gap:         t.$fs-space-1;
+    flex-wrap:   wrap;
+    font-family: t.$fs-font-sans;
+  }
+
+  &__dot {
+    width:         6px;
+    height:        6px;
+    border-radius: t.$fs-radius-full;
+    background:    var(--fs-exp-dot-past);
+    flex-shrink:   0;
+
+    &--current {
+      background: var(--fs-exp-dot-current);
+      box-shadow: 0 0 4px rgba(34, 197, 94, 0.6);
+    }
+  }
+
+  &__duration {
+    color: var(--fs-exp-duration);
+  }
+
+  // -------------------------------------------------------------------------
+  // Divider
+  // -------------------------------------------------------------------------
+
+  &__divider {
+    height:        0.5px;
+    background:    var(--fs-exp-divider);
+    margin-bottom: t.$fs-space-4;
+  }
+
+  // -------------------------------------------------------------------------
+  // Bullets
+  // -------------------------------------------------------------------------
+
+  &__bullets {
+    list-style:     none;
+    display:        flex;
+    flex-direction: column;
+    gap:            t.$fs-space-2;
+    margin-bottom:  t.$fs-space-3;
+    padding:        0;
+  }
+
+  &__bullet {
+    font-size:   t.$fs-text-xs;
+    color:       var(--fs-exp-bullet);
+    display:     flex;
+    gap:         t.$fs-space-2;
+    line-height: 1.6;
+    font-family: t.$fs-font-sans;
+  }
+
+  &__bullet-arrow {
+    color:      var(--fs-exp-bullet-arrow);
+    flex-shrink: 0;
+    margin-top:  1px;
+    font-size:   10px;
+  }
+
+  // -------------------------------------------------------------------------
+  // Toggle ver más / menos
+  // -------------------------------------------------------------------------
+
+  &__toggle {
+    display:     inline-flex;
+    align-items: center;
+    gap:         t.$fs-space-1;
+    font-size:   t.$fs-text-xs;
+    font-weight: t.$fs-font-medium;
+    color:       var(--fs-exp-toggle);
+    background:  transparent;
+    border:      none;
+    cursor:      pointer;
+    padding:     0;
+    font-family: t.$fs-font-sans;
+    margin-bottom: t.$fs-space-3;
+    transition:  color t.$fs-duration-fast t.$fs-ease-default;
+
+    &:hover {
+      color: var(--fs-primary-hover);
+    }
+
+    &:focus-visible {
+      @include t.focus-ring($color: var(--fs-primary-base));
+    }
+  }
+
+  &__toggle-icon {
+    transition: transform t.$fs-duration-normal t.$fs-ease-default;
+    flex-shrink: 0;
+
+    &--open {
+      transform: rotate(180deg);
+    }
+  }
+
+  // -------------------------------------------------------------------------
+  // Badges
+  // -------------------------------------------------------------------------
+
+  &__badges {
+    display:   flex;
+    flex-wrap: wrap;
+    gap:       t.$fs-space-1;
+    margin-top: t.$fs-space-1;
+  }
+}

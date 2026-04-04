@@ -1,0 +1,119 @@
+@use '../../styles/tokens' as t;
+
+$badge-colors: (
+  'primary':   (base: var(--fs-primary-500),   muted: var(--fs-primary-50),   light: var(--fs-primary-200),   emphasis: var(--fs-primary-800)),
+  'secondary': (base: var(--fs-secondary-500), muted: var(--fs-secondary-50), light: var(--fs-secondary-200), emphasis: var(--fs-secondary-800)),
+  'tertiary':  (base: var(--fs-tertiary-500),  muted: var(--fs-tertiary-50),  light: var(--fs-tertiary-200),  emphasis: var(--fs-tertiary-800)),
+  'success':   (base: var(--fs-success-500),   muted: var(--fs-success-50),   light: var(--fs-success-200),   emphasis: var(--fs-success-800)),
+  'warning':   (base: var(--fs-warning-500),   muted: var(--fs-warning-50),   light: var(--fs-warning-200),   emphasis: var(--fs-warning-800)),
+  'danger':    (base: var(--fs-danger-500),    muted: var(--fs-danger-50),    light: var(--fs-danger-200),    emphasis: var(--fs-danger-800)),
+  'neutral':   (base: var(--fs-neutral-500),   muted: var(--fs-neutral-50),   light: var(--fs-neutral-200),   emphasis: var(--fs-neutral-800)),
+);
+
+// ---------------------------------------------------------------------------
+// Base
+// ---------------------------------------------------------------------------
+
+.fs-badge {
+  display:       inline-flex;
+  align-items:   center;
+  gap:           t.$fs-space-1;
+  border-radius: t.$fs-radius-full;
+  font-family:   t.$fs-font-sans;
+  font-weight:   t.$fs-font-medium;
+  white-space:   nowrap;
+  border:        1px solid transparent;
+  line-height:   1;
+
+  // -------------------------------------------------------------------------
+  // Tamaños
+  // -------------------------------------------------------------------------
+
+  &--sm {
+    font-size: 10px;
+    padding:   2px t.$fs-space-2;
+
+    .fs-badge__icon svg { width: 10px; height: 10px; }
+  }
+
+  &--md {
+    font-size: t.$fs-text-xs;
+    padding:   3px t.$fs-space-3;
+
+    .fs-badge__icon svg { width: 12px; height: 12px; }
+  }
+
+  // Modo solo ícono — igual ancho que alto, forma circular
+  &--icon-only {
+    padding:         t.$fs-space-1 !important;
+    justify-content: center;
+
+    &.fs-badge--sm { width: 20px; height: 20px; }
+    &.fs-badge--md { width: 24px; height: 24px; }
+  }
+
+  // -------------------------------------------------------------------------
+  // Variantes por color
+  // -------------------------------------------------------------------------
+
+  @each $color, $values in $badge-colors {
+    &--#{$color} {
+      &.fs-badge--filled {
+        background:   map-get($values, 'muted');
+        color:        map-get($values, 'emphasis');
+        border-color: map-get($values, 'light');
+      }
+
+      &.fs-badge--outline {
+        background:   transparent;
+        color:        map-get($values, 'base');
+        border-color: map-get($values, 'base');
+      }
+
+      .fs-badge__dot {
+        background: map-get($values, 'base');
+      }
+    }
+  }
+
+  // -------------------------------------------------------------------------
+  // Elementos internos
+  // -------------------------------------------------------------------------
+
+  &__dot {
+    width:         6px;
+    height:        6px;
+    border-radius: t.$fs-radius-full;
+    flex-shrink:   0;
+  }
+
+  &__icon {
+    display:     inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  &__label {
+    display:     inline-flex;
+    align-items: center;
+  }
+
+  &__remove {
+    display:         inline-flex;
+    align-items:     center;
+    justify-content: center;
+    background:      transparent;
+    border:          none;
+    padding:         0;
+    cursor:          pointer;
+    color:           inherit;
+    opacity:         0.55;
+    border-radius:   t.$fs-radius-full;
+    transition:      opacity t.$fs-duration-fast t.$fs-ease-default;
+    margin-left:     2px;
+
+    &:hover { opacity: 1; }
+
+    &:focus-visible { @include t.focus-ring; }
+  }
+}

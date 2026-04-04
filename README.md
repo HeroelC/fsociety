@@ -280,12 +280,12 @@ npm run release
 
 - [x] `_tokens.scss` — sistema de color con 10 stops automáticos
 - [x] `_mixins.scss` — mixins de base
-- [ ] `fs-button` — variantes, estados, loading
-- [ ] `fs-badge` — colores y variantes
+- [x] `fs-button` — variantes, estados, loading
+- [x] `fs-badge` — colores y variantes
 - [ ] `fs-alert` — tipos semánticos, dismissible
-- [ ] `fs-tabs` — tabs con content projection
-- [ ] `fs-profile-card` — card de portfolio
-- [ ] `fs-experience-card` — card de experiencia laboral
+- [x] `fs-tabs` — tabs con content projection
+- [x] `fs-profile-card` — card de portfolio
+- [x] `fs-experience-card` — card de experiencia laboral
 - [ ] `fs-input` / `fs-form-field` — formularios
 - [ ] GitHub Actions CI/CD
 - [ ] Storybook publicado en GitHub Pages

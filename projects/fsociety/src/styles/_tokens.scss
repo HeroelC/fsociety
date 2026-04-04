@@ -453,3 +453,20 @@ $fs-z-tooltip: 600;
 [data-theme='dark'] {
   @extend :root; // hereda todo el bloque de dark mode arriba si se necesita
 }
+
+// ---------------------------------------------------------------------------
+// 15. TOKENS DE COMPONENTE
+// ---------------------------------------------------------------------------
+
+:root {
+  // fs-tabs
+  --fs-tab-bg:             #0d1117;
+  --fs-tab-color:          rgba(255, 255, 255, 0.40);
+  --fs-tab-color-hover:    rgba(255, 255, 255, 0.70);
+  --fs-tab-color-active:   #ffffff;
+  --fs-tab-border:         rgba(255, 255, 255, 0.08);
+  --fs-tab-hover-bg:       rgba(255, 255, 255, 0.03);
+  --fs-tab-indicator-from: var(--fs-primary-base);
+  --fs-tab-indicator-to:   var(--fs-tertiary-base);
+  --fs-tab-indicator-glow: rgba(34, 211, 238, 0.45);
+}

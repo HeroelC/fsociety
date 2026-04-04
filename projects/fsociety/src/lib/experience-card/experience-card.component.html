@@ -1,0 +1,102 @@
+<div
+  class="fs-exp"
+  [class.fs-exp--compact]="variant === 'compact'"
+  [class.fs-exp--timeline]="timeline"
+  [class.fs-exp--timeline-last]="timeline && timelineLast"
+>
+
+  <!-- línea vertical de timeline -->
+  <div *ngIf="timeline" class="fs-exp__timeline-line"></div>
+
+  <!-- dot del timeline -->
+  <div *ngIf="timeline" class="fs-exp__timeline-dot"
+    [class.fs-exp__timeline-dot--current]="isCurrent">
+  </div>
+
+  <!-- card -->
+  <div class="fs-exp__card">
+
+    <!-- header -->
+    <div class="fs-exp__header">
+
+      <!-- logo -->
+      <div class="fs-exp__logo">
+        <img
+          *ngIf="experience.logoUrl"
+          [src]="experience.logoUrl"
+          [alt]="experience.company"
+          class="fs-exp__logo-img"
+        />
+        <span *ngIf="!experience.logoUrl" class="fs-exp__logo-text">
+          {{ experience.logoText || experience.company.slice(0, 4).toUpperCase() }}
+        </span>
+      </div>
+
+      <!-- info -->
+      <div class="fs-exp__info">
+        <div class="fs-exp__company">{{ experience.company }}</div>
+        <div class="fs-exp__role">{{ experience.role }}</div>
+        <div class="fs-exp__date">
+          <span
+            class="fs-exp__dot"
+            [class.fs-exp__dot--current]="isCurrent"
+          ></span>
+          <span>
+            {{ experience.startDate }} –
+            {{ experience.current ? 'actualidad' : experience.endDate }}
+          </span>
+          <span *ngIf="duration" class="fs-exp__duration">
+            · {{ duration }}
+          </span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- cuerpo — solo en variante full -->
+    <ng-container *ngIf="variant === 'full'">
+
+      <div *ngIf="hasBullets || experience.badges?.length" class="fs-exp__divider"></div>
+
+      <!-- bullets -->
+      <ul *ngIf="hasBullets" class="fs-exp__bullets">
+        <li *ngFor="let bullet of visibleBullets" class="fs-exp__bullet">
+          <span class="fs-exp__bullet-arrow" aria-hidden="true">▸</span>
+          <span>{{ bullet }}</span>
+        </li>
+      </ul>
+
+      <!-- toggle ver más / menos -->
+      <button
+        *ngIf="hasMoreBullets"
+        class="fs-exp__toggle"
+        type="button"
+        (click)="toggleExpand()"
+      >
+        <svg
+          class="fs-exp__toggle-icon"
+          [class.fs-exp__toggle-icon--open]="expanded"
+          width="12" height="12" viewBox="0 0 12 12" fill="none"
+        >
+          <path d="M3 4.5l3 3 3-3"
+            stroke="currentColor" stroke-width="1.5"
+            stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        {{ expanded ? 'ver menos' : 'ver más' }}
+      </button>
+
+      <!-- badges -->
+      <div *ngIf="experience.badges?.length" class="fs-exp__badges">
+        <fs-badge
+          *ngFor="let badge of experience.badges"
+          [color]="badge.color || 'neutral'"
+          [iconLeft]="badge.iconLeft"
+          variant="filled"
+          size="sm"
+        >{{ badge.label }}</fs-badge>
+      </div>
+
+    </ng-container>
+
+  </div>
+</div>
