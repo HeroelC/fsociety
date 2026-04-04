@@ -1,18 +1,19 @@
 {
   "name": "fsociety-workspace",
   "version": "0.0.1",
-"scripts": {
-  "ng": "ng",
-  "start": "ng serve",
-  "build": "ng build",
-  "watch": "ng build --watch --configuration development",
-  "test": "ng test",
-  "storybook": "ng run fsociety:storybook",
-  "build-storybook": "ng run fsociety:build-storybook",
-  "build:lib": "ng build fsociety",
-  "release": "release-it",
-  "release:dry": "release-it --dry-run"
-},
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test",
+    "storybook": "ng run fsociety:storybook",
+    "build-storybook": "ng run fsociety:build-storybook",
+    "deploy-storybook": "storybook-to-ghpages --existing-output-dir=storybook-static",
+    "build:lib": "ng build fsociety",
+    "release": "release-it",
+    "release:dry": "release-it --dry-run"
+  },
   "private": true,
   "dependencies": {
     "@angular/animations": "^19.0.0",
@@ -38,6 +39,7 @@
     "@storybook/addon-a11y": "^10.3.4",
     "@storybook/addon-docs": "^10.3.4",
     "@storybook/angular": "^10.3.4",
+    "@storybook/storybook-deployer": "^2.8.16",
     "@types/jasmine": "~5.1.0",
     "jasmine-core": "~5.4.0",
     "karma": "~6.4.0",
