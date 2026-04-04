@@ -1,0 +1,62 @@
+<div
+  *ngIf="animState !== 'exiting' || true"
+  class="fs-alert"
+  [class.fs-alert--entering]="animState === 'entering'"
+  [class.fs-alert--visible]="animState === 'visible'"
+  [class.fs-alert--exiting]="animState === 'exiting'"
+  [class]="'fs-alert fs-alert--' + type + ' fs-alert--' + variant"
+  [attr.role]="type === 'danger' ? 'alert' : 'status'"
+  [attr.aria-live]="type === 'danger' ? 'assertive' : 'polite'"
+>
+
+  <!-- ícono semántico -->
+  <svg
+    class="fs-alert__icon"
+    width="16" height="16"
+    viewBox="0 0 16 16"
+    fill="none"
+    aria-hidden="true"
+  >
+    <path
+      [attr.d]="iconPath"
+      stroke="currentColor"
+      stroke-width="1.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+  </svg>
+
+  <!-- cuerpo -->
+  <div class="fs-alert__body">
+    <div *ngIf="title" class="fs-alert__title">{{ title }}</div>
+    <div class="fs-alert__desc">
+      <ng-content></ng-content>
+    </div>
+  </div>
+
+  <!-- botón cerrar -->
+  <button
+    *ngIf="dismissible"
+    class="fs-alert__close"
+    type="button"
+    aria-label="Cerrar"
+    (click)="dismiss()"
+  >
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+      <path
+        d="M3 3l8 8M11 3L3 11"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+      />
+    </svg>
+  </button>
+
+  <!-- progress bar de auto-dismiss -->
+  <div
+    *ngIf="autoDismiss > 0"
+    class="fs-alert__progress"
+    [style.animation-duration]="progressDuration"
+  ></div>
+
+</div>

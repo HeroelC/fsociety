@@ -10,3 +10,6 @@ export type { FsExperienceCard, FsExperienceBadge } from './lib/experience-card/
 
 export * from './lib/profile-card/profile-card.component';
 export type { FsProfileStat, FsProfileLink, FsProfileBadge } from './lib/profile-card/profile-card.component';
+
+export * from './lib/alert/alert.component';
+export type { FsAlertType, FsAlertVariant } from './lib/alert/alert.component';

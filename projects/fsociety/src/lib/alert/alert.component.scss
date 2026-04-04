@@ -1,0 +1,221 @@
+@use '../../styles/tokens' as t;
+
+// ---------------------------------------------------------------------------
+// Tokens del componente
+// ---------------------------------------------------------------------------
+
+$alert-types: (
+  'info': (
+    bg:     rgba(37,  99,  235, 0.12),
+    border: rgba(37,  99,  235, 0.35),
+    color:  #93c5fd,
+    accent: #2563eb,
+  ),
+  'success': (
+    bg:     rgba(34,  197, 94,  0.10),
+    border: rgba(34,  197, 94,  0.30),
+    color:  #86efac,
+    accent: #22c55e,
+  ),
+  'warning': (
+    bg:     rgba(245, 158, 11,  0.10),
+    border: rgba(245, 158, 11,  0.30),
+    color:  #fcd34d,
+    accent: #f59e0b,
+  ),
+  'danger': (
+    bg:     rgba(244, 63,  94,  0.10),
+    border: rgba(244, 63,  94,  0.30),
+    color:  #fb7185,
+    accent: #f43f5e,
+  ),
+  'neutral': (
+    bg:     rgba(255, 255, 255, 0.04),
+    border: rgba(255, 255, 255, 0.10),
+    color:  rgba(255, 255, 255, 0.70),
+    accent: rgba(255, 255, 255, 0.30),
+  ),
+);
+
+// ---------------------------------------------------------------------------
+// Animaciones
+// ---------------------------------------------------------------------------
+
+@keyframes fs-alert-in {
+  from {
+    opacity:    0;
+    transform:  translateY(-10px);
+    max-height: 0;
+    padding:    0 t.$fs-space-4;
+  }
+  to {
+    opacity:    1;
+    transform:  translateY(0);
+    max-height: 300px;
+  }
+}
+
+@keyframes fs-alert-out {
+  from {
+    opacity:       1;
+    transform:     translateY(0);
+    max-height:    300px;
+    margin-bottom: 0;
+  }
+  to {
+    opacity:       0;
+    transform:     translateY(-8px);
+    max-height:    0;
+    padding-top:   0;
+    padding-bottom: 0;
+    margin-bottom: 0;
+  }
+}
+
+@keyframes fs-alert-progress {
+  from { width: 100%; }
+  to   { width: 0%; }
+}
+
+// ---------------------------------------------------------------------------
+// Base
+// ---------------------------------------------------------------------------
+
+.fs-alert {
+  display:        flex;
+  gap:            t.$fs-space-3;
+  align-items:    flex-start;
+  border-radius:  t.$fs-radius-lg;
+  padding:        t.$fs-space-3 t.$fs-space-4;
+  border:         0.5px solid transparent;
+  position:       relative;
+  overflow:       hidden;
+  width:          100%;
+
+  // estados de animación
+  &--entering {
+    animation: fs-alert-in 280ms #{t.$fs-ease-default} forwards;
+  }
+
+  &--visible {
+    opacity:   1;
+    transform: translateY(0);
+  }
+
+  &--exiting {
+    animation: fs-alert-out 220ms #{t.$fs-ease-in} forwards;
+    pointer-events: none;
+  }
+
+  // -------------------------------------------------------------------------
+  // Variantes por tipo — generadas con @each
+  // -------------------------------------------------------------------------
+
+  @each $type, $values in $alert-types {
+    &--#{$type} {
+      // variante filled (default)
+      &.fs-alert--filled {
+        background:   map-get($values, 'bg');
+        border-color: map-get($values, 'border');
+        color:        map-get($values, 'color');
+
+        .fs-alert__progress {
+          background: map-get($values, 'accent');
+        }
+      }
+
+      // variante accent — borde izquierdo
+      &.fs-alert--accent {
+        background:    map-get($values, 'bg');
+        border-color:  map-get($values, 'border');
+        color:         map-get($values, 'color');
+        border-left:   3px solid map-get($values, 'accent');
+        border-radius: 0 t.$fs-radius-lg t.$fs-radius-lg 0;
+
+        .fs-alert__progress {
+          background: map-get($values, 'accent');
+        }
+      }
+    }
+  }
+
+  // -------------------------------------------------------------------------
+  // Ícono
+  // -------------------------------------------------------------------------
+
+  &__icon {
+    flex-shrink: 0;
+    margin-top:  1px;
+    stroke:      currentColor;
+  }
+
+  // -------------------------------------------------------------------------
+  // Cuerpo
+  // -------------------------------------------------------------------------
+
+  &__body {
+    flex:    1;
+    min-width: 0;
+  }
+
+  &__title {
+    font-size:     t.$fs-text-sm;
+    font-weight:   t.$fs-font-semi;
+    font-family:   t.$fs-font-sans;
+    margin-bottom: 2px;
+    line-height:   1.4;
+  }
+
+  &__desc {
+    font-size:   t.$fs-text-xs;
+    font-family: t.$fs-font-sans;
+    line-height: 1.6;
+    opacity:     0.85;
+
+    code {
+      font-family:  t.$fs-font-mono;
+      font-size:    11px;
+      background:   rgba(255, 255, 255, 0.08);
+      padding:      1px 5px;
+      border-radius: t.$fs-radius-sm;
+    }
+  }
+
+  // -------------------------------------------------------------------------
+  // Botón cerrar
+  // -------------------------------------------------------------------------
+
+  &__close {
+    display:         flex;
+    align-items:     center;
+    justify-content: center;
+    background:      transparent;
+    border:          none;
+    cursor:          pointer;
+    color:           inherit;
+    opacity:         0.5;
+    padding:         0;
+    flex-shrink:     0;
+    border-radius:   t.$fs-radius-sm;
+    transition:      opacity t.$fs-duration-fast t.$fs-ease-default;
+
+    &:hover { opacity: 1; }
+
+    &:focus-visible {
+      @include t.focus-ring($color: currentColor, $offset: 2px);
+    }
+  }
+
+  // -------------------------------------------------------------------------
+  // Progress bar de auto-dismiss
+  // -------------------------------------------------------------------------
+
+  &__progress {
+    position:      absolute;
+    bottom:        0;
+    left:          0;
+    height:        2px;
+    border-radius: 0 0 t.$fs-radius-lg 0;
+    animation:     fs-alert-progress linear forwards;
+  }
+}

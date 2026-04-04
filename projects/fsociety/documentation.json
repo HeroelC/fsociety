@@ -6,7 +6,414 @@
     "interceptors": [],
     "classes": [],
     "directives": [],
-    "components": [],
+    "components": [
+        {
+            "name": "FsAlertDemoComponent",
+            "id": "component-FsAlertDemoComponent-bd4588f61d9a1c0b87a820544237e18da662964c75bfbe6aabfa643208b31455af9ec47ec4ac7797b1108d49ffe99599ddb58928817f2f7de9dcaa2080dbe1fd",
+            "file": "projects/fsociety/src/lib/alert/alert.stories.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "fs-alert-demo",
+            "styleUrls": [],
+            "styles": [],
+            "template": "<div style=\"max-width:540px;\">\n  <div style=\"display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px;\">\n    <button *ngFor=\"let type of types\" (click)=\"add(type)\"\n      style=\"font-size:11px; font-weight:500; padding:6px 14px; border-radius:6px;\n             border:0.5px solid rgba(255,255,255,0.15); background:transparent;\n             color:rgba(255,255,255,0.7); cursor:pointer; font-family:inherit;\">\n      + {{ type }}\n    </button>\n    <button (click)=\"addAuto()\"\n      style=\"font-size:11px; font-weight:500; padding:6px 14px; border-radius:6px;\n             background:#534AB7; color:#fff; border:none; cursor:pointer; font-family:inherit;\">\n      + auto 4s\n    </button>\n  </div>\n  <div style=\"display:flex; flex-direction:column; gap:8px;\">\n    <fs-alert\n      *ngFor=\"let a of alerts; trackBy: trackById\"\n      [type]=\"a.type\"\n      [variant]=\"a.variant\"\n      [title]=\"a.title\"\n      [dismissible]=\"true\"\n      [autoDismiss]=\"a.autoDismiss\"\n      (dismissed)=\"remove(a.id)\"\n    >{{ a.message }}</fs-alert>\n  </div>\n  <p *ngIf=\"!alerts.length\"\n    style=\"font-size:12px; color:rgba(255,255,255,0.3); margin-top:8px;\">\n    Hacé click en los botones para agregar alerts ↑\n  </p>\n</div>\n",
+            "templateUrl": [],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "alerts",
+                    "defaultValue": "[]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "any[]",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 213
+                },
+                {
+                    "name": "counter",
+                    "defaultValue": "0",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 214,
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "messages",
+                    "defaultValue": "{\n    info:    { title: 'Nueva versión',    message: 'fsociety v0.0.2 lista. Actualizá con npm install.' },\n    success: { title: 'Build exitoso',    message: 'Pipeline completado sin errores en 3.2s.' },\n    warning: { title: 'Deprecación',      message: 'Este API queda obsoleta en v3.0.' },\n    danger:  { title: 'Error',            message: 'No se pudo resolver el módulo. Verificá el path.' },\n    neutral: { title: 'Recordatorio',     message: 'Hacé commit antes de cerrar la sesión.' },\n  }",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Record<string | literal type>",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 216,
+                    "modifierKind": [
+                        148
+                    ]
+                },
+                {
+                    "name": "types",
+                    "defaultValue": "['info', 'success', 'warning', 'danger', 'neutral'] as const",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 212
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "add",
+                    "args": [
+                        {
+                            "name": "type",
+                            "type": "string",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "autoDismiss",
+                            "type": "number",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "defaultValue": "0"
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 224,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "type",
+                            "type": "string",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "autoDismiss",
+                            "type": "number",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "defaultValue": "0",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "addAuto",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 236,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "remove",
+                    "args": [
+                        {
+                            "name": "id",
+                            "type": "number",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 238,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "id",
+                            "type": "number",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "trackById",
+                    "args": [
+                        {
+                            "name": "_",
+                            "type": "number",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "a",
+                            "type": "any",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "number",
+                    "typeParameters": [],
+                    "line": 244,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "_",
+                            "type": "number",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "a",
+                            "type": "any",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                },
+                {
+                    "name": "FsAlertComponent",
+                    "type": "component"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport type { Meta, StoryObj } from '@storybook/angular';\nimport { FsAlertComponent } from './alert.component';\n\n// ---------------------------------------------------------------------------\n// Meta\n// ---------------------------------------------------------------------------\n\nconst meta: Meta<FsAlertComponent> = {\n  title:     'fsociety/Alert',\n  component: FsAlertComponent,\n  tags:      ['autodocs'],\n\n  argTypes: {\n    type: {\n      control:  'select',\n      options:  ['info', 'success', 'warning', 'danger', 'neutral'],\n      description: 'Tipo semántico',\n      table: { defaultValue: { summary: 'info' } },\n    },\n    variant: {\n      control:  'radio',\n      options:  ['filled', 'accent'],\n      description: 'filled = fondo sutil · accent = borde izquierdo',\n      table: { defaultValue: { summary: 'filled' } },\n    },\n    title: {\n      control: 'text',\n      description: 'Título en negrita — opcional',\n    },\n    dismissible: {\n      control: 'boolean',\n      description: 'Muestra botón X para cerrar',\n      table: { defaultValue: { summary: 'false' } },\n    },\n    autoDismiss: {\n      control: 'number',\n      description: 'Auto-cierre en ms (0 = deshabilitado)',\n      table: { defaultValue: { summary: '0' } },\n    },\n    dismissed: {\n      action: 'dismissed',\n      description: 'Emite al cerrarse',\n    },\n  },\n};\n\nexport default meta;\ntype Story = StoryObj<FsAlertComponent>;\n\n// ---------------------------------------------------------------------------\n// Playground\n// ---------------------------------------------------------------------------\n\nexport const Playground: Story = {\n  args: {\n    type:        'info',\n    variant:     'filled',\n    title:       'Nueva versión disponible',\n    dismissible: true,\n    autoDismiss: 0,\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <fs-alert\n        [type]=\"type\"\n        [variant]=\"variant\"\n        [title]=\"title\"\n        [dismissible]=\"dismissible\"\n        [autoDismiss]=\"autoDismiss\"\n        (dismissed)=\"dismissed($event)\"\n      >\n        fsociety v0.0.2 ya está disponible.\n        Actualizá con <code>npm install &#64;heroelc/fsociety</code>\n      </fs-alert>\n    `,\n  }),\n};\n\n// ---------------------------------------------------------------------------\n// Todos los tipos — filled\n// ---------------------------------------------------------------------------\n\nexport const AllTypesFilled: Story = {\n  name: 'Todos los tipos — filled',\n  render: () => ({\n    template: `\n      <div style=\"display:flex; flex-direction:column; gap:10px; max-width:540px;\">\n        <fs-alert type=\"info\"    title=\"Nueva versión disponible\" [dismissible]=\"true\">\n          fsociety v0.0.2 lista. Actualizá con npm install.\n        </fs-alert>\n        <fs-alert type=\"success\" title=\"Build exitoso\" [dismissible]=\"true\">\n          Pipeline completado sin errores en 3.2s.\n        </fs-alert>\n        <fs-alert type=\"warning\" title=\"Deprecación\" [dismissible]=\"true\">\n          Este API queda obsoleta en v3.0. Migrá antes de diciembre.\n        </fs-alert>\n        <fs-alert type=\"danger\"  title=\"Error de compilación\" [dismissible]=\"true\">\n          No se pudo resolver el módulo. Verificá el path.\n        </fs-alert>\n        <fs-alert type=\"neutral\" title=\"Información\" [dismissible]=\"true\">\n          Este componente es standalone. Importalo directamente.\n        </fs-alert>\n      </div>\n    `,\n  }),\n};\n\n// ---------------------------------------------------------------------------\n// Todos los tipos — accent\n// ---------------------------------------------------------------------------\n\nexport const AllTypesAccent: Story = {\n  name: 'Todos los tipos — accent',\n  render: () => ({\n    template: `\n      <div style=\"display:flex; flex-direction:column; gap:10px; max-width:540px;\">\n        <fs-alert type=\"info\"    variant=\"accent\" title=\"Información\">Borde izquierdo del color semántico.</fs-alert>\n        <fs-alert type=\"success\" variant=\"accent\" title=\"Éxito\">Acción completada correctamente.</fs-alert>\n        <fs-alert type=\"warning\" variant=\"accent\" title=\"Atención\">Esta acción puede tener consecuencias.</fs-alert>\n        <fs-alert type=\"danger\"  variant=\"accent\" title=\"Error\">Algo salió mal. Revisá los logs.</fs-alert>\n        <fs-alert type=\"neutral\" variant=\"accent\" title=\"Nota\">Recordá hacer commit antes de cerrar.</fs-alert>\n      </div>\n    `,\n  }),\n};\n\n// ---------------------------------------------------------------------------\n// Sin título\n// ---------------------------------------------------------------------------\n\nexport const WithoutTitle: Story = {\n  name: 'Sin título — solo descripción',\n  render: () => ({\n    template: `\n      <div style=\"display:flex; flex-direction:column; gap:10px; max-width:540px;\">\n        <fs-alert type=\"info\"    [dismissible]=\"true\">Este componente es standalone. Importalo directamente en tu módulo.</fs-alert>\n        <fs-alert type=\"warning\" [dismissible]=\"true\">Hay cambios sin guardar.</fs-alert>\n        <fs-alert type=\"success\">Preferencias guardadas.</fs-alert>\n      </div>\n    `,\n  }),\n};\n\n// ---------------------------------------------------------------------------\n// Auto-dismiss con progress bar\n// ---------------------------------------------------------------------------\n\nexport const AutoDismiss: Story = {\n  name: 'Auto-dismiss con progress bar',\n  render: () => ({\n    template: `\n      <div style=\"display:flex; flex-direction:column; gap:10px; max-width:540px;\">\n        <fs-alert type=\"success\" title=\"Guardado\" [autoDismiss]=\"3000\">\n          Se cierra automáticamente en 3 segundos.\n        </fs-alert>\n        <fs-alert type=\"info\" title=\"Actualizando\" [autoDismiss]=\"5000\">\n          Se cierra en 5 segundos. La barra inferior indica el tiempo restante.\n        </fs-alert>\n        <fs-alert type=\"warning\" title=\"Sesión por expirar\" [autoDismiss]=\"8000\" [dismissible]=\"true\">\n          Tu sesión expira en 8 segundos. Podés cerrar este aviso o esperar.\n        </fs-alert>\n      </div>\n    `,\n  }),\n};\n\n// ---------------------------------------------------------------------------\n// Componente interactivo — add/remove dinámico\n// ---------------------------------------------------------------------------\n\n@Component({\n  selector: 'fs-alert-demo',\n  standalone: true,\n  imports: [CommonModule, FsAlertComponent],\n  template: `\n    <div style=\"max-width:540px;\">\n      <div style=\"display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px;\">\n        <button *ngFor=\"let type of types\" (click)=\"add(type)\"\n          style=\"font-size:11px; font-weight:500; padding:6px 14px; border-radius:6px;\n                 border:0.5px solid rgba(255,255,255,0.15); background:transparent;\n                 color:rgba(255,255,255,0.7); cursor:pointer; font-family:inherit;\">\n          + {{ type }}\n        </button>\n        <button (click)=\"addAuto()\"\n          style=\"font-size:11px; font-weight:500; padding:6px 14px; border-radius:6px;\n                 background:#534AB7; color:#fff; border:none; cursor:pointer; font-family:inherit;\">\n          + auto 4s\n        </button>\n      </div>\n      <div style=\"display:flex; flex-direction:column; gap:8px;\">\n        <fs-alert\n          *ngFor=\"let a of alerts; trackBy: trackById\"\n          [type]=\"a.type\"\n          [variant]=\"a.variant\"\n          [title]=\"a.title\"\n          [dismissible]=\"true\"\n          [autoDismiss]=\"a.autoDismiss\"\n          (dismissed)=\"remove(a.id)\"\n        >{{ a.message }}</fs-alert>\n      </div>\n      <p *ngIf=\"!alerts.length\"\n        style=\"font-size:12px; color:rgba(255,255,255,0.3); margin-top:8px;\">\n        Hacé click en los botones para agregar alerts ↑\n      </p>\n    </div>\n  `,\n})\nexport class FsAlertDemoComponent {\n  types = ['info', 'success', 'warning', 'danger', 'neutral'] as const;\n  alerts: any[] = [];\n  private counter = 0;\n\n  readonly messages: Record<string, { title: string; message: string }> = {\n    info:    { title: 'Nueva versión',    message: 'fsociety v0.0.2 lista. Actualizá con npm install.' },\n    success: { title: 'Build exitoso',    message: 'Pipeline completado sin errores en 3.2s.' },\n    warning: { title: 'Deprecación',      message: 'Este API queda obsoleta en v3.0.' },\n    danger:  { title: 'Error',            message: 'No se pudo resolver el módulo. Verificá el path.' },\n    neutral: { title: 'Recordatorio',     message: 'Hacé commit antes de cerrar la sesión.' },\n  };\n\n  add(type: string, autoDismiss = 0): void {\n    const m = this.messages[type];\n    this.alerts.push({\n      id:          ++this.counter,\n      type,\n      variant:     this.counter % 2 === 0 ? 'accent' : 'filled',\n      title:       m.title,\n      message:     m.message,\n      autoDismiss,\n    });\n  }\n\n  addAuto(): void { this.add('info', 4000); }\n\n  remove(id: number): void {\n    setTimeout(() => {\n      this.alerts = this.alerts.filter(a => a.id !== id);\n    }, 250);\n  }\n\n  trackById(_: number, a: any): number { return a.id; }\n}\n\nexport const Interactive: Story = {\n  name: 'Interactivo — agregar y remover',\n  render: () => ({\n    moduleMetadata: {\n      imports: [FsAlertDemoComponent],\n    },\n    template: `<fs-alert-demo />`,\n  }),\n};\n",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": []
+        },
+        {
+            "name": "FsTokensDocComponent",
+            "id": "component-FsTokensDocComponent-58067cf71711b4f654e60714821f96f68f825231921cdbf88c7a60c4eee258f68f09fd7ee8f1f32119bf9db3993d2fc0347d2623be1c518141709f1c1c650f8c",
+            "file": "projects/fsociety/src/lib/tokens.stories.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "fs-tokens-doc",
+            "styleUrls": [],
+            "styles": [
+                "\n    .doc { font-family: 'JetBrains Mono', monospace; padding: 24px; max-width: 900px; color: #e6edf3; }\n    section { margin-bottom: 48px; }\n    h2 { font-size: 16px; font-weight: 600; color: #e6edf3; margin-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 10px; }\n    .desc { font-size: 12px; color: #8b949e; margin-bottom: 16px; line-height: 1.7; }\n    code { color: #60a5fa; font-family: 'JetBrains Mono', monospace; font-size: 11px; }\n\n    .scale-label { font-size: 11px; color: #8b949e; margin-bottom: 6px; }\n    .mt { margin-top: 16px; }\n    .scale-row { display: flex; border-radius: 8px; overflow: hidden; border: 0.5px solid rgba(255,255,255,0.06); }\n    .stop { flex: 1; height: 64px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; }\n    .stop-num   { font-size: 9px; font-weight: 600; }\n    .stop-alias { font-size: 8px; opacity: 0.8; }\n\n    .semantic-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px,1fr)); gap: 10px; }\n    .semantic-card { border-radius: 8px; overflow: hidden; border: 0.5px solid rgba(255,255,255,0.06); }\n    .semantic-swatches { display: flex; }\n    .swatch { flex: 1; height: 44px; }\n    .semantic-meta { background: #0d1117; padding: 8px 10px; display: flex; flex-direction: column; gap: 4px; }\n    .semantic-name { font-size: 12px; font-weight: 600; color: #e6edf3; }\n\n    table { width: 100%; border-collapse: collapse; font-size: 12px; }\n    th { text-align: left; padding: 8px 12px; background: #161b22; color: #8b949e; font-weight: 500; border-bottom: 1px solid rgba(255,255,255,0.08); }\n    td { padding: 8px 12px; border-bottom: 0.5px solid rgba(255,255,255,0.05); color: #e6edf3; }\n\n    .type-stack { display: flex; flex-direction: column; gap: 4px; }\n    .type-row { display: flex; align-items: baseline; gap: 16px; padding: 8px 12px; background: #0d1117; border-radius: 6px; }\n    .type-preview { color: #e6edf3; min-width: 160px; font-family: inherit; }\n    .type-token { min-width: 160px; }\n    .type-val   { font-size: 10px; color: #4b5563; }\n\n    .space-stack { display: flex; flex-direction: column; gap: 8px; }\n    .space-row { display: flex; align-items: center; gap: 16px; }\n    .space-bar { height: 16px; background: #2563eb; border-radius: 2px; flex-shrink: 0; min-width: 4px; }\n    .space-token { min-width: 120px; }\n    .space-val   { font-size: 10px; color: #4b5563; }\n\n    .radii-row { display: flex; flex-wrap: wrap; gap: 20px; }\n    .radius-item { display: flex; flex-direction: column; align-items: center; gap: 6px; }\n    .radius-box { width: 52px; height: 52px; background: #1d2736; border: 1.5px solid #2563eb; }\n    .radius-val { font-size: 9px; color: #4b5563; }\n\n    .trans-stack { display: flex; flex-direction: column; gap: 4px; }\n    .trans-row { display: flex; align-items: center; gap: 16px; padding: 10px 12px; background: #0d1117; border-radius: 6px; }\n    .trans-token { min-width: 200px; }\n    .trans-val   { font-size: 13px; color: #e6edf3; min-width: 60px; }\n    .trans-label { font-size: 11px; color: #4b5563; }\n  "
+            ],
+            "template": "<div class=\"doc\">\n\n  <section>\n    <h2>Colores brand</h2>\n    <p class=\"desc\">\n      Cada color base genera 10 stops con <code>generate-scale()</code>.\n      Usá siempre los alias — nunca los stops numéricos directamente.\n    </p>\n\n    <div class=\"scale-label\">primary — #2563eb</div>\n    <div class=\"scale-row\">\n      <div *ngFor=\"let s of primaryScale\" class=\"stop\" [style.background]=\"s.color\">\n        <span class=\"stop-num\" [style.color]=\"s.text\">{{ s.stop }}</span>\n        <span class=\"stop-alias\" [style.color]=\"s.text\">{{ s.alias }}</span>\n      </div>\n    </div>\n\n    <div class=\"scale-label mt\">secondary — #0ea5e9</div>\n    <div class=\"scale-row\">\n      <div *ngFor=\"let s of secondaryScale\" class=\"stop\" [style.background]=\"s.color\">\n        <span class=\"stop-num\" [style.color]=\"s.text\">{{ s.stop }}</span>\n      </div>\n    </div>\n\n    <div class=\"scale-label mt\">tertiary — #22d3ee</div>\n    <div class=\"scale-row\">\n      <div *ngFor=\"let s of tertiaryScale\" class=\"stop\" [style.background]=\"s.color\">\n        <span class=\"stop-num\" [style.color]=\"s.text\">{{ s.stop }}</span>\n      </div>\n    </div>\n  </section>\n\n  <section>\n    <h2>Colores semánticos</h2>\n    <div class=\"semantic-grid\">\n      <div *ngFor=\"let s of semanticColors\" class=\"semantic-card\">\n        <div class=\"semantic-swatches\">\n          <div class=\"swatch\" [style.background]=\"s.base\"></div>\n          <div class=\"swatch\" [style.background]=\"s.muted\" style=\"border-left:1px solid rgba(0,0,0,0.08)\"></div>\n        </div>\n        <div class=\"semantic-meta\">\n          <span class=\"semantic-name\">{{ s.name }}</span>\n          <code>--fs-{{ s.name }}-base · {{ s.base }}</code>\n        </div>\n      </div>\n    </div>\n  </section>\n\n  <section>\n    <h2>Alias tokens de estado</h2>\n    <p class=\"desc\">Disponibles para: primary · secondary · tertiary · neutral · success · warning · danger</p>\n    <table>\n      <thead>\n        <tr><th>Token</th><th>Stop</th><th>Uso típico</th></tr>\n      </thead>\n      <tbody>\n        <tr *ngFor=\"let a of aliasTokens\">\n          <td><code>--fs-&lbrace;color&rbrace;-{{ a.alias }}</code></td>\n          <td><code>{{ a.stop }}</code></td>\n          <td>{{ a.usage }}</td>\n        </tr>\n      </tbody>\n    </table>\n  </section>\n\n  <section>\n    <h2>Tipografía</h2>\n    <div class=\"type-stack\">\n      <div *ngFor=\"let t of typeSizes\" class=\"type-row\">\n        <span class=\"type-preview\" [style.fontSize]=\"t.value\">fsociety UI</span>\n        <code class=\"type-token\">{{ t.token }}</code>\n        <span class=\"type-val\">{{ t.value }} — {{ t.label }}</span>\n      </div>\n    </div>\n    <div class=\"type-stack\" style=\"margin-top:12px\">\n      <div *ngFor=\"let w of fontWeights\" class=\"type-row\">\n        <span class=\"type-preview\" [style.fontWeight]=\"w.value\" style=\"font-size:15px\">fsociety UI</span>\n        <code class=\"type-token\">{{ w.token }}</code>\n        <span class=\"type-val\">{{ w.value }} — {{ w.label }}</span>\n      </div>\n    </div>\n  </section>\n\n  <section>\n    <h2>Espaciado</h2>\n    <div class=\"space-stack\">\n      <div *ngFor=\"let s of spacing\" class=\"space-row\">\n        <div class=\"space-bar\" [style.width.px]=\"s.px\"></div>\n        <code class=\"space-token\">{{ s.token }}</code>\n        <span class=\"space-val\">{{ s.px }}px</span>\n      </div>\n    </div>\n  </section>\n\n  <section>\n    <h2>Border radius</h2>\n    <div class=\"radii-row\">\n      <div *ngFor=\"let r of radii\" class=\"radius-item\">\n        <div class=\"radius-box\" [style.borderRadius]=\"r.px > 100 ? '9999px' : r.px + 'px'\"></div>\n        <code>{{ r.name }}</code>\n        <span class=\"radius-val\">{{ r.px > 100 ? '9999px' : r.px + 'px' }}</span>\n      </div>\n    </div>\n  </section>\n\n  <section>\n    <h2>Transiciones</h2>\n    <div class=\"trans-stack\">\n      <div *ngFor=\"let t of transitions\" class=\"trans-row\">\n        <code class=\"trans-token\">{{ t.token }}</code>\n        <span class=\"trans-val\">{{ t.value }}</span>\n        <span class=\"trans-label\">{{ t.label }}</span>\n      </div>\n    </div>\n  </section>\n\n  <section>\n    <h2>Tokens de componentes — fs-tabs</h2>\n    <table style=\"margin-top:12px\">\n      <thead>\n        <tr><th>Token</th><th>Default</th><th>Controla</th></tr>\n      </thead>\n      <tbody>\n        <tr *ngFor=\"let t of tabTokens\">\n          <td><code>{{ t.token }}</code></td>\n          <td><code>{{ t.default }}</code></td>\n          <td>{{ t.controls }}</td>\n        </tr>\n      </tbody>\n    </table>\n  </section>\n\n</div>\n",
+            "templateUrl": [],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "aliasTokens",
+                    "defaultValue": "[\r\n    { alias: 'muted',    stop: 50,  usage: 'Badge bg, chip, alert sutil' },\r\n    { alias: 'subtle',   stop: 100, usage: 'Ghost hover bg, row hover' },\r\n    { alias: 'tint',     stop: 200, usage: 'Selected bg, focus fill' },\r\n    { alias: 'light',    stop: 300, usage: 'Borders sobre fondos claros' },\r\n    { alias: 'soft',     stop: 400, usage: 'Íconos, placeholder, disabled' },\r\n    { alias: 'base',     stop: 500, usage: 'Color principal' },\r\n    { alias: 'hover',    stop: 600, usage: 'Hover en solid buttons' },\r\n    { alias: 'active',   stop: 700, usage: 'Pressed / active state' },\r\n    { alias: 'emphasis', stop: 800, usage: 'Texto sobre mismo color' },\r\n    { alias: 'contrast', stop: 900, usage: 'Texto dark sobre tint/muted' },\r\n  ]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "[]",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 236
+                },
+                {
+                    "name": "fontWeights",
+                    "defaultValue": "[\r\n    { token: '$fs-font-regular', value: 400, label: 'body text' },\r\n    { token: '$fs-font-medium',  value: 500, label: 'labels, tabs' },\r\n    { token: '$fs-font-semi',    value: 600, label: 'tabs activos' },\r\n    { token: '$fs-font-bold',    value: 700, label: 'headings' },\r\n  ]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "[]",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 257
+                },
+                {
+                    "name": "primaryScale",
+                    "defaultValue": "[\r\n    { stop: 50,  alias: 'muted',    color: '#eef3fe', text: '#1e3a8a' },\r\n    { stop: 100, alias: 'subtle',   color: '#d5e2fc', text: '#1e3a8a' },\r\n    { stop: 200, alias: 'tint',     color: '#adc4f9', text: '#1e3a8a' },\r\n    { stop: 300, alias: 'light',    color: '#7aa3f5', text: '#fff' },\r\n    { stop: 400, alias: 'soft',     color: '#4782f2', text: '#fff' },\r\n    { stop: 500, alias: 'base',     color: '#2563eb', text: '#fff' },\r\n    { stop: 600, alias: 'hover',    color: '#1d55d4', text: '#fff' },\r\n    { stop: 700, alias: 'active',   color: '#1646bc', text: '#fff' },\r\n    { stop: 800, alias: 'emphasis', color: '#0f35a4', text: '#fff' },\r\n    { stop: 900, alias: 'contrast', color: '#082494', text: '#fff' },\r\n  ]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "[]",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 194
+                },
+                {
+                    "name": "radii",
+                    "defaultValue": "[\r\n    { name: 'sm',   px: 4 },\r\n    { name: 'md',   px: 6 },\r\n    { name: 'lg',   px: 8 },\r\n    { name: 'xl',   px: 12 },\r\n    { name: '2xl',  px: 16 },\r\n    { name: 'full', px: 9999 },\r\n  ]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "[]",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 274
+                },
+                {
+                    "name": "secondaryScale",
+                    "defaultValue": "[\r\n    { stop: 50,  color: '#e0f6ff', text: '#0c4a6e' },\r\n    { stop: 100, color: '#b9ebfd', text: '#0c4a6e' },\r\n    { stop: 200, color: '#84d9fb', text: '#0c4a6e' },\r\n    { stop: 300, color: '#4ec6f8', text: '#fff' },\r\n    { stop: 400, color: '#22b2f5', text: '#fff' },\r\n    { stop: 500, color: '#0ea5e9', text: '#fff' },\r\n    { stop: 600, color: '#0896d8', text: '#fff' },\r\n    { stop: 700, color: '#0386c1', text: '#fff' },\r\n    { stop: 800, color: '#0272a4', text: '#fff' },\r\n    { stop: 900, color: '#015a82', text: '#fff' },\r\n  ]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "[]",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 206
+                },
+                {
+                    "name": "semanticColors",
+                    "defaultValue": "[\r\n    { name: 'success', base: '#22c55e', muted: '#f0fdf4' },\r\n    { name: 'warning', base: '#f59e0b', muted: '#fffbeb' },\r\n    { name: 'danger',  base: '#f43f5e', muted: '#fff1f2' },\r\n    { name: 'neutral', base: '#64748b', muted: '#f8fafc' },\r\n  ]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "[]",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 230
+                },
+                {
+                    "name": "spacing",
+                    "defaultValue": "[\r\n    { token: '$fs-space-1',  px: 4 },\r\n    { token: '$fs-space-2',  px: 8 },\r\n    { token: '$fs-space-3',  px: 12 },\r\n    { token: '$fs-space-4',  px: 16 },\r\n    { token: '$fs-space-6',  px: 24 },\r\n    { token: '$fs-space-8',  px: 32 },\r\n    { token: '$fs-space-10', px: 40 },\r\n    { token: '$fs-space-12', px: 48 },\r\n    { token: '$fs-space-16', px: 64 },\r\n  ]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "[]",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 263
+                },
+                {
+                    "name": "tabTokens",
+                    "defaultValue": "[\r\n    { token: '--fs-tab-bg',             default: '#0d1117',                controls: 'Fondo del header' },\r\n    { token: '--fs-tab-color',          default: 'rgba(255,255,255,0.40)', controls: 'Texto inactivo' },\r\n    { token: '--fs-tab-color-hover',    default: 'rgba(255,255,255,0.70)', controls: 'Texto en hover' },\r\n    { token: '--fs-tab-color-active',   default: '#ffffff',                controls: 'Texto tab activa' },\r\n    { token: '--fs-tab-border',         default: 'rgba(255,255,255,0.08)', controls: 'Línea separadora' },\r\n    { token: '--fs-tab-hover-bg',       default: 'rgba(255,255,255,0.03)', controls: 'Fondo en hover' },\r\n    { token: '--fs-tab-indicator-from', default: 'var(--fs-primary-base)', controls: 'Color inicio degradé' },\r\n    { token: '--fs-tab-indicator-to',   default: 'var(--fs-tertiary-base)',controls: 'Color fin degradé' },\r\n    { token: '--fs-tab-indicator-glow', default: 'rgba(34,211,238,0.45)',  controls: 'Glow del indicator' },\r\n  ]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "[]",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 287
+                },
+                {
+                    "name": "tertiaryScale",
+                    "defaultValue": "[\r\n    { stop: 50,  color: '#ecfeff', text: '#164e63' },\r\n    { stop: 100, color: '#cffafe', text: '#164e63' },\r\n    { stop: 200, color: '#a5f3fc', text: '#164e63' },\r\n    { stop: 300, color: '#67e8f9', text: '#164e63' },\r\n    { stop: 400, color: '#22d3ee', text: '#164e63' },\r\n    { stop: 500, color: '#06b6d4', text: '#fff' },\r\n    { stop: 600, color: '#0891b2', text: '#fff' },\r\n    { stop: 700, color: '#0e7490', text: '#fff' },\r\n    { stop: 800, color: '#155e75', text: '#fff' },\r\n    { stop: 900, color: '#164e63', text: '#fff' },\r\n  ]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "[]",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 218
+                },
+                {
+                    "name": "transitions",
+                    "defaultValue": "[\r\n    { token: '--fs-duration-fast',   value: '100ms', label: 'colores, opacidad' },\r\n    { token: '--fs-duration-normal', value: '200ms', label: 'mayoría de transiciones' },\r\n    { token: '--fs-duration-slow',   value: '350ms', label: 'spinner, entradas' },\r\n  ]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "[]",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 282
+                },
+                {
+                    "name": "typeSizes",
+                    "defaultValue": "[\r\n    { token: '$fs-text-xs',   value: '12px', label: 'badges, captions' },\r\n    { token: '$fs-text-sm',   value: '14px', label: 'body secundario, tabs' },\r\n    { token: '$fs-text-base', value: '16px', label: 'body principal' },\r\n    { token: '$fs-text-lg',   value: '18px', label: 'subtítulos' },\r\n    { token: '$fs-text-xl',   value: '20px', label: 'títulos de sección' },\r\n    { token: '$fs-text-2xl',  value: '24px', label: 'headings' },\r\n    { token: '$fs-text-3xl',  value: '30px', label: 'display' },\r\n  ]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "[]",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 248
+                }
+            ],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\nimport type { Meta, StoryObj } from '@storybook/angular';\r\n\r\n@Component({\r\n  selector: 'fs-tokens-doc',\r\n  standalone: true,\r\n  imports: [CommonModule],\r\n  template: `\r\n    <div class=\"doc\">\r\n\r\n      <section>\r\n        <h2>Colores brand</h2>\r\n        <p class=\"desc\">\r\n          Cada color base genera 10 stops con <code>generate-scale()</code>.\r\n          Usá siempre los alias — nunca los stops numéricos directamente.\r\n        </p>\r\n\r\n        <div class=\"scale-label\">primary — #2563eb</div>\r\n        <div class=\"scale-row\">\r\n          <div *ngFor=\"let s of primaryScale\" class=\"stop\" [style.background]=\"s.color\">\r\n            <span class=\"stop-num\" [style.color]=\"s.text\">{{ s.stop }}</span>\r\n            <span class=\"stop-alias\" [style.color]=\"s.text\">{{ s.alias }}</span>\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"scale-label mt\">secondary — #0ea5e9</div>\r\n        <div class=\"scale-row\">\r\n          <div *ngFor=\"let s of secondaryScale\" class=\"stop\" [style.background]=\"s.color\">\r\n            <span class=\"stop-num\" [style.color]=\"s.text\">{{ s.stop }}</span>\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"scale-label mt\">tertiary — #22d3ee</div>\r\n        <div class=\"scale-row\">\r\n          <div *ngFor=\"let s of tertiaryScale\" class=\"stop\" [style.background]=\"s.color\">\r\n            <span class=\"stop-num\" [style.color]=\"s.text\">{{ s.stop }}</span>\r\n          </div>\r\n        </div>\r\n      </section>\r\n\r\n      <section>\r\n        <h2>Colores semánticos</h2>\r\n        <div class=\"semantic-grid\">\r\n          <div *ngFor=\"let s of semanticColors\" class=\"semantic-card\">\r\n            <div class=\"semantic-swatches\">\r\n              <div class=\"swatch\" [style.background]=\"s.base\"></div>\r\n              <div class=\"swatch\" [style.background]=\"s.muted\" style=\"border-left:1px solid rgba(0,0,0,0.08)\"></div>\r\n            </div>\r\n            <div class=\"semantic-meta\">\r\n              <span class=\"semantic-name\">{{ s.name }}</span>\r\n              <code>--fs-{{ s.name }}-base · {{ s.base }}</code>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </section>\r\n\r\n      <section>\r\n        <h2>Alias tokens de estado</h2>\r\n        <p class=\"desc\">Disponibles para: primary · secondary · tertiary · neutral · success · warning · danger</p>\r\n        <table>\r\n          <thead>\r\n            <tr><th>Token</th><th>Stop</th><th>Uso típico</th></tr>\r\n          </thead>\r\n          <tbody>\r\n            <tr *ngFor=\"let a of aliasTokens\">\r\n              <td><code>--fs-&lbrace;color&rbrace;-{{ a.alias }}</code></td>\r\n              <td><code>{{ a.stop }}</code></td>\r\n              <td>{{ a.usage }}</td>\r\n            </tr>\r\n          </tbody>\r\n        </table>\r\n      </section>\r\n\r\n      <section>\r\n        <h2>Tipografía</h2>\r\n        <div class=\"type-stack\">\r\n          <div *ngFor=\"let t of typeSizes\" class=\"type-row\">\r\n            <span class=\"type-preview\" [style.fontSize]=\"t.value\">fsociety UI</span>\r\n            <code class=\"type-token\">{{ t.token }}</code>\r\n            <span class=\"type-val\">{{ t.value }} — {{ t.label }}</span>\r\n          </div>\r\n        </div>\r\n        <div class=\"type-stack\" style=\"margin-top:12px\">\r\n          <div *ngFor=\"let w of fontWeights\" class=\"type-row\">\r\n            <span class=\"type-preview\" [style.fontWeight]=\"w.value\" style=\"font-size:15px\">fsociety UI</span>\r\n            <code class=\"type-token\">{{ w.token }}</code>\r\n            <span class=\"type-val\">{{ w.value }} — {{ w.label }}</span>\r\n          </div>\r\n        </div>\r\n      </section>\r\n\r\n      <section>\r\n        <h2>Espaciado</h2>\r\n        <div class=\"space-stack\">\r\n          <div *ngFor=\"let s of spacing\" class=\"space-row\">\r\n            <div class=\"space-bar\" [style.width.px]=\"s.px\"></div>\r\n            <code class=\"space-token\">{{ s.token }}</code>\r\n            <span class=\"space-val\">{{ s.px }}px</span>\r\n          </div>\r\n        </div>\r\n      </section>\r\n\r\n      <section>\r\n        <h2>Border radius</h2>\r\n        <div class=\"radii-row\">\r\n          <div *ngFor=\"let r of radii\" class=\"radius-item\">\r\n            <div class=\"radius-box\" [style.borderRadius]=\"r.px > 100 ? '9999px' : r.px + 'px'\"></div>\r\n            <code>{{ r.name }}</code>\r\n            <span class=\"radius-val\">{{ r.px > 100 ? '9999px' : r.px + 'px' }}</span>\r\n          </div>\r\n        </div>\r\n      </section>\r\n\r\n      <section>\r\n        <h2>Transiciones</h2>\r\n        <div class=\"trans-stack\">\r\n          <div *ngFor=\"let t of transitions\" class=\"trans-row\">\r\n            <code class=\"trans-token\">{{ t.token }}</code>\r\n            <span class=\"trans-val\">{{ t.value }}</span>\r\n            <span class=\"trans-label\">{{ t.label }}</span>\r\n          </div>\r\n        </div>\r\n      </section>\r\n\r\n      <section>\r\n        <h2>Tokens de componentes — fs-tabs</h2>\r\n        <table style=\"margin-top:12px\">\r\n          <thead>\r\n            <tr><th>Token</th><th>Default</th><th>Controla</th></tr>\r\n          </thead>\r\n          <tbody>\r\n            <tr *ngFor=\"let t of tabTokens\">\r\n              <td><code>{{ t.token }}</code></td>\r\n              <td><code>{{ t.default }}</code></td>\r\n              <td>{{ t.controls }}</td>\r\n            </tr>\r\n          </tbody>\r\n        </table>\r\n      </section>\r\n\r\n    </div>\r\n  `,\r\n  styles: [`\r\n    .doc { font-family: 'JetBrains Mono', monospace; padding: 24px; max-width: 900px; color: #e6edf3; }\r\n    section { margin-bottom: 48px; }\r\n    h2 { font-size: 16px; font-weight: 600; color: #e6edf3; margin-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 10px; }\r\n    .desc { font-size: 12px; color: #8b949e; margin-bottom: 16px; line-height: 1.7; }\r\n    code { color: #60a5fa; font-family: 'JetBrains Mono', monospace; font-size: 11px; }\r\n\r\n    .scale-label { font-size: 11px; color: #8b949e; margin-bottom: 6px; }\r\n    .mt { margin-top: 16px; }\r\n    .scale-row { display: flex; border-radius: 8px; overflow: hidden; border: 0.5px solid rgba(255,255,255,0.06); }\r\n    .stop { flex: 1; height: 64px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; }\r\n    .stop-num   { font-size: 9px; font-weight: 600; }\r\n    .stop-alias { font-size: 8px; opacity: 0.8; }\r\n\r\n    .semantic-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px,1fr)); gap: 10px; }\r\n    .semantic-card { border-radius: 8px; overflow: hidden; border: 0.5px solid rgba(255,255,255,0.06); }\r\n    .semantic-swatches { display: flex; }\r\n    .swatch { flex: 1; height: 44px; }\r\n    .semantic-meta { background: #0d1117; padding: 8px 10px; display: flex; flex-direction: column; gap: 4px; }\r\n    .semantic-name { font-size: 12px; font-weight: 600; color: #e6edf3; }\r\n\r\n    table { width: 100%; border-collapse: collapse; font-size: 12px; }\r\n    th { text-align: left; padding: 8px 12px; background: #161b22; color: #8b949e; font-weight: 500; border-bottom: 1px solid rgba(255,255,255,0.08); }\r\n    td { padding: 8px 12px; border-bottom: 0.5px solid rgba(255,255,255,0.05); color: #e6edf3; }\r\n\r\n    .type-stack { display: flex; flex-direction: column; gap: 4px; }\r\n    .type-row { display: flex; align-items: baseline; gap: 16px; padding: 8px 12px; background: #0d1117; border-radius: 6px; }\r\n    .type-preview { color: #e6edf3; min-width: 160px; font-family: inherit; }\r\n    .type-token { min-width: 160px; }\r\n    .type-val   { font-size: 10px; color: #4b5563; }\r\n\r\n    .space-stack { display: flex; flex-direction: column; gap: 8px; }\r\n    .space-row { display: flex; align-items: center; gap: 16px; }\r\n    .space-bar { height: 16px; background: #2563eb; border-radius: 2px; flex-shrink: 0; min-width: 4px; }\r\n    .space-token { min-width: 120px; }\r\n    .space-val   { font-size: 10px; color: #4b5563; }\r\n\r\n    .radii-row { display: flex; flex-wrap: wrap; gap: 20px; }\r\n    .radius-item { display: flex; flex-direction: column; align-items: center; gap: 6px; }\r\n    .radius-box { width: 52px; height: 52px; background: #1d2736; border: 1.5px solid #2563eb; }\r\n    .radius-val { font-size: 9px; color: #4b5563; }\r\n\r\n    .trans-stack { display: flex; flex-direction: column; gap: 4px; }\r\n    .trans-row { display: flex; align-items: center; gap: 16px; padding: 10px 12px; background: #0d1117; border-radius: 6px; }\r\n    .trans-token { min-width: 200px; }\r\n    .trans-val   { font-size: 13px; color: #e6edf3; min-width: 60px; }\r\n    .trans-label { font-size: 11px; color: #4b5563; }\r\n  `],\r\n})\r\nexport class FsTokensDocComponent {\r\n  primaryScale = [\r\n    { stop: 50,  alias: 'muted',    color: '#eef3fe', text: '#1e3a8a' },\r\n    { stop: 100, alias: 'subtle',   color: '#d5e2fc', text: '#1e3a8a' },\r\n    { stop: 200, alias: 'tint',     color: '#adc4f9', text: '#1e3a8a' },\r\n    { stop: 300, alias: 'light',    color: '#7aa3f5', text: '#fff' },\r\n    { stop: 400, alias: 'soft',     color: '#4782f2', text: '#fff' },\r\n    { stop: 500, alias: 'base',     color: '#2563eb', text: '#fff' },\r\n    { stop: 600, alias: 'hover',    color: '#1d55d4', text: '#fff' },\r\n    { stop: 700, alias: 'active',   color: '#1646bc', text: '#fff' },\r\n    { stop: 800, alias: 'emphasis', color: '#0f35a4', text: '#fff' },\r\n    { stop: 900, alias: 'contrast', color: '#082494', text: '#fff' },\r\n  ];\r\n  secondaryScale = [\r\n    { stop: 50,  color: '#e0f6ff', text: '#0c4a6e' },\r\n    { stop: 100, color: '#b9ebfd', text: '#0c4a6e' },\r\n    { stop: 200, color: '#84d9fb', text: '#0c4a6e' },\r\n    { stop: 300, color: '#4ec6f8', text: '#fff' },\r\n    { stop: 400, color: '#22b2f5', text: '#fff' },\r\n    { stop: 500, color: '#0ea5e9', text: '#fff' },\r\n    { stop: 600, color: '#0896d8', text: '#fff' },\r\n    { stop: 700, color: '#0386c1', text: '#fff' },\r\n    { stop: 800, color: '#0272a4', text: '#fff' },\r\n    { stop: 900, color: '#015a82', text: '#fff' },\r\n  ];\r\n  tertiaryScale = [\r\n    { stop: 50,  color: '#ecfeff', text: '#164e63' },\r\n    { stop: 100, color: '#cffafe', text: '#164e63' },\r\n    { stop: 200, color: '#a5f3fc', text: '#164e63' },\r\n    { stop: 300, color: '#67e8f9', text: '#164e63' },\r\n    { stop: 400, color: '#22d3ee', text: '#164e63' },\r\n    { stop: 500, color: '#06b6d4', text: '#fff' },\r\n    { stop: 600, color: '#0891b2', text: '#fff' },\r\n    { stop: 700, color: '#0e7490', text: '#fff' },\r\n    { stop: 800, color: '#155e75', text: '#fff' },\r\n    { stop: 900, color: '#164e63', text: '#fff' },\r\n  ];\r\n  semanticColors = [\r\n    { name: 'success', base: '#22c55e', muted: '#f0fdf4' },\r\n    { name: 'warning', base: '#f59e0b', muted: '#fffbeb' },\r\n    { name: 'danger',  base: '#f43f5e', muted: '#fff1f2' },\r\n    { name: 'neutral', base: '#64748b', muted: '#f8fafc' },\r\n  ];\r\n  aliasTokens = [\r\n    { alias: 'muted',    stop: 50,  usage: 'Badge bg, chip, alert sutil' },\r\n    { alias: 'subtle',   stop: 100, usage: 'Ghost hover bg, row hover' },\r\n    { alias: 'tint',     stop: 200, usage: 'Selected bg, focus fill' },\r\n    { alias: 'light',    stop: 300, usage: 'Borders sobre fondos claros' },\r\n    { alias: 'soft',     stop: 400, usage: 'Íconos, placeholder, disabled' },\r\n    { alias: 'base',     stop: 500, usage: 'Color principal' },\r\n    { alias: 'hover',    stop: 600, usage: 'Hover en solid buttons' },\r\n    { alias: 'active',   stop: 700, usage: 'Pressed / active state' },\r\n    { alias: 'emphasis', stop: 800, usage: 'Texto sobre mismo color' },\r\n    { alias: 'contrast', stop: 900, usage: 'Texto dark sobre tint/muted' },\r\n  ];\r\n  typeSizes = [\r\n    { token: '$fs-text-xs',   value: '12px', label: 'badges, captions' },\r\n    { token: '$fs-text-sm',   value: '14px', label: 'body secundario, tabs' },\r\n    { token: '$fs-text-base', value: '16px', label: 'body principal' },\r\n    { token: '$fs-text-lg',   value: '18px', label: 'subtítulos' },\r\n    { token: '$fs-text-xl',   value: '20px', label: 'títulos de sección' },\r\n    { token: '$fs-text-2xl',  value: '24px', label: 'headings' },\r\n    { token: '$fs-text-3xl',  value: '30px', label: 'display' },\r\n  ];\r\n  fontWeights = [\r\n    { token: '$fs-font-regular', value: 400, label: 'body text' },\r\n    { token: '$fs-font-medium',  value: 500, label: 'labels, tabs' },\r\n    { token: '$fs-font-semi',    value: 600, label: 'tabs activos' },\r\n    { token: '$fs-font-bold',    value: 700, label: 'headings' },\r\n  ];\r\n  spacing = [\r\n    { token: '$fs-space-1',  px: 4 },\r\n    { token: '$fs-space-2',  px: 8 },\r\n    { token: '$fs-space-3',  px: 12 },\r\n    { token: '$fs-space-4',  px: 16 },\r\n    { token: '$fs-space-6',  px: 24 },\r\n    { token: '$fs-space-8',  px: 32 },\r\n    { token: '$fs-space-10', px: 40 },\r\n    { token: '$fs-space-12', px: 48 },\r\n    { token: '$fs-space-16', px: 64 },\r\n  ];\r\n  radii = [\r\n    { name: 'sm',   px: 4 },\r\n    { name: 'md',   px: 6 },\r\n    { name: 'lg',   px: 8 },\r\n    { name: 'xl',   px: 12 },\r\n    { name: '2xl',  px: 16 },\r\n    { name: 'full', px: 9999 },\r\n  ];\r\n  transitions = [\r\n    { token: '--fs-duration-fast',   value: '100ms', label: 'colores, opacidad' },\r\n    { token: '--fs-duration-normal', value: '200ms', label: 'mayoría de transiciones' },\r\n    { token: '--fs-duration-slow',   value: '350ms', label: 'spinner, entradas' },\r\n  ];\r\n  tabTokens = [\r\n    { token: '--fs-tab-bg',             default: '#0d1117',                controls: 'Fondo del header' },\r\n    { token: '--fs-tab-color',          default: 'rgba(255,255,255,0.40)', controls: 'Texto inactivo' },\r\n    { token: '--fs-tab-color-hover',    default: 'rgba(255,255,255,0.70)', controls: 'Texto en hover' },\r\n    { token: '--fs-tab-color-active',   default: '#ffffff',                controls: 'Texto tab activa' },\r\n    { token: '--fs-tab-border',         default: 'rgba(255,255,255,0.08)', controls: 'Línea separadora' },\r\n    { token: '--fs-tab-hover-bg',       default: 'rgba(255,255,255,0.03)', controls: 'Fondo en hover' },\r\n    { token: '--fs-tab-indicator-from', default: 'var(--fs-primary-base)', controls: 'Color inicio degradé' },\r\n    { token: '--fs-tab-indicator-to',   default: 'var(--fs-tertiary-base)',controls: 'Color fin degradé' },\r\n    { token: '--fs-tab-indicator-glow', default: 'rgba(34,211,238,0.45)',  controls: 'Glow del indicator' },\r\n  ];\r\n}\r\n\r\nconst meta: Meta<FsTokensDocComponent> = {\r\n  title:     'fsociety/Tokens',\r\n  component: FsTokensDocComponent,\r\n  tags:      ['autodocs'],\r\n  parameters: {\r\n    backgrounds: { default: 'dark' },\r\n    docs: {\r\n      description: {\r\n        component: 'Sistema de design tokens de fsociety — colores, tipografía, espaciado, radios y transiciones.',\r\n      },\r\n    },\r\n  },\r\n};\r\n\r\nexport default meta;\r\ntype Story = StoryObj<FsTokensDocComponent>;\r\n\r\nexport const DesignTokens: Story = {\r\n  name: 'Design tokens',\r\n};\r\n",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "\n    .doc { font-family: 'JetBrains Mono', monospace; padding: 24px; max-width: 900px; color: #e6edf3; }\n    section { margin-bottom: 48px; }\n    h2 { font-size: 16px; font-weight: 600; color: #e6edf3; margin-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 10px; }\n    .desc { font-size: 12px; color: #8b949e; margin-bottom: 16px; line-height: 1.7; }\n    code { color: #60a5fa; font-family: 'JetBrains Mono', monospace; font-size: 11px; }\n\n    .scale-label { font-size: 11px; color: #8b949e; margin-bottom: 6px; }\n    .mt { margin-top: 16px; }\n    .scale-row { display: flex; border-radius: 8px; overflow: hidden; border: 0.5px solid rgba(255,255,255,0.06); }\n    .stop { flex: 1; height: 64px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; }\n    .stop-num   { font-size: 9px; font-weight: 600; }\n    .stop-alias { font-size: 8px; opacity: 0.8; }\n\n    .semantic-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px,1fr)); gap: 10px; }\n    .semantic-card { border-radius: 8px; overflow: hidden; border: 0.5px solid rgba(255,255,255,0.06); }\n    .semantic-swatches { display: flex; }\n    .swatch { flex: 1; height: 44px; }\n    .semantic-meta { background: #0d1117; padding: 8px 10px; display: flex; flex-direction: column; gap: 4px; }\n    .semantic-name { font-size: 12px; font-weight: 600; color: #e6edf3; }\n\n    table { width: 100%; border-collapse: collapse; font-size: 12px; }\n    th { text-align: left; padding: 8px 12px; background: #161b22; color: #8b949e; font-weight: 500; border-bottom: 1px solid rgba(255,255,255,0.08); }\n    td { padding: 8px 12px; border-bottom: 0.5px solid rgba(255,255,255,0.05); color: #e6edf3; }\n\n    .type-stack { display: flex; flex-direction: column; gap: 4px; }\n    .type-row { display: flex; align-items: baseline; gap: 16px; padding: 8px 12px; background: #0d1117; border-radius: 6px; }\n    .type-preview { color: #e6edf3; min-width: 160px; font-family: inherit; }\n    .type-token { min-width: 160px; }\n    .type-val   { font-size: 10px; color: #4b5563; }\n\n    .space-stack { display: flex; flex-direction: column; gap: 8px; }\n    .space-row { display: flex; align-items: center; gap: 16px; }\n    .space-bar { height: 16px; background: #2563eb; border-radius: 2px; flex-shrink: 0; min-width: 4px; }\n    .space-token { min-width: 120px; }\n    .space-val   { font-size: 10px; color: #4b5563; }\n\n    .radii-row { display: flex; flex-wrap: wrap; gap: 20px; }\n    .radius-item { display: flex; flex-direction: column; align-items: center; gap: 6px; }\n    .radius-box { width: 52px; height: 52px; background: #1d2736; border: 1.5px solid #2563eb; }\n    .radius-val { font-size: 9px; color: #4b5563; }\n\n    .trans-stack { display: flex; flex-direction: column; gap: 4px; }\n    .trans-row { display: flex; align-items: center; gap: 16px; padding: 10px 12px; background: #0d1117; border-radius: 6px; }\n    .trans-token { min-width: 200px; }\n    .trans-val   { font-size: 13px; color: #e6edf3; min-width: 60px; }\n    .trans-label { font-size: 11px; color: #4b5563; }\n  \n",
+            "extends": []
+        }
+    ],
     "modules": [],
     "miscellaneous": {
         "variables": [
@@ -19,6 +426,146 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\n  name: 'Todos los colores',\n  render: () => ({\n    template: `\n      <div style=\"display:flex;flex-wrap:wrap;gap:8px;align-items:center;\">\n        <fs-badge color=\"primary\">Primary</fs-badge>\n        <fs-badge color=\"secondary\">Secondary</fs-badge>\n        <fs-badge color=\"tertiary\">Tertiary</fs-badge>\n        <fs-badge color=\"success\">Success</fs-badge>\n        <fs-badge color=\"warning\">Warning</fs-badge>\n        <fs-badge color=\"danger\">Danger</fs-badge>\n        <fs-badge color=\"neutral\">Neutral</fs-badge>\n      </div>\n    `,\n  }),\n}"
+            },
+            {
+                "name": "AllTypesAccent",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/alert/alert.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  name: 'Todos los tipos — accent',\n  render: () => ({\n    template: `\n      <div style=\"display:flex; flex-direction:column; gap:10px; max-width:540px;\">\n        <fs-alert type=\"info\"    variant=\"accent\" title=\"Información\">Borde izquierdo del color semántico.</fs-alert>\n        <fs-alert type=\"success\" variant=\"accent\" title=\"Éxito\">Acción completada correctamente.</fs-alert>\n        <fs-alert type=\"warning\" variant=\"accent\" title=\"Atención\">Esta acción puede tener consecuencias.</fs-alert>\n        <fs-alert type=\"danger\"  variant=\"accent\" title=\"Error\">Algo salió mal. Revisá los logs.</fs-alert>\n        <fs-alert type=\"neutral\" variant=\"accent\" title=\"Nota\">Recordá hacer commit antes de cerrar.</fs-alert>\n      </div>\n    `,\n  }),\n}"
+            },
+            {
+                "name": "AllTypesFilled",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/alert/alert.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  name: 'Todos los tipos — filled',\n  render: () => ({\n    template: `\n      <div style=\"display:flex; flex-direction:column; gap:10px; max-width:540px;\">\n        <fs-alert type=\"info\"    title=\"Nueva versión disponible\" [dismissible]=\"true\">\n          fsociety v0.0.2 lista. Actualizá con npm install.\n        </fs-alert>\n        <fs-alert type=\"success\" title=\"Build exitoso\" [dismissible]=\"true\">\n          Pipeline completado sin errores en 3.2s.\n        </fs-alert>\n        <fs-alert type=\"warning\" title=\"Deprecación\" [dismissible]=\"true\">\n          Este API queda obsoleta en v3.0. Migrá antes de diciembre.\n        </fs-alert>\n        <fs-alert type=\"danger\"  title=\"Error de compilación\" [dismissible]=\"true\">\n          No se pudo resolver el módulo. Verificá el path.\n        </fs-alert>\n        <fs-alert type=\"neutral\" title=\"Información\" [dismissible]=\"true\">\n          Este componente es standalone. Importalo directamente.\n        </fs-alert>\n      </div>\n    `,\n  }),\n}"
+            },
+            {
+                "name": "AllVariants",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/button/button.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  name:   'Todas las variantes',\n  render: () => ({\n    template: `\n      <div style=\"display:flex; flex-wrap:wrap; gap:12px; align-items:center;\">\n        <fs-button variant=\"primary\">Primary</fs-button>\n        <fs-button variant=\"secondary\">Secondary</fs-button>\n        <fs-button variant=\"outline\">Outline</fs-button>\n        <fs-button variant=\"ghost\">Ghost</fs-button>\n        <fs-button variant=\"danger\">Danger</fs-button>\n      </div>\n    `,\n  }),\n}"
+            },
+            {
+                "name": "AutoDismiss",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/alert/alert.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  name: 'Auto-dismiss con progress bar',\n  render: () => ({\n    template: `\n      <div style=\"display:flex; flex-direction:column; gap:10px; max-width:540px;\">\n        <fs-alert type=\"success\" title=\"Guardado\" [autoDismiss]=\"3000\">\n          Se cierra automáticamente en 3 segundos.\n        </fs-alert>\n        <fs-alert type=\"info\" title=\"Actualizando\" [autoDismiss]=\"5000\">\n          Se cierra en 5 segundos. La barra inferior indica el tiempo restante.\n        </fs-alert>\n        <fs-alert type=\"warning\" title=\"Sesión por expirar\" [autoDismiss]=\"8000\" [dismissible]=\"true\">\n          Tu sesión expira en 8 segundos. Podés cerrar este aviso o esperar.\n        </fs-alert>\n      </div>\n    `,\n  }),\n}"
+            },
+            {
+                "name": "Compact",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/experience-card/experience-card.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  name: 'Variante compact',\n  args: {\n    experience: XCALE_EXPERIENCE,\n    variant:    'compact',\n    timeline:   false,\n  },\n}"
+            },
+            {
+                "name": "Current",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/experience-card/experience-card.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  name: 'Trabajo actual — full',\n  args: {\n    experience: XCALE_EXPERIENCE,\n    variant:    'full',\n    timeline:   false,\n  },\n}"
+            },
+            {
+                "name": "CustomStats",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/profile-card/profile-card.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  name: 'Stats configurables',\n  args: {\n    ...HEROEL_PROFILE,\n    showActions: false,\n    stats: [\n      { value: '4+',  label: 'años exp.' },\n      { value: '16',  label: 'repos' },\n      { value: '1.2k',label: 'commits' },\n      { value: '8',   label: 'libs' },\n    ],\n  },\n}"
+            },
+            {
+                "name": "DesignTokens",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/tokens.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  name: 'Design tokens',\r\n}"
+            },
+            {
+                "name": "FourTabs",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/tabs/tabs.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  name: '4 tabs — ancho distribuido',\n  args: {\n    activeTab: 'experiencia',\n    tabs: [\n      { id: 'experiencia', label: 'Experiencia' },\n      { id: 'sobre-mi',    label: 'Sobre mí' },\n      { id: 'formacion',   label: 'Formación' },\n      { id: 'proyectos',   label: 'Proyectos' },\n    ],\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <fs-tabs [tabs]=\"tabs\" [(activeTab)]=\"activeTab\">\n        <div style=\"padding:20px 0; color:rgba(255,255,255,0.6); font-size:13px;\">\n          Tab activa: {{ activeTab }}\n        </div>\n      </fs-tabs>\n    `,\n  }),\n}"
+            },
+            {
+                "name": "FullWidth",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/button/button.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  name:   'Full width',\n  render: () => ({\n    template: `\n      <div style=\"max-width:320px; display:flex; flex-direction:column; gap:10px;\">\n        <fs-button [fullWidth]=\"true\">Primary full width</fs-button>\n        <fs-button [fullWidth]=\"true\" variant=\"outline\">Outline full width</fs-button>\n      </div>\n    `,\n  }),\n}"
+            },
+            {
+                "name": "HEROEL_PROFILE",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/profile-card/profile-card.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "object",
+                "defaultValue": "{\n  name:     'Heroel Carpinetti',\n  handle:   'heroelc',\n  role:     'Frontend Developer Angular',\n  verified: true,\n\n  // Para usar tu foto real:\n  // avatarUrl: 'https://avatars.githubusercontent.com/u/TU_ID',\n\n  // Para usar una imagen de banner:\n  // bannerUrl: 'https://...',\n\n  links: [\n    { label: 'linkedin.com/in/heroelc', url: 'https://linkedin.com/in/heroelc', icon: LINK_ICONS.linkedin },\n    { label: 'github.com/heroelc',      url: 'https://github.com/heroelc',      icon: LINK_ICONS.github   },\n    { label: 'Tandil, Buenos Aires',    icon: LINK_ICONS.location },\n  ],\n\n  badges: [\n    { label: 'Angular',    color: 'danger'    as const, iconLeft: TECH_ICONS.angular },\n    { label: 'TypeScript', color: 'primary'   as const },\n    { label: 'AWS',        color: 'secondary' as const, iconLeft: TECH_ICONS.aws },\n  ],\n\n  stats: [\n    { value: '4+',  label: 'años exp.' },\n    { value: '12',  label: 'proyectos' },\n    { value: '985', label: 'seguidores' },\n  ],\n}"
+            },
+            {
+                "name": "ICON_ARROW",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/button/button.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "string",
+                "defaultValue": "'M3 8h10M9 4l4 4-4 4'"
+            },
+            {
+                "name": "ICON_SAVE",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/button/button.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "string",
+                "defaultValue": "'M13 2H5a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h8l2-2V3a1 1 0 0 0-1-1zM9 12V8m0 0H7m2 0h2'"
+            },
+            {
+                "name": "ICON_TRASH",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/button/button.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "string",
+                "defaultValue": "'M4 6h8M7 6V4h2v2M6 6v6a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V6'"
             },
             {
                 "name": "IconOnly",
@@ -41,6 +588,36 @@
                 "defaultValue": "{\n  github:   'M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z',\n  html:     'M1.5 0h13l-1.5 14-6 2-6-2zm4.5 5h5.5l.5-3H5l.5 2.5H10l-.25 2.75-2.25.5-2.25-.5L5.25 8.5',\n  css:      'M1.5 0h13l-1.5 14-6 2-6-2zm5 4l-.25 3h4.25l-.5 4-2.5.75-2.5-.75-.1-1.25h2l.05.75 1.05.25 1-.25.15-2H5.5L5 4z',\n  js:       'M2 2h12v12H2zm6.5 9.5c.28.5.65.87 1.35.87.65 0 1.15-.33 1.15-.95 0-.63-.45-.85-1.2-1.2l-.4-.17c-1.2-.5-2-.85-2-1.87C7.4 7.17 8.2 6.5 9.35 6.5c.8 0 1.4.28 1.8.97l-.95.62c-.22-.38-.45-.53-.85-.53-.38 0-.65.2-.65.5 0 .38.25.55 1 .88l.4.17c1.4.6 2.2.97 2.2 2.1 0 1.2-.93 1.9-2.2 1.9-1.23 0-2.03-.62-2.4-1.43zM5.5 11c.2.37.38.7 1.03.7.6 0 .87-.27.87-.97V6.5H8.5v4.25c0 1.5-.88 2.18-2.17 2.18-1.15 0-1.83-.6-2.18-1.33z',\n  angular:  'M8 1L1.5 3.5l1 8.5L8 15l5.5-3 1-8.5zM8 3.5L4.5 12h1.25L6.75 10h2.5l1 2h1.25zM8 5.5L9.25 9h-2.5z',\n  node:     'M8 1.5L2 5v6l6 3.5L14 11V5zm0 2l4 2.5v5L8 13.5 4 11V6z',\n  aws:      'M4.5 9.5c-.28.5-.45 1.1-.45 1.75C4.05 13.32 5.73 15 7.8 15c1.2 0 2.27-.57 2.97-1.45.43.1.88.15 1.33.15 2.2 0 3.9-1.58 3.9-3.7 0-.9-.3-1.72-.82-2.37.05-.25.07-.5.07-.76C15.25 4.7 13.55 3 11.5 3c-.38 0-.75.05-1.1.15C9.75 2.43 8.75 2 7.6 2 5.5 2 3.8 3.68 3.75 5.78c0 .3.03.6.1.87C3.1 7.4 2.5 8.4 2.5 9.5c0 .35.05.68.15 1H4.5z',\n  check:    'M2 8l4 4 8-8',\n  star:     'M8 1l1.8 3.6L14 5.3l-3 2.9.7 4.1L8 10.4 4.3 12.3l.7-4.1-3-2.9 4.2-.7z',\n  zap:      'M13 2L4.5 9h5.5l-3 7 8.5-9H10z',\n  terminal: 'M2 3h12v10H2zm2 3l2 2-2 2m4 0h4',\n}"
             },
             {
+                "name": "ICONS",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/experience-card/experience-card.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "object",
+                "defaultValue": "{\n  angular:  'M9.931 12.645h4.138l-2.07-4.908m0-7.737L.68 3.982l1.726 18.091 9.525 2.642 9.523-2.642L23.32 3.982zM17.593 18.76H15.88l-1.02-2.527H9.148l-1.021 2.527H6.405l4.913-11.914h1.876z',\n  js:       'M0 0h24v24H0V0zm22.034 18.276c-.175-1.095-.888-2.015-3.003-2.873-.736-.345-1.554-.585-1.797-1.14-.091-.33-.105-.51-.046-.705.15-.646.915-.84 1.515-.66.39.12.75.42.976.9 1.034-.676 1.034-.676 1.755-1.125-.27-.42-.404-.601-.586-.78-.63-.705-1.469-1.065-2.834-1.034l-.705.089c-.676.165-1.32.525-1.71 1.005-1.14 1.291-.811 3.541.569 4.471 1.365 1.02 3.361 1.244 3.616 2.205.24 1.17-.87 1.545-1.966 1.41-.811-.18-1.26-.586-1.755-1.336l-1.83 1.051c.21.48.45.689.81 1.109 1.74 1.756 6.09 1.666 6.871-1.004.029-.09.24-.705.074-1.65l.046.067zm-8.983-7.245h-2.248c0 1.938-.009 3.864-.009 5.805 0 1.232.063 2.363-.138 2.711-.33.689-1.18.601-1.566.48-.396-.196-.597-.466-.83-.855-.063-.105-.11-.196-.127-.196l-1.825 1.125c.305.63.75 1.172 1.324 1.517.855.51 2.004.675 3.207.405.783-.226 1.458-.691 1.811-1.411.51-.93.402-2.07.397-3.346.012-2.054 0-4.109 0-6.179v-.056z',\n  node:     'M11.998 24c-.321 0-.641-.084-.924-.251L8.054 21.99c-.435-.243-.223-.329-.079-.378.441-.153.530-.187.995-.453.049-.028.114-.017.165.012l2.308 1.371c.079.043.191.043.266 0l8.991-5.19c.081-.047.134-.142.134-.238V6.921c0-.099-.053-.19-.137-.241L11.706 1.5c-.079-.046-.188-.046-.271 0L2.449 6.68c-.085.052-.139.143-.139.241v10.37c0 .096.054.189.137.236l2.462 1.422c1.338.669 2.154-.119 2.154-.914V7.205c0-.147.116-.261.262-.261h1.148c.143 0 .261.114.261.261v10.83c0 1.789-.975 2.815-2.671 2.815-.521 0-.932 0-2.079-.565L1.355 19.01c-.571-.329-.924-.940-.924-1.598V7.205c0-.659.353-1.273.924-1.598L10.351.416c.557-.320 1.296-.320 1.848 0l8.998 5.191c.571.325.924.939.924 1.598v10.207c0 .659-.353 1.274-.924 1.598l-8.998 5.19c-.283.168-.602.251-.921.251z',\n  aws:      'M18.75 0h-4.5L12 2.25 9.75 0h-4.5L0 12l5.25 12h4.5L12 21.75 14.25 24h4.5L24 12zm-6.75 18l-1.5-1.5-1.5 1.5-3-6.75L9 9l3 3 3-3 3 2.25z',\n}"
+            },
+            {
+                "name": "InTabs",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/experience-card/experience-card.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  name:   'Dentro de fs-tabs — caso portfolio',\n  render: () => ({\n    props: {\n      xcale: XCALE_EXPERIENCE,\n      prev:  PREV_EXPERIENCE,\n    },\n    template: `\n      <div style=\"max-width:600px;\">\n        <div style=\"\n          background:#0d1117;\n          border-radius:12px;\n          overflow:hidden;\n          border:0.5px solid rgba(255,255,255,0.08);\n        \">\n          <div style=\"padding:20px 20px 0;\">\n            <div style=\"font-size:15px;font-weight:600;color:#fff;margin-bottom:4px;\">\n              Heroel Carpinetti\n            </div>\n            <div style=\"font-size:12px;color:rgba(255,255,255,0.4);\">\n              Frontend Developer Angular\n            </div>\n          </div>\n          <div style=\"padding:20px; display:flex; flex-direction:column; gap:16px;\">\n            <fs-experience-card [experience]=\"xcale\" variant=\"full\" [timeline]=\"true\" [timelineLast]=\"false\"/>\n            <fs-experience-card [experience]=\"prev\"  variant=\"full\" [timeline]=\"true\" [timelineLast]=\"true\"/>\n          </div>\n        </div>\n      </div>\n    `,\n  }),\n}"
+            },
+            {
+                "name": "Interactive",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/alert/alert.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  name: 'Interactivo — agregar y remover',\n  render: () => ({\n    moduleMetadata: {\n      imports: [FsAlertDemoComponent],\n    },\n    template: `<fs-alert-demo />`,\n  }),\n}"
+            },
+            {
                 "name": "Large",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -49,6 +626,16 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\n  args: {\n    size: 'large',\n    label: 'Button',\n  },\n}"
+            },
+            {
+                "name": "LINK_ICONS",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/profile-card/profile-card.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "object",
+                "defaultValue": "{\n  linkedin: 'M2 2h12v12H2V2zm2 9.5v-5h1.5v5H4zm.75-5.75a.875.875 0 1 1 0-1.75.875.875 0 0 1 0 1.75zM12 11.5H10.5V9.25c0-.56-.45-1-.1-1s-1 .44-1 1v2.25H8v-5h1.5v.67A2.1 2.1 0 0 1 11 6c1.1 0 1 .9 1 2v3.5z',\n  github:   'M8 1C4.13 1 1 4.13 1 8c0 3.08 1.99 5.69 4.76 6.61.35.06.48-.15.48-.33v-1.3c-1.94.42-2.35-.94-2.35-.94-.32-.8-.77-1.02-.77-1.02-.63-.43.05-.42.05-.42.69.05 1.05.71 1.05.71.61 1.05 1.61.75 2 .57.06-.44.24-.75.43-.92-1.52-.17-3.12-.76-3.12-3.38 0-.75.27-1.36.71-1.84-.07-.17-.31-.87.07-1.82 0 0 .58-.18 1.9.71a6.6 6.6 0 0 1 1.74-.23c.59 0 1.18.08 1.74.23 1.32-.9 1.9-.71 1.9-.71.38.95.14 1.65.07 1.82.44.48.71 1.09.71 1.84 0 2.63-1.6 3.21-3.13 3.38.25.21.47.63.47 1.28v1.9c0 .18.12.4.48.33A7.02 7.02 0 0 0 15 8c0-3.87-3.13-7-7-7z',\n  location: 'M8 1.5A4.5 4.5 0 0 0 3.5 6c0 3 4.5 8.5 4.5 8.5S12.5 9 12.5 6A4.5 4.5 0 0 0 8 1.5zm0 6a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z',\n  globe:    'M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zm0 1.5c.5 0 1.2.8 1.7 2.5H6.3c.5-1.7 1.2-2.5 1.7-2.5zm-2.2.4C4.7 3.5 3.8 4.7 3.3 6H1.7a5.5 5.5 0 0 1 4.1-3.1zm4.4 0A5.5 5.5 0 0 1 14.3 6h-1.6c-.5-1.3-1.4-2.5-2.5-3.1zM1.5 7.5h2c-.1.5-.1 1-.1 1.5s0 1 .1 1.5h-2a5.5 5.5 0 0 1 0-3zm2.5 0h4v3h-4a9.7 9.7 0 0 1 0-3zm5.5 0h4a5.5 5.5 0 0 1 0 3H9.5a11.5 11.5 0 0 0 0-3zm-7.3 4h1.6c.5 1.3 1.4 2.5 2.5 3.1A5.5 5.5 0 0 1 2.2 11.5zm8.1 0h1.6a5.5 5.5 0 0 1-4.1 3.1c1.1-.6 2-1.8 2.5-3.1zM6.3 12h3.4c-.5 1.7-1.2 2.5-1.7 2.5s-1.2-.8-1.7-2.5z',\n}"
             },
             {
                 "name": "LoggedIn",
@@ -94,6 +681,16 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "projects/fsociety/src/lib/tokens.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<FsTokensDocComponent>",
+                "defaultValue": "{\r\n  title:     'fsociety/Tokens',\r\n  component: FsTokensDocComponent,\r\n  tags:      ['autodocs'],\r\n  parameters: {\r\n    backgrounds: { default: 'dark' },\r\n    docs: {\r\n      description: {\r\n        component: 'Sistema de design tokens de fsociety — colores, tipografía, espaciado, radios y transiciones.',\r\n      },\r\n    },\r\n  },\r\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "projects/fsociety/src/stories/button.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -124,6 +721,16 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "projects/fsociety/src/lib/alert/alert.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<FsAlertComponent>",
+                "defaultValue": "{\n  title:     'fsociety/Alert',\n  component: FsAlertComponent,\n  tags:      ['autodocs'],\n\n  argTypes: {\n    type: {\n      control:  'select',\n      options:  ['info', 'success', 'warning', 'danger', 'neutral'],\n      description: 'Tipo semántico',\n      table: { defaultValue: { summary: 'info' } },\n    },\n    variant: {\n      control:  'radio',\n      options:  ['filled', 'accent'],\n      description: 'filled = fondo sutil · accent = borde izquierdo',\n      table: { defaultValue: { summary: 'filled' } },\n    },\n    title: {\n      control: 'text',\n      description: 'Título en negrita — opcional',\n    },\n    dismissible: {\n      control: 'boolean',\n      description: 'Muestra botón X para cerrar',\n      table: { defaultValue: { summary: 'false' } },\n    },\n    autoDismiss: {\n      control: 'number',\n      description: 'Auto-cierre en ms (0 = deshabilitado)',\n      table: { defaultValue: { summary: '0' } },\n    },\n    dismissed: {\n      action: 'dismissed',\n      description: 'Emite al cerrarse',\n    },\n  },\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "projects/fsociety/src/lib/badge/badge.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -137,8 +744,68 @@
                 "file": "projects/fsociety/src/lib/button/button.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Meta<ButtonComponent>",
-                "defaultValue": "{\r\n  title:     'fsociety/Button',\r\n  component: ButtonComponent,\r\n  argTypes: {\r\n    variant: { control: 'select',\r\n      options: ['primary', 'secondary', 'outline', 'ghost', 'danger'] },\r\n    size:    { control: 'radio',\r\n      options: ['sm', 'md', 'lg'] },\r\n    disabled: { control: 'boolean' },\r\n  },\r\n}"
+                "type": "Meta<FsButtonComponent>",
+                "defaultValue": "{\n  title:     'fsociety/Button',\n  component: FsButtonComponent,\n  tags:      ['autodocs'],\n\n  argTypes: {\n    variant: {\n      control:     'select',\n      options:     ['primary', 'secondary', 'outline', 'ghost', 'danger'],\n      description: 'Variante visual del botón',\n      table: {\n        type:         { summary: 'FsButtonVariant' },\n        defaultValue: { summary: 'primary' },\n      },\n    },\n    size: {\n      control:     'radio',\n      options:     ['sm', 'md', 'lg'],\n      description: 'Tamaño del botón',\n      table: {\n        type:         { summary: 'FsButtonSize' },\n        defaultValue: { summary: 'md' },\n      },\n    },\n    type: {\n      control:     'radio',\n      options:     ['button', 'submit', 'reset'],\n      description: 'Tipo HTML nativo',\n      table: {\n        type:         { summary: 'FsButtonType' },\n        defaultValue: { summary: 'button' },\n      },\n    },\n    disabled: {\n      control:     'boolean',\n      description: 'Deshabilita el botón',\n      table: {\n        type:         { summary: 'boolean' },\n        defaultValue: { summary: 'false' },\n      },\n    },\n    loading: {\n      control:     'boolean',\n      description: 'Muestra spinner y deshabilita',\n      table: {\n        type:         { summary: 'boolean' },\n        defaultValue: { summary: 'false' },\n      },\n    },\n    label: {\n      control:     'text',\n      description: 'Texto del botón',\n    },\n    fullWidth: {\n      control:     'boolean',\n      description: 'Ocupa el ancho del contenedor',\n      table: {\n        type:         { summary: 'boolean' },\n        defaultValue: { summary: 'false' },\n      },\n    },\n    fsClick: {\n      action:      'fsClick',\n      description: 'Evento click (no dispara si disabled o loading)',\n    },\n  },\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/experience-card/experience-card.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<FsExperienceCardComponent>",
+                "defaultValue": "{\n  title:     'fsociety/Experience Card',\n  component: FsExperienceCardComponent,\n  tags:      ['autodocs'],\n  argTypes: {\n    variant: {\n      control:  'radio',\n      options:  ['full', 'compact'],\n      description: 'full = con bullets y badges · compact = solo header',\n    },\n    timeline: {\n      control:     'boolean',\n      description: 'Muestra línea y dot de timeline a la izquierda',\n    },\n    timelineLast: {\n      control:     'boolean',\n      description: 'Último item del timeline — oculta la línea hacia abajo',\n    },\n  },\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/profile-card/profile-card.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<FsProfileCardComponent>",
+                "defaultValue": "{\n  title:     'fsociety/Profile Card',\n  component: FsProfileCardComponent,\n  tags:      ['autodocs'],\n  argTypes: {\n    showActions: {\n      control:     'boolean',\n      description: 'false = readonly/portfolio · true = con botones Seguir/Mensaje',\n    },\n    verified: {\n      control: 'boolean',\n      description: 'Muestra el badge de verificado sobre el avatar',\n    },\n    avatarUrl: {\n      control:     'text',\n      description: 'URL de la foto de perfil. Sin valor → muestra iniciales.',\n    },\n    bannerUrl: {\n      control:     'text',\n      description: 'URL de imagen para el banner. Sin valor → usa degradé navy.',\n    },\n    primaryAction:   { action: 'primaryAction' },\n    secondaryAction: { action: 'secondaryAction' },\n  },\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/tabs/tabs.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<FsTabsComponent>",
+                "defaultValue": "{\n  title:     'fsociety/Tabs',\n  component: FsTabsComponent,\n  tags:      ['autodocs'],\n\n  argTypes: {\n    tabs: {\n      control:     'object',\n      description: 'Array de FsTab — { id, label, disabled? }',\n    },\n    activeTab: {\n      control:     'text',\n      description: 'Id de la tab activa',\n    },\n    activeTabChange: {\n      action:      'activeTabChange',\n      description: 'Two-way binding — emite el id de la tab seleccionada',\n    },\n    tabChange: {\n      action:      'tabChange',\n      description: 'Emite el objeto FsTab completo al cambiar',\n    },\n  },\n}"
+            },
+            {
+                "name": "NoStats",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/profile-card/profile-card.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  name: 'Sin stats footer',\n  args: {\n    ...HEROEL_PROFILE,\n    showActions: false,\n    stats:       [],\n  },\n}"
+            },
+            {
+                "name": "Past",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/experience-card/experience-card.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  name: 'Trabajo pasado',\n  args: {\n    experience: PREV_EXPERIENCE,\n    variant:    'full',\n    timeline:   false,\n  },\n}"
+            },
+            {
+                "name": "Playground",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/alert/alert.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    type:        'info',\n    variant:     'filled',\n    title:       'Nueva versión disponible',\n    dismissible: true,\n    autoDismiss: 0,\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <fs-alert\n        [type]=\"type\"\n        [variant]=\"variant\"\n        [title]=\"title\"\n        [dismissible]=\"dismissible\"\n        [autoDismiss]=\"autoDismiss\"\n        (dismissed)=\"dismissed($event)\"\n      >\n        fsociety v0.0.2 ya está disponible.\n        Actualizá con <code>npm install &#64;heroelc/fsociety</code>\n      </fs-alert>\n    `,\n  }),\n}"
             },
             {
                 "name": "Playground",
@@ -149,6 +816,46 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\n  args: {\n    color:    'primary',\n    variant:  'filled',\n    size:     'md',\n    label:    'Angular',\n    dot:      false,\n    iconOnly: false,\n    removable: false,\n  },\n}"
+            },
+            {
+                "name": "Playground",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/button/button.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    variant:  'primary',\n    size:     'md',\n    label:    'Guardar cambios',\n    disabled: false,\n    loading:  false,\n    fullWidth: false,\n  },\n}"
+            },
+            {
+                "name": "Portfolio",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/profile-card/profile-card.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  name: 'Portfolio — readonly',\n  args: {\n    ...HEROEL_PROFILE,\n    showActions: false,\n  },\n}"
+            },
+            {
+                "name": "Portfolio",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/tabs/tabs.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  name: 'Portfolio — 3 tabs',\n  args: {\n    activeTab: 'experiencia',\n    tabs: [\n      { id: 'experiencia', label: 'Experiencia' },\n      { id: 'sobre-mi',    label: 'Sobre mí' },\n      { id: 'formacion',   label: 'Formación' },\n    ],\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <fs-tabs [tabs]=\"tabs\" [(activeTab)]=\"activeTab\">\n        <div style=\"padding:20px 0; color:rgba(255,255,255,0.6); font-size:13px;\">\n          Tab activa: {{ activeTab }}\n        </div>\n      </fs-tabs>\n    `,\n  }),\n}"
+            },
+            {
+                "name": "PREV_EXPERIENCE",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/experience-card/experience-card.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "object",
+                "defaultValue": "{\n  company:   'Empresa anterior',\n  role:      'Frontend Developer Jr.',\n  startDate: 'ene 2020',\n  endDate:   'mar 2022',\n  logoText:  'PREV',\n  bullets: [\n    'Desarrollo de componentes en React y Vue.js.',\n    'Integración con APIs REST y GraphQL.',\n  ],\n  badges: [\n    { label: 'JavaScript', color: 'warning' as const, iconLeft: ICONS.js },\n    { label: 'React',      color: 'neutral' as const },\n    { label: 'Vue.js',     color: 'neutral' as const },\n  ],\n}"
             },
             {
                 "name": "preview",
@@ -171,16 +878,6 @@
                 "defaultValue": "{\n  args: {\n    primary: true,\n    label: 'Button',\n  },\n}"
             },
             {
-                "name": "Primary",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/fsociety/src/lib/button/button.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: { variant: 'primary', size: 'md', label: 'Guardar' }\r\n}"
-            },
-            {
                 "name": "Removable",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -201,6 +898,16 @@
                 "defaultValue": "{\n  args: {\n    label: 'Button',\n  },\n}"
             },
             {
+                "name": "Sizes",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/button/button.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  name:   'Tamaños',\n  render: () => ({\n    template: `\n      <div style=\"display:flex; flex-wrap:wrap; gap:12px; align-items:center;\">\n        <fs-button size=\"sm\">Small</fs-button>\n        <fs-button size=\"md\">Medium</fs-button>\n        <fs-button size=\"lg\">Large</fs-button>\n      </div>\n    `,\n  }),\n}"
+            },
+            {
                 "name": "Small",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -211,6 +918,26 @@
                 "defaultValue": "{\n  args: {\n    size: 'small',\n    label: 'Button',\n  },\n}"
             },
             {
+                "name": "States",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/button/button.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  name:   'Estados',\n  render: () => ({\n    template: `\n      <div style=\"display:flex; flex-wrap:wrap; gap:12px; align-items:center;\">\n        <fs-button>Normal</fs-button>\n        <fs-button [disabled]=\"true\">Disabled</fs-button>\n        <fs-button [loading]=\"true\">Loading</fs-button>\n        <fs-button variant=\"outline\" [disabled]=\"true\">Outline disabled</fs-button>\n        <fs-button variant=\"danger\" [loading]=\"true\">Danger loading</fs-button>\n      </div>\n    `,\n  }),\n}"
+            },
+            {
+                "name": "TECH_ICONS",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/profile-card/profile-card.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "object",
+                "defaultValue": "{\n  angular: 'M9.931 12.645h4.138l-2.07-4.908m0-7.737L.68 3.982l1.726 18.091 9.525 2.642 9.523-2.642L23.32 3.982zM17.593 18.76H15.88l-1.02-2.527H9.148l-1.021 2.527H6.405l4.913-11.914h1.876z',\n  aws:     'M18.75 0h-4.5L12 2.25 9.75 0h-4.5L0 12l5.25 12h4.5L12 21.75 14.25 24h4.5L24 12zm-6.75 18l-1.5-1.5-1.5 1.5-3-6.75L9 9l3 3 3-3 3 2.25z',\n}"
+            },
+            {
                 "name": "TechStack",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -219,6 +946,86 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\n  name: 'Tech stack — caso portfolio',\n  render: () => ({\n    props: { ICONS },\n    template: `\n      <div style=\"display:flex;flex-wrap:wrap;gap:6px;\">\n        <fs-badge color=\"danger\"    [iconLeft]=\"ICONS.angular\"  [dot]=\"true\">Angular</fs-badge>\n        <fs-badge color=\"primary\"   [iconLeft]=\"ICONS.terminal\"            >TypeScript</fs-badge>\n        <fs-badge color=\"warning\"   [iconLeft]=\"ICONS.js\"                  >JavaScript</fs-badge>\n        <fs-badge color=\"success\"   [iconLeft]=\"ICONS.node\"                >Node.js</fs-badge>\n        <fs-badge color=\"secondary\" [iconLeft]=\"ICONS.aws\"                 >AWS</fs-badge>\n        <fs-badge color=\"neutral\"                                          >ESLint</fs-badge>\n        <fs-badge color=\"neutral\"                                          >Husky</fs-badge>\n      </div>\n    `,\n  }),\n}"
+            },
+            {
+                "name": "Timeline",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/experience-card/experience-card.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  name:   'Timeline — múltiples experiencias',\n  render: () => ({\n    props: {\n      xcale: XCALE_EXPERIENCE,\n      prev:  PREV_EXPERIENCE,\n    },\n    template: `\n      <div style=\"display:flex; flex-direction:column; gap:16px; max-width:580px;\">\n        <fs-experience-card\n          [experience]=\"xcale\"\n          variant=\"full\"\n          [timeline]=\"true\"\n          [timelineLast]=\"false\"\n        />\n        <fs-experience-card\n          [experience]=\"prev\"\n          variant=\"full\"\n          [timeline]=\"true\"\n          [timelineLast]=\"true\"\n        />\n      </div>\n    `,\n  }),\n}"
+            },
+            {
+                "name": "TwoTabs",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/tabs/tabs.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  name: '2 tabs — 50/50',\n  args: {\n    activeTab: 'info',\n    tabs: [\n      { id: 'info',     label: 'Información' },\n      { id: 'settings', label: 'Configuración' },\n    ],\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <fs-tabs [tabs]=\"tabs\" [(activeTab)]=\"activeTab\">\n        <div style=\"padding:20px 0; color:rgba(255,255,255,0.6); font-size:13px;\">\n          Tab activa: {{ activeTab }}\n        </div>\n      </fs-tabs>\n    `,\n  }),\n}"
+            },
+            {
+                "name": "UsageExample",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/profile-card/profile-card.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  name: 'Ejemplo de uso — portfolio Angular',\n  render: () => ({\n    template: `\n      <div style=\"max-width:300px;\">\n        <fs-profile-card\n          name=\"Heroel Carpinetti\"\n          handle=\"heroelc\"\n          role=\"Frontend Developer Angular\"\n          [verified]=\"true\"\n          [showActions]=\"false\"\n          [links]=\"links\"\n          [badges]=\"badges\"\n          [stats]=\"stats\"\n        />\n      </div>\n    `,\n    props: {\n      links: HEROEL_PROFILE.links,\n      badges: HEROEL_PROFILE.badges,\n      stats: HEROEL_PROFILE.stats,\n    },\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: `\n\\`\\`\\`typescript\n// profile.component.ts\nimport { FsProfileCardComponent } from '@heroelc/fsociety';\n\n@Component({\n  standalone: true,\n  imports: [FsProfileCardComponent],\n  template: \\`\n    <fs-profile-card\n      name=\"Heroel Carpinetti\"\n      handle=\"heroelc\"\n      role=\"Frontend Developer Angular\"\n      avatarUrl=\"https://avatars.githubusercontent.com/u/TU_ID\"\n      [verified]=\"true\"\n      [showActions]=\"false\"\n      [links]=\"links\"\n      [badges]=\"badges\"\n      [stats]=\"stats\"\n    />\n  \\`\n})\nexport class ProfileComponent {\n  links = [\n    { label: 'linkedin.com/in/heroelc', url: 'https://linkedin.com/in/heroelc' },\n    { label: 'github.com/heroelc',      url: 'https://github.com/heroelc' },\n    { label: 'Tandil, Buenos Aires' },\n  ];\n\n  badges = [\n    { label: 'Angular',    color: 'danger'    },\n    { label: 'TypeScript', color: 'primary'   },\n    { label: 'AWS',        color: 'secondary' },\n  ];\n\n  stats = [\n    { value: '4+', label: 'años exp.' },\n    { value: '12', label: 'proyectos' },\n  ];\n}\n\\`\\`\\`\n        `,\n      },\n    },\n  },\n}"
+            },
+            {
+                "name": "WithActions",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/profile-card/profile-card.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  name: 'Con acciones — seguir / mensaje',\n  args: {\n    ...HEROEL_PROFILE,\n    showActions:           true,\n    primaryActionLabel:    'Seguir',\n    secondaryActionLabel:  'Mensaje',\n  },\n}"
+            },
+            {
+                "name": "WithAvatarUrl",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/profile-card/profile-card.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  name: 'Con avatarUrl — foto de GitHub',\n  args: {\n    ...HEROEL_PROFILE,\n    showActions: false,\n    // Reemplazá con el ID real de tu cuenta GitHub\n    avatarUrl: 'https://avatars.githubusercontent.com/u/9919?v=4',\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: `\nPasá la URL de tu foto de GitHub en \\`avatarUrl\\`:\n\\`\\`\\`html\n<fs-profile-card\n  avatarUrl=\"https://avatars.githubusercontent.com/u/TU_ID\"\n/>\n\\`\\`\\`\nPara obtener tu ID: abrí \\`https://api.github.com/users/heroelc\\` y buscá el campo \\`id\\`.\n        `,\n      },\n    },\n  },\n}"
+            },
+            {
+                "name": "WithBannerUrl",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/profile-card/profile-card.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  name: 'Con bannerUrl — imagen de fondo',\n  args: {\n    ...HEROEL_PROFILE,\n    showActions: false,\n    bannerUrl: 'https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=600&q=80',\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: `\nPasá cualquier URL de imagen en \\`bannerUrl\\`:\n\\`\\`\\`html\n<fs-profile-card\n  bannerUrl=\"https://tu-imagen.com/banner.jpg\"\n/>\n\\`\\`\\`\nSin \\`bannerUrl\\`, el componente usa el degradé navy por defecto.\n        `,\n      },\n    },\n  },\n}"
+            },
+            {
+                "name": "WithContent",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/tabs/tabs.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  name: 'Con contenido — portfolio completo',\n  args: {\n    activeTab: 'experiencia',\n    tabs: [\n      { id: 'experiencia', label: 'Experiencia' },\n      { id: 'sobre-mi',    label: 'Sobre mí' },\n      { id: 'formacion',   label: 'Formación' },\n    ],\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <fs-tabs [tabs]=\"tabs\" [(activeTab)]=\"activeTab\">\n        <div style=\"padding:24px 0;\">\n          <div *ngIf=\"activeTab === 'experiencia'\" style=\"color:rgba(255,255,255,0.6); font-size:13px; line-height:1.7;\">\n            <strong style=\"color:white\">Xcale Consulting</strong> · Frontend Developer · abr 2022 – actualidad<br/>\n            Angular, TypeScript, AWS, Node.js, Angular Material\n          </div>\n          <div *ngIf=\"activeTab === 'sobre-mi'\" style=\"color:rgba(255,255,255,0.6); font-size:13px; line-height:1.7;\">\n            Frontend Developer con 4+ años de experiencia en Angular y ecosistema frontend moderno.\n          </div>\n          <div *ngIf=\"activeTab === 'formacion'\" style=\"color:rgba(255,255,255,0.6); font-size:13px; line-height:1.7;\">\n            <strong style=\"color:white\">Universidad Nacional del Centro</strong> · Analista en Sistemas\n          </div>\n        </div>\n      </fs-tabs>\n    `,\n  }),\n}"
+            },
+            {
+                "name": "WithDisabled",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/tabs/tabs.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  name: 'Con tab deshabilitada',\n  args: {\n    activeTab: 'experiencia',\n    tabs: [\n      { id: 'experiencia', label: 'Experiencia' },\n      { id: 'sobre-mi',    label: 'Sobre mí' },\n      { id: 'formacion',   label: 'Formación', disabled: true },\n      { id: 'proyectos',   label: 'Proyectos' },\n    ],\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <fs-tabs [tabs]=\"tabs\" [(activeTab)]=\"activeTab\">\n        <div style=\"padding:20px 0; color:rgba(255,255,255,0.6); font-size:13px;\">\n          Tab activa: {{ activeTab }}\n        </div>\n      </fs-tabs>\n    `,\n  }),\n}"
             },
             {
                 "name": "WithIconLeft",
@@ -239,10 +1046,51 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\n  name: 'Con ícono derecho',\n  render: () => ({\n    props: { ICONS },\n    template: `\n      <div style=\"display:flex;flex-wrap:wrap;gap:8px;align-items:center;\">\n        <fs-badge color=\"success\" [iconRight]=\"ICONS.check\">Verificado</fs-badge>\n        <fs-badge color=\"warning\" [iconRight]=\"ICONS.zap\">Rápido</fs-badge>\n        <fs-badge color=\"primary\" [iconRight]=\"ICONS.star\">Destacado</fs-badge>\n      </div>\n    `,\n  }),\n}"
+            },
+            {
+                "name": "WithIcons",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/button/button.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  name:   'Con íconos',\n  render: () => ({\n    props: {\n      iconArrow: ICON_ARROW,\n      iconSave:  ICON_SAVE,\n      iconTrash: ICON_TRASH,\n    },\n    template: `\n      <div style=\"display:flex; flex-wrap:wrap; gap:12px; align-items:center;\">\n        <fs-button [iconRight]=\"iconArrow\">Ver más</fs-button>\n        <fs-button [iconLeft]=\"iconSave\" variant=\"outline\">Guardar</fs-button>\n        <fs-button [iconLeft]=\"iconTrash\" variant=\"danger\">Eliminar</fs-button>\n      </div>\n    `,\n  }),\n}"
+            },
+            {
+                "name": "WithoutTitle",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/alert/alert.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  name: 'Sin título — solo descripción',\n  render: () => ({\n    template: `\n      <div style=\"display:flex; flex-direction:column; gap:10px; max-width:540px;\">\n        <fs-alert type=\"info\"    [dismissible]=\"true\">Este componente es standalone. Importalo directamente en tu módulo.</fs-alert>\n        <fs-alert type=\"warning\" [dismissible]=\"true\">Hay cambios sin guardar.</fs-alert>\n        <fs-alert type=\"success\">Preferencias guardadas.</fs-alert>\n      </div>\n    `,\n  }),\n}"
+            },
+            {
+                "name": "XCALE_EXPERIENCE",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/experience-card/experience-card.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "object",
+                "defaultValue": "{\n  company:      'Xcale Consulting',\n  role:         'Frontend Developer',\n  startDate:    'abr 2022',\n  current:      true,\n  logoText:     'X CALE',\n  bullets: [\n    'Desarrollo de interfaces con Angular, migraciones de versión 8 a la 16.',\n    'Configuración de pipelines, CodeBuild, ECS en AWS y trabajo con S3 buckets.',\n    'Desarrollé pequeños scripts en Node.js para automatización de tareas.',\n    'Configuré y trabajé con Angular Material, FontAwesome, ESLint y Husky.',\n  ],\n  bulletsPreview: 3,\n  badges: [\n    { label: 'Angular',     color: 'danger'    as const, iconLeft: ICONS.angular },\n    { label: 'TypeScript',  color: 'primary'   as const },\n    { label: 'JavaScript',  color: 'warning'   as const, iconLeft: ICONS.js },\n    { label: 'Node.js',     color: 'success'   as const, iconLeft: ICONS.node },\n    { label: 'AWS',         color: 'secondary' as const, iconLeft: ICONS.aws },\n    { label: 'ESLint',      color: 'neutral'   as const },\n    { label: 'Husky',       color: 'neutral'   as const },\n  ],\n}"
             }
         ],
         "functions": [],
         "typealiases": [
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<FsTokensDocComponent>",
+                "file": "projects/fsociety/src/lib/tokens.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 184
+            },
             {
                 "name": "Story",
                 "ctype": "miscellaneous",
@@ -280,6 +1128,17 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
+                "rawtype": "StoryObj<FsAlertComponent>",
+                "file": "projects/fsociety/src/lib/alert/alert.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 184
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
                 "rawtype": "StoryObj<FsBadgeComponent>",
                 "file": "projects/fsociety/src/lib/badge/badge.stories.ts",
                 "deprecated": false,
@@ -291,8 +1150,41 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
-                "rawtype": "StoryObj<ButtonComponent>",
+                "rawtype": "StoryObj<FsButtonComponent>",
                 "file": "projects/fsociety/src/lib/button/button.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 184
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<FsExperienceCardComponent>",
+                "file": "projects/fsociety/src/lib/experience-card/experience-card.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 184
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<FsProfileCardComponent>",
+                "file": "projects/fsociety/src/lib/profile-card/profile-card.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 184
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<FsTabsComponent>",
+                "file": "projects/fsociety/src/lib/tabs/tabs.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -391,6 +1283,468 @@
                     "deprecationMessage": "",
                     "type": "Story",
                     "defaultValue": "{\n  name: 'Con ícono derecho',\n  render: () => ({\n    props: { ICONS },\n    template: `\n      <div style=\"display:flex;flex-wrap:wrap;gap:8px;align-items:center;\">\n        <fs-badge color=\"success\" [iconRight]=\"ICONS.check\">Verificado</fs-badge>\n        <fs-badge color=\"warning\" [iconRight]=\"ICONS.zap\">Rápido</fs-badge>\n        <fs-badge color=\"primary\" [iconRight]=\"ICONS.star\">Destacado</fs-badge>\n      </div>\n    `,\n  }),\n}"
+                }
+            ],
+            "projects/fsociety/src/lib/alert/alert.stories.ts": [
+                {
+                    "name": "AllTypesAccent",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/alert/alert.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  name: 'Todos los tipos — accent',\n  render: () => ({\n    template: `\n      <div style=\"display:flex; flex-direction:column; gap:10px; max-width:540px;\">\n        <fs-alert type=\"info\"    variant=\"accent\" title=\"Información\">Borde izquierdo del color semántico.</fs-alert>\n        <fs-alert type=\"success\" variant=\"accent\" title=\"Éxito\">Acción completada correctamente.</fs-alert>\n        <fs-alert type=\"warning\" variant=\"accent\" title=\"Atención\">Esta acción puede tener consecuencias.</fs-alert>\n        <fs-alert type=\"danger\"  variant=\"accent\" title=\"Error\">Algo salió mal. Revisá los logs.</fs-alert>\n        <fs-alert type=\"neutral\" variant=\"accent\" title=\"Nota\">Recordá hacer commit antes de cerrar.</fs-alert>\n      </div>\n    `,\n  }),\n}"
+                },
+                {
+                    "name": "AllTypesFilled",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/alert/alert.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  name: 'Todos los tipos — filled',\n  render: () => ({\n    template: `\n      <div style=\"display:flex; flex-direction:column; gap:10px; max-width:540px;\">\n        <fs-alert type=\"info\"    title=\"Nueva versión disponible\" [dismissible]=\"true\">\n          fsociety v0.0.2 lista. Actualizá con npm install.\n        </fs-alert>\n        <fs-alert type=\"success\" title=\"Build exitoso\" [dismissible]=\"true\">\n          Pipeline completado sin errores en 3.2s.\n        </fs-alert>\n        <fs-alert type=\"warning\" title=\"Deprecación\" [dismissible]=\"true\">\n          Este API queda obsoleta en v3.0. Migrá antes de diciembre.\n        </fs-alert>\n        <fs-alert type=\"danger\"  title=\"Error de compilación\" [dismissible]=\"true\">\n          No se pudo resolver el módulo. Verificá el path.\n        </fs-alert>\n        <fs-alert type=\"neutral\" title=\"Información\" [dismissible]=\"true\">\n          Este componente es standalone. Importalo directamente.\n        </fs-alert>\n      </div>\n    `,\n  }),\n}"
+                },
+                {
+                    "name": "AutoDismiss",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/alert/alert.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  name: 'Auto-dismiss con progress bar',\n  render: () => ({\n    template: `\n      <div style=\"display:flex; flex-direction:column; gap:10px; max-width:540px;\">\n        <fs-alert type=\"success\" title=\"Guardado\" [autoDismiss]=\"3000\">\n          Se cierra automáticamente en 3 segundos.\n        </fs-alert>\n        <fs-alert type=\"info\" title=\"Actualizando\" [autoDismiss]=\"5000\">\n          Se cierra en 5 segundos. La barra inferior indica el tiempo restante.\n        </fs-alert>\n        <fs-alert type=\"warning\" title=\"Sesión por expirar\" [autoDismiss]=\"8000\" [dismissible]=\"true\">\n          Tu sesión expira en 8 segundos. Podés cerrar este aviso o esperar.\n        </fs-alert>\n      </div>\n    `,\n  }),\n}"
+                },
+                {
+                    "name": "Interactive",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/alert/alert.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  name: 'Interactivo — agregar y remover',\n  render: () => ({\n    moduleMetadata: {\n      imports: [FsAlertDemoComponent],\n    },\n    template: `<fs-alert-demo />`,\n  }),\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/alert/alert.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<FsAlertComponent>",
+                    "defaultValue": "{\n  title:     'fsociety/Alert',\n  component: FsAlertComponent,\n  tags:      ['autodocs'],\n\n  argTypes: {\n    type: {\n      control:  'select',\n      options:  ['info', 'success', 'warning', 'danger', 'neutral'],\n      description: 'Tipo semántico',\n      table: { defaultValue: { summary: 'info' } },\n    },\n    variant: {\n      control:  'radio',\n      options:  ['filled', 'accent'],\n      description: 'filled = fondo sutil · accent = borde izquierdo',\n      table: { defaultValue: { summary: 'filled' } },\n    },\n    title: {\n      control: 'text',\n      description: 'Título en negrita — opcional',\n    },\n    dismissible: {\n      control: 'boolean',\n      description: 'Muestra botón X para cerrar',\n      table: { defaultValue: { summary: 'false' } },\n    },\n    autoDismiss: {\n      control: 'number',\n      description: 'Auto-cierre en ms (0 = deshabilitado)',\n      table: { defaultValue: { summary: '0' } },\n    },\n    dismissed: {\n      action: 'dismissed',\n      description: 'Emite al cerrarse',\n    },\n  },\n}"
+                },
+                {
+                    "name": "Playground",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/alert/alert.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    type:        'info',\n    variant:     'filled',\n    title:       'Nueva versión disponible',\n    dismissible: true,\n    autoDismiss: 0,\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <fs-alert\n        [type]=\"type\"\n        [variant]=\"variant\"\n        [title]=\"title\"\n        [dismissible]=\"dismissible\"\n        [autoDismiss]=\"autoDismiss\"\n        (dismissed)=\"dismissed($event)\"\n      >\n        fsociety v0.0.2 ya está disponible.\n        Actualizá con <code>npm install &#64;heroelc/fsociety</code>\n      </fs-alert>\n    `,\n  }),\n}"
+                },
+                {
+                    "name": "WithoutTitle",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/alert/alert.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  name: 'Sin título — solo descripción',\n  render: () => ({\n    template: `\n      <div style=\"display:flex; flex-direction:column; gap:10px; max-width:540px;\">\n        <fs-alert type=\"info\"    [dismissible]=\"true\">Este componente es standalone. Importalo directamente en tu módulo.</fs-alert>\n        <fs-alert type=\"warning\" [dismissible]=\"true\">Hay cambios sin guardar.</fs-alert>\n        <fs-alert type=\"success\">Preferencias guardadas.</fs-alert>\n      </div>\n    `,\n  }),\n}"
+                }
+            ],
+            "projects/fsociety/src/lib/button/button.stories.ts": [
+                {
+                    "name": "AllVariants",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/button/button.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  name:   'Todas las variantes',\n  render: () => ({\n    template: `\n      <div style=\"display:flex; flex-wrap:wrap; gap:12px; align-items:center;\">\n        <fs-button variant=\"primary\">Primary</fs-button>\n        <fs-button variant=\"secondary\">Secondary</fs-button>\n        <fs-button variant=\"outline\">Outline</fs-button>\n        <fs-button variant=\"ghost\">Ghost</fs-button>\n        <fs-button variant=\"danger\">Danger</fs-button>\n      </div>\n    `,\n  }),\n}"
+                },
+                {
+                    "name": "FullWidth",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/button/button.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  name:   'Full width',\n  render: () => ({\n    template: `\n      <div style=\"max-width:320px; display:flex; flex-direction:column; gap:10px;\">\n        <fs-button [fullWidth]=\"true\">Primary full width</fs-button>\n        <fs-button [fullWidth]=\"true\" variant=\"outline\">Outline full width</fs-button>\n      </div>\n    `,\n  }),\n}"
+                },
+                {
+                    "name": "ICON_ARROW",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/button/button.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "defaultValue": "'M3 8h10M9 4l4 4-4 4'"
+                },
+                {
+                    "name": "ICON_SAVE",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/button/button.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "defaultValue": "'M13 2H5a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h8l2-2V3a1 1 0 0 0-1-1zM9 12V8m0 0H7m2 0h2'"
+                },
+                {
+                    "name": "ICON_TRASH",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/button/button.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "defaultValue": "'M4 6h8M7 6V4h2v2M6 6v6a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V6'"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/button/button.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<FsButtonComponent>",
+                    "defaultValue": "{\n  title:     'fsociety/Button',\n  component: FsButtonComponent,\n  tags:      ['autodocs'],\n\n  argTypes: {\n    variant: {\n      control:     'select',\n      options:     ['primary', 'secondary', 'outline', 'ghost', 'danger'],\n      description: 'Variante visual del botón',\n      table: {\n        type:         { summary: 'FsButtonVariant' },\n        defaultValue: { summary: 'primary' },\n      },\n    },\n    size: {\n      control:     'radio',\n      options:     ['sm', 'md', 'lg'],\n      description: 'Tamaño del botón',\n      table: {\n        type:         { summary: 'FsButtonSize' },\n        defaultValue: { summary: 'md' },\n      },\n    },\n    type: {\n      control:     'radio',\n      options:     ['button', 'submit', 'reset'],\n      description: 'Tipo HTML nativo',\n      table: {\n        type:         { summary: 'FsButtonType' },\n        defaultValue: { summary: 'button' },\n      },\n    },\n    disabled: {\n      control:     'boolean',\n      description: 'Deshabilita el botón',\n      table: {\n        type:         { summary: 'boolean' },\n        defaultValue: { summary: 'false' },\n      },\n    },\n    loading: {\n      control:     'boolean',\n      description: 'Muestra spinner y deshabilita',\n      table: {\n        type:         { summary: 'boolean' },\n        defaultValue: { summary: 'false' },\n      },\n    },\n    label: {\n      control:     'text',\n      description: 'Texto del botón',\n    },\n    fullWidth: {\n      control:     'boolean',\n      description: 'Ocupa el ancho del contenedor',\n      table: {\n        type:         { summary: 'boolean' },\n        defaultValue: { summary: 'false' },\n      },\n    },\n    fsClick: {\n      action:      'fsClick',\n      description: 'Evento click (no dispara si disabled o loading)',\n    },\n  },\n}"
+                },
+                {
+                    "name": "Playground",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/button/button.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    variant:  'primary',\n    size:     'md',\n    label:    'Guardar cambios',\n    disabled: false,\n    loading:  false,\n    fullWidth: false,\n  },\n}"
+                },
+                {
+                    "name": "Sizes",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/button/button.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  name:   'Tamaños',\n  render: () => ({\n    template: `\n      <div style=\"display:flex; flex-wrap:wrap; gap:12px; align-items:center;\">\n        <fs-button size=\"sm\">Small</fs-button>\n        <fs-button size=\"md\">Medium</fs-button>\n        <fs-button size=\"lg\">Large</fs-button>\n      </div>\n    `,\n  }),\n}"
+                },
+                {
+                    "name": "States",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/button/button.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  name:   'Estados',\n  render: () => ({\n    template: `\n      <div style=\"display:flex; flex-wrap:wrap; gap:12px; align-items:center;\">\n        <fs-button>Normal</fs-button>\n        <fs-button [disabled]=\"true\">Disabled</fs-button>\n        <fs-button [loading]=\"true\">Loading</fs-button>\n        <fs-button variant=\"outline\" [disabled]=\"true\">Outline disabled</fs-button>\n        <fs-button variant=\"danger\" [loading]=\"true\">Danger loading</fs-button>\n      </div>\n    `,\n  }),\n}"
+                },
+                {
+                    "name": "WithIcons",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/button/button.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  name:   'Con íconos',\n  render: () => ({\n    props: {\n      iconArrow: ICON_ARROW,\n      iconSave:  ICON_SAVE,\n      iconTrash: ICON_TRASH,\n    },\n    template: `\n      <div style=\"display:flex; flex-wrap:wrap; gap:12px; align-items:center;\">\n        <fs-button [iconRight]=\"iconArrow\">Ver más</fs-button>\n        <fs-button [iconLeft]=\"iconSave\" variant=\"outline\">Guardar</fs-button>\n        <fs-button [iconLeft]=\"iconTrash\" variant=\"danger\">Eliminar</fs-button>\n      </div>\n    `,\n  }),\n}"
+                }
+            ],
+            "projects/fsociety/src/lib/experience-card/experience-card.stories.ts": [
+                {
+                    "name": "Compact",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/experience-card/experience-card.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  name: 'Variante compact',\n  args: {\n    experience: XCALE_EXPERIENCE,\n    variant:    'compact',\n    timeline:   false,\n  },\n}"
+                },
+                {
+                    "name": "Current",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/experience-card/experience-card.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  name: 'Trabajo actual — full',\n  args: {\n    experience: XCALE_EXPERIENCE,\n    variant:    'full',\n    timeline:   false,\n  },\n}"
+                },
+                {
+                    "name": "ICONS",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/experience-card/experience-card.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "object",
+                    "defaultValue": "{\n  angular:  'M9.931 12.645h4.138l-2.07-4.908m0-7.737L.68 3.982l1.726 18.091 9.525 2.642 9.523-2.642L23.32 3.982zM17.593 18.76H15.88l-1.02-2.527H9.148l-1.021 2.527H6.405l4.913-11.914h1.876z',\n  js:       'M0 0h24v24H0V0zm22.034 18.276c-.175-1.095-.888-2.015-3.003-2.873-.736-.345-1.554-.585-1.797-1.14-.091-.33-.105-.51-.046-.705.15-.646.915-.84 1.515-.66.39.12.75.42.976.9 1.034-.676 1.034-.676 1.755-1.125-.27-.42-.404-.601-.586-.78-.63-.705-1.469-1.065-2.834-1.034l-.705.089c-.676.165-1.32.525-1.71 1.005-1.14 1.291-.811 3.541.569 4.471 1.365 1.02 3.361 1.244 3.616 2.205.24 1.17-.87 1.545-1.966 1.41-.811-.18-1.26-.586-1.755-1.336l-1.83 1.051c.21.48.45.689.81 1.109 1.74 1.756 6.09 1.666 6.871-1.004.029-.09.24-.705.074-1.65l.046.067zm-8.983-7.245h-2.248c0 1.938-.009 3.864-.009 5.805 0 1.232.063 2.363-.138 2.711-.33.689-1.18.601-1.566.48-.396-.196-.597-.466-.83-.855-.063-.105-.11-.196-.127-.196l-1.825 1.125c.305.63.75 1.172 1.324 1.517.855.51 2.004.675 3.207.405.783-.226 1.458-.691 1.811-1.411.51-.93.402-2.07.397-3.346.012-2.054 0-4.109 0-6.179v-.056z',\n  node:     'M11.998 24c-.321 0-.641-.084-.924-.251L8.054 21.99c-.435-.243-.223-.329-.079-.378.441-.153.530-.187.995-.453.049-.028.114-.017.165.012l2.308 1.371c.079.043.191.043.266 0l8.991-5.19c.081-.047.134-.142.134-.238V6.921c0-.099-.053-.19-.137-.241L11.706 1.5c-.079-.046-.188-.046-.271 0L2.449 6.68c-.085.052-.139.143-.139.241v10.37c0 .096.054.189.137.236l2.462 1.422c1.338.669 2.154-.119 2.154-.914V7.205c0-.147.116-.261.262-.261h1.148c.143 0 .261.114.261.261v10.83c0 1.789-.975 2.815-2.671 2.815-.521 0-.932 0-2.079-.565L1.355 19.01c-.571-.329-.924-.940-.924-1.598V7.205c0-.659.353-1.273.924-1.598L10.351.416c.557-.320 1.296-.320 1.848 0l8.998 5.191c.571.325.924.939.924 1.598v10.207c0 .659-.353 1.274-.924 1.598l-8.998 5.19c-.283.168-.602.251-.921.251z',\n  aws:      'M18.75 0h-4.5L12 2.25 9.75 0h-4.5L0 12l5.25 12h4.5L12 21.75 14.25 24h4.5L24 12zm-6.75 18l-1.5-1.5-1.5 1.5-3-6.75L9 9l3 3 3-3 3 2.25z',\n}"
+                },
+                {
+                    "name": "InTabs",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/experience-card/experience-card.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  name:   'Dentro de fs-tabs — caso portfolio',\n  render: () => ({\n    props: {\n      xcale: XCALE_EXPERIENCE,\n      prev:  PREV_EXPERIENCE,\n    },\n    template: `\n      <div style=\"max-width:600px;\">\n        <div style=\"\n          background:#0d1117;\n          border-radius:12px;\n          overflow:hidden;\n          border:0.5px solid rgba(255,255,255,0.08);\n        \">\n          <div style=\"padding:20px 20px 0;\">\n            <div style=\"font-size:15px;font-weight:600;color:#fff;margin-bottom:4px;\">\n              Heroel Carpinetti\n            </div>\n            <div style=\"font-size:12px;color:rgba(255,255,255,0.4);\">\n              Frontend Developer Angular\n            </div>\n          </div>\n          <div style=\"padding:20px; display:flex; flex-direction:column; gap:16px;\">\n            <fs-experience-card [experience]=\"xcale\" variant=\"full\" [timeline]=\"true\" [timelineLast]=\"false\"/>\n            <fs-experience-card [experience]=\"prev\"  variant=\"full\" [timeline]=\"true\" [timelineLast]=\"true\"/>\n          </div>\n        </div>\n      </div>\n    `,\n  }),\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/experience-card/experience-card.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<FsExperienceCardComponent>",
+                    "defaultValue": "{\n  title:     'fsociety/Experience Card',\n  component: FsExperienceCardComponent,\n  tags:      ['autodocs'],\n  argTypes: {\n    variant: {\n      control:  'radio',\n      options:  ['full', 'compact'],\n      description: 'full = con bullets y badges · compact = solo header',\n    },\n    timeline: {\n      control:     'boolean',\n      description: 'Muestra línea y dot de timeline a la izquierda',\n    },\n    timelineLast: {\n      control:     'boolean',\n      description: 'Último item del timeline — oculta la línea hacia abajo',\n    },\n  },\n}"
+                },
+                {
+                    "name": "Past",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/experience-card/experience-card.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  name: 'Trabajo pasado',\n  args: {\n    experience: PREV_EXPERIENCE,\n    variant:    'full',\n    timeline:   false,\n  },\n}"
+                },
+                {
+                    "name": "PREV_EXPERIENCE",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/experience-card/experience-card.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "object",
+                    "defaultValue": "{\n  company:   'Empresa anterior',\n  role:      'Frontend Developer Jr.',\n  startDate: 'ene 2020',\n  endDate:   'mar 2022',\n  logoText:  'PREV',\n  bullets: [\n    'Desarrollo de componentes en React y Vue.js.',\n    'Integración con APIs REST y GraphQL.',\n  ],\n  badges: [\n    { label: 'JavaScript', color: 'warning' as const, iconLeft: ICONS.js },\n    { label: 'React',      color: 'neutral' as const },\n    { label: 'Vue.js',     color: 'neutral' as const },\n  ],\n}"
+                },
+                {
+                    "name": "Timeline",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/experience-card/experience-card.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  name:   'Timeline — múltiples experiencias',\n  render: () => ({\n    props: {\n      xcale: XCALE_EXPERIENCE,\n      prev:  PREV_EXPERIENCE,\n    },\n    template: `\n      <div style=\"display:flex; flex-direction:column; gap:16px; max-width:580px;\">\n        <fs-experience-card\n          [experience]=\"xcale\"\n          variant=\"full\"\n          [timeline]=\"true\"\n          [timelineLast]=\"false\"\n        />\n        <fs-experience-card\n          [experience]=\"prev\"\n          variant=\"full\"\n          [timeline]=\"true\"\n          [timelineLast]=\"true\"\n        />\n      </div>\n    `,\n  }),\n}"
+                },
+                {
+                    "name": "XCALE_EXPERIENCE",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/experience-card/experience-card.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "object",
+                    "defaultValue": "{\n  company:      'Xcale Consulting',\n  role:         'Frontend Developer',\n  startDate:    'abr 2022',\n  current:      true,\n  logoText:     'X CALE',\n  bullets: [\n    'Desarrollo de interfaces con Angular, migraciones de versión 8 a la 16.',\n    'Configuración de pipelines, CodeBuild, ECS en AWS y trabajo con S3 buckets.',\n    'Desarrollé pequeños scripts en Node.js para automatización de tareas.',\n    'Configuré y trabajé con Angular Material, FontAwesome, ESLint y Husky.',\n  ],\n  bulletsPreview: 3,\n  badges: [\n    { label: 'Angular',     color: 'danger'    as const, iconLeft: ICONS.angular },\n    { label: 'TypeScript',  color: 'primary'   as const },\n    { label: 'JavaScript',  color: 'warning'   as const, iconLeft: ICONS.js },\n    { label: 'Node.js',     color: 'success'   as const, iconLeft: ICONS.node },\n    { label: 'AWS',         color: 'secondary' as const, iconLeft: ICONS.aws },\n    { label: 'ESLint',      color: 'neutral'   as const },\n    { label: 'Husky',       color: 'neutral'   as const },\n  ],\n}"
+                }
+            ],
+            "projects/fsociety/src/lib/profile-card/profile-card.stories.ts": [
+                {
+                    "name": "CustomStats",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/profile-card/profile-card.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  name: 'Stats configurables',\n  args: {\n    ...HEROEL_PROFILE,\n    showActions: false,\n    stats: [\n      { value: '4+',  label: 'años exp.' },\n      { value: '16',  label: 'repos' },\n      { value: '1.2k',label: 'commits' },\n      { value: '8',   label: 'libs' },\n    ],\n  },\n}"
+                },
+                {
+                    "name": "HEROEL_PROFILE",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/profile-card/profile-card.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "object",
+                    "defaultValue": "{\n  name:     'Heroel Carpinetti',\n  handle:   'heroelc',\n  role:     'Frontend Developer Angular',\n  verified: true,\n\n  // Para usar tu foto real:\n  // avatarUrl: 'https://avatars.githubusercontent.com/u/TU_ID',\n\n  // Para usar una imagen de banner:\n  // bannerUrl: 'https://...',\n\n  links: [\n    { label: 'linkedin.com/in/heroelc', url: 'https://linkedin.com/in/heroelc', icon: LINK_ICONS.linkedin },\n    { label: 'github.com/heroelc',      url: 'https://github.com/heroelc',      icon: LINK_ICONS.github   },\n    { label: 'Tandil, Buenos Aires',    icon: LINK_ICONS.location },\n  ],\n\n  badges: [\n    { label: 'Angular',    color: 'danger'    as const, iconLeft: TECH_ICONS.angular },\n    { label: 'TypeScript', color: 'primary'   as const },\n    { label: 'AWS',        color: 'secondary' as const, iconLeft: TECH_ICONS.aws },\n  ],\n\n  stats: [\n    { value: '4+',  label: 'años exp.' },\n    { value: '12',  label: 'proyectos' },\n    { value: '985', label: 'seguidores' },\n  ],\n}"
+                },
+                {
+                    "name": "LINK_ICONS",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/profile-card/profile-card.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "object",
+                    "defaultValue": "{\n  linkedin: 'M2 2h12v12H2V2zm2 9.5v-5h1.5v5H4zm.75-5.75a.875.875 0 1 1 0-1.75.875.875 0 0 1 0 1.75zM12 11.5H10.5V9.25c0-.56-.45-1-.1-1s-1 .44-1 1v2.25H8v-5h1.5v.67A2.1 2.1 0 0 1 11 6c1.1 0 1 .9 1 2v3.5z',\n  github:   'M8 1C4.13 1 1 4.13 1 8c0 3.08 1.99 5.69 4.76 6.61.35.06.48-.15.48-.33v-1.3c-1.94.42-2.35-.94-2.35-.94-.32-.8-.77-1.02-.77-1.02-.63-.43.05-.42.05-.42.69.05 1.05.71 1.05.71.61 1.05 1.61.75 2 .57.06-.44.24-.75.43-.92-1.52-.17-3.12-.76-3.12-3.38 0-.75.27-1.36.71-1.84-.07-.17-.31-.87.07-1.82 0 0 .58-.18 1.9.71a6.6 6.6 0 0 1 1.74-.23c.59 0 1.18.08 1.74.23 1.32-.9 1.9-.71 1.9-.71.38.95.14 1.65.07 1.82.44.48.71 1.09.71 1.84 0 2.63-1.6 3.21-3.13 3.38.25.21.47.63.47 1.28v1.9c0 .18.12.4.48.33A7.02 7.02 0 0 0 15 8c0-3.87-3.13-7-7-7z',\n  location: 'M8 1.5A4.5 4.5 0 0 0 3.5 6c0 3 4.5 8.5 4.5 8.5S12.5 9 12.5 6A4.5 4.5 0 0 0 8 1.5zm0 6a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z',\n  globe:    'M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zm0 1.5c.5 0 1.2.8 1.7 2.5H6.3c.5-1.7 1.2-2.5 1.7-2.5zm-2.2.4C4.7 3.5 3.8 4.7 3.3 6H1.7a5.5 5.5 0 0 1 4.1-3.1zm4.4 0A5.5 5.5 0 0 1 14.3 6h-1.6c-.5-1.3-1.4-2.5-2.5-3.1zM1.5 7.5h2c-.1.5-.1 1-.1 1.5s0 1 .1 1.5h-2a5.5 5.5 0 0 1 0-3zm2.5 0h4v3h-4a9.7 9.7 0 0 1 0-3zm5.5 0h4a5.5 5.5 0 0 1 0 3H9.5a11.5 11.5 0 0 0 0-3zm-7.3 4h1.6c.5 1.3 1.4 2.5 2.5 3.1A5.5 5.5 0 0 1 2.2 11.5zm8.1 0h1.6a5.5 5.5 0 0 1-4.1 3.1c1.1-.6 2-1.8 2.5-3.1zM6.3 12h3.4c-.5 1.7-1.2 2.5-1.7 2.5s-1.2-.8-1.7-2.5z',\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/profile-card/profile-card.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<FsProfileCardComponent>",
+                    "defaultValue": "{\n  title:     'fsociety/Profile Card',\n  component: FsProfileCardComponent,\n  tags:      ['autodocs'],\n  argTypes: {\n    showActions: {\n      control:     'boolean',\n      description: 'false = readonly/portfolio · true = con botones Seguir/Mensaje',\n    },\n    verified: {\n      control: 'boolean',\n      description: 'Muestra el badge de verificado sobre el avatar',\n    },\n    avatarUrl: {\n      control:     'text',\n      description: 'URL de la foto de perfil. Sin valor → muestra iniciales.',\n    },\n    bannerUrl: {\n      control:     'text',\n      description: 'URL de imagen para el banner. Sin valor → usa degradé navy.',\n    },\n    primaryAction:   { action: 'primaryAction' },\n    secondaryAction: { action: 'secondaryAction' },\n  },\n}"
+                },
+                {
+                    "name": "NoStats",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/profile-card/profile-card.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  name: 'Sin stats footer',\n  args: {\n    ...HEROEL_PROFILE,\n    showActions: false,\n    stats:       [],\n  },\n}"
+                },
+                {
+                    "name": "Portfolio",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/profile-card/profile-card.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  name: 'Portfolio — readonly',\n  args: {\n    ...HEROEL_PROFILE,\n    showActions: false,\n  },\n}"
+                },
+                {
+                    "name": "TECH_ICONS",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/profile-card/profile-card.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "object",
+                    "defaultValue": "{\n  angular: 'M9.931 12.645h4.138l-2.07-4.908m0-7.737L.68 3.982l1.726 18.091 9.525 2.642 9.523-2.642L23.32 3.982zM17.593 18.76H15.88l-1.02-2.527H9.148l-1.021 2.527H6.405l4.913-11.914h1.876z',\n  aws:     'M18.75 0h-4.5L12 2.25 9.75 0h-4.5L0 12l5.25 12h4.5L12 21.75 14.25 24h4.5L24 12zm-6.75 18l-1.5-1.5-1.5 1.5-3-6.75L9 9l3 3 3-3 3 2.25z',\n}"
+                },
+                {
+                    "name": "UsageExample",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/profile-card/profile-card.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  name: 'Ejemplo de uso — portfolio Angular',\n  render: () => ({\n    template: `\n      <div style=\"max-width:300px;\">\n        <fs-profile-card\n          name=\"Heroel Carpinetti\"\n          handle=\"heroelc\"\n          role=\"Frontend Developer Angular\"\n          [verified]=\"true\"\n          [showActions]=\"false\"\n          [links]=\"links\"\n          [badges]=\"badges\"\n          [stats]=\"stats\"\n        />\n      </div>\n    `,\n    props: {\n      links: HEROEL_PROFILE.links,\n      badges: HEROEL_PROFILE.badges,\n      stats: HEROEL_PROFILE.stats,\n    },\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: `\n\\`\\`\\`typescript\n// profile.component.ts\nimport { FsProfileCardComponent } from '@heroelc/fsociety';\n\n@Component({\n  standalone: true,\n  imports: [FsProfileCardComponent],\n  template: \\`\n    <fs-profile-card\n      name=\"Heroel Carpinetti\"\n      handle=\"heroelc\"\n      role=\"Frontend Developer Angular\"\n      avatarUrl=\"https://avatars.githubusercontent.com/u/TU_ID\"\n      [verified]=\"true\"\n      [showActions]=\"false\"\n      [links]=\"links\"\n      [badges]=\"badges\"\n      [stats]=\"stats\"\n    />\n  \\`\n})\nexport class ProfileComponent {\n  links = [\n    { label: 'linkedin.com/in/heroelc', url: 'https://linkedin.com/in/heroelc' },\n    { label: 'github.com/heroelc',      url: 'https://github.com/heroelc' },\n    { label: 'Tandil, Buenos Aires' },\n  ];\n\n  badges = [\n    { label: 'Angular',    color: 'danger'    },\n    { label: 'TypeScript', color: 'primary'   },\n    { label: 'AWS',        color: 'secondary' },\n  ];\n\n  stats = [\n    { value: '4+', label: 'años exp.' },\n    { value: '12', label: 'proyectos' },\n  ];\n}\n\\`\\`\\`\n        `,\n      },\n    },\n  },\n}"
+                },
+                {
+                    "name": "WithActions",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/profile-card/profile-card.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  name: 'Con acciones — seguir / mensaje',\n  args: {\n    ...HEROEL_PROFILE,\n    showActions:           true,\n    primaryActionLabel:    'Seguir',\n    secondaryActionLabel:  'Mensaje',\n  },\n}"
+                },
+                {
+                    "name": "WithAvatarUrl",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/profile-card/profile-card.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  name: 'Con avatarUrl — foto de GitHub',\n  args: {\n    ...HEROEL_PROFILE,\n    showActions: false,\n    // Reemplazá con el ID real de tu cuenta GitHub\n    avatarUrl: 'https://avatars.githubusercontent.com/u/9919?v=4',\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: `\nPasá la URL de tu foto de GitHub en \\`avatarUrl\\`:\n\\`\\`\\`html\n<fs-profile-card\n  avatarUrl=\"https://avatars.githubusercontent.com/u/TU_ID\"\n/>\n\\`\\`\\`\nPara obtener tu ID: abrí \\`https://api.github.com/users/heroelc\\` y buscá el campo \\`id\\`.\n        `,\n      },\n    },\n  },\n}"
+                },
+                {
+                    "name": "WithBannerUrl",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/profile-card/profile-card.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  name: 'Con bannerUrl — imagen de fondo',\n  args: {\n    ...HEROEL_PROFILE,\n    showActions: false,\n    bannerUrl: 'https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=600&q=80',\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: `\nPasá cualquier URL de imagen en \\`bannerUrl\\`:\n\\`\\`\\`html\n<fs-profile-card\n  bannerUrl=\"https://tu-imagen.com/banner.jpg\"\n/>\n\\`\\`\\`\nSin \\`bannerUrl\\`, el componente usa el degradé navy por defecto.\n        `,\n      },\n    },\n  },\n}"
+                }
+            ],
+            "projects/fsociety/src/lib/tokens.stories.ts": [
+                {
+                    "name": "DesignTokens",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/tokens.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  name: 'Design tokens',\r\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/tokens.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<FsTokensDocComponent>",
+                    "defaultValue": "{\r\n  title:     'fsociety/Tokens',\r\n  component: FsTokensDocComponent,\r\n  tags:      ['autodocs'],\r\n  parameters: {\r\n    backgrounds: { default: 'dark' },\r\n    docs: {\r\n      description: {\r\n        component: 'Sistema de design tokens de fsociety — colores, tipografía, espaciado, radios y transiciones.',\r\n      },\r\n    },\r\n  },\r\n}"
+                }
+            ],
+            "projects/fsociety/src/lib/tabs/tabs.stories.ts": [
+                {
+                    "name": "FourTabs",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/tabs/tabs.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  name: '4 tabs — ancho distribuido',\n  args: {\n    activeTab: 'experiencia',\n    tabs: [\n      { id: 'experiencia', label: 'Experiencia' },\n      { id: 'sobre-mi',    label: 'Sobre mí' },\n      { id: 'formacion',   label: 'Formación' },\n      { id: 'proyectos',   label: 'Proyectos' },\n    ],\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <fs-tabs [tabs]=\"tabs\" [(activeTab)]=\"activeTab\">\n        <div style=\"padding:20px 0; color:rgba(255,255,255,0.6); font-size:13px;\">\n          Tab activa: {{ activeTab }}\n        </div>\n      </fs-tabs>\n    `,\n  }),\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/tabs/tabs.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<FsTabsComponent>",
+                    "defaultValue": "{\n  title:     'fsociety/Tabs',\n  component: FsTabsComponent,\n  tags:      ['autodocs'],\n\n  argTypes: {\n    tabs: {\n      control:     'object',\n      description: 'Array de FsTab — { id, label, disabled? }',\n    },\n    activeTab: {\n      control:     'text',\n      description: 'Id de la tab activa',\n    },\n    activeTabChange: {\n      action:      'activeTabChange',\n      description: 'Two-way binding — emite el id de la tab seleccionada',\n    },\n    tabChange: {\n      action:      'tabChange',\n      description: 'Emite el objeto FsTab completo al cambiar',\n    },\n  },\n}"
+                },
+                {
+                    "name": "Portfolio",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/tabs/tabs.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  name: 'Portfolio — 3 tabs',\n  args: {\n    activeTab: 'experiencia',\n    tabs: [\n      { id: 'experiencia', label: 'Experiencia' },\n      { id: 'sobre-mi',    label: 'Sobre mí' },\n      { id: 'formacion',   label: 'Formación' },\n    ],\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <fs-tabs [tabs]=\"tabs\" [(activeTab)]=\"activeTab\">\n        <div style=\"padding:20px 0; color:rgba(255,255,255,0.6); font-size:13px;\">\n          Tab activa: {{ activeTab }}\n        </div>\n      </fs-tabs>\n    `,\n  }),\n}"
+                },
+                {
+                    "name": "TwoTabs",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/tabs/tabs.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  name: '2 tabs — 50/50',\n  args: {\n    activeTab: 'info',\n    tabs: [\n      { id: 'info',     label: 'Información' },\n      { id: 'settings', label: 'Configuración' },\n    ],\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <fs-tabs [tabs]=\"tabs\" [(activeTab)]=\"activeTab\">\n        <div style=\"padding:20px 0; color:rgba(255,255,255,0.6); font-size:13px;\">\n          Tab activa: {{ activeTab }}\n        </div>\n      </fs-tabs>\n    `,\n  }),\n}"
+                },
+                {
+                    "name": "WithContent",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/tabs/tabs.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  name: 'Con contenido — portfolio completo',\n  args: {\n    activeTab: 'experiencia',\n    tabs: [\n      { id: 'experiencia', label: 'Experiencia' },\n      { id: 'sobre-mi',    label: 'Sobre mí' },\n      { id: 'formacion',   label: 'Formación' },\n    ],\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <fs-tabs [tabs]=\"tabs\" [(activeTab)]=\"activeTab\">\n        <div style=\"padding:24px 0;\">\n          <div *ngIf=\"activeTab === 'experiencia'\" style=\"color:rgba(255,255,255,0.6); font-size:13px; line-height:1.7;\">\n            <strong style=\"color:white\">Xcale Consulting</strong> · Frontend Developer · abr 2022 – actualidad<br/>\n            Angular, TypeScript, AWS, Node.js, Angular Material\n          </div>\n          <div *ngIf=\"activeTab === 'sobre-mi'\" style=\"color:rgba(255,255,255,0.6); font-size:13px; line-height:1.7;\">\n            Frontend Developer con 4+ años de experiencia en Angular y ecosistema frontend moderno.\n          </div>\n          <div *ngIf=\"activeTab === 'formacion'\" style=\"color:rgba(255,255,255,0.6); font-size:13px; line-height:1.7;\">\n            <strong style=\"color:white\">Universidad Nacional del Centro</strong> · Analista en Sistemas\n          </div>\n        </div>\n      </fs-tabs>\n    `,\n  }),\n}"
+                },
+                {
+                    "name": "WithDisabled",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/tabs/tabs.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  name: 'Con tab deshabilitada',\n  args: {\n    activeTab: 'experiencia',\n    tabs: [\n      { id: 'experiencia', label: 'Experiencia' },\n      { id: 'sobre-mi',    label: 'Sobre mí' },\n      { id: 'formacion',   label: 'Formación', disabled: true },\n      { id: 'proyectos',   label: 'Proyectos' },\n    ],\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <fs-tabs [tabs]=\"tabs\" [(activeTab)]=\"activeTab\">\n        <div style=\"padding:20px 0; color:rgba(255,255,255,0.6); font-size:13px;\">\n          Tab activa: {{ activeTab }}\n        </div>\n      </fs-tabs>\n    `,\n  }),\n}"
                 }
             ],
             "projects/fsociety/src/stories/button.stories.ts": [
@@ -509,28 +1863,6 @@
                     "defaultValue": "{\n  title: 'Example/Page',\n  component: PageComponent,\n  parameters: {\n    // More on how to position stories at: https://storybook.js.org/docs/configure/story-layout\n    layout: 'fullscreen',\n  },\n}"
                 }
             ],
-            "projects/fsociety/src/lib/button/button.stories.ts": [
-                {
-                    "name": "meta",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/fsociety/src/lib/button/button.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Meta<ButtonComponent>",
-                    "defaultValue": "{\r\n  title:     'fsociety/Button',\r\n  component: ButtonComponent,\r\n  argTypes: {\r\n    variant: { control: 'select',\r\n      options: ['primary', 'secondary', 'outline', 'ghost', 'danger'] },\r\n    size:    { control: 'radio',\r\n      options: ['sm', 'md', 'lg'] },\r\n    disabled: { control: 'boolean' },\r\n  },\r\n}"
-                },
-                {
-                    "name": "Primary",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/fsociety/src/lib/button/button.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\r\n  args: { variant: 'primary', size: 'md', label: 'Guardar' }\r\n}"
-                }
-            ],
             "projects/fsociety/.storybook/preview.ts": [
                 {
                     "name": "preview",
@@ -547,6 +1879,19 @@
         "groupedFunctions": {},
         "groupedEnumerations": {},
         "groupedTypeAliases": {
+            "projects/fsociety/src/lib/tokens.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<FsTokensDocComponent>",
+                    "file": "projects/fsociety/src/lib/tokens.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 184
+                }
+            ],
             "projects/fsociety/src/stories/button.stories.ts": [
                 {
                     "name": "Story",
@@ -586,6 +1931,19 @@
                     "kind": 184
                 }
             ],
+            "projects/fsociety/src/lib/alert/alert.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<FsAlertComponent>",
+                    "file": "projects/fsociety/src/lib/alert/alert.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 184
+                }
+            ],
             "projects/fsociety/src/lib/badge/badge.stories.ts": [
                 {
                     "name": "Story",
@@ -604,8 +1962,47 @@
                     "name": "Story",
                     "ctype": "miscellaneous",
                     "subtype": "typealias",
-                    "rawtype": "StoryObj<ButtonComponent>",
+                    "rawtype": "StoryObj<FsButtonComponent>",
                     "file": "projects/fsociety/src/lib/button/button.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 184
+                }
+            ],
+            "projects/fsociety/src/lib/experience-card/experience-card.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<FsExperienceCardComponent>",
+                    "file": "projects/fsociety/src/lib/experience-card/experience-card.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 184
+                }
+            ],
+            "projects/fsociety/src/lib/profile-card/profile-card.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<FsProfileCardComponent>",
+                    "file": "projects/fsociety/src/lib/profile-card/profile-card.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 184
+                }
+            ],
+            "projects/fsociety/src/lib/tabs/tabs.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<FsTabsComponent>",
+                    "file": "projects/fsociety/src/lib/tabs/tabs.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",
@@ -629,6 +2026,95 @@
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
                 "name": "preview",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/alert/alert.stories.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "FsAlertDemoComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/9",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/alert/alert.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "AllTypesAccent",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/alert/alert.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "AllTypesFilled",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/alert/alert.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "AutoDismiss",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/alert/alert.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Interactive",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/alert/alert.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/alert/alert.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Playground",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/alert/alert.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "WithoutTitle",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/alert/alert.stories.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "Story",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
@@ -738,6 +2224,56 @@
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
+                "name": "AllVariants",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/button/button.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "FullWidth",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/button/button.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "ICON_ARROW",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/button/button.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "ICON_SAVE",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/button/button.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "ICON_TRASH",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/button/button.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
                 "name": "meta",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
@@ -748,13 +2284,372 @@
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
-                "name": "Primary",
+                "name": "Playground",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
             },
             {
                 "filePath": "projects/fsociety/src/lib/button/button.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Sizes",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/button/button.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "States",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/button/button.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "WithIcons",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/button/button.stories.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "Story",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/experience-card/experience-card.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Compact",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/experience-card/experience-card.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Current",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/experience-card/experience-card.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "ICONS",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/experience-card/experience-card.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "InTabs",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/experience-card/experience-card.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/experience-card/experience-card.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Past",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/experience-card/experience-card.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "PREV_EXPERIENCE",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/experience-card/experience-card.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Timeline",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/experience-card/experience-card.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "XCALE_EXPERIENCE",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/experience-card/experience-card.stories.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "Story",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/profile-card/profile-card.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "CustomStats",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/profile-card/profile-card.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "HEROEL_PROFILE",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/profile-card/profile-card.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "LINK_ICONS",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/profile-card/profile-card.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/profile-card/profile-card.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "NoStats",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/profile-card/profile-card.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Portfolio",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/profile-card/profile-card.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "TECH_ICONS",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/profile-card/profile-card.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "UsageExample",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/profile-card/profile-card.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "WithActions",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/profile-card/profile-card.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "WithAvatarUrl",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/profile-card/profile-card.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "WithBannerUrl",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/profile-card/profile-card.stories.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "Story",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/tabs/tabs.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "FourTabs",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/tabs/tabs.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/tabs/tabs.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Portfolio",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/tabs/tabs.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "TwoTabs",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/tabs/tabs.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "WithContent",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/tabs/tabs.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "WithDisabled",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/tabs/tabs.stories.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "Story",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/tokens.stories.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "FsTokensDocComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/12",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/tokens.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "DesignTokens",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/tokens.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/tokens.stories.ts",
                 "type": "type alias",
                 "linktype": "miscellaneous",
                 "linksubtype": "typealias",

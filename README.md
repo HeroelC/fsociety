@@ -282,7 +282,7 @@ npm run release
 - [x] `_mixins.scss` — mixins de base
 - [x] `fs-button` — variantes, estados, loading
 - [x] `fs-badge` — colores y variantes
-- [ ] `fs-alert` — tipos semánticos, dismissible
+- [x] `fs-alert` — tipos semánticos, dismissible
 - [x] `fs-tabs` — tabs con content projection
 - [x] `fs-profile-card` — card de portfolio
 - [x] `fs-experience-card` — card de experiencia laboral
