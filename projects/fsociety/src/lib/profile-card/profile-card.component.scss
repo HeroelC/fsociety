@@ -1,45 +1,47 @@
 @use '../../styles/tokens' as t;
 
 .fs-profile {
-  --fs-profile-bg:           #0d1117;
-  --fs-profile-border:       rgba(255, 255, 255, 0.08);
-  --fs-profile-banner-from:  #1e3a5f;
-  --fs-profile-banner-to:    #0f2035;
-  --fs-profile-avatar-bg:    #1d3557;
-  --fs-profile-avatar-color: #60a5fa;
+  --fs-profile-bg:            #0d1117;
+  --fs-profile-border:        rgba(255, 255, 255, 0.08);
+  --fs-profile-banner-from:   #1e3a5f;
+  --fs-profile-banner-to:     #0f2035;
+  --fs-profile-avatar-bg:     #1d3557;
+  --fs-profile-avatar-color:  #60a5fa;
   --fs-profile-avatar-border: #0d1117;
-  --fs-profile-name:         #ffffff;
-  --fs-profile-handle:       rgba(255, 255, 255, 0.35);
-  --fs-profile-role:         rgba(255, 255, 255, 0.50);
-  --fs-profile-link:         #60a5fa;
-  --fs-profile-link-icon:    rgba(255, 255, 255, 0.30);
-  --fs-profile-stat-value:   #ffffff;
-  --fs-profile-stat-label:   rgba(255, 255, 255, 0.30);
-  --fs-profile-stats-border: rgba(255, 255, 255, 0.06);
-  --fs-profile-divider:      rgba(255, 255, 255, 0.06);
+  --fs-profile-name:          #ffffff;
+  --fs-profile-handle:        rgba(255, 255, 255, 0.35);
+  --fs-profile-role:          rgba(255, 255, 255, 0.50);
+  --fs-profile-link:          #60a5fa;
+  --fs-profile-stat-value:    #ffffff;
+  --fs-profile-stat-label:    rgba(255, 255, 255, 0.30);
+  --fs-profile-stats-border:  rgba(255, 255, 255, 0.06);
+  --fs-profile-divider:       rgba(255, 255, 255, 0.06);
+
+  // Radio configurable — ponelo en 0 si la card va a full width sin margen
+  --fs-profile-radius: #{t.$fs-radius-xl};
 
   background:    var(--fs-profile-bg);
   border:        0.5px solid var(--fs-profile-border);
-  border-radius: t.$fs-radius-xl;
+  border-radius: var(--fs-profile-radius);
   overflow:      hidden;
   width:         100%;
 
   // -------------------------------------------------------------------------
-  // Banner
+  // Banner — más alto para mejor presencia visual
   // -------------------------------------------------------------------------
 
   &__banner {
-    height:   84px;
+    height:   180px;   // era 84px
     position: relative;
     overflow: hidden;
   }
 
   &__banner-img {
-    width:      100%;
-    height:     100%;
-    object-fit: cover;
+    width:           100%;
+    height:          100%;
+    object-fit:      cover;
     object-position: center;
-    display: block;
+    display:         block;
   }
 
   &__banner-gradient {
@@ -52,7 +54,6 @@
     );
   }
 
-  // línea degradé al pie del banner — usa tokens de la lib
   &__banner-line {
     position:   absolute;
     bottom:     0;
@@ -71,23 +72,23 @@
   // -------------------------------------------------------------------------
 
   &__body {
-    padding: t.$fs-space-3 t.$fs-space-4 t.$fs-space-4;
+    padding: t.$fs-space-3 t.$fs-space-6 t.$fs-space-6;
   }
 
   // -------------------------------------------------------------------------
-  // Avatar
+  // Avatar — más grande
   // -------------------------------------------------------------------------
 
   &__avatar-wrap {
-    position:    relative;
-    width:       fit-content;
-    margin-top:  -28px;
-    margin-bottom: t.$fs-space-3;
+    position:      relative;
+    width:         fit-content;
+    margin-top:    -60px;
+    margin-bottom: t.$fs-space-4;
   }
 
   &__avatar {
-    width:           56px;
-    height:          56px;
+    width:           120px;
+    height:          120px;
     border-radius:   t.$fs-radius-full;
     background:      var(--fs-profile-avatar-bg);
     border:          3px solid var(--fs-profile-avatar-border);
@@ -105,7 +106,7 @@
   }
 
   &__avatar-initials {
-    font-size:   18px;
+    font-size:   34px;
     font-weight: t.$fs-font-bold;
     color:       var(--fs-profile-avatar-color);
     font-family: t.$fs-font-sans;
@@ -114,10 +115,10 @@
 
   &__verified {
     position:        absolute;
-    bottom:          0;
-    right:           -2px;
-    width:           20px;
-    height:          20px;
+    bottom:          2px;
+    right:           0;
+    width:           30px;
+    height:          30px;
     border-radius:   t.$fs-radius-full;
     background:      var(--fs-primary-base);
     border:          2px solid var(--fs-profile-avatar-border);
@@ -127,32 +128,33 @@
   }
 
   // -------------------------------------------------------------------------
-  // Identidad
+  // Identidad — textos más grandes
   // -------------------------------------------------------------------------
 
   &__name {
-    font-size:     t.$fs-text-base;
+    font-size:     t.$fs-text-xl;    // era text-base (16px) → ahora 20px
     font-weight:   t.$fs-font-semi;
     color:         var(--fs-profile-name);
     font-family:   t.$fs-font-sans;
-    margin-bottom: 2px;
+    margin-bottom: t.$fs-space-1;
+    line-height:   1.2;
   }
 
   &__handle {
-    font-size:     t.$fs-text-xs;
+    font-size:     t.$fs-text-sm;    // era text-xs → ahora 14px
     color:         var(--fs-profile-handle);
     font-family:   t.$fs-font-sans;
-    margin-bottom: t.$fs-space-1;
+    margin-bottom: t.$fs-space-2;
   }
 
   &__role {
-    font-size:      t.$fs-text-xs;
+    font-size:      t.$fs-text-sm;   // era text-xs → ahora 14px
     font-weight:    t.$fs-font-medium;
     color:          var(--fs-profile-role);
     text-transform: uppercase;
     letter-spacing: 0.08em;
     font-family:    t.$fs-font-sans;
-    margin-bottom:  t.$fs-space-3;
+    margin-bottom:  t.$fs-space-4;
   }
 
   // -------------------------------------------------------------------------
@@ -162,24 +164,23 @@
   &__actions {
     display:       flex;
     gap:           t.$fs-space-2;
-    margin-bottom: t.$fs-space-3;
+    margin-bottom: t.$fs-space-4;
   }
 
   &__btn {
-    flex:        1;
-    padding:     7px 0;
+    flex:          1;
+    padding:       t.$fs-space-2 0;
     border-radius: t.$fs-radius-md;
-    font-size:   t.$fs-text-xs;
-    font-weight: t.$fs-font-medium;
-    cursor:      pointer;
-    font-family: t.$fs-font-sans;
-    transition:  t.$fs-transition-colors;
-    border:      none;
+    font-size:     t.$fs-text-sm;    // era text-xs → 14px
+    font-weight:   t.$fs-font-medium;
+    cursor:        pointer;
+    font-family:   t.$fs-font-sans;
+    transition:    t.$fs-transition-colors;
+    border:        none;
 
     &--primary {
       background: var(--fs-primary-base);
       color:      #ffffff;
-
       &:hover  { background: var(--fs-primary-hover); }
       &:active { background: var(--fs-primary-active); }
     }
@@ -188,7 +189,6 @@
       background:   transparent;
       color:        rgba(255, 255, 255, 0.7);
       border:       0.5px solid rgba(255, 255, 255, 0.15);
-
       &:hover  { border-color: rgba(255, 255, 255, 0.30); }
       &:active { background: rgba(255, 255, 255, 0.05); }
     }
@@ -205,26 +205,21 @@
   &__links {
     display:        flex;
     flex-direction: column;
-    gap:            t.$fs-space-1;
-    margin-bottom:  t.$fs-space-3;
+    gap:            t.$fs-space-2;
+    margin-bottom:  t.$fs-space-4;
   }
 
   &__link {
-    display:     inline-flex;
-    align-items: center;
-    gap:         t.$fs-space-2;
-    font-size:   t.$fs-text-xs;
-    color:       var(--fs-profile-link);
+    display:         inline-flex;
+    align-items:     center;
+    gap:             t.$fs-space-2;
+    font-size:       t.$fs-text-sm;  // era text-xs → 14px
+    color:           var(--fs-profile-link);
     text-decoration: none;
-    font-family: t.$fs-font-sans;
-    transition:  opacity t.$fs-duration-fast t.$fs-ease-default;
+    font-family:     t.$fs-font-sans;
+    transition:      opacity t.$fs-duration-fast t.$fs-ease-default;
 
-    svg {
-      opacity:     0.5;
-      flex-shrink: 0;
-      stroke:      currentColor;
-    }
-
+    svg { opacity: 0.5; flex-shrink: 0; stroke: currentColor; }
     &:hover { opacity: 0.75; }
   }
 
@@ -235,7 +230,7 @@
   &__badges {
     display:   flex;
     flex-wrap: wrap;
-    gap:       t.$fs-space-1;
+    gap:       t.$fs-space-2;
   }
 
   // -------------------------------------------------------------------------
@@ -249,18 +244,18 @@
 
   &__stat {
     flex:           1;
-    padding:        t.$fs-space-3 0;
+    padding:        t.$fs-space-4 0;
     text-align:     center;
     border-right:   0.5px solid var(--fs-profile-divider);
     display:        flex;
     flex-direction: column;
-    gap:            2px;
+    gap:            t.$fs-space-1;
 
     &:last-child { border-right: none; }
   }
 
   &__stat-value {
-    font-size:   t.$fs-text-base;
+    font-size:   t.$fs-text-xl;      // era text-base → 20px
     font-weight: t.$fs-font-semi;
     color:       var(--fs-profile-stat-value);
     font-family: t.$fs-font-sans;
@@ -268,7 +263,7 @@
   }
 
   &__stat-label {
-    font-size:   10px;
+    font-size:   t.$fs-text-xs;      // era 10px → ahora con token
     color:       var(--fs-profile-stat-label);
     font-family: t.$fs-font-sans;
   }

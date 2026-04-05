@@ -219,6 +219,14 @@ experience = {
 | `timeline` | `boolean` | `false` | Línea y dot de timeline |
 | `timelineLast` | `boolean` | `false` | Último item (oculta línea hacia abajo) |
 
+**CSS custom properties configurables:**
+
+```css
+fs-experience-card {
+  --fs-exp-radius: 12px; /* 0 para layout full width sin redondeo */
+}
+```
+
 ---
 
 ### `<fs-profile-card>`
@@ -254,6 +262,14 @@ stats = [
   { value: '12',  label: 'proyectos'  },
   { value: '985', label: 'seguidores' },
 ];
+```
+
+**CSS custom properties configurables:**
+
+```css
+fs-profile-card {
+  --fs-profile-radius: 14px; /* 0 para layout full width sin redondeo */
+}
 ```
 
 > **Obtener tu avatarUrl de GitHub:**
@@ -351,7 +367,7 @@ npm run release
 # para forzar patch sin importar el tipo de commit:
 npm run release -- patch
 
-# 3. build de la lib
+# 3. build:lib sincroniza la versión a projects/fsociety/package.json y buildea
 npm run build:lib
 
 # 4. ir a dist y publicar
@@ -362,6 +378,10 @@ npm publish --access public
 cd ../..
 ```
 
+> **Nota:** `npm run build:lib` ejecuta `sync-version.js` automáticamente antes del build.
+> Este script copia la versión del `package.json` raíz al `projects/fsociety/package.json`.
+> No es necesario editar la versión de la lib manualmente.
+
 ### Verificar publicación
 
 ```bash
@@ -370,22 +390,44 @@ npm show @heroelc/fsociety version
 
 O abrir: https://www.npmjs.com/package/@heroelc/fsociety
 
-> Si aparece error 403, el token expiró o no tiene permisos. Repetir el paso de configurar token.
+> Si aparece error 403 de versión ya publicada, asegurate de haber corrido `npm run release` antes del build.
+> Si aparece error 403 de autenticación, el token expiró — repetir el paso de configurar token.
 
 ---
+
+## 📖 Publicar Storybook en GitHub Pages
+
+### Instalación (solo la primera vez)
+
+```bash
+npm install -D @storybook/storybook-deployer
+```
+
+Agregar en `package.json` raíz dentro de `scripts`:
+
+```json
+"deploy-storybook": "storybook-to-ghpages --existing-output-dir=storybook-static"
+```
+
+### Configurar GitHub Pages (solo la primera vez)
+
+1. Ir al repo en GitHub → **Settings** → **Pages**
+2. **Source** → `Deploy from a branch`
+3. **Branch** → `gh-pages` → `/ (root)` → **Save**
 
 ### Deploy
 
 ```bash
 # build del storybook estático
 npm run build-storybook
-# genera la carpeta storybook-static/
 
 # deploy a la rama gh-pages
 npm run deploy-storybook
 ```
 
 Storybook queda en: **https://heroelc.github.io/fsociety**
+
+> El deploy puede tardar 1-2 minutos en reflejarse.
 
 ### Re-deploy (cuando actualizás componentes)
 

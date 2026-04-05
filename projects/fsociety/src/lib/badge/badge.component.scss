@@ -10,10 +10,6 @@ $badge-colors: (
   'neutral':   (base: var(--fs-neutral-500),   muted: var(--fs-neutral-50),   light: var(--fs-neutral-200),   emphasis: var(--fs-neutral-800)),
 );
 
-// ---------------------------------------------------------------------------
-// Base
-// ---------------------------------------------------------------------------
-
 .fs-badge {
   display:       inline-flex;
   align-items:   center;
@@ -26,30 +22,28 @@ $badge-colors: (
   line-height:   1;
 
   // -------------------------------------------------------------------------
-  // Tamaños
+  // Tamaños — más grandes que antes
   // -------------------------------------------------------------------------
 
   &--sm {
-    font-size: 10px;
-    padding:   2px t.$fs-space-2;
+    font-size: t.$fs-text-xs;        // era 10px → 12px
+    padding:   t.$fs-space-1 t.$fs-space-3;
 
-    .fs-badge__icon svg { width: 10px; height: 10px; }
+    .fs-badge__icon svg { width: 11px; height: 11px; }
   }
 
   &--md {
-    font-size: t.$fs-text-xs;
-    padding:   3px t.$fs-space-3;
+    font-size: t.$fs-text-sm;        // era 12px → 14px
+    padding:   t.$fs-space-1 t.$fs-space-3;
 
-    .fs-badge__icon svg { width: 12px; height: 12px; }
+    .fs-badge__icon svg { width: 13px; height: 13px; }
   }
 
-  // Modo solo ícono — igual ancho que alto, forma circular
   &--icon-only {
     padding:         t.$fs-space-1 !important;
     justify-content: center;
-
-    &.fs-badge--sm { width: 20px; height: 20px; }
-    &.fs-badge--md { width: 24px; height: 24px; }
+    &.fs-badge--sm { width: 24px; height: 24px; }
+    &.fs-badge--md { width: 28px; height: 28px; }
   }
 
   // -------------------------------------------------------------------------
@@ -70,9 +64,7 @@ $badge-colors: (
         border-color: map-get($values, 'base');
       }
 
-      .fs-badge__dot {
-        background: map-get($values, 'base');
-      }
+      .fs-badge__dot { background: map-get($values, 'base'); }
     }
   }
 
@@ -81,8 +73,8 @@ $badge-colors: (
   // -------------------------------------------------------------------------
 
   &__dot {
-    width:         6px;
-    height:        6px;
+    width:         7px;
+    height:        7px;
     border-radius: t.$fs-radius-full;
     flex-shrink:   0;
   }
@@ -113,7 +105,6 @@ $badge-colors: (
     margin-left:     2px;
 
     &:hover { opacity: 1; }
-
     &:focus-visible { @include t.focus-ring; }
   }
 }
