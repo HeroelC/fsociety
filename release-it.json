@@ -9,6 +9,5 @@
     "commitMessage": "chore: release v${version}",
     "tagName": "v${version}"
   },
-  "npm": { "publish": false },
-  "pkgFiles": ["projects/fsociety/package.json"]
+  "npm": { "publish": false }
 }
