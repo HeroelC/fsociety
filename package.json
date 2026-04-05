@@ -10,9 +10,10 @@
     "storybook": "ng run fsociety:storybook",
     "build-storybook": "ng run fsociety:build-storybook",
     "deploy-storybook": "storybook-to-ghpages --existing-output-dir=storybook-static",
-    "build:lib": "ng build fsociety",
-"release":     "release-it --pkg.path=projects/fsociety/package.json",
-"release:dry": "release-it --pkg.path=projects/fsociety/package.json --dry-run"
+    "release": "release-it",
+    "release:dry": "release-it --dry-run",
+    "sync-version": "node sync-version.js",
+    "build:lib": "npm run sync-version && ng build fsociety"
   },
   "private": true,
   "dependencies": {
