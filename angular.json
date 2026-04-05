@@ -49,7 +49,8 @@
             "browserTarget": "fsociety:build",
             "compodoc": true,
             "compodocArgs": ["-e", "json", "-d", "projects/fsociety"],
-            "outputDir": "storybook-static"
+            "outputDir": "storybook-static",
+            "styles": ["projects/fsociety/src/styles/global.scss"]
           }
         }
       }

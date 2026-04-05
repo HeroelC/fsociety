@@ -374,26 +374,6 @@ O abrir: https://www.npmjs.com/package/@heroelc/fsociety
 
 ---
 
-## 📖 Publicar Storybook en GitHub Pages
-
-### Instalación (solo la primera vez)
-
-```bash
-npm install -D @storybook/storybook-deployer
-```
-
-Agregar en `package.json` raíz dentro de `scripts`:
-
-```json
-"deploy-storybook": "storybook-to-ghpages --existing-output-dir=storybook-static"
-```
-
-### Configurar GitHub Pages (solo la primera vez)
-
-1. Ir al repo en GitHub → **Settings** → **Pages**
-2. **Source** → `Deploy from a branch`
-3. **Branch** → `gh-pages` → `/ (root)` → **Save**
-
 ### Deploy
 
 ```bash
@@ -406,8 +386,6 @@ npm run deploy-storybook
 ```
 
 Storybook queda en: **https://heroelc.github.io/fsociety**
-
-> El deploy puede tardar 1-2 minutos en reflejarse.
 
 ### Re-deploy (cuando actualizás componentes)
 

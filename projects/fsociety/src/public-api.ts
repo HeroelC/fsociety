@@ -13,3 +13,6 @@ export type { FsProfileStat, FsProfileLink, FsProfileBadge } from './lib/profile
 
 export * from './lib/alert/alert.component';
 export type { FsAlertType, FsAlertVariant } from './lib/alert/alert.component';
+
+export * from './lib/tabs/tabs.component';
+export type { FsTab } from './lib/tabs/tabs.component';
