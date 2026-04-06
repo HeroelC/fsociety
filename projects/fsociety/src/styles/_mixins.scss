@@ -1,0 +1,473 @@
+@use 'tokens' as t;
+
+// =============================================================================
+// fsociety · _mixins.scss
+// Mixins reutilizables + clases utilitarias generadas automáticamente
+//
+// USO CON @include (en SCSS de componentes):
+//   @use '../styles/mixins' as m;
+//   .mi-componente { @include m.flex-center; @include m.pl(6); }
+//
+// USO CON CLASE (directo en HTML):
+//   <div class="flex-center pl-6 mt-4 truncate">
+// =============================================================================
+
+
+// -----------------------------------------------------------------------------
+// 1. FLEXBOX / LAYOUT
+// -----------------------------------------------------------------------------
+
+@mixin flex-center {
+  display:         flex;
+  align-items:     center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display:         flex;
+  align-items:     center;
+  justify-content: space-between;
+}
+
+@mixin flex-around {
+  display:         flex;
+  align-items:     center;
+  justify-content: space-around;
+}
+
+@mixin flex-start {
+  display:     flex;
+  align-items: center;
+  gap:         t.$fs-space-2;
+}
+
+@mixin flex-end {
+  display:         flex;
+  align-items:     center;
+  justify-content: flex-end;
+}
+
+@mixin flex-col {
+  display:        flex;
+  flex-direction: column;
+}
+
+@mixin flex-col-center {
+  display:         flex;
+  flex-direction:  column;
+  align-items:     center;
+  justify-content: center;
+}
+
+@mixin inline-flex-center {
+  display:         inline-flex;
+  align-items:     center;
+  justify-content: center;
+}
+
+// stack — flex column con gap configurable
+// @param $gap — valor de gap (default: $fs-space-4)
+@mixin stack($gap: t.$fs-space-4) {
+  display:        flex;
+  flex-direction: column;
+  gap:            $gap;
+}
+
+// inline-stack — flex row con gap configurable
+// @param $gap — valor de gap (default: $fs-space-2)
+@mixin inline-stack($gap: t.$fs-space-2) {
+  display:     flex;
+  align-items: center;
+  gap:         $gap;
+}
+
+// Clases utilitarias de flexbox
+.flex-center       { @include flex-center; }
+.flex-between      { @include flex-between; }
+.flex-around       { @include flex-around; }
+.flex-start        { @include flex-start; }
+.flex-end          { @include flex-end; }
+.flex-col          { @include flex-col; }
+.flex-col-center   { @include flex-col-center; }
+.inline-flex-center{ @include inline-flex-center; }
+
+// gap utilitario
+$gap-scale: (
+  1: t.$fs-space-1,
+  2: t.$fs-space-2,
+  3: t.$fs-space-3,
+  4: t.$fs-space-4,
+  5: t.$fs-space-5,
+  6: t.$fs-space-6,
+  8: t.$fs-space-8,
+);
+
+@each $key, $val in $gap-scale {
+  .gap-#{$key} { gap: $val; }
+}
+
+
+// -----------------------------------------------------------------------------
+// 2. SPACING — padding y margin con lados individuales
+// -----------------------------------------------------------------------------
+
+// Escala de spacing mapeada a los tokens
+$spacing-scale: (
+  0:  0,
+  1:  t.$fs-space-1,   // 4px
+  2:  t.$fs-space-2,   // 8px
+  3:  t.$fs-space-3,   // 12px
+  4:  t.$fs-space-4,   // 16px
+  5:  t.$fs-space-5,   // 20px
+  6:  t.$fs-space-6,   // 24px
+  8:  t.$fs-space-8,   // 32px
+  10: t.$fs-space-10,  // 40px
+  12: t.$fs-space-12,  // 48px
+  16: t.$fs-space-16,  // 64px
+);
+
+// ---------- Mixins de padding ----------
+
+@mixin p($val)  { padding: $val; }
+@mixin px($key) { padding-left: map-get($spacing-scale, $key); padding-right: map-get($spacing-scale, $key); }
+@mixin py($key) { padding-top: map-get($spacing-scale, $key);  padding-bottom: map-get($spacing-scale, $key); }
+@mixin pl($key) { padding-left:   map-get($spacing-scale, $key); }
+@mixin pr($key) { padding-right:  map-get($spacing-scale, $key); }
+@mixin pt($key) { padding-top:    map-get($spacing-scale, $key); }
+@mixin pb($key) { padding-bottom: map-get($spacing-scale, $key); }
+
+// ---------- Mixins de margin ----------
+
+@mixin m($val)  { margin: $val; }
+@mixin mx($key) {
+  @if $key == 'auto' {
+    margin-left: auto; margin-right: auto;
+  } @else {
+    margin-left: map-get($spacing-scale, $key); margin-right: map-get($spacing-scale, $key);
+  }
+}
+@mixin my($key) { margin-top: map-get($spacing-scale, $key); margin-bottom: map-get($spacing-scale, $key); }
+@mixin ml($key) { margin-left:   map-get($spacing-scale, $key); }
+@mixin mr($key) { margin-right:  map-get($spacing-scale, $key); }
+@mixin mt($key) { margin-top:    map-get($spacing-scale, $key); }
+@mixin mb($key) { margin-bottom: map-get($spacing-scale, $key); }
+
+// ---------- Clases utilitarias de padding ----------
+
+@each $key, $val in $spacing-scale {
+  .p-#{$key}  { padding: $val; }
+  .px-#{$key} { padding-left: $val; padding-right: $val; }
+  .py-#{$key} { padding-top: $val;  padding-bottom: $val; }
+  .pl-#{$key} { padding-left:   $val; }
+  .pr-#{$key} { padding-right:  $val; }
+  .pt-#{$key} { padding-top:    $val; }
+  .pb-#{$key} { padding-bottom: $val; }
+}
+
+// ---------- Clases utilitarias de margin ----------
+
+@each $key, $val in $spacing-scale {
+  .m-#{$key}  { margin: $val; }
+  .mx-#{$key} { margin-left: $val; margin-right: $val; }
+  .my-#{$key} { margin-top: $val;  margin-bottom: $val; }
+  .ml-#{$key} { margin-left:   $val; }
+  .mr-#{$key} { margin-right:  $val; }
+  .mt-#{$key} { margin-top:    $val; }
+  .mb-#{$key} { margin-bottom: $val; }
+}
+
+// margin auto
+.mx-auto { margin-left: auto; margin-right: auto; }
+.ml-auto { margin-left: auto; }
+.mr-auto { margin-right: auto; }
+
+
+// -----------------------------------------------------------------------------
+// 3. TIPOGRAFÍA
+// -----------------------------------------------------------------------------
+
+// Corta el texto en una línea con ellipsis
+@mixin truncate {
+  white-space:   nowrap;
+  overflow:      hidden;
+  text-overflow: ellipsis;
+}
+
+// Limita a N líneas con ellipsis (webkit)
+// @param $lines — número de líneas
+@mixin truncate-lines($lines: 2) {
+  display:            -webkit-box;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+  overflow:           hidden;
+}
+
+// Estilo de label uppercase — usado en role, sección, etc.
+@mixin uppercase-label {
+  font-size:      t.$fs-text-xs;
+  font-weight:    t.$fs-font-medium;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-family:    t.$fs-font-sans;
+}
+
+// Fuente monospace
+@mixin font-mono {
+  font-family: t.$fs-font-mono;
+  font-size:   t.$fs-text-sm;
+}
+
+// Estilo de texto configurable
+// @param $size   — font-size token (ej: t.$fs-text-sm)
+// @param $weight — font-weight token (ej: t.$fs-font-medium)
+// @param $color  — color CSS (default: inherit)
+@mixin text-style($size: t.$fs-text-base, $weight: t.$fs-font-regular, $color: inherit) {
+  font-size:   $size;
+  font-weight: $weight;
+  color:       $color;
+  font-family: t.$fs-font-sans;
+}
+
+// Clases utilitarias de tipografía
+.truncate          { @include truncate; }
+.truncate-2        { @include truncate-lines(2); }
+.truncate-3        { @include truncate-lines(3); }
+.uppercase-label   { @include uppercase-label; }
+.font-mono         { @include font-mono; }
+
+// text-align
+.text-left   { text-align: left; }
+.text-center { text-align: center; }
+.text-right  { text-align: right; }
+
+// font-weight
+.font-regular { font-weight: t.$fs-font-regular; }
+.font-medium  { font-weight: t.$fs-font-medium; }
+.font-semi    { font-weight: t.$fs-font-semi; }
+.font-bold    { font-weight: t.$fs-font-bold; }
+
+// font-size
+.text-xs   { font-size: t.$fs-text-xs; }
+.text-sm   { font-size: t.$fs-text-sm; }
+.text-base { font-size: t.$fs-text-base; }
+.text-lg   { font-size: t.$fs-text-lg; }
+.text-xl   { font-size: t.$fs-text-xl; }
+.text-2xl  { font-size: t.$fs-text-2xl; }
+.text-3xl  { font-size: t.$fs-text-3xl; }
+
+
+// -----------------------------------------------------------------------------
+// 4. RESPONSIVE — breakpoints
+// -----------------------------------------------------------------------------
+
+$breakpoints: (
+  'sm':  640px,
+  'md':  768px,
+  'lg':  1024px,
+  'xl':  1280px,
+  '2xl': 1536px,
+);
+
+// respond-to — media query min-width
+// @param $bp — nombre del breakpoint: 'sm' | 'md' | 'lg' | 'xl' | '2xl'
+// Ejemplo:
+//   .mi-componente {
+//     font-size: t.$fs-text-sm;
+//     @include respond-to('md') { font-size: t.$fs-text-base; }
+//   }
+@mixin respond-to($bp) {
+  $val: map-get($breakpoints, $bp);
+  @if $val {
+    @media (min-width: $val) { @content; }
+  } @else {
+    @warn "respond-to(): breakpoint '#{$bp}' no existe. Usá: sm, md, lg, xl, 2xl";
+  }
+}
+
+// mobile-only — se aplica solo en pantallas menores a sm
+@mixin mobile-only {
+  @media (max-width: #{map-get($breakpoints, 'sm') - 1px}) { @content; }
+}
+
+// container — ancho máximo centrado con padding lateral
+@mixin container($max: 1200px) {
+  width:      100%;
+  max-width:  $max;
+  margin-left:  auto;
+  margin-right: auto;
+  padding-left:  t.$fs-space-4;
+  padding-right: t.$fs-space-4;
+
+  @include respond-to('md') {
+    padding-left:  t.$fs-space-6;
+    padding-right: t.$fs-space-6;
+  }
+}
+
+// Clases utilitarias responsive
+.container { @include container; }
+
+// display responsive
+@each $bp, $val in $breakpoints {
+  @media (min-width: $val) {
+    .#{$bp}\:flex        { display: flex; }
+    .#{$bp}\:flex-col    { display: flex; flex-direction: column; }
+    .#{$bp}\:hidden      { display: none; }
+    .#{$bp}\:block       { display: block; }
+    .#{$bp}\:flex-center { @include flex-center; }
+  }
+}
+
+
+// -----------------------------------------------------------------------------
+// 5. VISUAL / UI
+// -----------------------------------------------------------------------------
+
+// Focus ring accesible — ya definido en tokens, se re-exporta acá
+// @param $color  — color del ring (default: primary)
+// @param $offset — separación del elemento (default: 2px)
+@mixin focus-ring($color: var(--fs-primary-base), $offset: 2px) {
+  outline: none;
+  box-shadow: 0 0 0 $offset var(--fs-profile-avatar-border, #0d1117),
+              0 0 0 ($offset + 2px) $color;
+}
+
+// Card con fondo navy y borde sutil — base de todos los componentes
+@mixin card-surface($radius: t.$fs-radius-xl) {
+  background:    #0d1117;
+  border:        0.5px solid rgba(255, 255, 255, 0.08);
+  border-radius: $radius;
+  transition:    border-color t.$fs-duration-fast t.$fs-ease-default;
+
+  &:hover {
+    border-color: rgba(255, 255, 255, 0.14);
+  }
+}
+
+// Glass — fondo translúcido con blur
+// @param $opacity — opacidad del fondo (default: 0.05)
+@mixin glass($opacity: 0.05) {
+  background:      rgba(255, 255, 255, $opacity);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border:          0.5px solid rgba(255, 255, 255, 0.1);
+}
+
+// Visually hidden — oculto visualmente pero accesible para screen readers
+@mixin visually-hidden {
+  position: absolute;
+  width:    1px;
+  height:   1px;
+  padding:  0;
+  margin:   -1px;
+  overflow: hidden;
+  clip:     rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border:   0;
+}
+
+// Reset button — quita todos los estilos nativos del navegador
+@mixin reset-button {
+  appearance:  none;
+  background:  none;
+  border:      none;
+  padding:     0;
+  margin:      0;
+  cursor:      pointer;
+  font-family: inherit;
+  font-size:   inherit;
+  color:       inherit;
+  line-height: inherit;
+}
+
+// Reset list — quita estilos de ul/ol
+@mixin reset-list {
+  list-style: none;
+  padding:    0;
+  margin:     0;
+}
+
+// Divider — línea separadora horizontal
+// @param $color — color del borde (default: sutil)
+@mixin divider($color: rgba(255, 255, 255, 0.06)) {
+  height:     0.5px;
+  background: $color;
+  border:     none;
+  margin:     0;
+}
+
+// Clases utilitarias visuales
+.visually-hidden { @include visually-hidden; }
+.card-surface    { @include card-surface; }
+.glass           { @include glass; }
+.divider         { @include divider; }
+.reset-list      { @include reset-list; }
+
+// display
+.hidden  { display: none; }
+.block   { display: block; }
+.inline  { display: inline; }
+.inline-block { display: inline-block; }
+
+// overflow
+.overflow-hidden { overflow: hidden; }
+.overflow-auto   { overflow: auto; }
+
+// position
+.relative { position: relative; }
+.absolute { position: absolute; }
+.sticky   { position: sticky; }
+
+// width / height comunes
+.w-full  { width: 100%; }
+.h-full  { height: 100%; }
+.w-auto  { width: auto; }
+.min-w-0 { min-width: 0; }
+
+// border-radius
+.rounded-sm   { border-radius: t.$fs-radius-sm; }
+.rounded-md   { border-radius: t.$fs-radius-md; }
+.rounded-lg   { border-radius: t.$fs-radius-lg; }
+.rounded-xl   { border-radius: t.$fs-radius-xl; }
+.rounded-2xl  { border-radius: t.$fs-radius-2xl; }
+.rounded-full { border-radius: t.$fs-radius-full; }
+
+
+// -----------------------------------------------------------------------------
+// 6. BADGE / COLOR HELPERS
+// -----------------------------------------------------------------------------
+
+// Genera el estilo filled de un badge a partir de un color base
+// @param $base     — color del texto y del dot
+// @param $bg       — fondo sutil
+// @param $border   — borde sutil
+@mixin badge-variant($base, $bg, $border) {
+  background:   $bg;
+  color:        $base;
+  border-color: $border;
+}
+
+// Genera el estilo outline de un badge
+// @param $base — color del borde y del texto
+@mixin badge-outline($base) {
+  background:   transparent;
+  color:        $base;
+  border-color: $base;
+}
+
+// Dot indicador de estado
+// @param $color — color del punto
+// @param $size  — tamaño (default: 6px)
+@mixin dot-indicator($color, $size: 6px) {
+  width:         $size;
+  height:        $size;
+  border-radius: t.$fs-radius-full;
+  background:    $color;
+  flex-shrink:   0;
+}
+
+// Degradé indicator — el mismo que usan los tabs de fsociety
+@mixin gradient-indicator($from: var(--fs-primary-base), $to: var(--fs-tertiary-base)) {
+  background: linear-gradient(90deg, $from 0%, $to 100%);
+  box-shadow: 0 0 10px rgba(34, 211, 238, 0.45);
+}
