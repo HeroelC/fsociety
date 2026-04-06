@@ -1,4 +1,5 @@
 @use '../../styles/tokens' as t;
+@use 'sass:map';
 
 // ---------------------------------------------------------------------------
 // Tokens del componente
@@ -115,25 +116,25 @@ $alert-types: (
     &--#{$type} {
       // variante filled (default)
       &.fs-alert--filled {
-        background:   map-get($values, 'bg');
-        border-color: map-get($values, 'border');
-        color:        map-get($values, 'color');
+        background:   map.get($values, 'bg');
+        border-color: map.get($values, 'border');
+        color:        map.get($values, 'color');
 
         .fs-alert__progress {
-          background: map-get($values, 'accent');
+          background: map.get($values, 'accent');
         }
       }
 
       // variante accent — borde izquierdo
       &.fs-alert--accent {
-        background:    map-get($values, 'bg');
-        border-color:  map-get($values, 'border');
-        color:         map-get($values, 'color');
-        border-left:   3px solid map-get($values, 'accent');
+        background:    map.get($values, 'bg');
+        border-color:  map.get($values, 'border');
+        color:         map.get($values, 'color');
+        border-left:   3px solid map.get($values, 'accent');
         border-radius: 0 t.$fs-radius-lg t.$fs-radius-lg 0;
 
         .fs-alert__progress {
-          background: map-get($values, 'accent');
+          background: map.get($values, 'accent');
         }
       }
     }

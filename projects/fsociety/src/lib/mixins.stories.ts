@@ -134,7 +134,7 @@ import type { Meta, StoryObj } from '@storybook/angular';
         <h2>Responsive — respond-to()</h2>
         <p class="desc">
           Breakpoints: <code>sm</code> 640px · <code>md</code> 768px ·
-          <code>lg</code> 1024px · <code>xl</code> 1280px · <code>2xl</code> 1536px
+          <code>lg</code> 1024px · <code>xl</code> 1280px · <code>xxl</code> 1536px
         </p>
         <div class="code-block">
           <div class="code-label">uso con &#64;include en SCSS</div>

@@ -1,4 +1,5 @@
 @use '../../styles/tokens' as t;
+@use 'sass:map';
 
 $badge-colors: (
   'primary':   (base: var(--fs-primary-500),   muted: var(--fs-primary-50),   light: var(--fs-primary-200),   emphasis: var(--fs-primary-800)),
@@ -53,18 +54,18 @@ $badge-colors: (
   @each $color, $values in $badge-colors {
     &--#{$color} {
       &.fs-badge--filled {
-        background:   map-get($values, 'muted');
-        color:        map-get($values, 'emphasis');
-        border-color: map-get($values, 'light');
+        background:   map.get($values, 'muted');
+        color:        map.get($values, 'emphasis');
+        border-color: map.get($values, 'light');
       }
 
       &.fs-badge--outline {
         background:   transparent;
-        color:        map-get($values, 'base');
-        border-color: map-get($values, 'base');
+        color:        map.get($values, 'base');
+        border-color: map.get($values, 'base');
       }
 
-      .fs-badge__dot { background: map-get($values, 'base'); }
+      .fs-badge__dot { background: map.get($values, 'base'); }
     }
   }
 

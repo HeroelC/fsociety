@@ -1,3 +1,5 @@
+@use 'sass:color';
+
 // =============================================================================
 // fsociety · _tokens.scss
 // Color scale engine + alias tokens de estado
@@ -53,16 +55,16 @@ $fs-light-mix: #ffffff !default;
 // @return color
 
 @function generate-scale($base, $stop) {
-  @if $stop == 50  { @return mix($fs-light-mix, $base, 92%); }
-  @if $stop == 100 { @return mix($fs-light-mix, $base, 80%); }
-  @if $stop == 200 { @return mix($fs-light-mix, $base, 64%); }
-  @if $stop == 300 { @return mix($fs-light-mix, $base, 44%); }
-  @if $stop == 400 { @return mix($fs-light-mix, $base, 22%); }
+  @if $stop == 50  { @return color.mix($fs-light-mix, $base, 92%); }
+  @if $stop == 100 { @return color.mix($fs-light-mix, $base, 80%); }
+  @if $stop == 200 { @return color.mix($fs-light-mix, $base, 64%); }
+  @if $stop == 300 { @return color.mix($fs-light-mix, $base, 44%); }
+  @if $stop == 400 { @return color.mix($fs-light-mix, $base, 22%); }
   @if $stop == 500 { @return $base; }
-  @if $stop == 600 { @return mix($fs-dark-mix, $base, 16%); }
-  @if $stop == 700 { @return mix($fs-dark-mix, $base, 34%); }
-  @if $stop == 800 { @return mix($fs-dark-mix, $base, 54%); }
-  @if $stop == 900 { @return mix($fs-dark-mix, $base, 72%); }
+  @if $stop == 600 { @return color.mix($fs-dark-mix, $base, 16%); }
+  @if $stop == 700 { @return color.mix($fs-dark-mix, $base, 34%); }
+  @if $stop == 800 { @return color.mix($fs-dark-mix, $base, 54%); }
+  @if $stop == 900 { @return color.mix($fs-dark-mix, $base, 72%); }
 
   @warn "generate-scale(): stop #{$stop} no válido. Usá: 50 100 200 300 400 500 600 700 800 900";
   @return $base;
@@ -452,21 +454,4 @@ $fs-z-tooltip: 600;
 // Soporte para clase manual [data-theme="dark"] en Angular
 [data-theme='dark'] {
   @extend :root; // hereda todo el bloque de dark mode arriba si se necesita
-}
-
-// ---------------------------------------------------------------------------
-// 15. TOKENS DE COMPONENTE
-// ---------------------------------------------------------------------------
-
-:root {
-  // fs-tabs
-  --fs-tab-bg:             #0d1117;
-  --fs-tab-color:          rgba(255, 255, 255, 0.40);
-  --fs-tab-color-hover:    rgba(255, 255, 255, 0.70);
-  --fs-tab-color-active:   #ffffff;
-  --fs-tab-border:         rgba(255, 255, 255, 0.08);
-  --fs-tab-hover-bg:       rgba(255, 255, 255, 0.03);
-  --fs-tab-indicator-from: var(--fs-primary-base);
-  --fs-tab-indicator-to:   var(--fs-tertiary-base);
-  --fs-tab-indicator-glow: rgba(34, 211, 238, 0.45);
 }

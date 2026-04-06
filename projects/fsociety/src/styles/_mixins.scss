@@ -1,4 +1,5 @@
 @use 'tokens' as t;
+@use 'sass:map';
 
 // =============================================================================
 // fsociety · _mixins.scss
@@ -129,12 +130,12 @@ $spacing-scale: (
 // ---------- Mixins de padding ----------
 
 @mixin p($val)  { padding: $val; }
-@mixin px($key) { padding-left: map-get($spacing-scale, $key); padding-right: map-get($spacing-scale, $key); }
-@mixin py($key) { padding-top: map-get($spacing-scale, $key);  padding-bottom: map-get($spacing-scale, $key); }
-@mixin pl($key) { padding-left:   map-get($spacing-scale, $key); }
-@mixin pr($key) { padding-right:  map-get($spacing-scale, $key); }
-@mixin pt($key) { padding-top:    map-get($spacing-scale, $key); }
-@mixin pb($key) { padding-bottom: map-get($spacing-scale, $key); }
+@mixin px($key) { padding-left: map.get($spacing-scale, $key); padding-right: map.get($spacing-scale, $key); }
+@mixin py($key) { padding-top: map.get($spacing-scale, $key);  padding-bottom: map.get($spacing-scale, $key); }
+@mixin pl($key) { padding-left:   map.get($spacing-scale, $key); }
+@mixin pr($key) { padding-right:  map.get($spacing-scale, $key); }
+@mixin pt($key) { padding-top:    map.get($spacing-scale, $key); }
+@mixin pb($key) { padding-bottom: map.get($spacing-scale, $key); }
 
 // ---------- Mixins de margin ----------
 
@@ -143,14 +144,14 @@ $spacing-scale: (
   @if $key == 'auto' {
     margin-left: auto; margin-right: auto;
   } @else {
-    margin-left: map-get($spacing-scale, $key); margin-right: map-get($spacing-scale, $key);
+    margin-left: map.get($spacing-scale, $key); margin-right: map.get($spacing-scale, $key);
   }
 }
-@mixin my($key) { margin-top: map-get($spacing-scale, $key); margin-bottom: map-get($spacing-scale, $key); }
-@mixin ml($key) { margin-left:   map-get($spacing-scale, $key); }
-@mixin mr($key) { margin-right:  map-get($spacing-scale, $key); }
-@mixin mt($key) { margin-top:    map-get($spacing-scale, $key); }
-@mixin mb($key) { margin-bottom: map-get($spacing-scale, $key); }
+@mixin my($key) { margin-top: map.get($spacing-scale, $key); margin-bottom: map.get($spacing-scale, $key); }
+@mixin ml($key) { margin-left:   map.get($spacing-scale, $key); }
+@mixin mr($key) { margin-right:  map.get($spacing-scale, $key); }
+@mixin mt($key) { margin-top:    map.get($spacing-scale, $key); }
+@mixin mb($key) { margin-bottom: map.get($spacing-scale, $key); }
 
 // ---------- Clases utilitarias de padding ----------
 
@@ -265,28 +266,28 @@ $breakpoints: (
   'md':  768px,
   'lg':  1024px,
   'xl':  1280px,
-  '2xl': 1536px,
+  'xxl': 1536px,
 );
 
 // respond-to — media query min-width
-// @param $bp — nombre del breakpoint: 'sm' | 'md' | 'lg' | 'xl' | '2xl'
+// @param $bp — nombre del breakpoint: 'sm' | 'md' | 'lg' | 'xl' | 'xxl'
 // Ejemplo:
 //   .mi-componente {
 //     font-size: t.$fs-text-sm;
 //     @include respond-to('md') { font-size: t.$fs-text-base; }
 //   }
 @mixin respond-to($bp) {
-  $val: map-get($breakpoints, $bp);
+  $val: map.get($breakpoints, $bp);
   @if $val {
     @media (min-width: $val) { @content; }
   } @else {
-    @warn "respond-to(): breakpoint '#{$bp}' no existe. Usá: sm, md, lg, xl, 2xl";
+    @warn "respond-to(): breakpoint '#{$bp}' no existe. Usá: sm, md, lg, xl, xxl";
   }
 }
 
 // mobile-only — se aplica solo en pantallas menores a sm
 @mixin mobile-only {
-  @media (max-width: #{map-get($breakpoints, 'sm') - 1px}) { @content; }
+  @media (max-width: #{map.get($breakpoints, 'sm') - 1px}) { @content; }
 }
 
 // container — ancho máximo centrado con padding lateral
@@ -307,14 +308,14 @@ $breakpoints: (
 // Clases utilitarias responsive
 .container { @include container; }
 
-// display responsive
+// display responsive — usa guión como separador (ej: sm-flex, md-hidden)
 @each $bp, $val in $breakpoints {
   @media (min-width: $val) {
-    .#{$bp}\:flex        { display: flex; }
-    .#{$bp}\:flex-col    { display: flex; flex-direction: column; }
-    .#{$bp}\:hidden      { display: none; }
-    .#{$bp}\:block       { display: block; }
-    .#{$bp}\:flex-center { @include flex-center; }
+    .#{$bp}-flex        { display: flex; }
+    .#{$bp}-flex-col    { display: flex; flex-direction: column; }
+    .#{$bp}-hidden      { display: none; }
+    .#{$bp}-block       { display: block; }
+    .#{$bp}-flex-center { @include flex-center; }
   }
 }
 
