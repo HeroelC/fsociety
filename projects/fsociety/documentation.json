@@ -619,7 +619,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  name:   'Todas las variantes',\n  render: () => ({\n    template: `\n      <div style=\"display:flex; flex-wrap:wrap; gap:12px; align-items:center;\">\n        <fs-button variant=\"primary\">Primary</fs-button>\n        <fs-button variant=\"secondary\">Secondary</fs-button>\n        <fs-button variant=\"outline\">Outline</fs-button>\n        <fs-button variant=\"ghost\">Ghost</fs-button>\n        <fs-button variant=\"danger\">Danger</fs-button>\n      </div>\n    `,\n  }),\n}"
+                "defaultValue": "{\n  name:   'Todas las variantes',\n  render: () => ({\n    template: `\n      <div style=\"display:flex; flex-wrap:wrap; gap:12px; align-items:center;\">\n        <fs-button variant=\"primary\">Primary</fs-button>\n        <fs-button variant=\"secondary\">Secondary</fs-button>\n        <fs-button variant=\"outline\">Outline</fs-button>\n        <fs-button variant=\"ghost\">Ghost</fs-button>\n        <fs-button variant=\"danger\">Danger</fs-button>\n        <fs-button variant=\"link\">Link</fs-button>\n      </div>\n    `,\n  }),\n}"
             },
             {
                 "name": "AutoDismiss",
@@ -712,6 +712,16 @@
                 "defaultValue": "'M3 8h10M9 4l4 4-4 4'"
             },
             {
+                "name": "ICON_LINK",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/button/button.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "string",
+                "defaultValue": "'M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71'"
+            },
+            {
                 "name": "ICON_SAVE",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -792,6 +802,16 @@
                 "defaultValue": "{\n  linkedin: 'M2 2h12v12H2V2zm2 9.5v-5h1.5v5H4zm.75-5.75a.875.875 0 1 1 0-1.75.875.875 0 0 1 0 1.75zM12 11.5H10.5V9.25c0-.56-.45-1-.1-1s-1 .44-1 1v2.25H8v-5h1.5v.67A2.1 2.1 0 0 1 11 6c1.1 0 1 .9 1 2v3.5z',\n  github:   'M8 1C4.13 1 1 4.13 1 8c0 3.08 1.99 5.69 4.76 6.61.35.06.48-.15.48-.33v-1.3c-1.94.42-2.35-.94-2.35-.94-.32-.8-.77-1.02-.77-1.02-.63-.43.05-.42.05-.42.69.05 1.05.71 1.05.71.61 1.05 1.61.75 2 .57.06-.44.24-.75.43-.92-1.52-.17-3.12-.76-3.12-3.38 0-.75.27-1.36.71-1.84-.07-.17-.31-.87.07-1.82 0 0 .58-.18 1.9.71a6.6 6.6 0 0 1 1.74-.23c.59 0 1.18.08 1.74.23 1.32-.9 1.9-.71 1.9-.71.38.95.14 1.65.07 1.82.44.48.71 1.09.71 1.84 0 2.63-1.6 3.21-3.13 3.38.25.21.47.63.47 1.28v1.9c0 .18.12.4.48.33A7.02 7.02 0 0 0 15 8c0-3.87-3.13-7-7-7z',\n  location: 'M8 1.5A4.5 4.5 0 0 0 3.5 6c0 3 4.5 8.5 4.5 8.5S12.5 9 12.5 6A4.5 4.5 0 0 0 8 1.5zm0 6a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z',\n  globe:    'M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zm0 1.5c.5 0 1.2.8 1.7 2.5H6.3c.5-1.7 1.2-2.5 1.7-2.5zm-2.2.4C4.7 3.5 3.8 4.7 3.3 6H1.7a5.5 5.5 0 0 1 4.1-3.1zm4.4 0A5.5 5.5 0 0 1 14.3 6h-1.6c-.5-1.3-1.4-2.5-2.5-3.1zM1.5 7.5h2c-.1.5-.1 1-.1 1.5s0 1 .1 1.5h-2a5.5 5.5 0 0 1 0-3zm2.5 0h4v3h-4a9.7 9.7 0 0 1 0-3zm5.5 0h4a5.5 5.5 0 0 1 0 3H9.5a11.5 11.5 0 0 0 0-3zm-7.3 4h1.6c.5 1.3 1.4 2.5 2.5 3.1A5.5 5.5 0 0 1 2.2 11.5zm8.1 0h1.6a5.5 5.5 0 0 1-4.1 3.1c1.1-.6 2-1.8 2.5-3.1zM6.3 12h3.4c-.5 1.7-1.2 2.5-1.7 2.5s-1.2-.8-1.7-2.5z',\n}"
             },
             {
+                "name": "LinkInline",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/button/button.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  name:   'Link — uso inline',\n  render: () => ({\n    template: `\n      <p style=\"font-size:14px; color:#64748b; line-height:1.7;\">\n        Trabajé 3 años en desarrollo frontend.\n        <fs-button variant=\"link\" size=\"sm\">Ver detalle</fs-button>\n        o revisá el\n        <fs-button variant=\"link\" size=\"sm\">repositorio</fs-button>\n        en GitHub.\n      </p>\n    `,\n  }),\n}"
+            },
+            {
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -839,7 +859,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<FsButtonComponent>",
-                "defaultValue": "{\n  title:     'fsociety/Button',\n  component: FsButtonComponent,\n  tags:      ['autodocs'],\n\n  argTypes: {\n    variant: {\n      control:     'select',\n      options:     ['primary', 'secondary', 'outline', 'ghost', 'danger'],\n      description: 'Variante visual del botón',\n      table: {\n        type:         { summary: 'FsButtonVariant' },\n        defaultValue: { summary: 'primary' },\n      },\n    },\n    size: {\n      control:     'radio',\n      options:     ['sm', 'md', 'lg'],\n      description: 'Tamaño del botón',\n      table: {\n        type:         { summary: 'FsButtonSize' },\n        defaultValue: { summary: 'md' },\n      },\n    },\n    type: {\n      control:     'radio',\n      options:     ['button', 'submit', 'reset'],\n      description: 'Tipo HTML nativo',\n      table: {\n        type:         { summary: 'FsButtonType' },\n        defaultValue: { summary: 'button' },\n      },\n    },\n    disabled: {\n      control:     'boolean',\n      description: 'Deshabilita el botón',\n      table: {\n        type:         { summary: 'boolean' },\n        defaultValue: { summary: 'false' },\n      },\n    },\n    loading: {\n      control:     'boolean',\n      description: 'Muestra spinner y deshabilita',\n      table: {\n        type:         { summary: 'boolean' },\n        defaultValue: { summary: 'false' },\n      },\n    },\n    label: {\n      control:     'text',\n      description: 'Texto del botón',\n    },\n    fullWidth: {\n      control:     'boolean',\n      description: 'Ocupa el ancho del contenedor',\n      table: {\n        type:         { summary: 'boolean' },\n        defaultValue: { summary: 'false' },\n      },\n    },\n    fsClick: {\n      action:      'fsClick',\n      description: 'Evento click (no dispara si disabled o loading)',\n    },\n  },\n}"
+                "defaultValue": "{\n  title:     'fsociety/Button',\n  component: FsButtonComponent,\n  tags:      ['autodocs'],\n\n  argTypes: {\n    variant: {\n      control:     'select',\n      options:     ['primary', 'secondary', 'outline', 'ghost', 'danger', 'link'],\n      description: 'Variante visual del botón',\n      table: {\n        type:         { summary: 'FsButtonVariant' },\n        defaultValue: { summary: 'primary' },\n      },\n    },\n    size: {\n      control:     'radio',\n      options:     ['sm', 'md', 'lg'],\n      description: 'Tamaño del botón',\n      table: {\n        type:         { summary: 'FsButtonSize' },\n        defaultValue: { summary: 'md' },\n      },\n    },\n    type: {\n      control:     'radio',\n      options:     ['button', 'submit', 'reset'],\n      description: 'Tipo HTML nativo',\n      table: {\n        type:         { summary: 'FsButtonType' },\n        defaultValue: { summary: 'button' },\n      },\n    },\n    disabled: {\n      control:     'boolean',\n      description: 'Deshabilita el botón',\n      table: {\n        type:         { summary: 'boolean' },\n        defaultValue: { summary: 'false' },\n      },\n    },\n    loading: {\n      control:     'boolean',\n      description: 'Muestra spinner y deshabilita',\n      table: {\n        type:         { summary: 'boolean' },\n        defaultValue: { summary: 'false' },\n      },\n    },\n    label: {\n      control:     'text',\n      description: 'Texto del botón',\n    },\n    fullWidth: {\n      control:     'boolean',\n      description: 'Ocupa el ancho del contenedor',\n      table: {\n        type:         { summary: 'boolean' },\n        defaultValue: { summary: 'false' },\n      },\n    },\n    fsClick: {\n      action:      'fsClick',\n      description: 'Evento click (no dispara si disabled o loading)',\n    },\n  },\n}"
             },
             {
                 "name": "meta",
@@ -929,7 +949,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: {\n    variant:  'primary',\n    size:     'md',\n    label:    'Guardar cambios',\n    disabled: false,\n    loading:  false,\n    fullWidth: false,\n  },\n}"
+                "defaultValue": "{\n  args: {\n    variant:   'primary',\n    size:      'md',\n    label:     'Guardar cambios',\n    disabled:  false,\n    loading:   false,\n    fullWidth: false,\n  },\n}"
             },
             {
                 "name": "Portfolio",
@@ -999,7 +1019,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  name:   'Estados',\n  render: () => ({\n    template: `\n      <div style=\"display:flex; flex-wrap:wrap; gap:12px; align-items:center;\">\n        <fs-button>Normal</fs-button>\n        <fs-button [disabled]=\"true\">Disabled</fs-button>\n        <fs-button [loading]=\"true\">Loading</fs-button>\n        <fs-button variant=\"outline\" [disabled]=\"true\">Outline disabled</fs-button>\n        <fs-button variant=\"danger\" [loading]=\"true\">Danger loading</fs-button>\n      </div>\n    `,\n  }),\n}"
+                "defaultValue": "{\n  name:   'Estados',\n  render: () => ({\n    template: `\n      <div style=\"display:flex; flex-wrap:wrap; gap:12px; align-items:center;\">\n        <fs-button>Normal</fs-button>\n        <fs-button [disabled]=\"true\">Disabled</fs-button>\n        <fs-button [loading]=\"true\">Loading</fs-button>\n        <fs-button variant=\"outline\" [disabled]=\"true\">Outline disabled</fs-button>\n        <fs-button variant=\"danger\" [loading]=\"true\">Danger loading</fs-button>\n        <fs-button variant=\"link\" [disabled]=\"true\">Link disabled</fs-button>\n      </div>\n    `,\n  }),\n}"
             },
             {
                 "name": "TECH_ICONS",
@@ -1129,7 +1149,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  name:   'Con íconos',\n  render: () => ({\n    props: {\n      iconArrow: ICON_ARROW,\n      iconSave:  ICON_SAVE,\n      iconTrash: ICON_TRASH,\n    },\n    template: `\n      <div style=\"display:flex; flex-wrap:wrap; gap:12px; align-items:center;\">\n        <fs-button [iconRight]=\"iconArrow\">Ver más</fs-button>\n        <fs-button [iconLeft]=\"iconSave\" variant=\"outline\">Guardar</fs-button>\n        <fs-button [iconLeft]=\"iconTrash\" variant=\"danger\">Eliminar</fs-button>\n      </div>\n    `,\n  }),\n}"
+                "defaultValue": "{\n  name:   'Con íconos',\n  render: () => ({\n    props: {\n      iconArrow: ICON_ARROW,\n      iconSave:  ICON_SAVE,\n      iconTrash: ICON_TRASH,\n      iconLink:  ICON_LINK,\n    },\n    template: `\n      <div style=\"display:flex; flex-wrap:wrap; gap:12px; align-items:center;\">\n        <fs-button [iconRight]=\"iconArrow\">Ver más</fs-button>\n        <fs-button [iconLeft]=\"iconSave\" variant=\"outline\">Guardar</fs-button>\n        <fs-button [iconLeft]=\"iconTrash\" variant=\"danger\">Eliminar</fs-button>\n        <fs-button [iconRight]=\"iconLink\" variant=\"link\">Ver enlace</fs-button>\n      </div>\n    `,\n  }),\n}"
             },
             {
                 "name": "WithoutTitle",
@@ -1418,7 +1438,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  name:   'Todas las variantes',\n  render: () => ({\n    template: `\n      <div style=\"display:flex; flex-wrap:wrap; gap:12px; align-items:center;\">\n        <fs-button variant=\"primary\">Primary</fs-button>\n        <fs-button variant=\"secondary\">Secondary</fs-button>\n        <fs-button variant=\"outline\">Outline</fs-button>\n        <fs-button variant=\"ghost\">Ghost</fs-button>\n        <fs-button variant=\"danger\">Danger</fs-button>\n      </div>\n    `,\n  }),\n}"
+                    "defaultValue": "{\n  name:   'Todas las variantes',\n  render: () => ({\n    template: `\n      <div style=\"display:flex; flex-wrap:wrap; gap:12px; align-items:center;\">\n        <fs-button variant=\"primary\">Primary</fs-button>\n        <fs-button variant=\"secondary\">Secondary</fs-button>\n        <fs-button variant=\"outline\">Outline</fs-button>\n        <fs-button variant=\"ghost\">Ghost</fs-button>\n        <fs-button variant=\"danger\">Danger</fs-button>\n        <fs-button variant=\"link\">Link</fs-button>\n      </div>\n    `,\n  }),\n}"
                 },
                 {
                     "name": "FullWidth",
@@ -1441,6 +1461,16 @@
                     "defaultValue": "'M3 8h10M9 4l4 4-4 4'"
                 },
                 {
+                    "name": "ICON_LINK",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/button/button.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "defaultValue": "'M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71'"
+                },
+                {
                     "name": "ICON_SAVE",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
@@ -1461,6 +1491,16 @@
                     "defaultValue": "'M4 6h8M7 6V4h2v2M6 6v6a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V6'"
                 },
                 {
+                    "name": "LinkInline",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/button/button.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  name:   'Link — uso inline',\n  render: () => ({\n    template: `\n      <p style=\"font-size:14px; color:#64748b; line-height:1.7;\">\n        Trabajé 3 años en desarrollo frontend.\n        <fs-button variant=\"link\" size=\"sm\">Ver detalle</fs-button>\n        o revisá el\n        <fs-button variant=\"link\" size=\"sm\">repositorio</fs-button>\n        en GitHub.\n      </p>\n    `,\n  }),\n}"
+                },
+                {
                     "name": "meta",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
@@ -1468,7 +1508,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Meta<FsButtonComponent>",
-                    "defaultValue": "{\n  title:     'fsociety/Button',\n  component: FsButtonComponent,\n  tags:      ['autodocs'],\n\n  argTypes: {\n    variant: {\n      control:     'select',\n      options:     ['primary', 'secondary', 'outline', 'ghost', 'danger'],\n      description: 'Variante visual del botón',\n      table: {\n        type:         { summary: 'FsButtonVariant' },\n        defaultValue: { summary: 'primary' },\n      },\n    },\n    size: {\n      control:     'radio',\n      options:     ['sm', 'md', 'lg'],\n      description: 'Tamaño del botón',\n      table: {\n        type:         { summary: 'FsButtonSize' },\n        defaultValue: { summary: 'md' },\n      },\n    },\n    type: {\n      control:     'radio',\n      options:     ['button', 'submit', 'reset'],\n      description: 'Tipo HTML nativo',\n      table: {\n        type:         { summary: 'FsButtonType' },\n        defaultValue: { summary: 'button' },\n      },\n    },\n    disabled: {\n      control:     'boolean',\n      description: 'Deshabilita el botón',\n      table: {\n        type:         { summary: 'boolean' },\n        defaultValue: { summary: 'false' },\n      },\n    },\n    loading: {\n      control:     'boolean',\n      description: 'Muestra spinner y deshabilita',\n      table: {\n        type:         { summary: 'boolean' },\n        defaultValue: { summary: 'false' },\n      },\n    },\n    label: {\n      control:     'text',\n      description: 'Texto del botón',\n    },\n    fullWidth: {\n      control:     'boolean',\n      description: 'Ocupa el ancho del contenedor',\n      table: {\n        type:         { summary: 'boolean' },\n        defaultValue: { summary: 'false' },\n      },\n    },\n    fsClick: {\n      action:      'fsClick',\n      description: 'Evento click (no dispara si disabled o loading)',\n    },\n  },\n}"
+                    "defaultValue": "{\n  title:     'fsociety/Button',\n  component: FsButtonComponent,\n  tags:      ['autodocs'],\n\n  argTypes: {\n    variant: {\n      control:     'select',\n      options:     ['primary', 'secondary', 'outline', 'ghost', 'danger', 'link'],\n      description: 'Variante visual del botón',\n      table: {\n        type:         { summary: 'FsButtonVariant' },\n        defaultValue: { summary: 'primary' },\n      },\n    },\n    size: {\n      control:     'radio',\n      options:     ['sm', 'md', 'lg'],\n      description: 'Tamaño del botón',\n      table: {\n        type:         { summary: 'FsButtonSize' },\n        defaultValue: { summary: 'md' },\n      },\n    },\n    type: {\n      control:     'radio',\n      options:     ['button', 'submit', 'reset'],\n      description: 'Tipo HTML nativo',\n      table: {\n        type:         { summary: 'FsButtonType' },\n        defaultValue: { summary: 'button' },\n      },\n    },\n    disabled: {\n      control:     'boolean',\n      description: 'Deshabilita el botón',\n      table: {\n        type:         { summary: 'boolean' },\n        defaultValue: { summary: 'false' },\n      },\n    },\n    loading: {\n      control:     'boolean',\n      description: 'Muestra spinner y deshabilita',\n      table: {\n        type:         { summary: 'boolean' },\n        defaultValue: { summary: 'false' },\n      },\n    },\n    label: {\n      control:     'text',\n      description: 'Texto del botón',\n    },\n    fullWidth: {\n      control:     'boolean',\n      description: 'Ocupa el ancho del contenedor',\n      table: {\n        type:         { summary: 'boolean' },\n        defaultValue: { summary: 'false' },\n      },\n    },\n    fsClick: {\n      action:      'fsClick',\n      description: 'Evento click (no dispara si disabled o loading)',\n    },\n  },\n}"
                 },
                 {
                     "name": "Playground",
@@ -1478,7 +1518,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: {\n    variant:  'primary',\n    size:     'md',\n    label:    'Guardar cambios',\n    disabled: false,\n    loading:  false,\n    fullWidth: false,\n  },\n}"
+                    "defaultValue": "{\n  args: {\n    variant:   'primary',\n    size:      'md',\n    label:     'Guardar cambios',\n    disabled:  false,\n    loading:   false,\n    fullWidth: false,\n  },\n}"
                 },
                 {
                     "name": "Sizes",
@@ -1498,7 +1538,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  name:   'Estados',\n  render: () => ({\n    template: `\n      <div style=\"display:flex; flex-wrap:wrap; gap:12px; align-items:center;\">\n        <fs-button>Normal</fs-button>\n        <fs-button [disabled]=\"true\">Disabled</fs-button>\n        <fs-button [loading]=\"true\">Loading</fs-button>\n        <fs-button variant=\"outline\" [disabled]=\"true\">Outline disabled</fs-button>\n        <fs-button variant=\"danger\" [loading]=\"true\">Danger loading</fs-button>\n      </div>\n    `,\n  }),\n}"
+                    "defaultValue": "{\n  name:   'Estados',\n  render: () => ({\n    template: `\n      <div style=\"display:flex; flex-wrap:wrap; gap:12px; align-items:center;\">\n        <fs-button>Normal</fs-button>\n        <fs-button [disabled]=\"true\">Disabled</fs-button>\n        <fs-button [loading]=\"true\">Loading</fs-button>\n        <fs-button variant=\"outline\" [disabled]=\"true\">Outline disabled</fs-button>\n        <fs-button variant=\"danger\" [loading]=\"true\">Danger loading</fs-button>\n        <fs-button variant=\"link\" [disabled]=\"true\">Link disabled</fs-button>\n      </div>\n    `,\n  }),\n}"
                 },
                 {
                     "name": "WithIcons",
@@ -1508,7 +1548,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  name:   'Con íconos',\n  render: () => ({\n    props: {\n      iconArrow: ICON_ARROW,\n      iconSave:  ICON_SAVE,\n      iconTrash: ICON_TRASH,\n    },\n    template: `\n      <div style=\"display:flex; flex-wrap:wrap; gap:12px; align-items:center;\">\n        <fs-button [iconRight]=\"iconArrow\">Ver más</fs-button>\n        <fs-button [iconLeft]=\"iconSave\" variant=\"outline\">Guardar</fs-button>\n        <fs-button [iconLeft]=\"iconTrash\" variant=\"danger\">Eliminar</fs-button>\n      </div>\n    `,\n  }),\n}"
+                    "defaultValue": "{\n  name:   'Con íconos',\n  render: () => ({\n    props: {\n      iconArrow: ICON_ARROW,\n      iconSave:  ICON_SAVE,\n      iconTrash: ICON_TRASH,\n      iconLink:  ICON_LINK,\n    },\n    template: `\n      <div style=\"display:flex; flex-wrap:wrap; gap:12px; align-items:center;\">\n        <fs-button [iconRight]=\"iconArrow\">Ver más</fs-button>\n        <fs-button [iconLeft]=\"iconSave\" variant=\"outline\">Guardar</fs-button>\n        <fs-button [iconLeft]=\"iconTrash\" variant=\"danger\">Eliminar</fs-button>\n        <fs-button [iconRight]=\"iconLink\" variant=\"link\">Ver enlace</fs-button>\n      </div>\n    `,\n  }),\n}"
                 }
             ],
             "projects/fsociety/src/lib/experience-card/experience-card.stories.ts": [
@@ -2186,6 +2226,16 @@
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
+                "name": "ICON_LINK",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/button/button.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
                 "name": "ICON_SAVE",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
@@ -2197,6 +2247,16 @@
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
                 "name": "ICON_TRASH",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/button/button.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "LinkInline",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"

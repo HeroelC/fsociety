@@ -25,6 +25,7 @@
       "input": "src/styles",
       "glob": "global.scss",
       "output": "/"
-    }
+    },
+    "README.md"
   ]
 }
