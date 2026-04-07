@@ -6,8 +6,25 @@
     "styleIncludePaths": ["src/styles"]
   },
   "assets": [
-    "src/styles/_tokens.scss",
-    "src/styles/_mixins.scss",
-    "src/styles/_index.scss"
+    {
+      "input": "src/styles",
+      "glob": "_tokens.scss",
+      "output": "/"
+    },
+    {
+      "input": "src/styles",
+      "glob": "_mixins.scss",
+      "output": "/"
+    },
+    {
+      "input": "src/styles",
+      "glob": "_index.scss",
+      "output": "/"
+    },
+    {
+      "input": "src/styles",
+      "glob": "global.scss",
+      "output": "/"
+    }
   ]
 }

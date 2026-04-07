@@ -97,6 +97,21 @@
     &:active:not(:disabled) { background: var(--fs-danger-active); border-color: var(--fs-danger-active); }
   }
 
+  &--link {
+    background:                transparent;
+    color:                     var(--fs-primary-base);
+    border-color:              transparent;
+    text-decoration:           underline;
+    text-decoration-color:     transparent;
+    text-underline-offset:     3px;
+    text-decoration-thickness: 1.5px;
+    transition:                t.$fs-transition-colors,
+                               text-decoration-color t.$fs-duration-fast t.$fs-ease-default;
+
+    &:hover:not(:disabled)  { text-decoration-color: var(--fs-primary-base); }
+    &:active:not(:disabled) { color: var(--fs-primary-active); text-decoration-color: var(--fs-primary-active); }
+  }
+
   // -------------------------------------------------------------------------
   // Estados
   // -------------------------------------------------------------------------
@@ -144,10 +159,10 @@
   }
 
   &__label {
-    display:  inline-flex;
+    display:     inline-flex;
     align-items: center;
-    gap:      t.$fs-space-1;
-    transition: opacity t.$fs-duration-fast t.$fs-ease-default;
+    gap:         t.$fs-space-1;
+    transition:  opacity t.$fs-duration-fast t.$fs-ease-default;
   }
 }
 

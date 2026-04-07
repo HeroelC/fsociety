@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-export type FsButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger';
+export type FsButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger' | 'link';
 export type FsButtonSize    = 'sm' | 'md' | 'lg';
 export type FsButtonType    = 'button' | 'submit' | 'reset';
 

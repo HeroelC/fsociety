@@ -86,6 +86,17 @@ $badge-colors: (
     flex-shrink: 0;
   }
 
+  &__img {
+    width:         12px;
+    height:        12px;
+    object-fit:    contain;
+    display:       block;
+    flex-shrink:   0;
+
+    .fs-badge--sm & { width: 11px; height: 11px; }
+    .fs-badge--md & { width: 13px; height: 13px; }
+  }
+
   &__label {
     display:     inline-flex;
     align-items: center;

@@ -37,19 +37,37 @@ export class FsBadgeComponent {
   @Input() dot = false;
 
   /**
-   * SVG path del ícono izquierdo.
-   * Ejemplo: 'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10...'
+   * SVG path del ícono izquierdo (viewBox 0 0 24 24).
    */
   @Input() iconLeft?: string;
 
   /**
-   * SVG path del ícono derecho.
+   * SVG path del ícono derecho (viewBox 0 0 24 24).
    */
   @Input() iconRight?: string;
 
   /**
+   * URL o ruta de imagen izquierda.
+   * Ejemplo: 'assets/icons/angular.svg' o 'https://...'
+   * Tiene prioridad sobre iconLeft si ambos están definidos.
+   */
+  @Input() imgLeft?: string;
+
+  /**
+   * URL o ruta de imagen derecha.
+   * Tiene prioridad sobre iconRight si ambos están definidos.
+   */
+  @Input() imgRight?: string;
+
+  /** Alt text para imgLeft — por defecto vacío (decorativo) */
+  @Input() imgLeftAlt = '';
+
+  /** Alt text para imgRight — por defecto vacío (decorativo) */
+  @Input() imgRightAlt = '';
+
+  /**
    * Modo solo ícono — oculta el label y hace el badge cuadrado/circular.
-   * Requiere iconLeft o iconRight.
+   * Requiere iconLeft, iconRight, imgLeft o imgRight.
    */
   @Input() iconOnly = false;
 
