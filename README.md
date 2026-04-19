@@ -30,6 +30,7 @@ npm install @heroelc/fsociety
 ```scss
 // src/styles.scss de tu app Angular
 @use '@heroelc/fsociety/styles/tokens';
+@use '@heroelc/fsociety/styles/mixins'; // opcional — clases utilitarias
 ```
 
 Esto emite todas las CSS custom properties (`--fs-primary-base`, `--fs-primary-hover`, etc.) en `:root`, disponibles globalmente en toda la app.
@@ -84,23 +85,40 @@ export class MyComponent {}
 ### `<fs-badge>`
 
 ```html
-<fs-badge color="primary">Angular</fs-badge>
-<fs-badge color="danger" [dot]="true">Activo</fs-badge>
+<fs-badge color="primary">TypeScript</fs-badge>
+<fs-badge color="success" [dot]="true">Activo</fs-badge>
 <fs-badge color="neutral" variant="outline">ESLint</fs-badge>
-<fs-badge color="primary" [iconLeft]="iconPath" [removable]="true" (removed)="onRemove()">
-  TypeScript
+
+<!-- con imagen (simpleicons, assets, etc.) -->
+<fs-badge color="danger"
+  imgLeft="https://cdn.simpleicons.org/angular/white"
+  imgLeftAlt="Angular">
+  Angular
 </fs-badge>
-<fs-badge color="secondary" [iconLeft]="iconPath" [iconOnly]="true"></fs-badge>
+
+<!-- con color hex personalizado -->
+<fs-badge customColor="#7c3aed"
+  imgLeft="https://cdn.simpleicons.org/nestjs/white">
+  NestJS
+</fs-badge>
+
+<!-- removable -->
+<fs-badge color="primary" [removable]="true" (removed)="onRemove()">TypeScript</fs-badge>
 ```
 
 | Input | Tipo | Default | Descripción |
 |---|---|---|---|
-| `color` | `'primary' \| 'secondary' \| 'tertiary' \| 'success' \| 'warning' \| 'danger' \| 'neutral'` | `'neutral'` | Color |
+| `color` | `'primary' \| 'secondary' \| 'tertiary' \| 'success' \| 'warning' \| 'danger' \| 'neutral'` | `'neutral'` | Color semántico |
+| `customColor` | `string` | — | Color hex personalizado — genera fondo, borde y texto automáticamente |
 | `variant` | `'filled' \| 'outline'` | `'filled'` | Variante visual |
 | `size` | `'sm' \| 'md'` | `'md'` | Tamaño |
 | `dot` | `boolean` | `false` | Punto de estado |
-| `iconLeft` | `string` | — | SVG path ícono izquierdo |
+| `iconLeft` | `string` | — | SVG path ícono izquierdo (viewBox 0 0 24 24) |
 | `iconRight` | `string` | — | SVG path ícono derecho |
+| `imgLeft` | `string` | — | URL o ruta imagen izquierda (prioridad sobre iconLeft) |
+| `imgRight` | `string` | — | URL o ruta imagen derecha |
+| `imgLeftAlt` | `string` | `''` | Alt text para imgLeft |
+| `imgRightAlt` | `string` | `''` | Alt text para imgRight |
 | `iconOnly` | `boolean` | `false` | Badge circular sin label |
 | `removable` | `boolean` | `false` | Muestra botón X |
 
@@ -186,22 +204,40 @@ fs-tabs {
 
 ```typescript
 experience = {
-  company:        'Xcale Consulting',
-  role:           'Frontend Developer',
-  startDate:      'abr 2022',
+  company:        'Acme Corp',
+  role:           'Senior Frontend Developer',
+  startDate:      'mar 2022',
   current:        true,
-  logoText:       'X CALE',
+  logoText:       'ACME',
   bullets: [
-    'Desarrollo de interfaces con Angular, migraciones v8→v16.',
-    'Configuración de pipelines en CodeBuild, ECS en AWS.',
+    'Desarrollo de interfaces con Angular 17+, migraciones de versiones anteriores.',
+    'Configuración de pipelines CI/CD en AWS CodeBuild y ECS.',
+    'Implementación de design system con tokens SCSS y componentes standalone.',
   ],
-  bulletsPreview: 3,
+  bulletsPreview: 2,
   badges: [
-    { label: 'Angular',    color: 'danger'  },
-    { label: 'TypeScript', color: 'primary' },
+    {
+      label:   'Angular',
+      color:   'danger',
+      imgLeft: 'https://cdn.simpleicons.org/angular/white',
+    },
+    {
+      label:   'TypeScript',
+      color:   'primary',
+      imgLeft: 'https://cdn.simpleicons.org/typescript/white',
+    },
+    {
+      label:       'AWS',
+      customColor: '#ea580c',
+      imgLeft:     'https://cdn.simpleicons.org/amazonaws/white',
+    },
+    { label: 'ESLint', color: 'neutral' },
   ],
 };
 ```
+
+> `FsExperienceBadge` acepta los mismos campos que `FsProfileBadge`:
+> `color`, `customColor`, `iconLeft`, `imgLeft`, `imgLeftAlt`.
 
 ```html
 <fs-experience-card
@@ -233,11 +269,11 @@ fs-experience-card {
 
 ```html
 <fs-profile-card
-  name="Heroel Carpinetti"
-  handle="heroelc"
-  role="Frontend Developer Angular"
-  avatarUrl="https://avatars.githubusercontent.com/u/TU_ID"
-  bannerUrl="URL_DE_TU_BANNER"
+  name="John Doe"
+  handle="johndoe"
+  role="Frontend Developer"
+  avatarUrl="https://i.pravatar.cc/150?img=8"
+  bannerUrl="https://picsum.photos/seed/fsociety/800/200"
   [verified]="true"
   [showActions]="false"
   [links]="links"
@@ -248,14 +284,36 @@ fs-experience-card {
 
 ```typescript
 links = [
-  { label: 'linkedin.com/in/heroelc', url: 'https://linkedin.com/in/heroelc' },
-  { label: 'github.com/heroelc',      url: 'https://github.com/heroelc' },
-  { label: 'Tandil, Buenos Aires' },
+  {
+    label:  'linkedin.com/in/johndoe',
+    url:    'https://linkedin.com/in/johndoe',
+    imgUrl: 'https://cdn.simpleicons.org/linkedin/white',
+    imgAlt: 'LinkedIn',
+  },
+  {
+    label:  'github.com/johndoe',
+    url:    'https://github.com/johndoe',
+    imgUrl: 'https://cdn.simpleicons.org/github/white',
+    imgAlt: 'GitHub',
+  },
+  { label: 'Buenos Aires, Argentina' },
 ];
 badges = [
-  { label: 'Angular',    color: 'danger'    },
-  { label: 'TypeScript', color: 'primary'   },
-  { label: 'AWS',        color: 'secondary' },
+  {
+    label:   'Angular',
+    color:   'danger',
+    imgLeft: 'https://cdn.simpleicons.org/angular/white',
+  },
+  {
+    label:   'TypeScript',
+    color:   'primary',
+    imgLeft: 'https://cdn.simpleicons.org/typescript/white',
+  },
+  {
+    label:       'NestJS',
+    customColor: '#7c3aed',
+    imgLeft:     'https://cdn.simpleicons.org/nestjs/white',
+  },
 ];
 stats = [
   { value: '4+',  label: 'años exp.'  },
@@ -273,7 +331,7 @@ fs-profile-card {
 ```
 
 > **Obtener tu avatarUrl de GitHub:**
-> Abrí `https://api.github.com/users/heroelc`, copiá el campo `id` y usá:
+> Abrí `https://api.github.com/users/TU_USUARIO`, copiá el campo `id` y usá:
 > `https://avatars.githubusercontent.com/u/TU_ID`
 
 ---
@@ -307,6 +365,36 @@ Colores disponibles: `primary · secondary · tertiary · neutral · success · 
 
 ---
 
+## Mixins y utilidades
+
+```scss
+@use '@heroelc/fsociety/styles/mixins' as m;
+
+.mi-componente {
+  @include m.flex-center;
+  @include m.px(4);        // padding-left + right: 16px
+  @include m.stack(16px);  // flex-col + gap
+  @include m.truncate;
+
+  @include m.respond-to('md') {
+    @include m.flex-between;
+  }
+}
+```
+
+O con clases utilitarias directamente en el HTML:
+
+```html
+<div class="flex-between px-6 py-4 gap-4">
+  <span class="truncate-2 text-sm font-medium">...</span>
+  <span class="uppercase-label">Frontend Developer</span>
+</div>
+```
+
+Breakpoints: `sm` 640px · `md` 768px · `lg` 1024px · `xl` 1280px · `xxl` 1536px
+
+---
+
 ## Desarrollo local
 
 ```bash
@@ -323,7 +411,6 @@ npm run build:lib -- --watch
 ```
 
 ---
-
 ## Versionado
 
 Usa [Conventional Commits](https://www.conventionalcommits.org/) + [release-it](https://github.com/release-it/release-it).
@@ -363,8 +450,6 @@ git add .
 git commit -m "fix: descripción del cambio"
 
 # 2. generar el release (bumps version + CHANGELOG + git tag + push)
-npm run release
-# para forzar patch sin importar el tipo de commit:
 npm run release -- patch
 
 # 3. build:lib sincroniza la versión a projects/fsociety/package.json y buildea
@@ -378,9 +463,7 @@ npm publish --access public
 cd ../..
 ```
 
-> **Nota:** `npm run build:lib` ejecuta `sync-version.js` automáticamente antes del build.
-> Este script copia la versión del `package.json` raíz al `projects/fsociety/package.json`.
-> No es necesario editar la versión de la lib manualmente.
+> `npm run build:lib` ejecuta `sync-version.js` antes del build — copia la versión del `package.json` raíz al `projects/fsociety/package.json` automáticamente.
 
 ### Verificar publicación
 
@@ -388,10 +471,8 @@ cd ../..
 npm show @heroelc/fsociety version
 ```
 
-O abrir: https://www.npmjs.com/package/@heroelc/fsociety
-
-> Si aparece error 403 de versión ya publicada, asegurate de haber corrido `npm run release` antes del build.
-> Si aparece error 403 de autenticación, el token expiró — repetir el paso de configurar token.
+> Error 403 versión ya publicada → corrí `npm run release` antes del build.
+> Error 403 autenticación → token expiró, repetir configuración.
 
 ---
 
@@ -403,7 +484,7 @@ O abrir: https://www.npmjs.com/package/@heroelc/fsociety
 npm install -D @storybook/storybook-deployer
 ```
 
-Agregar en `package.json` raíz dentro de `scripts`:
+Agregar en `package.json` raíz:
 
 ```json
 "deploy-storybook": "storybook-to-ghpages --existing-output-dir=storybook-static"
@@ -411,42 +492,30 @@ Agregar en `package.json` raíz dentro de `scripts`:
 
 ### Configurar GitHub Pages (solo la primera vez)
 
-1. Ir al repo en GitHub → **Settings** → **Pages**
+1. Repo en GitHub → **Settings** → **Pages**
 2. **Source** → `Deploy from a branch`
 3. **Branch** → `gh-pages` → `/ (root)` → **Save**
 
-### Deploy
-
-```bash
-# build del storybook estático
-npm run build-storybook
-
-# deploy a la rama gh-pages
-npm run deploy-storybook
-```
-
-Storybook queda en: **https://heroelc.github.io/fsociety**
-
-> El deploy puede tardar 1-2 minutos en reflejarse.
-
-### Re-deploy (cuando actualizás componentes)
+### Deploy y re-deploy
 
 ```bash
 npm run build-storybook && npm run deploy-storybook
 ```
+
+Storybook en: **https://heroelc.github.io/fsociety**
 
 ---
 
 ## Roadmap
 
 - [x] `_tokens.scss` — sistema de color con 10 stops automáticos
-- [x] `_mixins.scss` — mixins de base
+- [x] `_mixins.scss` — flexbox, spacing, tipografía, responsive, visual helpers
 - [x] `fs-button` — 5 variantes, 3 tamaños, loading, icons
-- [x] `fs-badge` — 7 colores, iconLeft/Right, iconOnly, dot, removable
-- [x] `fs-tabs` — degradé indicator, flex:1, CSS custom properties
-- [x] `fs-alert` — filled/accent, autoDismiss, animaciones
-- [x] `fs-experience-card` — full/compact, timeline, bullets expandibles
-- [x] `fs-profile-card` — avatarUrl, bannerUrl, stats[], showActions
+- [x] `fs-badge` — 7 colores, customColor hex, imgLeft/Right, iconOnly, dot, removable
+- [x] `fs-tabs` — degradé indicator, flex:1, 9 CSS custom properties
+- [x] `fs-alert` — filled/accent, autoDismiss con progress bar, animaciones
+- [x] `fs-experience-card` — full/compact, timeline, bullets expandibles, --fs-exp-radius
+- [x] `fs-profile-card` — avatarUrl, bannerUrl, links con imgUrl, badges con customColor
 - [ ] `fs-input` / `fs-form-field`
 - [ ] `fs-toast` — servicio + container flotante
 - [ ] GitHub Actions CI/CD
@@ -456,4 +525,4 @@ npm run build-storybook && npm run deploy-storybook
 
 ## Licencia
 
-[MIT](LICENSE) © [Heroel Carpinetti](https://github.com/heroelc)
+[MIT](LICENSE) © heroelc

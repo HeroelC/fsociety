@@ -69,7 +69,22 @@
         [attr.target]="link.url ? '_blank' : null"
         [attr.rel]="link.url ? 'noopener noreferrer' : null"
       >
-        <svg *ngIf="link.icon" width="12" height="12" viewBox="0 0 16 16" fill="none">
+        <!-- imagen del link (prioridad sobre icon SVG) -->
+        <img
+          *ngIf="link.imgUrl"
+          [src]="link.imgUrl"
+          [alt]="link.imgAlt || ''"
+          class="fs-profile__link-img"
+          aria-hidden="true"
+        />
+        <!-- ícono SVG (solo si no hay imgUrl) -->
+        <svg
+          *ngIf="link.icon && !link.imgUrl"
+          width="12" height="12"
+          viewBox="0 0 16 16"
+          fill="none"
+          aria-hidden="true"
+        >
           <path [attr.d]="link.icon" stroke="currentColor" stroke-width="1.3"
             stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
@@ -82,7 +97,10 @@
       <fs-badge
         *ngFor="let badge of badges"
         [color]="badge.color || 'neutral'"
+        [customColor]="badge.customColor"
         [iconLeft]="badge.iconLeft"
+        [imgLeft]="badge.imgLeft"
+        [imgLeftAlt]="badge.imgLeftAlt || ''"
         variant="filled"
         size="sm"
       >{{ badge.label }}</fs-badge>

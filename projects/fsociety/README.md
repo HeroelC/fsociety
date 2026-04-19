@@ -85,19 +85,31 @@ export class MyComponent {}
 ### `<fs-badge>`
 
 ```html
-<fs-badge color="primary">Angular</fs-badge>
-<fs-badge color="danger" [dot]="true">Activo</fs-badge>
+<fs-badge color="primary">TypeScript</fs-badge>
+<fs-badge color="success" [dot]="true">Activo</fs-badge>
 <fs-badge color="neutral" variant="outline">ESLint</fs-badge>
-<fs-badge color="primary" [imgLeft]="'assets/icons/angular.svg'">Angular</fs-badge>
-<fs-badge color="primary" [iconLeft]="svgPath" [removable]="true" (removed)="onRemove()">
-  TypeScript
+
+<!-- con imagen (simpleicons, assets, etc.) -->
+<fs-badge color="danger"
+  imgLeft="https://cdn.simpleicons.org/angular/white"
+  imgLeftAlt="Angular">
+  Angular
 </fs-badge>
-<fs-badge color="secondary" [iconLeft]="svgPath" [iconOnly]="true"></fs-badge>
+
+<!-- con color hex personalizado -->
+<fs-badge customColor="#7c3aed"
+  imgLeft="https://cdn.simpleicons.org/nestjs/white">
+  NestJS
+</fs-badge>
+
+<!-- removable -->
+<fs-badge color="primary" [removable]="true" (removed)="onRemove()">TypeScript</fs-badge>
 ```
 
 | Input | Tipo | Default | Descripción |
 |---|---|---|---|
-| `color` | `'primary' \| 'secondary' \| 'tertiary' \| 'success' \| 'warning' \| 'danger' \| 'neutral'` | `'neutral'` | Color |
+| `color` | `'primary' \| 'secondary' \| 'tertiary' \| 'success' \| 'warning' \| 'danger' \| 'neutral'` | `'neutral'` | Color semántico |
+| `customColor` | `string` | — | Color hex personalizado — genera fondo, borde y texto automáticamente |
 | `variant` | `'filled' \| 'outline'` | `'filled'` | Variante visual |
 | `size` | `'sm' \| 'md'` | `'md'` | Tamaño |
 | `dot` | `boolean` | `false` | Punto de estado |
@@ -192,22 +204,40 @@ fs-tabs {
 
 ```typescript
 experience = {
-  company:        'Xcale Consulting',
-  role:           'Frontend Developer',
-  startDate:      'abr 2022',
+  company:        'Acme Corp',
+  role:           'Senior Frontend Developer',
+  startDate:      'mar 2022',
   current:        true,
-  logoText:       'X CALE',
+  logoText:       'ACME',
   bullets: [
-    'Desarrollo de interfaces con Angular, migraciones v8→v16.',
-    'Configuración de pipelines en CodeBuild, ECS en AWS.',
+    'Desarrollo de interfaces con Angular 17+, migraciones de versiones anteriores.',
+    'Configuración de pipelines CI/CD en AWS CodeBuild y ECS.',
+    'Implementación de design system con tokens SCSS y componentes standalone.',
   ],
-  bulletsPreview: 3,
+  bulletsPreview: 2,
   badges: [
-    { label: 'Angular',    color: 'danger'  },
-    { label: 'TypeScript', color: 'primary' },
+    {
+      label:   'Angular',
+      color:   'danger',
+      imgLeft: 'https://cdn.simpleicons.org/angular/white',
+    },
+    {
+      label:   'TypeScript',
+      color:   'primary',
+      imgLeft: 'https://cdn.simpleicons.org/typescript/white',
+    },
+    {
+      label:       'AWS',
+      customColor: '#ea580c',
+      imgLeft:     'https://cdn.simpleicons.org/amazonaws/white',
+    },
+    { label: 'ESLint', color: 'neutral' },
   ],
 };
 ```
+
+> `FsExperienceBadge` acepta los mismos campos que `FsProfileBadge`:
+> `color`, `customColor`, `iconLeft`, `imgLeft`, `imgLeftAlt`.
 
 ```html
 <fs-experience-card
@@ -254,14 +284,36 @@ fs-experience-card {
 
 ```typescript
 links = [
-  { label: 'linkedin.com/in/johndoe', url: 'https://linkedin.com/in/johndoe' },
-  { label: 'github.com/johndoe',      url: 'https://github.com/johndoe' },
+  {
+    label:  'linkedin.com/in/johndoe',
+    url:    'https://linkedin.com/in/johndoe',
+    imgUrl: 'https://cdn.simpleicons.org/linkedin/white',
+    imgAlt: 'LinkedIn',
+  },
+  {
+    label:  'github.com/johndoe',
+    url:    'https://github.com/johndoe',
+    imgUrl: 'https://cdn.simpleicons.org/github/white',
+    imgAlt: 'GitHub',
+  },
   { label: 'Buenos Aires, Argentina' },
 ];
 badges = [
-  { label: 'Angular',    color: 'danger'    },
-  { label: 'TypeScript', color: 'primary'   },
-  { label: 'AWS',        color: 'secondary' },
+  {
+    label:   'Angular',
+    color:   'danger',
+    imgLeft: 'https://cdn.simpleicons.org/angular/white',
+  },
+  {
+    label:   'TypeScript',
+    color:   'primary',
+    imgLeft: 'https://cdn.simpleicons.org/typescript/white',
+  },
+  {
+    label:       'NestJS',
+    customColor: '#7c3aed',
+    imgLeft:     'https://cdn.simpleicons.org/nestjs/white',
+  },
 ];
 stats = [
   { value: '4+',  label: 'años exp.'  },

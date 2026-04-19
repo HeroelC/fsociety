@@ -8,9 +8,12 @@ import { CommonModule } from '@angular/common';
 import { FsBadgeComponent, FsBadgeColor } from '../badge/badge.component';
 
 export interface FsExperienceBadge {
-  label: string;
-  color?: FsBadgeColor;
-  iconLeft?: string;
+  label:        string;
+  color?:       FsBadgeColor;
+  customColor?: string;
+  iconLeft?:    string;
+  imgLeft?:     string;
+  imgLeftAlt?:  string;
 }
 
 export interface FsExperienceCard {
