@@ -629,7 +629,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  name: 'Variante compact',\n  args: {\n    experience: XCALE_EXPERIENCE,\n    variant:    'compact',\n    timeline:   false,\n  },\n}"
+                "defaultValue": "{\n  name: 'Variante compact — solo header',\n  args: {\n    experience: EXPERIENCE_CURRENT,\n    variant:    'compact',\n    timeline:   false,\n  },\n}"
             },
             {
                 "name": "Current",
@@ -639,7 +639,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  name: 'Trabajo actual — full',\n  args: {\n    experience: XCALE_EXPERIENCE,\n    variant:    'full',\n    timeline:   false,\n  },\n}"
+                "defaultValue": "{\n  name: 'Trabajo actual — filled + dot verde',\n  args: {\n    experience: EXPERIENCE_CURRENT,\n    variant:    'full',\n    timeline:   false,\n  },\n}"
             },
             {
                 "name": "CustomColors",
@@ -660,6 +660,36 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\r\n  name: 'Design tokens',\r\n}"
+            },
+            {
+                "name": "EXPERIENCE_CURRENT",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/experience-card/experience-card.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "object",
+                "defaultValue": "{\n  company:   'Acme Corp',\n  role:      'Senior Frontend Developer',\n  startDate: 'mar 2022',\n  current:   true,\n  logoText:  'ACME',\n  bullets: [\n    'Desarrollo de interfaces con Angular 17+, migraciones de versiones anteriores.',\n    'Configuración de pipelines CI/CD en AWS CodeBuild y ECS.',\n    'Implementación de design system propio con tokens SCSS y componentes standalone.',\n    'Automatización de tareas con scripts en Node.js.',\n  ],\n  bulletsPreview: 3,\n  badges: [\n    {\n      label:   'Angular',\n      color:   'danger' as const,\n      imgLeft: 'https://cdn.simpleicons.org/angular/white',\n    },\n    {\n      label:   'TypeScript',\n      color:   'primary' as const,\n      imgLeft: 'https://cdn.simpleicons.org/typescript/white',\n    },\n    {\n      label:   'Node.js',\n      color:   'success' as const,\n      imgLeft: 'https://cdn.simpleicons.org/nodedotjs/white',\n    },\n    {\n      label:       'AWS',\n      customColor: '#ea580c',\n      imgLeft:     'https://cdn.simpleicons.org/amazonaws/white',\n    },\n    { label: 'ESLint', color: 'neutral' as const },\n    { label: 'Husky',  color: 'neutral' as const },\n  ],\n}"
+            },
+            {
+                "name": "EXPERIENCE_EARLY",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/experience-card/experience-card.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "object",
+                "defaultValue": "{\n  company:   'StartupXYZ',\n  role:      'Frontend Developer Jr.',\n  startDate: 'ene 2019',\n  endDate:   'may 2020',\n  logoText:  'XYZ',\n  bullets: [\n    'Primeros pasos en desarrollo web con Vue.js y JavaScript.',\n    'Maquetado responsive con HTML/CSS y SCSS.',\n  ],\n  badges: [\n    {\n      label:       'Vue.js',\n      customColor: '#22c55e',\n      imgLeft:     'https://cdn.simpleicons.org/vuedotjs/white',\n    },\n    {\n      label:   'JavaScript',\n      color:   'warning' as const,\n      imgLeft: 'https://cdn.simpleicons.org/javascript/white',\n    },\n    { label: 'SCSS', color: 'neutral' as const },\n  ],\n}"
+            },
+            {
+                "name": "EXPERIENCE_PAST",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/experience-card/experience-card.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "object",
+                "defaultValue": "{\n  company:   'Globex Solutions',\n  role:      'Frontend Developer',\n  startDate: 'jun 2020',\n  endDate:   'feb 2022',\n  logoText:  'GX',\n  bullets: [\n    'Desarrollo de componentes en Angular e Ionic para apps móviles.',\n    'Integración con APIs REST y GraphQL.',\n    'Participación en sprints ágiles con equipo distribuido.',\n  ],\n  badges: [\n    {\n      label:   'Angular',\n      color:   'danger' as const,\n      imgLeft: 'https://cdn.simpleicons.org/angular/white',\n    },\n    {\n      label:   'Ionic',\n      customColor: '#3880ff',\n      imgLeft: 'https://cdn.simpleicons.org/ionic/white',\n    },\n    {\n      label:   'JavaScript',\n      color:   'warning' as const,\n      imgLeft: 'https://cdn.simpleicons.org/javascript/white',\n    },\n    { label: 'Git', color: 'neutral' as const },\n  ],\n}"
             },
             {
                 "name": "FAKE_BADGES",
@@ -752,24 +782,14 @@
                 "defaultValue": "'M4 6h8M7 6V4h2v2M6 6v6a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V6'"
             },
             {
-                "name": "ICONS",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/fsociety/src/lib/experience-card/experience-card.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "object",
-                "defaultValue": "{\n  angular:  'M9.931 12.645h4.138l-2.07-4.908m0-7.737L.68 3.982l1.726 18.091 9.525 2.642 9.523-2.642L23.32 3.982zM17.593 18.76H15.88l-1.02-2.527H9.148l-1.021 2.527H6.405l4.913-11.914h1.876z',\n  js:       'M0 0h24v24H0V0zm22.034 18.276c-.175-1.095-.888-2.015-3.003-2.873-.736-.345-1.554-.585-1.797-1.14-.091-.33-.105-.51-.046-.705.15-.646.915-.84 1.515-.66.39.12.75.42.976.9 1.034-.676 1.034-.676 1.755-1.125-.27-.42-.404-.601-.586-.78-.63-.705-1.469-1.065-2.834-1.034l-.705.089c-.676.165-1.32.525-1.71 1.005-1.14 1.291-.811 3.541.569 4.471 1.365 1.02 3.361 1.244 3.616 2.205.24 1.17-.87 1.545-1.966 1.41-.811-.18-1.26-.586-1.755-1.336l-1.83 1.051c.21.48.45.689.81 1.109 1.74 1.756 6.09 1.666 6.871-1.004.029-.09.24-.705.074-1.65l.046.067zm-8.983-7.245h-2.248c0 1.938-.009 3.864-.009 5.805 0 1.232.063 2.363-.138 2.711-.33.689-1.18.601-1.566.48-.396-.196-.597-.466-.83-.855-.063-.105-.11-.196-.127-.196l-1.825 1.125c.305.63.75 1.172 1.324 1.517.855.51 2.004.675 3.207.405.783-.226 1.458-.691 1.811-1.411.51-.93.402-2.07.397-3.346.012-2.054 0-4.109 0-6.179v-.056z',\n  node:     'M11.998 24c-.321 0-.641-.084-.924-.251L8.054 21.99c-.435-.243-.223-.329-.079-.378.441-.153.530-.187.995-.453.049-.028.114-.017.165.012l2.308 1.371c.079.043.191.043.266 0l8.991-5.19c.081-.047.134-.142.134-.238V6.921c0-.099-.053-.19-.137-.241L11.706 1.5c-.079-.046-.188-.046-.271 0L2.449 6.68c-.085.052-.139.143-.139.241v10.37c0 .096.054.189.137.236l2.462 1.422c1.338.669 2.154-.119 2.154-.914V7.205c0-.147.116-.261.262-.261h1.148c.143 0 .261.114.261.261v10.83c0 1.789-.975 2.815-2.671 2.815-.521 0-.932 0-2.079-.565L1.355 19.01c-.571-.329-.924-.940-.924-1.598V7.205c0-.659.353-1.273.924-1.598L10.351.416c.557-.320 1.296-.320 1.848 0l8.998 5.191c.571.325.924.939.924 1.598v10.207c0 .659-.353 1.274-.924 1.598l-8.998 5.19c-.283.168-.602.251-.921.251z',\n  aws:      'M18.75 0h-4.5L12 2.25 9.75 0h-4.5L0 12l5.25 12h4.5L12 21.75 14.25 24h4.5L24 12zm-6.75 18l-1.5-1.5-1.5 1.5-3-6.75L9 9l3 3 3-3 3 2.25z',\n}"
-            },
-            {
-                "name": "InTabs",
+                "name": "InPortfolio",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
                 "file": "projects/fsociety/src/lib/experience-card/experience-card.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  name:   'Dentro de fs-tabs — caso portfolio',\n  render: () => ({\n    props: {\n      xcale: XCALE_EXPERIENCE,\n      prev:  PREV_EXPERIENCE,\n    },\n    template: `\n      <div style=\"max-width:600px;\">\n        <div style=\"\n          background:#0d1117;\n          border-radius:12px;\n          overflow:hidden;\n          border:0.5px solid rgba(255,255,255,0.08);\n        \">\n          <div style=\"padding:20px 20px 0;\">\n            <div style=\"font-size:15px;font-weight:600;color:#fff;margin-bottom:4px;\">\n              Heroel Carpinetti\n            </div>\n            <div style=\"font-size:12px;color:rgba(255,255,255,0.4);\">\n              Frontend Developer Angular\n            </div>\n          </div>\n          <div style=\"padding:20px; display:flex; flex-direction:column; gap:16px;\">\n            <fs-experience-card [experience]=\"xcale\" variant=\"full\" [timeline]=\"true\" [timelineLast]=\"false\"/>\n            <fs-experience-card [experience]=\"prev\"  variant=\"full\" [timeline]=\"true\" [timelineLast]=\"true\"/>\n          </div>\n        </div>\n      </div>\n    `,\n  }),\n}"
+                "defaultValue": "{\n  name:   'En contexto portfolio',\n  render: () => ({\n    props: {\n      current: EXPERIENCE_CURRENT,\n      past:    EXPERIENCE_PAST,\n      early:   EXPERIENCE_EARLY,\n    },\n    template: `\n      <div style=\"max-width:600px;\">\n        <div style=\"\n          background:#0d1117;\n          border-radius:12px;\n          overflow:hidden;\n          border:0.5px solid rgba(255,255,255,0.08);\n        \">\n          <div style=\"padding:20px 20px 0;\">\n            <div style=\"font-size:15px; font-weight:600; color:#fff; margin-bottom:4px;\">\n              John Doe\n            </div>\n            <div style=\"font-size:12px; color:rgba(255,255,255,0.4);\">\n              Senior Frontend Developer\n            </div>\n          </div>\n          <div style=\"padding:20px; display:flex; flex-direction:column; gap:16px;\">\n            <fs-experience-card [experience]=\"current\" variant=\"full\" [timeline]=\"true\" [timelineLast]=\"false\"/>\n            <fs-experience-card [experience]=\"past\"    variant=\"full\" [timeline]=\"true\" [timelineLast]=\"false\"/>\n            <fs-experience-card [experience]=\"early\"   variant=\"full\" [timeline]=\"true\" [timelineLast]=\"true\"/>\n          </div>\n        </div>\n      </div>\n    `,\n  }),\n}"
             },
             {
                 "name": "Interactive",
@@ -839,7 +859,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<FsBadgeComponent>",
-                "defaultValue": "{\n  title:     'fsociety/Badge',\n  component: FsBadgeComponent,\n  tags:      ['autodocs'],\n  argTypes: {\n    color: {\n      control: 'select',\n      options: ['primary','secondary','tertiary','success','warning','danger','neutral'],\n    },\n    variant:     { control: 'radio',   options: ['filled','outline'] },\n    size:        { control: 'radio',   options: ['sm','md'] },\n    customColor: { control: 'color',   description: 'Color hex personalizado — tiene prioridad sobre color' },\n    dot:         { control: 'boolean' },\n    iconOnly:    { control: 'boolean' },\n    removable:   { control: 'boolean' },\n    removed:     { action: 'removed' },\n  },\n}"
+                "defaultValue": "{\n  title:     'fsociety/Badge',\n  component: FsBadgeComponent,\n  tags:      ['autodocs'],\n  argTypes: {\n    color: {\n      control: 'select',\n      options: ['primary','secondary','tertiary','success','warning','danger','neutral'],\n      description: 'Color semántico del badge',\n    },\n    customColor: {\n      control: 'color',\n      description: 'Color hex personalizado — tiene prioridad sobre color. Genera fondo, borde y texto automáticamente.',\n    },\n    variant:     { control: 'radio',   options: ['filled','outline'] },\n    size:        { control: 'radio',   options: ['sm','md'] },\n    imgLeft: {\n      control: 'text',\n      description: 'URL de imagen izquierda — ej: https://cdn.simpleicons.org/angular/white',\n    },\n    imgRight: {\n      control: 'text',\n      description: 'URL de imagen derecha',\n    },\n    imgLeftAlt:  { control: 'text', description: 'Alt text para imgLeft' },\n    imgRightAlt: { control: 'text', description: 'Alt text para imgRight' },\n    dot:         { control: 'boolean' },\n    iconOnly:    { control: 'boolean' },\n    removable:   { control: 'boolean' },\n    removed:     { action: 'removed' },\n  },\n}"
             },
             {
                 "name": "meta",
@@ -849,7 +869,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<FsExperienceCardComponent>",
-                "defaultValue": "{\n  title:     'fsociety/Experience Card',\n  component: FsExperienceCardComponent,\n  tags:      ['autodocs'],\n  argTypes: {\n    variant: {\n      control:  'radio',\n      options:  ['full', 'compact'],\n      description: 'full = con bullets y badges · compact = solo header',\n    },\n    timeline: {\n      control:     'boolean',\n      description: 'Muestra línea y dot de timeline a la izquierda',\n    },\n    timelineLast: {\n      control:     'boolean',\n      description: 'Último item del timeline — oculta la línea hacia abajo',\n    },\n  },\n}"
+                "defaultValue": "{\n  title:     'fsociety/Experience Card',\n  component: FsExperienceCardComponent,\n  tags:      ['autodocs'],\n  argTypes: {\n    variant: {\n      control:     'radio',\n      options:     ['full', 'compact'],\n      description: 'full = con bullets y badges · compact = solo header',\n    },\n    timeline: {\n      control:     'boolean',\n      description: 'Muestra línea y dot de timeline a la izquierda',\n    },\n    timelineLast: {\n      control:     'boolean',\n      description: 'Último item del timeline — oculta la línea hacia abajo',\n    },\n  },\n}"
             },
             {
                 "name": "meta",
@@ -885,6 +905,16 @@
                 "name": "NoRadius",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "projects/fsociety/src/lib/experience-card/experience-card.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  name: 'Sin redondeo — --fs-exp-radius: 0',\n  render: () => ({\n    props: { experience: EXPERIENCE_CURRENT },\n    template: `\n      <div style=\"--fs-exp-radius: 0\">\n        <fs-experience-card\n          [experience]=\"experience\"\n          variant=\"full\"\n        />\n      </div>\n    `,\n  }),\n}"
+            },
+            {
+                "name": "NoRadius",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "projects/fsociety/src/lib/profile-card/profile-card.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -909,7 +939,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  name: 'Trabajo pasado',\n  args: {\n    experience: PREV_EXPERIENCE,\n    variant:    'full',\n    timeline:   false,\n  },\n}"
+                "defaultValue": "{\n  name: 'Trabajo pasado',\n  args: {\n    experience: EXPERIENCE_PAST,\n    variant:    'full',\n    timeline:   false,\n  },\n}"
             },
             {
                 "name": "Playground",
@@ -939,7 +969,17 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: {\n    color:   'primary',\n    variant: 'filled',\n    size:    'md',\n    label:   'TypeScript',\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <fs-badge\n        [color]=\"color\"\n        [customColor]=\"customColor\"\n        [variant]=\"variant\"\n        [size]=\"size\"\n        [dot]=\"dot\"\n        [iconOnly]=\"iconOnly\"\n        [removable]=\"removable\"\n        (removed)=\"removed($event)\"\n      >{{ label }}</fs-badge>\n    `,\n  }),\n}"
+                "defaultValue": "{\n  args: {\n    color:      'primary',\n    variant:    'filled',\n    size:       'md',\n    label:      'TypeScript',\n    imgLeft:    '',\n    imgRight:   '',\n    imgLeftAlt: '',\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <fs-badge\n        [color]=\"color\"\n        [customColor]=\"customColor\"\n        [variant]=\"variant\"\n        [size]=\"size\"\n        [dot]=\"dot\"\n        [iconOnly]=\"iconOnly\"\n        [removable]=\"removable\"\n        [imgLeft]=\"imgLeft || undefined\"\n        [imgRight]=\"imgRight || undefined\"\n        [imgLeftAlt]=\"imgLeftAlt\"\n        [imgRightAlt]=\"imgRightAlt\"\n        (removed)=\"removed($event)\"\n      >{{ label }}</fs-badge>\n    `,\n  }),\n}"
+            },
+            {
+                "name": "Playground",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/experience-card/experience-card.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  name: 'Playground',\n  args: {\n    experience: EXPERIENCE_CURRENT,\n    variant:    'full',\n    timeline:   false,\n  },\n}"
             },
             {
                 "name": "Playground",
@@ -960,16 +1000,6 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\n  name: 'Portfolio — 3 tabs',\n  args: {\n    activeTab: 'experiencia',\n    tabs: [\n      { id: 'experiencia', label: 'Experiencia' },\n      { id: 'sobre-mi',    label: 'Sobre mí' },\n      { id: 'formacion',   label: 'Formación' },\n    ],\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <fs-tabs [tabs]=\"tabs\" [(activeTab)]=\"activeTab\">\n        <div style=\"padding:20px 0; color:rgba(255,255,255,0.6); font-size:13px;\">\n          Tab activa: {{ activeTab }}\n        </div>\n      </fs-tabs>\n    `,\n  }),\n}"
-            },
-            {
-                "name": "PREV_EXPERIENCE",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/fsociety/src/lib/experience-card/experience-card.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "object",
-                "defaultValue": "{\n  company:   'Empresa anterior',\n  role:      'Frontend Developer Jr.',\n  startDate: 'ene 2020',\n  endDate:   'mar 2022',\n  logoText:  'PREV',\n  bullets: [\n    'Desarrollo de componentes en React y Vue.js.',\n    'Integración con APIs REST y GraphQL.',\n  ],\n  badges: [\n    { label: 'JavaScript', color: 'warning' as const, iconLeft: ICONS.js },\n    { label: 'React',      color: 'neutral' as const },\n    { label: 'Vue.js',     color: 'neutral' as const },\n  ],\n}"
             },
             {
                 "name": "preview",
@@ -1039,7 +1069,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  name:   'Timeline — múltiples experiencias',\n  render: () => ({\n    props: {\n      xcale: XCALE_EXPERIENCE,\n      prev:  PREV_EXPERIENCE,\n    },\n    template: `\n      <div style=\"display:flex; flex-direction:column; gap:16px; max-width:580px;\">\n        <fs-experience-card\n          [experience]=\"xcale\"\n          variant=\"full\"\n          [timeline]=\"true\"\n          [timelineLast]=\"false\"\n        />\n        <fs-experience-card\n          [experience]=\"prev\"\n          variant=\"full\"\n          [timeline]=\"true\"\n          [timelineLast]=\"true\"\n        />\n      </div>\n    `,\n  }),\n}"
+                "defaultValue": "{\n  name:   'Timeline — múltiples experiencias',\n  render: () => ({\n    props: {\n      current: EXPERIENCE_CURRENT,\n      past:    EXPERIENCE_PAST,\n      early:   EXPERIENCE_EARLY,\n    },\n    template: `\n      <div style=\"display:flex; flex-direction:column; gap:16px; max-width:580px;\">\n        <fs-experience-card\n          [experience]=\"current\"\n          variant=\"full\"\n          [timeline]=\"true\"\n          [timelineLast]=\"false\"\n        />\n        <fs-experience-card\n          [experience]=\"past\"\n          variant=\"full\"\n          [timeline]=\"true\"\n          [timelineLast]=\"false\"\n        />\n        <fs-experience-card\n          [experience]=\"early\"\n          variant=\"full\"\n          [timeline]=\"true\"\n          [timelineLast]=\"true\"\n        />\n      </div>\n    `,\n  }),\n}"
             },
             {
                 "name": "TwoTabs",
@@ -1130,16 +1160,6 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\n  name: 'Sin título — solo descripción',\n  render: () => ({\n    template: `\n      <div style=\"display:flex; flex-direction:column; gap:10px; max-width:540px;\">\n        <fs-alert type=\"info\"    [dismissible]=\"true\">Este componente es standalone. Importalo directamente en tu módulo.</fs-alert>\n        <fs-alert type=\"warning\" [dismissible]=\"true\">Hay cambios sin guardar.</fs-alert>\n        <fs-alert type=\"success\">Preferencias guardadas.</fs-alert>\n      </div>\n    `,\n  }),\n}"
-            },
-            {
-                "name": "XCALE_EXPERIENCE",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/fsociety/src/lib/experience-card/experience-card.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "object",
-                "defaultValue": "{\n  company:      'Xcale Consulting',\n  role:         'Frontend Developer',\n  startDate:    'abr 2022',\n  current:      true,\n  logoText:     'X CALE',\n  bullets: [\n    'Desarrollo de interfaces con Angular, migraciones de versión 8 a la 16.',\n    'Configuración de pipelines, CodeBuild, ECS en AWS y trabajo con S3 buckets.',\n    'Desarrollé pequeños scripts en Node.js para automatización de tareas.',\n    'Configuré y trabajé con Angular Material, FontAwesome, ESLint y Husky.',\n  ],\n  bulletsPreview: 3,\n  badges: [\n    { label: 'Angular',     color: 'danger'    as const, iconLeft: ICONS.angular },\n    { label: 'TypeScript',  color: 'primary'   as const },\n    { label: 'JavaScript',  color: 'warning'   as const, iconLeft: ICONS.js },\n    { label: 'Node.js',     color: 'success'   as const, iconLeft: ICONS.node },\n    { label: 'AWS',         color: 'secondary' as const, iconLeft: ICONS.aws },\n    { label: 'ESLint',      color: 'neutral'   as const },\n    { label: 'Husky',       color: 'neutral'   as const },\n  ],\n}"
             }
         ],
         "functions": [],
@@ -1438,7 +1458,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  name: 'Variante compact',\n  args: {\n    experience: XCALE_EXPERIENCE,\n    variant:    'compact',\n    timeline:   false,\n  },\n}"
+                    "defaultValue": "{\n  name: 'Variante compact — solo header',\n  args: {\n    experience: EXPERIENCE_CURRENT,\n    variant:    'compact',\n    timeline:   false,\n  },\n}"
                 },
                 {
                     "name": "Current",
@@ -1448,27 +1468,47 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  name: 'Trabajo actual — full',\n  args: {\n    experience: XCALE_EXPERIENCE,\n    variant:    'full',\n    timeline:   false,\n  },\n}"
+                    "defaultValue": "{\n  name: 'Trabajo actual — filled + dot verde',\n  args: {\n    experience: EXPERIENCE_CURRENT,\n    variant:    'full',\n    timeline:   false,\n  },\n}"
                 },
                 {
-                    "name": "ICONS",
+                    "name": "EXPERIENCE_CURRENT",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
                     "file": "projects/fsociety/src/lib/experience-card/experience-card.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "object",
-                    "defaultValue": "{\n  angular:  'M9.931 12.645h4.138l-2.07-4.908m0-7.737L.68 3.982l1.726 18.091 9.525 2.642 9.523-2.642L23.32 3.982zM17.593 18.76H15.88l-1.02-2.527H9.148l-1.021 2.527H6.405l4.913-11.914h1.876z',\n  js:       'M0 0h24v24H0V0zm22.034 18.276c-.175-1.095-.888-2.015-3.003-2.873-.736-.345-1.554-.585-1.797-1.14-.091-.33-.105-.51-.046-.705.15-.646.915-.84 1.515-.66.39.12.75.42.976.9 1.034-.676 1.034-.676 1.755-1.125-.27-.42-.404-.601-.586-.78-.63-.705-1.469-1.065-2.834-1.034l-.705.089c-.676.165-1.32.525-1.71 1.005-1.14 1.291-.811 3.541.569 4.471 1.365 1.02 3.361 1.244 3.616 2.205.24 1.17-.87 1.545-1.966 1.41-.811-.18-1.26-.586-1.755-1.336l-1.83 1.051c.21.48.45.689.81 1.109 1.74 1.756 6.09 1.666 6.871-1.004.029-.09.24-.705.074-1.65l.046.067zm-8.983-7.245h-2.248c0 1.938-.009 3.864-.009 5.805 0 1.232.063 2.363-.138 2.711-.33.689-1.18.601-1.566.48-.396-.196-.597-.466-.83-.855-.063-.105-.11-.196-.127-.196l-1.825 1.125c.305.63.75 1.172 1.324 1.517.855.51 2.004.675 3.207.405.783-.226 1.458-.691 1.811-1.411.51-.93.402-2.07.397-3.346.012-2.054 0-4.109 0-6.179v-.056z',\n  node:     'M11.998 24c-.321 0-.641-.084-.924-.251L8.054 21.99c-.435-.243-.223-.329-.079-.378.441-.153.530-.187.995-.453.049-.028.114-.017.165.012l2.308 1.371c.079.043.191.043.266 0l8.991-5.19c.081-.047.134-.142.134-.238V6.921c0-.099-.053-.19-.137-.241L11.706 1.5c-.079-.046-.188-.046-.271 0L2.449 6.68c-.085.052-.139.143-.139.241v10.37c0 .096.054.189.137.236l2.462 1.422c1.338.669 2.154-.119 2.154-.914V7.205c0-.147.116-.261.262-.261h1.148c.143 0 .261.114.261.261v10.83c0 1.789-.975 2.815-2.671 2.815-.521 0-.932 0-2.079-.565L1.355 19.01c-.571-.329-.924-.940-.924-1.598V7.205c0-.659.353-1.273.924-1.598L10.351.416c.557-.320 1.296-.320 1.848 0l8.998 5.191c.571.325.924.939.924 1.598v10.207c0 .659-.353 1.274-.924 1.598l-8.998 5.19c-.283.168-.602.251-.921.251z',\n  aws:      'M18.75 0h-4.5L12 2.25 9.75 0h-4.5L0 12l5.25 12h4.5L12 21.75 14.25 24h4.5L24 12zm-6.75 18l-1.5-1.5-1.5 1.5-3-6.75L9 9l3 3 3-3 3 2.25z',\n}"
+                    "defaultValue": "{\n  company:   'Acme Corp',\n  role:      'Senior Frontend Developer',\n  startDate: 'mar 2022',\n  current:   true,\n  logoText:  'ACME',\n  bullets: [\n    'Desarrollo de interfaces con Angular 17+, migraciones de versiones anteriores.',\n    'Configuración de pipelines CI/CD en AWS CodeBuild y ECS.',\n    'Implementación de design system propio con tokens SCSS y componentes standalone.',\n    'Automatización de tareas con scripts en Node.js.',\n  ],\n  bulletsPreview: 3,\n  badges: [\n    {\n      label:   'Angular',\n      color:   'danger' as const,\n      imgLeft: 'https://cdn.simpleicons.org/angular/white',\n    },\n    {\n      label:   'TypeScript',\n      color:   'primary' as const,\n      imgLeft: 'https://cdn.simpleicons.org/typescript/white',\n    },\n    {\n      label:   'Node.js',\n      color:   'success' as const,\n      imgLeft: 'https://cdn.simpleicons.org/nodedotjs/white',\n    },\n    {\n      label:       'AWS',\n      customColor: '#ea580c',\n      imgLeft:     'https://cdn.simpleicons.org/amazonaws/white',\n    },\n    { label: 'ESLint', color: 'neutral' as const },\n    { label: 'Husky',  color: 'neutral' as const },\n  ],\n}"
                 },
                 {
-                    "name": "InTabs",
+                    "name": "EXPERIENCE_EARLY",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/experience-card/experience-card.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "object",
+                    "defaultValue": "{\n  company:   'StartupXYZ',\n  role:      'Frontend Developer Jr.',\n  startDate: 'ene 2019',\n  endDate:   'may 2020',\n  logoText:  'XYZ',\n  bullets: [\n    'Primeros pasos en desarrollo web con Vue.js y JavaScript.',\n    'Maquetado responsive con HTML/CSS y SCSS.',\n  ],\n  badges: [\n    {\n      label:       'Vue.js',\n      customColor: '#22c55e',\n      imgLeft:     'https://cdn.simpleicons.org/vuedotjs/white',\n    },\n    {\n      label:   'JavaScript',\n      color:   'warning' as const,\n      imgLeft: 'https://cdn.simpleicons.org/javascript/white',\n    },\n    { label: 'SCSS', color: 'neutral' as const },\n  ],\n}"
+                },
+                {
+                    "name": "EXPERIENCE_PAST",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/experience-card/experience-card.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "object",
+                    "defaultValue": "{\n  company:   'Globex Solutions',\n  role:      'Frontend Developer',\n  startDate: 'jun 2020',\n  endDate:   'feb 2022',\n  logoText:  'GX',\n  bullets: [\n    'Desarrollo de componentes en Angular e Ionic para apps móviles.',\n    'Integración con APIs REST y GraphQL.',\n    'Participación en sprints ágiles con equipo distribuido.',\n  ],\n  badges: [\n    {\n      label:   'Angular',\n      color:   'danger' as const,\n      imgLeft: 'https://cdn.simpleicons.org/angular/white',\n    },\n    {\n      label:   'Ionic',\n      customColor: '#3880ff',\n      imgLeft: 'https://cdn.simpleicons.org/ionic/white',\n    },\n    {\n      label:   'JavaScript',\n      color:   'warning' as const,\n      imgLeft: 'https://cdn.simpleicons.org/javascript/white',\n    },\n    { label: 'Git', color: 'neutral' as const },\n  ],\n}"
+                },
+                {
+                    "name": "InPortfolio",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
                     "file": "projects/fsociety/src/lib/experience-card/experience-card.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  name:   'Dentro de fs-tabs — caso portfolio',\n  render: () => ({\n    props: {\n      xcale: XCALE_EXPERIENCE,\n      prev:  PREV_EXPERIENCE,\n    },\n    template: `\n      <div style=\"max-width:600px;\">\n        <div style=\"\n          background:#0d1117;\n          border-radius:12px;\n          overflow:hidden;\n          border:0.5px solid rgba(255,255,255,0.08);\n        \">\n          <div style=\"padding:20px 20px 0;\">\n            <div style=\"font-size:15px;font-weight:600;color:#fff;margin-bottom:4px;\">\n              Heroel Carpinetti\n            </div>\n            <div style=\"font-size:12px;color:rgba(255,255,255,0.4);\">\n              Frontend Developer Angular\n            </div>\n          </div>\n          <div style=\"padding:20px; display:flex; flex-direction:column; gap:16px;\">\n            <fs-experience-card [experience]=\"xcale\" variant=\"full\" [timeline]=\"true\" [timelineLast]=\"false\"/>\n            <fs-experience-card [experience]=\"prev\"  variant=\"full\" [timeline]=\"true\" [timelineLast]=\"true\"/>\n          </div>\n        </div>\n      </div>\n    `,\n  }),\n}"
+                    "defaultValue": "{\n  name:   'En contexto portfolio',\n  render: () => ({\n    props: {\n      current: EXPERIENCE_CURRENT,\n      past:    EXPERIENCE_PAST,\n      early:   EXPERIENCE_EARLY,\n    },\n    template: `\n      <div style=\"max-width:600px;\">\n        <div style=\"\n          background:#0d1117;\n          border-radius:12px;\n          overflow:hidden;\n          border:0.5px solid rgba(255,255,255,0.08);\n        \">\n          <div style=\"padding:20px 20px 0;\">\n            <div style=\"font-size:15px; font-weight:600; color:#fff; margin-bottom:4px;\">\n              John Doe\n            </div>\n            <div style=\"font-size:12px; color:rgba(255,255,255,0.4);\">\n              Senior Frontend Developer\n            </div>\n          </div>\n          <div style=\"padding:20px; display:flex; flex-direction:column; gap:16px;\">\n            <fs-experience-card [experience]=\"current\" variant=\"full\" [timeline]=\"true\" [timelineLast]=\"false\"/>\n            <fs-experience-card [experience]=\"past\"    variant=\"full\" [timeline]=\"true\" [timelineLast]=\"false\"/>\n            <fs-experience-card [experience]=\"early\"   variant=\"full\" [timeline]=\"true\" [timelineLast]=\"true\"/>\n          </div>\n        </div>\n      </div>\n    `,\n  }),\n}"
                 },
                 {
                     "name": "meta",
@@ -1478,7 +1518,17 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Meta<FsExperienceCardComponent>",
-                    "defaultValue": "{\n  title:     'fsociety/Experience Card',\n  component: FsExperienceCardComponent,\n  tags:      ['autodocs'],\n  argTypes: {\n    variant: {\n      control:  'radio',\n      options:  ['full', 'compact'],\n      description: 'full = con bullets y badges · compact = solo header',\n    },\n    timeline: {\n      control:     'boolean',\n      description: 'Muestra línea y dot de timeline a la izquierda',\n    },\n    timelineLast: {\n      control:     'boolean',\n      description: 'Último item del timeline — oculta la línea hacia abajo',\n    },\n  },\n}"
+                    "defaultValue": "{\n  title:     'fsociety/Experience Card',\n  component: FsExperienceCardComponent,\n  tags:      ['autodocs'],\n  argTypes: {\n    variant: {\n      control:     'radio',\n      options:     ['full', 'compact'],\n      description: 'full = con bullets y badges · compact = solo header',\n    },\n    timeline: {\n      control:     'boolean',\n      description: 'Muestra línea y dot de timeline a la izquierda',\n    },\n    timelineLast: {\n      control:     'boolean',\n      description: 'Último item del timeline — oculta la línea hacia abajo',\n    },\n  },\n}"
+                },
+                {
+                    "name": "NoRadius",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/experience-card/experience-card.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  name: 'Sin redondeo — --fs-exp-radius: 0',\n  render: () => ({\n    props: { experience: EXPERIENCE_CURRENT },\n    template: `\n      <div style=\"--fs-exp-radius: 0\">\n        <fs-experience-card\n          [experience]=\"experience\"\n          variant=\"full\"\n        />\n      </div>\n    `,\n  }),\n}"
                 },
                 {
                     "name": "Past",
@@ -1488,17 +1538,17 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  name: 'Trabajo pasado',\n  args: {\n    experience: PREV_EXPERIENCE,\n    variant:    'full',\n    timeline:   false,\n  },\n}"
+                    "defaultValue": "{\n  name: 'Trabajo pasado',\n  args: {\n    experience: EXPERIENCE_PAST,\n    variant:    'full',\n    timeline:   false,\n  },\n}"
                 },
                 {
-                    "name": "PREV_EXPERIENCE",
+                    "name": "Playground",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
                     "file": "projects/fsociety/src/lib/experience-card/experience-card.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "object",
-                    "defaultValue": "{\n  company:   'Empresa anterior',\n  role:      'Frontend Developer Jr.',\n  startDate: 'ene 2020',\n  endDate:   'mar 2022',\n  logoText:  'PREV',\n  bullets: [\n    'Desarrollo de componentes en React y Vue.js.',\n    'Integración con APIs REST y GraphQL.',\n  ],\n  badges: [\n    { label: 'JavaScript', color: 'warning' as const, iconLeft: ICONS.js },\n    { label: 'React',      color: 'neutral' as const },\n    { label: 'Vue.js',     color: 'neutral' as const },\n  ],\n}"
+                    "type": "Story",
+                    "defaultValue": "{\n  name: 'Playground',\n  args: {\n    experience: EXPERIENCE_CURRENT,\n    variant:    'full',\n    timeline:   false,\n  },\n}"
                 },
                 {
                     "name": "Timeline",
@@ -1508,17 +1558,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  name:   'Timeline — múltiples experiencias',\n  render: () => ({\n    props: {\n      xcale: XCALE_EXPERIENCE,\n      prev:  PREV_EXPERIENCE,\n    },\n    template: `\n      <div style=\"display:flex; flex-direction:column; gap:16px; max-width:580px;\">\n        <fs-experience-card\n          [experience]=\"xcale\"\n          variant=\"full\"\n          [timeline]=\"true\"\n          [timelineLast]=\"false\"\n        />\n        <fs-experience-card\n          [experience]=\"prev\"\n          variant=\"full\"\n          [timeline]=\"true\"\n          [timelineLast]=\"true\"\n        />\n      </div>\n    `,\n  }),\n}"
-                },
-                {
-                    "name": "XCALE_EXPERIENCE",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/fsociety/src/lib/experience-card/experience-card.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "object",
-                    "defaultValue": "{\n  company:      'Xcale Consulting',\n  role:         'Frontend Developer',\n  startDate:    'abr 2022',\n  current:      true,\n  logoText:     'X CALE',\n  bullets: [\n    'Desarrollo de interfaces con Angular, migraciones de versión 8 a la 16.',\n    'Configuración de pipelines, CodeBuild, ECS en AWS y trabajo con S3 buckets.',\n    'Desarrollé pequeños scripts en Node.js para automatización de tareas.',\n    'Configuré y trabajé con Angular Material, FontAwesome, ESLint y Husky.',\n  ],\n  bulletsPreview: 3,\n  badges: [\n    { label: 'Angular',     color: 'danger'    as const, iconLeft: ICONS.angular },\n    { label: 'TypeScript',  color: 'primary'   as const },\n    { label: 'JavaScript',  color: 'warning'   as const, iconLeft: ICONS.js },\n    { label: 'Node.js',     color: 'success'   as const, iconLeft: ICONS.node },\n    { label: 'AWS',         color: 'secondary' as const, iconLeft: ICONS.aws },\n    { label: 'ESLint',      color: 'neutral'   as const },\n    { label: 'Husky',       color: 'neutral'   as const },\n  ],\n}"
+                    "defaultValue": "{\n  name:   'Timeline — múltiples experiencias',\n  render: () => ({\n    props: {\n      current: EXPERIENCE_CURRENT,\n      past:    EXPERIENCE_PAST,\n      early:   EXPERIENCE_EARLY,\n    },\n    template: `\n      <div style=\"display:flex; flex-direction:column; gap:16px; max-width:580px;\">\n        <fs-experience-card\n          [experience]=\"current\"\n          variant=\"full\"\n          [timeline]=\"true\"\n          [timelineLast]=\"false\"\n        />\n        <fs-experience-card\n          [experience]=\"past\"\n          variant=\"full\"\n          [timeline]=\"true\"\n          [timelineLast]=\"false\"\n        />\n        <fs-experience-card\n          [experience]=\"early\"\n          variant=\"full\"\n          [timeline]=\"true\"\n          [timelineLast]=\"true\"\n        />\n      </div>\n    `,\n  }),\n}"
                 }
             ],
             "projects/fsociety/src/lib/badge/badge.stories.ts": [
@@ -1540,7 +1580,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Meta<FsBadgeComponent>",
-                    "defaultValue": "{\n  title:     'fsociety/Badge',\n  component: FsBadgeComponent,\n  tags:      ['autodocs'],\n  argTypes: {\n    color: {\n      control: 'select',\n      options: ['primary','secondary','tertiary','success','warning','danger','neutral'],\n    },\n    variant:     { control: 'radio',   options: ['filled','outline'] },\n    size:        { control: 'radio',   options: ['sm','md'] },\n    customColor: { control: 'color',   description: 'Color hex personalizado — tiene prioridad sobre color' },\n    dot:         { control: 'boolean' },\n    iconOnly:    { control: 'boolean' },\n    removable:   { control: 'boolean' },\n    removed:     { action: 'removed' },\n  },\n}"
+                    "defaultValue": "{\n  title:     'fsociety/Badge',\n  component: FsBadgeComponent,\n  tags:      ['autodocs'],\n  argTypes: {\n    color: {\n      control: 'select',\n      options: ['primary','secondary','tertiary','success','warning','danger','neutral'],\n      description: 'Color semántico del badge',\n    },\n    customColor: {\n      control: 'color',\n      description: 'Color hex personalizado — tiene prioridad sobre color. Genera fondo, borde y texto automáticamente.',\n    },\n    variant:     { control: 'radio',   options: ['filled','outline'] },\n    size:        { control: 'radio',   options: ['sm','md'] },\n    imgLeft: {\n      control: 'text',\n      description: 'URL de imagen izquierda — ej: https://cdn.simpleicons.org/angular/white',\n    },\n    imgRight: {\n      control: 'text',\n      description: 'URL de imagen derecha',\n    },\n    imgLeftAlt:  { control: 'text', description: 'Alt text para imgLeft' },\n    imgRightAlt: { control: 'text', description: 'Alt text para imgRight' },\n    dot:         { control: 'boolean' },\n    iconOnly:    { control: 'boolean' },\n    removable:   { control: 'boolean' },\n    removed:     { action: 'removed' },\n  },\n}"
                 },
                 {
                     "name": "Outline",
@@ -1560,7 +1600,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: {\n    color:   'primary',\n    variant: 'filled',\n    size:    'md',\n    label:   'TypeScript',\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <fs-badge\n        [color]=\"color\"\n        [customColor]=\"customColor\"\n        [variant]=\"variant\"\n        [size]=\"size\"\n        [dot]=\"dot\"\n        [iconOnly]=\"iconOnly\"\n        [removable]=\"removable\"\n        (removed)=\"removed($event)\"\n      >{{ label }}</fs-badge>\n    `,\n  }),\n}"
+                    "defaultValue": "{\n  args: {\n    color:      'primary',\n    variant:    'filled',\n    size:       'md',\n    label:      'TypeScript',\n    imgLeft:    '',\n    imgRight:   '',\n    imgLeftAlt: '',\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <fs-badge\n        [color]=\"color\"\n        [customColor]=\"customColor\"\n        [variant]=\"variant\"\n        [size]=\"size\"\n        [dot]=\"dot\"\n        [iconOnly]=\"iconOnly\"\n        [removable]=\"removable\"\n        [imgLeft]=\"imgLeft || undefined\"\n        [imgRight]=\"imgRight || undefined\"\n        [imgLeftAlt]=\"imgLeftAlt\"\n        [imgRightAlt]=\"imgRightAlt\"\n        (removed)=\"removed($event)\"\n      >{{ label }}</fs-badge>\n    `,\n  }),\n}"
                 },
                 {
                     "name": "SemanticColors",
@@ -2276,7 +2316,7 @@
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
-                "name": "ICONS",
+                "name": "EXPERIENCE_CURRENT",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
@@ -2286,7 +2326,27 @@
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
-                "name": "InTabs",
+                "name": "EXPERIENCE_EARLY",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/experience-card/experience-card.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "EXPERIENCE_PAST",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/experience-card/experience-card.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "InPortfolio",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
@@ -2306,6 +2366,16 @@
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
+                "name": "NoRadius",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/experience-card/experience-card.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
                 "name": "Past",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
@@ -2316,7 +2386,7 @@
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
-                "name": "PREV_EXPERIENCE",
+                "name": "Playground",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
@@ -2327,16 +2397,6 @@
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
                 "name": "Timeline",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/fsociety/src/lib/experience-card/experience-card.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "XCALE_EXPERIENCE",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
