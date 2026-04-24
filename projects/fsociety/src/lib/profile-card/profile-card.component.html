@@ -65,9 +65,9 @@
       <a
         *ngFor="let link of links"
         class="fs-profile__link"
-        [href]="link.url || '#'"
-        [attr.target]="link.url ? '_blank' : null"
-        [attr.rel]="link.url ? 'noopener noreferrer' : null"
+        [href]="getLinkHref(link) || '#'"
+        [attr.target]="link.url && !link.encodedEmail ? '_blank' : null"
+        [attr.rel]="link.url && !link.encodedEmail ? 'noopener noreferrer' : null"
       >
         <!-- imagen del link (prioridad sobre icon SVG) -->
         <img

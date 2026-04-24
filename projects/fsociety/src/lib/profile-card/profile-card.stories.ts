@@ -20,6 +20,12 @@ type Story = StoryObj<FsProfileCardComponent>;
 
 const FAKE_LINKS = [
   {
+    label:        'johndoe@example.com',
+    encodedEmail: 'am9obmRvZUBleGFtcGxlLmNvbQ==', // btoa('johndoe@example.com')
+    imgUrl:       'https://cdn.simpleicons.org/gmail/white',
+    imgAlt:       'Email',
+  },
+  {
     label:  'linkedin.com/in/johndoe',
     url:    'https://linkedin.com/in/johndoe',
     imgUrl: 'https://cdn.simpleicons.org/linkedin/white',
@@ -55,15 +61,15 @@ const FAKE_STATS = [
 
 export const Playground: Story = {
   args: {
-    name:       'John Doe',
-    handle:     'johndoe',
-    role:       'Frontend Developer',
-    verified:   true,
-    avatarUrl:  'https://i.pravatar.cc/150?img=8',
-    bannerUrl:  'https://picsum.photos/seed/fsociety/800/200',
-    links:      FAKE_LINKS,
-    badges:     FAKE_BADGES,
-    stats:      FAKE_STATS,
+    name:        'John Doe',
+    handle:      'johndoe',
+    role:        'Frontend Developer',
+    verified:    true,
+    avatarUrl:   'https://i.pravatar.cc/150?img=8',
+    bannerUrl:   'https://picsum.photos/seed/fsociety/800/200',
+    links:       FAKE_LINKS,
+    badges:      FAKE_BADGES,
+    stats:       FAKE_STATS,
     showActions: false,
   },
 };
@@ -94,12 +100,12 @@ export const WithImages: Story = {
 export const WithInitials: Story = {
   name: 'Sin imágenes — iniciales + degradé',
   args: {
-    name:    'Alex Rivera',
-    handle:  'alexrivera',
-    role:    'Frontend Developer',
+    name:     'Alex Rivera',
+    handle:   'alexrivera',
+    role:     'Frontend Developer',
     verified: false,
-    links:   FAKE_LINKS,
-    badges:  [
+    links:    FAKE_LINKS,
+    badges:   [
       { label: 'Vue.js',  customColor: '#22c55e' },
       { label: 'Python',  customColor: '#3b82f6' },
       { label: 'Docker',  color: 'neutral' as const },
@@ -115,16 +121,16 @@ export const WithInitials: Story = {
 export const WithActions: Story = {
   name: 'Con botones de acción',
   args: {
-    name:        'Sam Taylor',
-    handle:      'samtaylor',
-    role:        'UI/UX Engineer',
-    verified:    true,
-    avatarUrl:   'https://i.pravatar.cc/150?img=12',
-    bannerUrl:   'https://picsum.photos/seed/banner2/800/200',
-    links:       FAKE_LINKS,
-    badges:      FAKE_BADGES,
-    stats:       FAKE_STATS,
-    showActions: true,
+    name:                 'Sam Taylor',
+    handle:               'samtaylor',
+    role:                 'UI/UX Engineer',
+    verified:             true,
+    avatarUrl:            'https://i.pravatar.cc/150?img=12',
+    bannerUrl:            'https://picsum.photos/seed/banner2/800/200',
+    links:                FAKE_LINKS,
+    badges:               FAKE_BADGES,
+    stats:                FAKE_STATS,
+    showActions:          true,
     primaryActionLabel:   'Seguir',
     secondaryActionLabel: 'Mensaje',
   },

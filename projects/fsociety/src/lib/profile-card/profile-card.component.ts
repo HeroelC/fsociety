@@ -16,8 +16,16 @@ export interface FsProfileStat {
 export interface FsProfileLink {
   /** Texto visible */
   label: string;
-  /** URL destino */
+  /** URL destino — se ignora si hay encodedEmail */
   url?: string;
+  /**
+   * Email codificado en base64 — tiene prioridad sobre url.
+   * Generá el valor con btoa('tu@email.com') en la consola del browser.
+   * El componente lo decodifica en runtime con atob() — nunca aparece
+   * el mailto: en el HTML estático, protegiéndolo de email scrapers.
+   * Ejemplo: btoa('johndoe@example.com') → 'am9obmRvZUBleGFtcGxlLmNvbQ=='
+   */
+  encodedEmail?: string;
   /** SVG path del ícono (viewBox 0 0 16 16) — se ignora si hay imgUrl */
   icon?: string;
   /**
@@ -72,5 +80,22 @@ export class FsProfileCardComponent {
       .map(w => w[0])
       .join('')
       .toUpperCase();
+  }
+
+  /**
+   * Resuelve el href de un link.
+   * Si tiene encodedEmail, lo decodifica con atob() y retorna 'mailto:email'.
+   * Si tiene url, la retorna directamente.
+   * Si no tiene ninguno, retorna null.
+   */
+  getLinkHref(link: FsProfileLink): string | null {
+    if (link.encodedEmail) {
+      try {
+        return 'mailto:' + atob(link.encodedEmail);
+      } catch {
+        return null;
+      }
+    }
+    return link.url ?? null;
   }
 }
