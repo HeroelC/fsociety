@@ -1,0 +1,1355 @@
+:root, [data-theme=dark] {
+  --fs-primary-50: rgb(237.56, 242.52, 253.4);
+  --fs-primary-100: rgb(211.4, 223.8, 251);
+  --fs-primary-200: rgb(176.52, 198.84, 247.8);
+  --fs-primary-300: rgb(132.92, 167.64, 243.8);
+  --fs-primary-400: rgb(84.96, 133.32, 239.4);
+  --fs-primary-500: #2563eb;
+  --fs-primary-600: rgb(33.48, 86.84, 204.12);
+  --fs-primary-700: rgb(29.52, 73.16, 169.38);
+  --fs-primary-800: rgb(25.12, 57.96, 130.78);
+  --fs-primary-900: rgb(21.16, 44.28, 96.04);
+  --fs-secondary-50: rgb(235.72, 247.8, 253.24);
+  --fs-secondary-100: rgb(206.8, 237, 250.6);
+  --fs-secondary-200: rgb(168.24, 222.6, 247.08);
+  --fs-secondary-300: rgb(120.04, 204.6, 242.68);
+  --fs-secondary-400: rgb(67.02, 184.8, 237.84);
+  --fs-secondary-500: #0ea5e9;
+  --fs-secondary-600: rgb(14.16, 142.28, 202.44);
+  --fs-secondary-700: rgb(14.34, 116.72, 168.06);
+  --fs-secondary-800: rgb(14.54, 88.32, 129.86);
+  --fs-secondary-900: rgb(14.72, 62.76, 95.48);
+  --fs-tertiary-50: rgb(237.32, 251.48, 253.64);
+  --fs-tertiary-100: rgb(210.8, 246.2, 251.6);
+  --fs-tertiary-200: rgb(175.44, 239.16, 248.88);
+  --fs-tertiary-300: rgb(131.24, 230.36, 245.48);
+  --fs-tertiary-400: rgb(82.62, 220.68, 241.74);
+  --fs-tertiary-500: #22d3ee;
+  --fs-tertiary-600: rgb(30.96, 180.92, 206.64);
+  --fs-tertiary-700: rgb(27.54, 147.08, 171.36);
+  --fs-tertiary-800: rgb(23.74, 109.48, 132.16);
+  --fs-tertiary-900: rgb(20.32, 75.64, 96.88);
+  --fs-neutral-50: rgb(242.6, 243.88, 245.72);
+  --fs-neutral-100: rgb(224, 227.2, 231.8);
+  --fs-neutral-200: rgb(199.2, 204.96, 213.24);
+  --fs-neutral-300: rgb(168.2, 177.16, 190.04);
+  --fs-neutral-400: rgb(134.1, 146.58, 164.52);
+  --fs-neutral-500: #64748b;
+  --fs-neutral-600: rgb(86.4, 101.12, 123.48);
+  --fs-neutral-700: rgb(71.1, 84.38, 106.02);
+  --fs-neutral-800: rgb(54.1, 65.78, 86.62);
+  --fs-neutral-900: rgb(38.8, 49.04, 69.16);
+  --fs-success-50: rgb(237.32, 250.36, 242.12);
+  --fs-success-100: rgb(210.8, 243.4, 222.8);
+  --fs-success-200: rgb(175.44, 234.12, 197.04);
+  --fs-success-300: rgb(131.24, 222.52, 164.84);
+  --fs-success-400: rgb(82.62, 209.76, 129.42);
+  --fs-success-500: #22c55e;
+  --fs-success-600: rgb(30.96, 169.16, 85.68);
+  --fs-success-700: rgb(27.54, 137.84, 76.32);
+  --fs-success-800: rgb(23.74, 103.04, 65.92);
+  --fs-success-900: rgb(20.32, 71.72, 56.56);
+  --fs-warning-50: rgb(254.2, 247.24, 235.48);
+  --fs-warning-100: rgb(253, 235.6, 206.2);
+  --fs-warning-200: rgb(251.4, 220.08, 167.16);
+  --fs-warning-300: rgb(249.4, 200.68, 118.36);
+  --fs-warning-400: rgb(247.2, 179.34, 64.68);
+  --fs-warning-500: #f59e0b;
+  --fs-warning-600: rgb(208.2, 136.4, 15.96);
+  --fs-warning-700: rgb(166.8, 112.1, 21.54);
+  --fs-warning-800: rgb(120.8, 85.1, 27.74);
+  --fs-warning-900: rgb(79.4, 60.8, 33.32);
+  --fs-danger-50: rgb(254.12, 239.64, 242.12);
+  --fs-danger-100: rgb(252.8, 216.6, 222.8);
+  --fs-danger-200: rgb(251.04, 185.88, 197.04);
+  --fs-danger-300: rgb(248.84, 147.48, 164.84);
+  --fs-danger-400: rgb(246.42, 105.24, 129.42);
+  --fs-danger-500: #f43f5e;
+  --fs-danger-600: rgb(207.36, 56.6, 85.68);
+  --fs-danger-700: rgb(166.14, 49.4, 76.32);
+  --fs-danger-800: rgb(120.34, 41.4, 65.92);
+  --fs-danger-900: rgb(79.12, 34.2, 56.56);
+  --fs-primary-muted: var(--fs-primary-50);
+  --fs-primary-subtle: var(--fs-primary-100);
+  --fs-primary-tint: var(--fs-primary-200);
+  --fs-primary-light: var(--fs-primary-300);
+  --fs-primary-soft: var(--fs-primary-400);
+  --fs-primary-base: var(--fs-primary-500);
+  --fs-primary-hover: var(--fs-primary-600);
+  --fs-primary-active: var(--fs-primary-700);
+  --fs-primary-emphasis: var(--fs-primary-800);
+  --fs-primary-contrast: var(--fs-primary-900);
+  --fs-secondary-muted: var(--fs-secondary-50);
+  --fs-secondary-subtle: var(--fs-secondary-100);
+  --fs-secondary-tint: var(--fs-secondary-200);
+  --fs-secondary-light: var(--fs-secondary-300);
+  --fs-secondary-soft: var(--fs-secondary-400);
+  --fs-secondary-base: var(--fs-secondary-500);
+  --fs-secondary-hover: var(--fs-secondary-600);
+  --fs-secondary-active: var(--fs-secondary-700);
+  --fs-secondary-emphasis: var(--fs-secondary-800);
+  --fs-secondary-contrast: var(--fs-secondary-900);
+  --fs-tertiary-muted: var(--fs-tertiary-50);
+  --fs-tertiary-subtle: var(--fs-tertiary-100);
+  --fs-tertiary-tint: var(--fs-tertiary-200);
+  --fs-tertiary-light: var(--fs-tertiary-300);
+  --fs-tertiary-soft: var(--fs-tertiary-400);
+  --fs-tertiary-base: var(--fs-tertiary-500);
+  --fs-tertiary-hover: var(--fs-tertiary-600);
+  --fs-tertiary-active: var(--fs-tertiary-700);
+  --fs-tertiary-emphasis: var(--fs-tertiary-800);
+  --fs-tertiary-contrast: var(--fs-tertiary-900);
+  --fs-neutral-muted: var(--fs-neutral-50);
+  --fs-neutral-subtle: var(--fs-neutral-100);
+  --fs-neutral-tint: var(--fs-neutral-200);
+  --fs-neutral-light: var(--fs-neutral-300);
+  --fs-neutral-soft: var(--fs-neutral-400);
+  --fs-neutral-base: var(--fs-neutral-500);
+  --fs-neutral-hover: var(--fs-neutral-600);
+  --fs-neutral-active: var(--fs-neutral-700);
+  --fs-neutral-emphasis: var(--fs-neutral-800);
+  --fs-neutral-contrast: var(--fs-neutral-900);
+  --fs-success-muted: var(--fs-success-50);
+  --fs-success-subtle: var(--fs-success-100);
+  --fs-success-tint: var(--fs-success-200);
+  --fs-success-light: var(--fs-success-300);
+  --fs-success-soft: var(--fs-success-400);
+  --fs-success-base: var(--fs-success-500);
+  --fs-success-hover: var(--fs-success-600);
+  --fs-success-active: var(--fs-success-700);
+  --fs-success-emphasis: var(--fs-success-800);
+  --fs-success-contrast: var(--fs-success-900);
+  --fs-warning-muted: var(--fs-warning-50);
+  --fs-warning-subtle: var(--fs-warning-100);
+  --fs-warning-tint: var(--fs-warning-200);
+  --fs-warning-light: var(--fs-warning-300);
+  --fs-warning-soft: var(--fs-warning-400);
+  --fs-warning-base: var(--fs-warning-500);
+  --fs-warning-hover: var(--fs-warning-600);
+  --fs-warning-active: var(--fs-warning-700);
+  --fs-warning-emphasis: var(--fs-warning-800);
+  --fs-warning-contrast: var(--fs-warning-900);
+  --fs-danger-muted: var(--fs-danger-50);
+  --fs-danger-subtle: var(--fs-danger-100);
+  --fs-danger-tint: var(--fs-danger-200);
+  --fs-danger-light: var(--fs-danger-300);
+  --fs-danger-soft: var(--fs-danger-400);
+  --fs-danger-base: var(--fs-danger-500);
+  --fs-danger-hover: var(--fs-danger-600);
+  --fs-danger-active: var(--fs-danger-700);
+  --fs-danger-emphasis: var(--fs-danger-800);
+  --fs-danger-contrast: var(--fs-danger-900);
+  --fs-font-sans: Inter, Segoe UI, system-ui, sans-serif;
+  --fs-font-mono: JetBrains Mono, Fira Code, Cascadia Code, monospace;
+  --fs-font-serif: Georgia, serif;
+  --fs-radius-sm: 4px;
+  --fs-radius-md: 6px;
+  --fs-radius-lg: 8px;
+  --fs-radius-xl: 12px;
+  --fs-radius-full: 9999px;
+  --fs-duration-fast: 100ms;
+  --fs-duration-normal: 200ms;
+  --fs-duration-slow: 350ms;
+  --fs-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.06);
+  --fs-shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.04);
+  --fs-shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.08), 0 4px 6px rgba(0, 0, 0, 0.04);
+  --fs-space-1: 0.25rem;
+  --fs-space-2: 0.5rem;
+  --fs-space-3: 0.75rem;
+  --fs-space-4: 1rem;
+  --fs-space-6: 1.5rem;
+  --fs-space-8: 2rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root, [data-theme=dark] {
+    --fs-primary-50: rgb(237.56, 242.52, 253.4);
+    --fs-primary-100: rgb(211.4, 223.8, 251);
+    --fs-primary-200: rgb(176.52, 198.84, 247.8);
+    --fs-primary-300: rgb(132.92, 167.64, 243.8);
+    --fs-primary-400: rgb(84.96, 133.32, 239.4);
+    --fs-primary-500: #2563eb;
+    --fs-primary-600: rgb(33.48, 86.84, 204.12);
+    --fs-primary-700: rgb(29.52, 73.16, 169.38);
+    --fs-primary-800: rgb(25.12, 57.96, 130.78);
+    --fs-primary-900: rgb(21.16, 44.28, 96.04);
+    --fs-secondary-50: rgb(235.72, 247.8, 253.24);
+    --fs-secondary-100: rgb(206.8, 237, 250.6);
+    --fs-secondary-200: rgb(168.24, 222.6, 247.08);
+    --fs-secondary-300: rgb(120.04, 204.6, 242.68);
+    --fs-secondary-400: rgb(67.02, 184.8, 237.84);
+    --fs-secondary-500: #0ea5e9;
+    --fs-secondary-600: rgb(14.16, 142.28, 202.44);
+    --fs-secondary-700: rgb(14.34, 116.72, 168.06);
+    --fs-secondary-800: rgb(14.54, 88.32, 129.86);
+    --fs-secondary-900: rgb(14.72, 62.76, 95.48);
+    --fs-tertiary-50: rgb(237.32, 251.48, 253.64);
+    --fs-tertiary-100: rgb(210.8, 246.2, 251.6);
+    --fs-tertiary-200: rgb(175.44, 239.16, 248.88);
+    --fs-tertiary-300: rgb(131.24, 230.36, 245.48);
+    --fs-tertiary-400: rgb(82.62, 220.68, 241.74);
+    --fs-tertiary-500: #22d3ee;
+    --fs-tertiary-600: rgb(30.96, 180.92, 206.64);
+    --fs-tertiary-700: rgb(27.54, 147.08, 171.36);
+    --fs-tertiary-800: rgb(23.74, 109.48, 132.16);
+    --fs-tertiary-900: rgb(20.32, 75.64, 96.88);
+    --fs-neutral-50: rgb(242.6, 243.88, 245.72);
+    --fs-neutral-100: rgb(224, 227.2, 231.8);
+    --fs-neutral-200: rgb(199.2, 204.96, 213.24);
+    --fs-neutral-300: rgb(168.2, 177.16, 190.04);
+    --fs-neutral-400: rgb(134.1, 146.58, 164.52);
+    --fs-neutral-500: #64748b;
+    --fs-neutral-600: rgb(86.4, 101.12, 123.48);
+    --fs-neutral-700: rgb(71.1, 84.38, 106.02);
+    --fs-neutral-800: rgb(54.1, 65.78, 86.62);
+    --fs-neutral-900: rgb(38.8, 49.04, 69.16);
+    --fs-success-50: rgb(237.32, 250.36, 242.12);
+    --fs-success-100: rgb(210.8, 243.4, 222.8);
+    --fs-success-200: rgb(175.44, 234.12, 197.04);
+    --fs-success-300: rgb(131.24, 222.52, 164.84);
+    --fs-success-400: rgb(82.62, 209.76, 129.42);
+    --fs-success-500: #22c55e;
+    --fs-success-600: rgb(30.96, 169.16, 85.68);
+    --fs-success-700: rgb(27.54, 137.84, 76.32);
+    --fs-success-800: rgb(23.74, 103.04, 65.92);
+    --fs-success-900: rgb(20.32, 71.72, 56.56);
+    --fs-warning-50: rgb(254.2, 247.24, 235.48);
+    --fs-warning-100: rgb(253, 235.6, 206.2);
+    --fs-warning-200: rgb(251.4, 220.08, 167.16);
+    --fs-warning-300: rgb(249.4, 200.68, 118.36);
+    --fs-warning-400: rgb(247.2, 179.34, 64.68);
+    --fs-warning-500: #f59e0b;
+    --fs-warning-600: rgb(208.2, 136.4, 15.96);
+    --fs-warning-700: rgb(166.8, 112.1, 21.54);
+    --fs-warning-800: rgb(120.8, 85.1, 27.74);
+    --fs-warning-900: rgb(79.4, 60.8, 33.32);
+    --fs-danger-50: rgb(254.12, 239.64, 242.12);
+    --fs-danger-100: rgb(252.8, 216.6, 222.8);
+    --fs-danger-200: rgb(251.04, 185.88, 197.04);
+    --fs-danger-300: rgb(248.84, 147.48, 164.84);
+    --fs-danger-400: rgb(246.42, 105.24, 129.42);
+    --fs-danger-500: #f43f5e;
+    --fs-danger-600: rgb(207.36, 56.6, 85.68);
+    --fs-danger-700: rgb(166.14, 49.4, 76.32);
+    --fs-danger-800: rgb(120.34, 41.4, 65.92);
+    --fs-danger-900: rgb(79.12, 34.2, 56.56);
+    --fs-primary-muted: var(--fs-primary-900);
+    --fs-primary-subtle: var(--fs-primary-800);
+    --fs-primary-tint: var(--fs-primary-700);
+    --fs-primary-light: var(--fs-primary-600);
+    --fs-primary-soft: var(--fs-primary-400);
+    --fs-primary-base: var(--fs-primary-500);
+    --fs-primary-hover: var(--fs-primary-400);
+    --fs-primary-active: var(--fs-primary-300);
+    --fs-primary-emphasis: var(--fs-primary-200);
+    --fs-primary-contrast: var(--fs-primary-50);
+    --fs-secondary-muted: var(--fs-secondary-900);
+    --fs-secondary-subtle: var(--fs-secondary-800);
+    --fs-secondary-tint: var(--fs-secondary-700);
+    --fs-secondary-light: var(--fs-secondary-600);
+    --fs-secondary-soft: var(--fs-secondary-400);
+    --fs-secondary-base: var(--fs-secondary-500);
+    --fs-secondary-hover: var(--fs-secondary-400);
+    --fs-secondary-active: var(--fs-secondary-300);
+    --fs-secondary-emphasis: var(--fs-secondary-200);
+    --fs-secondary-contrast: var(--fs-secondary-50);
+    --fs-tertiary-muted: var(--fs-tertiary-900);
+    --fs-tertiary-subtle: var(--fs-tertiary-800);
+    --fs-tertiary-tint: var(--fs-tertiary-700);
+    --fs-tertiary-light: var(--fs-tertiary-600);
+    --fs-tertiary-soft: var(--fs-tertiary-400);
+    --fs-tertiary-base: var(--fs-tertiary-500);
+    --fs-tertiary-hover: var(--fs-tertiary-400);
+    --fs-tertiary-active: var(--fs-tertiary-300);
+    --fs-tertiary-emphasis: var(--fs-tertiary-200);
+    --fs-tertiary-contrast: var(--fs-tertiary-50);
+    --fs-neutral-muted: var(--fs-neutral-900);
+    --fs-neutral-subtle: var(--fs-neutral-800);
+    --fs-neutral-base: var(--fs-neutral-500);
+    --fs-neutral-hover: var(--fs-neutral-400);
+    --fs-neutral-active: var(--fs-neutral-300);
+    --fs-neutral-contrast: var(--fs-neutral-50);
+    --fs-danger-muted: var(--fs-danger-900);
+    --fs-danger-base: var(--fs-danger-500);
+    --fs-danger-hover: var(--fs-danger-400);
+    --fs-danger-contrast: var(--fs-danger-50);
+    --fs-success-muted: var(--fs-success-900);
+    --fs-success-base: var(--fs-success-500);
+    --fs-success-hover: var(--fs-success-400);
+    --fs-success-contrast: var(--fs-success-50);
+    --fs-warning-muted: var(--fs-warning-900);
+    --fs-warning-base: var(--fs-warning-500);
+    --fs-warning-hover: var(--fs-warning-400);
+    --fs-warning-contrast: var(--fs-warning-50);
+  }
+}
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flex-around {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.flex-start {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.flex-end {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-col-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.inline-flex-center {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gap-1 {
+  gap: 0.25rem;
+}
+
+.gap-2 {
+  gap: 0.5rem;
+}
+
+.gap-3 {
+  gap: 0.75rem;
+}
+
+.gap-4 {
+  gap: 1rem;
+}
+
+.gap-5 {
+  gap: 1.25rem;
+}
+
+.gap-6 {
+  gap: 1.5rem;
+}
+
+.gap-8 {
+  gap: 2rem;
+}
+
+.p-0 {
+  padding: 0;
+}
+
+.px-0 {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.py-0 {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.pl-0 {
+  padding-left: 0;
+}
+
+.pr-0 {
+  padding-right: 0;
+}
+
+.pt-0 {
+  padding-top: 0;
+}
+
+.pb-0 {
+  padding-bottom: 0;
+}
+
+.p-1 {
+  padding: 0.25rem;
+}
+
+.px-1 {
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+}
+
+.py-1 {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
+.pl-1 {
+  padding-left: 0.25rem;
+}
+
+.pr-1 {
+  padding-right: 0.25rem;
+}
+
+.pt-1 {
+  padding-top: 0.25rem;
+}
+
+.pb-1 {
+  padding-bottom: 0.25rem;
+}
+
+.p-2 {
+  padding: 0.5rem;
+}
+
+.px-2 {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.py-2 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.pl-2 {
+  padding-left: 0.5rem;
+}
+
+.pr-2 {
+  padding-right: 0.5rem;
+}
+
+.pt-2 {
+  padding-top: 0.5rem;
+}
+
+.pb-2 {
+  padding-bottom: 0.5rem;
+}
+
+.p-3 {
+  padding: 0.75rem;
+}
+
+.px-3 {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+
+.py-3 {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
+.pl-3 {
+  padding-left: 0.75rem;
+}
+
+.pr-3 {
+  padding-right: 0.75rem;
+}
+
+.pt-3 {
+  padding-top: 0.75rem;
+}
+
+.pb-3 {
+  padding-bottom: 0.75rem;
+}
+
+.p-4 {
+  padding: 1rem;
+}
+
+.px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.py-4 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.pl-4 {
+  padding-left: 1rem;
+}
+
+.pr-4 {
+  padding-right: 1rem;
+}
+
+.pt-4 {
+  padding-top: 1rem;
+}
+
+.pb-4 {
+  padding-bottom: 1rem;
+}
+
+.p-5 {
+  padding: 1.25rem;
+}
+
+.px-5 {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
+.py-5 {
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+}
+
+.pl-5 {
+  padding-left: 1.25rem;
+}
+
+.pr-5 {
+  padding-right: 1.25rem;
+}
+
+.pt-5 {
+  padding-top: 1.25rem;
+}
+
+.pb-5 {
+  padding-bottom: 1.25rem;
+}
+
+.p-6 {
+  padding: 1.5rem;
+}
+
+.px-6 {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.py-6 {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+.pl-6 {
+  padding-left: 1.5rem;
+}
+
+.pr-6 {
+  padding-right: 1.5rem;
+}
+
+.pt-6 {
+  padding-top: 1.5rem;
+}
+
+.pb-6 {
+  padding-bottom: 1.5rem;
+}
+
+.p-8 {
+  padding: 2rem;
+}
+
+.px-8 {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.py-8 {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.pl-8 {
+  padding-left: 2rem;
+}
+
+.pr-8 {
+  padding-right: 2rem;
+}
+
+.pt-8 {
+  padding-top: 2rem;
+}
+
+.pb-8 {
+  padding-bottom: 2rem;
+}
+
+.p-10 {
+  padding: 2.5rem;
+}
+
+.px-10 {
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+}
+
+.py-10 {
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+}
+
+.pl-10 {
+  padding-left: 2.5rem;
+}
+
+.pr-10 {
+  padding-right: 2.5rem;
+}
+
+.pt-10 {
+  padding-top: 2.5rem;
+}
+
+.pb-10 {
+  padding-bottom: 2.5rem;
+}
+
+.p-12 {
+  padding: 3rem;
+}
+
+.px-12 {
+  padding-left: 3rem;
+  padding-right: 3rem;
+}
+
+.py-12 {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+.pl-12 {
+  padding-left: 3rem;
+}
+
+.pr-12 {
+  padding-right: 3rem;
+}
+
+.pt-12 {
+  padding-top: 3rem;
+}
+
+.pb-12 {
+  padding-bottom: 3rem;
+}
+
+.p-16 {
+  padding: 4rem;
+}
+
+.px-16 {
+  padding-left: 4rem;
+  padding-right: 4rem;
+}
+
+.py-16 {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+.pl-16 {
+  padding-left: 4rem;
+}
+
+.pr-16 {
+  padding-right: 4rem;
+}
+
+.pt-16 {
+  padding-top: 4rem;
+}
+
+.pb-16 {
+  padding-bottom: 4rem;
+}
+
+.m-0 {
+  margin: 0;
+}
+
+.mx-0 {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.my-0 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.ml-0 {
+  margin-left: 0;
+}
+
+.mr-0 {
+  margin-right: 0;
+}
+
+.mt-0 {
+  margin-top: 0;
+}
+
+.mb-0 {
+  margin-bottom: 0;
+}
+
+.m-1 {
+  margin: 0.25rem;
+}
+
+.mx-1 {
+  margin-left: 0.25rem;
+  margin-right: 0.25rem;
+}
+
+.my-1 {
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+}
+
+.ml-1 {
+  margin-left: 0.25rem;
+}
+
+.mr-1 {
+  margin-right: 0.25rem;
+}
+
+.mt-1 {
+  margin-top: 0.25rem;
+}
+
+.mb-1 {
+  margin-bottom: 0.25rem;
+}
+
+.m-2 {
+  margin: 0.5rem;
+}
+
+.mx-2 {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+.my-2 {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.ml-2 {
+  margin-left: 0.5rem;
+}
+
+.mr-2 {
+  margin-right: 0.5rem;
+}
+
+.mt-2 {
+  margin-top: 0.5rem;
+}
+
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+
+.m-3 {
+  margin: 0.75rem;
+}
+
+.mx-3 {
+  margin-left: 0.75rem;
+  margin-right: 0.75rem;
+}
+
+.my-3 {
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.ml-3 {
+  margin-left: 0.75rem;
+}
+
+.mr-3 {
+  margin-right: 0.75rem;
+}
+
+.mt-3 {
+  margin-top: 0.75rem;
+}
+
+.mb-3 {
+  margin-bottom: 0.75rem;
+}
+
+.m-4 {
+  margin: 1rem;
+}
+
+.mx-4 {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.my-4 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.ml-4 {
+  margin-left: 1rem;
+}
+
+.mr-4 {
+  margin-right: 1rem;
+}
+
+.mt-4 {
+  margin-top: 1rem;
+}
+
+.mb-4 {
+  margin-bottom: 1rem;
+}
+
+.m-5 {
+  margin: 1.25rem;
+}
+
+.mx-5 {
+  margin-left: 1.25rem;
+  margin-right: 1.25rem;
+}
+
+.my-5 {
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.ml-5 {
+  margin-left: 1.25rem;
+}
+
+.mr-5 {
+  margin-right: 1.25rem;
+}
+
+.mt-5 {
+  margin-top: 1.25rem;
+}
+
+.mb-5 {
+  margin-bottom: 1.25rem;
+}
+
+.m-6 {
+  margin: 1.5rem;
+}
+
+.mx-6 {
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+}
+
+.my-6 {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.ml-6 {
+  margin-left: 1.5rem;
+}
+
+.mr-6 {
+  margin-right: 1.5rem;
+}
+
+.mt-6 {
+  margin-top: 1.5rem;
+}
+
+.mb-6 {
+  margin-bottom: 1.5rem;
+}
+
+.m-8 {
+  margin: 2rem;
+}
+
+.mx-8 {
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+
+.my-8 {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.ml-8 {
+  margin-left: 2rem;
+}
+
+.mr-8 {
+  margin-right: 2rem;
+}
+
+.mt-8 {
+  margin-top: 2rem;
+}
+
+.mb-8 {
+  margin-bottom: 2rem;
+}
+
+.m-10 {
+  margin: 2.5rem;
+}
+
+.mx-10 {
+  margin-left: 2.5rem;
+  margin-right: 2.5rem;
+}
+
+.my-10 {
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.ml-10 {
+  margin-left: 2.5rem;
+}
+
+.mr-10 {
+  margin-right: 2.5rem;
+}
+
+.mt-10 {
+  margin-top: 2.5rem;
+}
+
+.mb-10 {
+  margin-bottom: 2.5rem;
+}
+
+.m-12 {
+  margin: 3rem;
+}
+
+.mx-12 {
+  margin-left: 3rem;
+  margin-right: 3rem;
+}
+
+.my-12 {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+
+.ml-12 {
+  margin-left: 3rem;
+}
+
+.mr-12 {
+  margin-right: 3rem;
+}
+
+.mt-12 {
+  margin-top: 3rem;
+}
+
+.mb-12 {
+  margin-bottom: 3rem;
+}
+
+.m-16 {
+  margin: 4rem;
+}
+
+.mx-16 {
+  margin-left: 4rem;
+  margin-right: 4rem;
+}
+
+.my-16 {
+  margin-top: 4rem;
+  margin-bottom: 4rem;
+}
+
+.ml-16 {
+  margin-left: 4rem;
+}
+
+.mr-16 {
+  margin-right: 4rem;
+}
+
+.mt-16 {
+  margin-top: 4rem;
+}
+
+.mb-16 {
+  margin-bottom: 4rem;
+}
+
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ml-auto {
+  margin-left: auto;
+}
+
+.mr-auto {
+  margin-right: auto;
+}
+
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.truncate-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.truncate-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.uppercase-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+}
+
+.font-mono {
+  font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", monospace;
+  font-size: 0.875rem;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.font-regular {
+  font-weight: 400;
+}
+
+.font-medium {
+  font-weight: 500;
+}
+
+.font-semi {
+  font-weight: 600;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+.text-xs {
+  font-size: 0.75rem;
+}
+
+.text-sm {
+  font-size: 0.875rem;
+}
+
+.text-base {
+  font-size: 1rem;
+}
+
+.text-lg {
+  font-size: 1.125rem;
+}
+
+.text-xl {
+  font-size: 1.25rem;
+}
+
+.text-2xl {
+  font-size: 1.5rem;
+}
+
+.text-3xl {
+  font-size: 1.875rem;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+@media (min-width: 768px) {
+  .container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 640px) {
+  .sm-flex {
+    display: flex;
+  }
+  .sm-flex-col {
+    display: flex;
+    flex-direction: column;
+  }
+  .sm-hidden {
+    display: none;
+  }
+  .sm-block {
+    display: block;
+  }
+  .sm-flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+@media (min-width: 768px) {
+  .md-flex {
+    display: flex;
+  }
+  .md-flex-col {
+    display: flex;
+    flex-direction: column;
+  }
+  .md-hidden {
+    display: none;
+  }
+  .md-block {
+    display: block;
+  }
+  .md-flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+@media (min-width: 1024px) {
+  .lg-flex {
+    display: flex;
+  }
+  .lg-flex-col {
+    display: flex;
+    flex-direction: column;
+  }
+  .lg-hidden {
+    display: none;
+  }
+  .lg-block {
+    display: block;
+  }
+  .lg-flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+@media (min-width: 1280px) {
+  .xl-flex {
+    display: flex;
+  }
+  .xl-flex-col {
+    display: flex;
+    flex-direction: column;
+  }
+  .xl-hidden {
+    display: none;
+  }
+  .xl-block {
+    display: block;
+  }
+  .xl-flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+@media (min-width: 1536px) {
+  .xxl-flex {
+    display: flex;
+  }
+  .xxl-flex-col {
+    display: flex;
+    flex-direction: column;
+  }
+  .xxl-hidden {
+    display: none;
+  }
+  .xxl-block {
+    display: block;
+  }
+  .xxl-flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.card-surface {
+  background: #0d1117;
+  border: 0.5px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  transition: border-color 100ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.card-surface:hover {
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 0.5px solid rgba(255, 255, 255, 0.1);
+}
+
+.divider {
+  height: 0.5px;
+  background: rgba(255, 255, 255, 0.06);
+  border: none;
+  margin: 0;
+}
+
+.reset-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.hidden {
+  display: none;
+}
+
+.block {
+  display: block;
+}
+
+.inline {
+  display: inline;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.overflow-auto {
+  overflow: auto;
+}
+
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.sticky {
+  position: sticky;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.h-full {
+  height: 100%;
+}
+
+.w-auto {
+  width: auto;
+}
+
+.min-w-0 {
+  min-width: 0;
+}
+
+.rounded-sm {
+  border-radius: 4px;
+}
+
+.rounded-md {
+  border-radius: 6px;
+}
+
+.rounded-lg {
+  border-radius: 8px;
+}
+
+.rounded-xl {
+  border-radius: 12px;
+}
+
+.rounded-2xl {
+  border-radius: 16px;
+}
+
+.rounded-full {
+  border-radius: 9999px;
+}
