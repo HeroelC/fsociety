@@ -213,7 +213,7 @@
     display:         inline-flex;
     align-items:     center;
     gap:             t.$fs-space-2;
-    font-size:       t.$fs-text-sm;  // era text-xs → 14px
+    font-size:       t.$fs-text-sm;
     color:           var(--fs-profile-link);
     text-decoration: none;
     font-family:     t.$fs-font-sans;
@@ -221,6 +221,12 @@
 
     svg { opacity: 0.5; flex-shrink: 0; stroke: currentColor; }
     &:hover { opacity: 0.75; }
+  }
+
+  // Email anti-scraper — texto invertido en el DOM, CSS lo muestra al derecho
+  &__link-email {
+    unicode-bidi: bidi-override;
+    direction:    rtl;
   }
 
   &__link-img {

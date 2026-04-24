@@ -1,6 +1,6 @@
 {
   "name": "@heroelc/fsociety",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "Angular component library with design system tokens, mixins and UI components",
   "author": "Heroel Carpinetti <heroeljcarpinetti@gmail.com>",
   "license": "MIT",

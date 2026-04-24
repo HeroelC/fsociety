@@ -88,7 +88,9 @@
           <path [attr.d]="link.icon" stroke="currentColor" stroke-width="1.3"
             stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
-        <span>{{ link.label }}</span>
+        <span
+          [class.fs-profile__link-email]="isEmailLink(link)"
+        >{{ getLinkLabel(link) }}</span>
       </a>
     </div>
 

@@ -98,4 +98,26 @@ export class FsProfileCardComponent {
     }
     return link.url ?? null;
   }
+
+  /**
+   * Resuelve el label visible de un link.
+   * Si tiene encodedEmail, decodifica y reversa el texto —
+   * CSS direction:rtl lo muestra al derecho para el usuario
+   * pero el DOM tiene el string invertido, dificultando scrapers.
+   */
+  getLinkLabel(link: FsProfileLink): string {
+    if (link.encodedEmail) {
+      try {
+        return atob(link.encodedEmail).split('').reverse().join('');
+      } catch {
+        return link.label;
+      }
+    }
+    return link.label;
+  }
+
+  /** Verdadero si el link muestra un email (para aplicar la clase RTL) */
+  isEmailLink(link: FsProfileLink): boolean {
+    return !!link.encodedEmail;
+  }
 }

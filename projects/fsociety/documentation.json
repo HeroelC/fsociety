@@ -709,7 +709,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "[]",
-                "defaultValue": "[\n  {\n    label:  'linkedin.com/in/johndoe',\n    url:    'https://linkedin.com/in/johndoe',\n    imgUrl: 'https://cdn.simpleicons.org/linkedin/white',\n    imgAlt: 'LinkedIn',\n  },\n  {\n    label:  'github.com/johndoe',\n    url:    'https://github.com/johndoe',\n    imgUrl: 'https://cdn.simpleicons.org/github/white',\n    imgAlt: 'GitHub',\n  },\n  {\n    label: 'Buenos Aires, Argentina',\n    icon:  'M8 1.5A4.5 4.5 0 0 0 3.5 6c0 3 4.5 8.5 4.5 8.5S12.5 9 12.5 6A4.5 4.5 0 0 0 8 1.5zm0 6a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z',\n  },\n]"
+                "defaultValue": "[\n  {\n    label:        'johndoe@example.com',\n    encodedEmail: 'am9obmRvZUBleGFtcGxlLmNvbQ==', // btoa('johndoe@example.com')\n    imgUrl:       'https://cdn.simpleicons.org/gmail/white',\n    imgAlt:       'Email',\n  },\n  {\n    label:  'linkedin.com/in/johndoe',\n    url:    'https://linkedin.com/in/johndoe',\n    imgUrl: 'https://cdn.simpleicons.org/linkedin/white',\n    imgAlt: 'LinkedIn',\n  },\n  {\n    label:  'github.com/johndoe',\n    url:    'https://github.com/johndoe',\n    imgUrl: 'https://cdn.simpleicons.org/github/white',\n    imgAlt: 'GitHub',\n  },\n  {\n    label: 'Buenos Aires, Argentina',\n    icon:  'M8 1.5A4.5 4.5 0 0 0 3.5 6c0 3 4.5 8.5 4.5 8.5S12.5 9 12.5 6A4.5 4.5 0 0 0 8 1.5zm0 6a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z',\n  },\n]"
             },
             {
                 "name": "FAKE_STATS",
@@ -845,21 +845,21 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/fsociety/src/lib/button/button.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Meta<FsButtonComponent>",
-                "defaultValue": "{\n  title:     'fsociety/Button',\n  component: FsButtonComponent,\n  tags:      ['autodocs'],\n\n  argTypes: {\n    variant: {\n      control:     'select',\n      options:     ['primary', 'secondary', 'outline', 'ghost', 'danger', 'link'],\n      description: 'Variante visual del botón',\n      table: {\n        type:         { summary: 'FsButtonVariant' },\n        defaultValue: { summary: 'primary' },\n      },\n    },\n    size: {\n      control:     'radio',\n      options:     ['sm', 'md', 'lg'],\n      description: 'Tamaño del botón',\n      table: {\n        type:         { summary: 'FsButtonSize' },\n        defaultValue: { summary: 'md' },\n      },\n    },\n    type: {\n      control:     'radio',\n      options:     ['button', 'submit', 'reset'],\n      description: 'Tipo HTML nativo',\n      table: {\n        type:         { summary: 'FsButtonType' },\n        defaultValue: { summary: 'button' },\n      },\n    },\n    disabled: {\n      control:     'boolean',\n      description: 'Deshabilita el botón',\n      table: {\n        type:         { summary: 'boolean' },\n        defaultValue: { summary: 'false' },\n      },\n    },\n    loading: {\n      control:     'boolean',\n      description: 'Muestra spinner y deshabilita',\n      table: {\n        type:         { summary: 'boolean' },\n        defaultValue: { summary: 'false' },\n      },\n    },\n    label: {\n      control:     'text',\n      description: 'Texto del botón',\n    },\n    fullWidth: {\n      control:     'boolean',\n      description: 'Ocupa el ancho del contenedor',\n      table: {\n        type:         { summary: 'boolean' },\n        defaultValue: { summary: 'false' },\n      },\n    },\n    fsClick: {\n      action:      'fsClick',\n      description: 'Evento click (no dispara si disabled o loading)',\n    },\n  },\n}"
-            },
-            {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/fsociety/src/lib/badge/badge.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<FsBadgeComponent>",
                 "defaultValue": "{\n  title:     'fsociety/Badge',\n  component: FsBadgeComponent,\n  tags:      ['autodocs'],\n  argTypes: {\n    color: {\n      control: 'select',\n      options: ['primary','secondary','tertiary','success','warning','danger','neutral'],\n      description: 'Color semántico del badge',\n    },\n    customColor: {\n      control: 'color',\n      description: 'Color hex personalizado — tiene prioridad sobre color. Genera fondo, borde y texto automáticamente.',\n    },\n    variant:     { control: 'radio',   options: ['filled','outline'] },\n    size:        { control: 'radio',   options: ['sm','md'] },\n    imgLeft: {\n      control: 'text',\n      description: 'URL de imagen izquierda — ej: https://cdn.simpleicons.org/angular/white',\n    },\n    imgRight: {\n      control: 'text',\n      description: 'URL de imagen derecha',\n    },\n    imgLeftAlt:  { control: 'text', description: 'Alt text para imgLeft' },\n    imgRightAlt: { control: 'text', description: 'Alt text para imgRight' },\n    dot:         { control: 'boolean' },\n    iconOnly:    { control: 'boolean' },\n    removable:   { control: 'boolean' },\n    removed:     { action: 'removed' },\n  },\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/button/button.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<FsButtonComponent>",
+                "defaultValue": "{\n  title:     'fsociety/Button',\n  component: FsButtonComponent,\n  tags:      ['autodocs'],\n\n  argTypes: {\n    variant: {\n      control:     'select',\n      options:     ['primary', 'secondary', 'outline', 'ghost', 'danger', 'link'],\n      description: 'Variante visual del botón',\n      table: {\n        type:         { summary: 'FsButtonVariant' },\n        defaultValue: { summary: 'primary' },\n      },\n    },\n    size: {\n      control:     'radio',\n      options:     ['sm', 'md', 'lg'],\n      description: 'Tamaño del botón',\n      table: {\n        type:         { summary: 'FsButtonSize' },\n        defaultValue: { summary: 'md' },\n      },\n    },\n    type: {\n      control:     'radio',\n      options:     ['button', 'submit', 'reset'],\n      description: 'Tipo HTML nativo',\n      table: {\n        type:         { summary: 'FsButtonType' },\n        defaultValue: { summary: 'button' },\n      },\n    },\n    disabled: {\n      control:     'boolean',\n      description: 'Deshabilita el botón',\n      table: {\n        type:         { summary: 'boolean' },\n        defaultValue: { summary: 'false' },\n      },\n    },\n    loading: {\n      control:     'boolean',\n      description: 'Muestra spinner y deshabilita',\n      table: {\n        type:         { summary: 'boolean' },\n        defaultValue: { summary: 'false' },\n      },\n    },\n    label: {\n      control:     'text',\n      description: 'Texto del botón',\n    },\n    fullWidth: {\n      control:     'boolean',\n      description: 'Ocupa el ancho del contenedor',\n      table: {\n        type:         { summary: 'boolean' },\n        defaultValue: { summary: 'false' },\n      },\n    },\n    fsClick: {\n      action:      'fsClick',\n      description: 'Evento click (no dispara si disabled o loading)',\n    },\n  },\n}"
             },
             {
                 "name": "meta",
@@ -955,21 +955,21 @@
                 "name": "Playground",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/fsociety/src/lib/button/button.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\n  args: {\n    variant:   'primary',\n    size:      'md',\n    label:     'Guardar cambios',\n    disabled:  false,\n    loading:   false,\n    fullWidth: false,\n  },\n}"
-            },
-            {
-                "name": "Playground",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/fsociety/src/lib/badge/badge.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\n  args: {\n    color:      'primary',\n    variant:    'filled',\n    size:       'md',\n    label:      'TypeScript',\n    imgLeft:    '',\n    imgRight:   '',\n    imgLeftAlt: '',\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <fs-badge\n        [color]=\"color\"\n        [customColor]=\"customColor\"\n        [variant]=\"variant\"\n        [size]=\"size\"\n        [dot]=\"dot\"\n        [iconOnly]=\"iconOnly\"\n        [removable]=\"removable\"\n        [imgLeft]=\"imgLeft || undefined\"\n        [imgRight]=\"imgRight || undefined\"\n        [imgLeftAlt]=\"imgLeftAlt\"\n        [imgRightAlt]=\"imgRightAlt\"\n        (removed)=\"removed($event)\"\n      >{{ label }}</fs-badge>\n    `,\n  }),\n}"
+            },
+            {
+                "name": "Playground",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/button/button.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    variant:   'primary',\n    size:      'md',\n    label:     'Guardar cambios',\n    disabled:  false,\n    loading:   false,\n    fullWidth: false,\n  },\n}"
             },
             {
                 "name": "Playground",
@@ -989,7 +989,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: {\n    name:       'John Doe',\n    handle:     'johndoe',\n    role:       'Frontend Developer',\n    verified:   true,\n    avatarUrl:  'https://i.pravatar.cc/150?img=8',\n    bannerUrl:  'https://picsum.photos/seed/fsociety/800/200',\n    links:      FAKE_LINKS,\n    badges:     FAKE_BADGES,\n    stats:      FAKE_STATS,\n    showActions: false,\n  },\n}"
+                "defaultValue": "{\n  args: {\n    name:        'John Doe',\n    handle:      'johndoe',\n    role:        'Frontend Developer',\n    verified:    true,\n    avatarUrl:   'https://i.pravatar.cc/150?img=8',\n    bannerUrl:   'https://picsum.photos/seed/fsociety/800/200',\n    links:       FAKE_LINKS,\n    badges:      FAKE_BADGES,\n    stats:       FAKE_STATS,\n    showActions: false,\n  },\n}"
             },
             {
                 "name": "Portfolio",
@@ -1025,16 +1025,6 @@
                 "name": "Sizes",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/fsociety/src/lib/button/button.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\n  name:   'Tamaños',\n  render: () => ({\n    template: `\n      <div style=\"display:flex; flex-wrap:wrap; gap:12px; align-items:center;\">\n        <fs-button size=\"sm\">Small</fs-button>\n        <fs-button size=\"md\">Medium</fs-button>\n        <fs-button size=\"lg\">Large</fs-button>\n      </div>\n    `,\n  }),\n}"
-            },
-            {
-                "name": "Sizes",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "projects/fsociety/src/lib/badge/badge.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -1042,14 +1032,14 @@
                 "defaultValue": "{\n  name: 'Tamaños sm / md',\n  render: () => ({\n    template: `\n      <div style=\"display:flex; flex-direction:column; gap:12px;\">\n        <div style=\"display:flex; flex-wrap:wrap; gap:8px; align-items:center;\">\n          <span style=\"font-size:11px;color:rgba(255,255,255,0.4);min-width:20px\">md</span>\n          <fs-badge color=\"primary\"  size=\"md\">Angular</fs-badge>\n          <fs-badge color=\"success\"  size=\"md\">Node.js</fs-badge>\n          <fs-badge color=\"neutral\"  size=\"md\">ESLint</fs-badge>\n        </div>\n        <div style=\"display:flex; flex-wrap:wrap; gap:8px; align-items:center;\">\n          <span style=\"font-size:11px;color:rgba(255,255,255,0.4);min-width:20px\">sm</span>\n          <fs-badge color=\"primary\"  size=\"sm\">Angular</fs-badge>\n          <fs-badge color=\"success\"  size=\"sm\">Node.js</fs-badge>\n          <fs-badge color=\"neutral\"  size=\"sm\">ESLint</fs-badge>\n        </div>\n      </div>\n    `,\n  }),\n}"
             },
             {
-                "name": "States",
+                "name": "Sizes",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
                 "file": "projects/fsociety/src/lib/button/button.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  name:   'Estados',\n  render: () => ({\n    template: `\n      <div style=\"display:flex; flex-wrap:wrap; gap:12px; align-items:center;\">\n        <fs-button>Normal</fs-button>\n        <fs-button [disabled]=\"true\">Disabled</fs-button>\n        <fs-button [loading]=\"true\">Loading</fs-button>\n        <fs-button variant=\"outline\" [disabled]=\"true\">Outline disabled</fs-button>\n        <fs-button variant=\"danger\" [loading]=\"true\">Danger loading</fs-button>\n        <fs-button variant=\"link\" [disabled]=\"true\">Link disabled</fs-button>\n      </div>\n    `,\n  }),\n}"
+                "defaultValue": "{\n  name:   'Tamaños',\n  render: () => ({\n    template: `\n      <div style=\"display:flex; flex-wrap:wrap; gap:12px; align-items:center;\">\n        <fs-button size=\"sm\">Small</fs-button>\n        <fs-button size=\"md\">Medium</fs-button>\n        <fs-button size=\"lg\">Large</fs-button>\n      </div>\n    `,\n  }),\n}"
             },
             {
                 "name": "States",
@@ -1060,6 +1050,16 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\n  name: 'Dot y removable',\n  render: () => ({\n    template: `\n      <div style=\"display:flex; flex-wrap:wrap; gap:8px; align-items:center;\">\n        <fs-badge color=\"success\" [dot]=\"true\">Activo</fs-badge>\n        <fs-badge color=\"danger\"  [dot]=\"true\">Error</fs-badge>\n        <fs-badge color=\"warning\" [dot]=\"true\">Pendiente</fs-badge>\n        <fs-badge color=\"primary\" [removable]=\"true\">TypeScript</fs-badge>\n        <fs-badge color=\"neutral\" [removable]=\"true\">ESLint</fs-badge>\n      </div>\n    `,\n  }),\n}"
+            },
+            {
+                "name": "States",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/button/button.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  name:   'Estados',\n  render: () => ({\n    template: `\n      <div style=\"display:flex; flex-wrap:wrap; gap:12px; align-items:center;\">\n        <fs-button>Normal</fs-button>\n        <fs-button [disabled]=\"true\">Disabled</fs-button>\n        <fs-button [loading]=\"true\">Loading</fs-button>\n        <fs-button variant=\"outline\" [disabled]=\"true\">Outline disabled</fs-button>\n        <fs-button variant=\"danger\" [loading]=\"true\">Danger loading</fs-button>\n        <fs-button variant=\"link\" [disabled]=\"true\">Link disabled</fs-button>\n      </div>\n    `,\n  }),\n}"
             },
             {
                 "name": "Timeline",
@@ -1089,7 +1089,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  name: 'Con botones de acción',\n  args: {\n    name:        'Sam Taylor',\n    handle:      'samtaylor',\n    role:        'UI/UX Engineer',\n    verified:    true,\n    avatarUrl:   'https://i.pravatar.cc/150?img=12',\n    bannerUrl:   'https://picsum.photos/seed/banner2/800/200',\n    links:       FAKE_LINKS,\n    badges:      FAKE_BADGES,\n    stats:       FAKE_STATS,\n    showActions: true,\n    primaryActionLabel:   'Seguir',\n    secondaryActionLabel: 'Mensaje',\n  },\n}"
+                "defaultValue": "{\n  name: 'Con botones de acción',\n  args: {\n    name:                 'Sam Taylor',\n    handle:               'samtaylor',\n    role:                 'UI/UX Engineer',\n    verified:             true,\n    avatarUrl:            'https://i.pravatar.cc/150?img=12',\n    bannerUrl:            'https://picsum.photos/seed/banner2/800/200',\n    links:                FAKE_LINKS,\n    badges:               FAKE_BADGES,\n    stats:                FAKE_STATS,\n    showActions:          true,\n    primaryActionLabel:   'Seguir',\n    secondaryActionLabel: 'Mensaje',\n  },\n}"
             },
             {
                 "name": "WithContent",
@@ -1149,7 +1149,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  name: 'Sin imágenes — iniciales + degradé',\n  args: {\n    name:    'Alex Rivera',\n    handle:  'alexrivera',\n    role:    'Frontend Developer',\n    verified: false,\n    links:   FAKE_LINKS,\n    badges:  [\n      { label: 'Vue.js',  customColor: '#22c55e' },\n      { label: 'Python',  customColor: '#3b82f6' },\n      { label: 'Docker',  color: 'neutral' as const },\n    ],\n    stats: FAKE_STATS,\n  },\n}"
+                "defaultValue": "{\n  name: 'Sin imágenes — iniciales + degradé',\n  args: {\n    name:     'Alex Rivera',\n    handle:   'alexrivera',\n    role:     'Frontend Developer',\n    verified: false,\n    links:    FAKE_LINKS,\n    badges:   [\n      { label: 'Vue.js',  customColor: '#22c55e' },\n      { label: 'Python',  customColor: '#3b82f6' },\n      { label: 'Docker',  color: 'neutral' as const },\n    ],\n    stats: FAKE_STATS,\n  },\n}"
             },
             {
                 "name": "WithoutTitle",
@@ -1201,8 +1201,8 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
-                "rawtype": "StoryObj<FsButtonComponent>",
-                "file": "projects/fsociety/src/lib/button/button.stories.ts",
+                "rawtype": "StoryObj<FsBadgeComponent>",
+                "file": "projects/fsociety/src/lib/badge/badge.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -1212,8 +1212,8 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
-                "rawtype": "StoryObj<FsBadgeComponent>",
-                "file": "projects/fsociety/src/lib/badge/badge.stories.ts",
+                "rawtype": "StoryObj<FsButtonComponent>",
+                "file": "projects/fsociety/src/lib/button/button.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -1684,7 +1684,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "[]",
-                    "defaultValue": "[\n  {\n    label:  'linkedin.com/in/johndoe',\n    url:    'https://linkedin.com/in/johndoe',\n    imgUrl: 'https://cdn.simpleicons.org/linkedin/white',\n    imgAlt: 'LinkedIn',\n  },\n  {\n    label:  'github.com/johndoe',\n    url:    'https://github.com/johndoe',\n    imgUrl: 'https://cdn.simpleicons.org/github/white',\n    imgAlt: 'GitHub',\n  },\n  {\n    label: 'Buenos Aires, Argentina',\n    icon:  'M8 1.5A4.5 4.5 0 0 0 3.5 6c0 3 4.5 8.5 4.5 8.5S12.5 9 12.5 6A4.5 4.5 0 0 0 8 1.5zm0 6a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z',\n  },\n]"
+                    "defaultValue": "[\n  {\n    label:        'johndoe@example.com',\n    encodedEmail: 'am9obmRvZUBleGFtcGxlLmNvbQ==', // btoa('johndoe@example.com')\n    imgUrl:       'https://cdn.simpleicons.org/gmail/white',\n    imgAlt:       'Email',\n  },\n  {\n    label:  'linkedin.com/in/johndoe',\n    url:    'https://linkedin.com/in/johndoe',\n    imgUrl: 'https://cdn.simpleicons.org/linkedin/white',\n    imgAlt: 'LinkedIn',\n  },\n  {\n    label:  'github.com/johndoe',\n    url:    'https://github.com/johndoe',\n    imgUrl: 'https://cdn.simpleicons.org/github/white',\n    imgAlt: 'GitHub',\n  },\n  {\n    label: 'Buenos Aires, Argentina',\n    icon:  'M8 1.5A4.5 4.5 0 0 0 3.5 6c0 3 4.5 8.5 4.5 8.5S12.5 9 12.5 6A4.5 4.5 0 0 0 8 1.5zm0 6a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z',\n  },\n]"
                 },
                 {
                     "name": "FAKE_STATS",
@@ -1724,7 +1724,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: {\n    name:       'John Doe',\n    handle:     'johndoe',\n    role:       'Frontend Developer',\n    verified:   true,\n    avatarUrl:  'https://i.pravatar.cc/150?img=8',\n    bannerUrl:  'https://picsum.photos/seed/fsociety/800/200',\n    links:      FAKE_LINKS,\n    badges:     FAKE_BADGES,\n    stats:      FAKE_STATS,\n    showActions: false,\n  },\n}"
+                    "defaultValue": "{\n  args: {\n    name:        'John Doe',\n    handle:      'johndoe',\n    role:        'Frontend Developer',\n    verified:    true,\n    avatarUrl:   'https://i.pravatar.cc/150?img=8',\n    bannerUrl:   'https://picsum.photos/seed/fsociety/800/200',\n    links:       FAKE_LINKS,\n    badges:      FAKE_BADGES,\n    stats:       FAKE_STATS,\n    showActions: false,\n  },\n}"
                 },
                 {
                     "name": "WithActions",
@@ -1734,7 +1734,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  name: 'Con botones de acción',\n  args: {\n    name:        'Sam Taylor',\n    handle:      'samtaylor',\n    role:        'UI/UX Engineer',\n    verified:    true,\n    avatarUrl:   'https://i.pravatar.cc/150?img=12',\n    bannerUrl:   'https://picsum.photos/seed/banner2/800/200',\n    links:       FAKE_LINKS,\n    badges:      FAKE_BADGES,\n    stats:       FAKE_STATS,\n    showActions: true,\n    primaryActionLabel:   'Seguir',\n    secondaryActionLabel: 'Mensaje',\n  },\n}"
+                    "defaultValue": "{\n  name: 'Con botones de acción',\n  args: {\n    name:                 'Sam Taylor',\n    handle:               'samtaylor',\n    role:                 'UI/UX Engineer',\n    verified:             true,\n    avatarUrl:            'https://i.pravatar.cc/150?img=12',\n    bannerUrl:            'https://picsum.photos/seed/banner2/800/200',\n    links:                FAKE_LINKS,\n    badges:               FAKE_BADGES,\n    stats:                FAKE_STATS,\n    showActions:          true,\n    primaryActionLabel:   'Seguir',\n    secondaryActionLabel: 'Mensaje',\n  },\n}"
                 },
                 {
                     "name": "WithImages",
@@ -1754,7 +1754,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  name: 'Sin imágenes — iniciales + degradé',\n  args: {\n    name:    'Alex Rivera',\n    handle:  'alexrivera',\n    role:    'Frontend Developer',\n    verified: false,\n    links:   FAKE_LINKS,\n    badges:  [\n      { label: 'Vue.js',  customColor: '#22c55e' },\n      { label: 'Python',  customColor: '#3b82f6' },\n      { label: 'Docker',  color: 'neutral' as const },\n    ],\n    stats: FAKE_STATS,\n  },\n}"
+                    "defaultValue": "{\n  name: 'Sin imágenes — iniciales + degradé',\n  args: {\n    name:     'Alex Rivera',\n    handle:   'alexrivera',\n    role:     'Frontend Developer',\n    verified: false,\n    links:    FAKE_LINKS,\n    badges:   [\n      { label: 'Vue.js',  customColor: '#22c55e' },\n      { label: 'Python',  customColor: '#3b82f6' },\n      { label: 'Docker',  color: 'neutral' as const },\n    ],\n    stats: FAKE_STATS,\n  },\n}"
                 }
             ],
             "projects/fsociety/src/lib/tabs/tabs.stories.ts": [
@@ -1896,19 +1896,6 @@
                     "kind": 184
                 }
             ],
-            "projects/fsociety/src/lib/button/button.stories.ts": [
-                {
-                    "name": "Story",
-                    "ctype": "miscellaneous",
-                    "subtype": "typealias",
-                    "rawtype": "StoryObj<FsButtonComponent>",
-                    "file": "projects/fsociety/src/lib/button/button.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "description": "",
-                    "kind": 184
-                }
-            ],
             "projects/fsociety/src/lib/badge/badge.stories.ts": [
                 {
                     "name": "Story",
@@ -1916,6 +1903,19 @@
                     "subtype": "typealias",
                     "rawtype": "StoryObj<FsBadgeComponent>",
                     "file": "projects/fsociety/src/lib/badge/badge.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 184
+                }
+            ],
+            "projects/fsociety/src/lib/button/button.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<FsButtonComponent>",
+                    "file": "projects/fsociety/src/lib/button/button.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",
