@@ -83,27 +83,34 @@ export class FsProfileCardComponent {
   }
 
   /**
-   * Resuelve el href de un link.
-   * Si tiene encodedEmail, lo decodifica con atob() y retorna 'mailto:email'.
-   * Si tiene url, la retorna directamente.
-   * Si no tiene ninguno, retorna null.
+   * Resuelve el href de un link normal (no email).
+   * Para emails usar handleLinkClick() — nunca poner mailto: en el DOM.
    */
-  getLinkHref(link: FsProfileLink): string | null {
-    if (link.encodedEmail) {
-      try {
-        return 'mailto:' + atob(link.encodedEmail);
-      } catch {
-        return null;
-      }
+  getLinkHref(link: FsProfileLink): string {
+    if (link.encodedEmail) return '#';
+    return link.url ?? '#';
+  }
+
+  /**
+   * Maneja el click de un link.
+   * Si tiene encodedEmail, decodifica en runtime y navega vía window.location.
+   * El mailto: nunca aparece en el DOM.
+   */
+  handleLinkClick(event: MouseEvent, link: FsProfileLink): void {
+    if (!link.encodedEmail) return;
+    event.preventDefault();
+    try {
+      window.location.href = 'mailto:' + atob(link.encodedEmail);
+    } catch {
+      // silently fail
     }
-    return link.url ?? null;
   }
 
   /**
    * Resuelve el label visible de un link.
-   * Si tiene encodedEmail, decodifica y reversa el texto —
-   * CSS direction:rtl lo muestra al derecho para el usuario
-   * pero el DOM tiene el string invertido, dificultando scrapers.
+   * Si tiene encodedEmail, invierte el texto — CSS direction:rtl
+   * lo muestra al derecho para el usuario pero el DOM tiene el string
+   * invertido, dificultando scrapers de texto.
    */
   getLinkLabel(link: FsProfileLink): string {
     if (link.encodedEmail) {
