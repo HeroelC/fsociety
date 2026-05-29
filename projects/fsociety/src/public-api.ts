@@ -22,3 +22,20 @@ export type { FsExperienceCard, FsExperienceBadge } from './lib/experience-card/
 
 export * from './lib/profile-card/profile-card.component';
 export type { FsProfileStat, FsProfileLink, FsProfileBadge } from './lib/profile-card/profile-card.component';
+
+export { FsInputComponent } from './lib/input/input.component';
+export type { FsInputType, FsInputState } from './lib/input/input.component';
+
+export { FsSelectComponent } from './lib/select/select.component';
+export type { FsSelectOption, FsSelectState } from './lib/select/select.component';
+
+export { FsCheckboxComponent } from './lib/choice/checkbox.component';
+export type { FsCheckboxState } from './lib/choice/checkbox.component';
+
+export { FsRadioGroupComponent } from './lib/choice/radio-group.component';
+export type { FsRadioOption } from './lib/choice/radio-group.component';
+
+export { FsSwitchComponent } from './lib/choice/switch.component';
+
+export { FsSegmentedComponent } from './lib/choice/segmented.component';
+export type { FsSegmentOption } from './lib/choice/segmented.component';

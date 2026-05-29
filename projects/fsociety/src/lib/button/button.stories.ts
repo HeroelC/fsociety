@@ -1,13 +1,21 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 import { FsButtonComponent } from './button.component';
 
-const ICON_ARROW = 'M3 8h10M9 4l4 4-4 4';
-const ICON_SAVE  = 'M13 2H5a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h8l2-2V3a1 1 0 0 0-1-1zM9 12V8m0 0H7m2 0h2';
-const ICON_TRASH = 'M4 6h8M7 6V4h2v2M6 6v6a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V6';
-const ICON_LINK  = 'M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71';
+const CDN = 'https://api.iconify.design';
+const I = {
+  trash:    `${CDN}/tabler:trash.svg`,
+  edit:     `${CDN}/tabler:edit.svg`,
+  plus:     `${CDN}/tabler:plus.svg`,
+  settings: `${CDN}/tabler:settings.svg`,
+  heart:    `${CDN}/tabler:heart.svg`,
+  download: `${CDN}/tabler:download.svg`,
+  save:     `${CDN}/tabler:device-floppy.svg`,
+  arrow:    `${CDN}/tabler:arrow-right.svg`,
+  link:     `${CDN}/tabler:external-link.svg`,
+};
 
 const meta: Meta<FsButtonComponent> = {
-  title:     'fsociety/Button',
+  title:     'Components/Button',
   component: FsButtonComponent,
   tags:      ['autodocs'],
 
@@ -55,6 +63,18 @@ const meta: Meta<FsButtonComponent> = {
         defaultValue: { summary: 'false' },
       },
     },
+    iconOnly: {
+      control:     'boolean',
+      description: 'Botón cuadrado sin label (solo ícono)',
+      table: {
+        type:         { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
+      },
+    },
+    ariaLabel: {
+      control:     'text',
+      description: 'aria-label cuando iconOnly = true',
+    },
     label: {
       control:     'text',
       description: 'Texto del botón',
@@ -89,11 +109,12 @@ export const Playground: Story = {
     disabled:  false,
     loading:   false,
     fullWidth: false,
+    iconOnly:  false,
   },
 };
 
 // ---------------------------------------------------------------------------
-// Variantes
+// Todas las variantes
 // ---------------------------------------------------------------------------
 
 export const AllVariants: Story = {
@@ -142,8 +163,8 @@ export const States: Story = {
         <fs-button [disabled]="true">Disabled</fs-button>
         <fs-button [loading]="true">Loading</fs-button>
         <fs-button variant="outline" [disabled]="true">Outline disabled</fs-button>
+        <fs-button variant="ghost" [disabled]="true">Ghost disabled</fs-button>
         <fs-button variant="danger" [loading]="true">Danger loading</fs-button>
-        <fs-button variant="link" [disabled]="true">Link disabled</fs-button>
       </div>
     `,
   }),
@@ -156,18 +177,64 @@ export const States: Story = {
 export const WithIcons: Story = {
   name:   'Con íconos',
   render: () => ({
-    props: {
-      iconArrow: ICON_ARROW,
-      iconSave:  ICON_SAVE,
-      iconTrash: ICON_TRASH,
-      iconLink:  ICON_LINK,
-    },
+    props: { I },
     template: `
       <div style="display:flex; flex-wrap:wrap; gap:12px; align-items:center;">
-        <fs-button [iconRight]="iconArrow">Ver más</fs-button>
-        <fs-button [iconLeft]="iconSave" variant="outline">Guardar</fs-button>
-        <fs-button [iconLeft]="iconTrash" variant="danger">Eliminar</fs-button>
-        <fs-button [iconRight]="iconLink" variant="link">Ver enlace</fs-button>
+        <fs-button [iconRight]="I.arrow">Ver más</fs-button>
+        <fs-button [iconLeft]="I.save" variant="outline">Guardar</fs-button>
+        <fs-button [iconLeft]="I.trash" variant="danger">Eliminar</fs-button>
+        <fs-button [iconLeft]="I.save" variant="ghost">Guardar borrador</fs-button>
+        <fs-button [iconLeft]="I.link" variant="link">Ver enlace</fs-button>
+      </div>
+    `,
+  }),
+};
+
+// ---------------------------------------------------------------------------
+// Icon-only
+// ---------------------------------------------------------------------------
+
+export const IconOnly: Story = {
+  name:   'Solo ícono',
+  render: () => ({
+    props: { I },
+    template: `
+      <div style="display:flex; flex-direction:column; gap:20px;">
+
+        <div style="display:flex; flex-wrap:wrap; gap:10px; align-items:center;">
+          <span style="font-size:12px;color:#888;width:80px">Primary</span>
+          <fs-button variant="primary"   [iconLeft]="I.plus"     [iconOnly]="true" size="sm" ariaLabel="Agregar"></fs-button>
+          <fs-button variant="primary"   [iconLeft]="I.plus"     [iconOnly]="true" size="md" ariaLabel="Agregar"></fs-button>
+          <fs-button variant="primary"   [iconLeft]="I.plus"     [iconOnly]="true" size="lg" ariaLabel="Agregar"></fs-button>
+        </div>
+
+        <div style="display:flex; flex-wrap:wrap; gap:10px; align-items:center;">
+          <span style="font-size:12px;color:#888;width:80px">Outline</span>
+          <fs-button variant="outline"   [iconLeft]="I.edit"     [iconOnly]="true" size="sm" ariaLabel="Editar"></fs-button>
+          <fs-button variant="outline"   [iconLeft]="I.edit"     [iconOnly]="true" size="md" ariaLabel="Editar"></fs-button>
+          <fs-button variant="outline"   [iconLeft]="I.edit"     [iconOnly]="true" size="lg" ariaLabel="Editar"></fs-button>
+        </div>
+
+        <div style="display:flex; flex-wrap:wrap; gap:10px; align-items:center;">
+          <span style="font-size:12px;color:#888;width:80px">Ghost</span>
+          <fs-button variant="ghost"     [iconLeft]="I.settings" [iconOnly]="true" size="sm" ariaLabel="Configuración"></fs-button>
+          <fs-button variant="ghost"     [iconLeft]="I.settings" [iconOnly]="true" size="md" ariaLabel="Configuración"></fs-button>
+          <fs-button variant="ghost"     [iconLeft]="I.settings" [iconOnly]="true" size="lg" ariaLabel="Configuración"></fs-button>
+        </div>
+
+        <div style="display:flex; flex-wrap:wrap; gap:10px; align-items:center;">
+          <span style="font-size:12px;color:#888;width:80px">Danger</span>
+          <fs-button variant="danger"    [iconLeft]="I.trash"    [iconOnly]="true" size="sm" ariaLabel="Eliminar"></fs-button>
+          <fs-button variant="danger"    [iconLeft]="I.trash"    [iconOnly]="true" size="md" ariaLabel="Eliminar"></fs-button>
+          <fs-button variant="danger"    [iconLeft]="I.trash"    [iconOnly]="true" size="lg" ariaLabel="Eliminar"></fs-button>
+        </div>
+
+        <div style="display:flex; flex-wrap:wrap; gap:10px; align-items:center;">
+          <span style="font-size:12px;color:#888;width:80px">Disabled</span>
+          <fs-button variant="ghost"  [iconLeft]="I.heart"    [iconOnly]="true" [disabled]="true" ariaLabel="Me gusta"></fs-button>
+          <fs-button variant="outline" [iconLeft]="I.download" [iconOnly]="true" [disabled]="true" ariaLabel="Descargar"></fs-button>
+        </div>
+
       </div>
     `,
   }),
@@ -184,6 +251,7 @@ export const FullWidth: Story = {
       <div style="max-width:320px; display:flex; flex-direction:column; gap:10px;">
         <fs-button [fullWidth]="true">Primary full width</fs-button>
         <fs-button [fullWidth]="true" variant="outline">Outline full width</fs-button>
+        <fs-button [fullWidth]="true" variant="ghost">Ghost full width</fs-button>
       </div>
     `,
   }),

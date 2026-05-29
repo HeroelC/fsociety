@@ -5,6 +5,7 @@
   [disabled]="isDisabled"
   [attr.aria-disabled]="isDisabled"
   [attr.aria-busy]="loading"
+  [attr.aria-label]="iconOnly ? (ariaLabel ?? label) : null"
   (click)="onClick($event)"
 >
   <!-- spinner (solo cuando loading) -->
@@ -16,12 +17,12 @@
   </span>
 
   <!-- ícono izquierdo -->
-  <span *ngIf="iconLeft && !loading" class="fs-btn__icon fs-btn__icon--left" aria-hidden="true">
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-      <path [attr.d]="iconLeft" stroke="currentColor" stroke-width="1.5"
-        stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-  </span>
+  <span
+    *ngIf="iconLeft && !loading"
+    class="fs-icon fs-btn__icon fs-btn__icon--left"
+    [style.--_icon]="'url(' + iconLeft + ')'"
+    aria-hidden="true"
+  ></span>
 
   <!-- label vía input o content projection -->
   <span class="fs-btn__label">
@@ -29,10 +30,10 @@
   </span>
 
   <!-- ícono derecho -->
-  <span *ngIf="iconRight && !loading" class="fs-btn__icon fs-btn__icon--right" aria-hidden="true">
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-      <path [attr.d]="iconRight" stroke="currentColor" stroke-width="1.5"
-        stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-  </span>
+  <span
+    *ngIf="iconRight && !loading"
+    class="fs-icon fs-btn__icon fs-btn__icon--right"
+    [style.--_icon]="'url(' + iconRight + ')'"
+    aria-hidden="true"
+  ></span>
 </button>

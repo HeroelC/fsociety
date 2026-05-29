@@ -1,0 +1,150 @@
+.fs-input {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  // ─── Label ───────────────────────────────────────────────────
+  &__label {
+    font-size: 13px;
+    font-weight: 550;
+    letter-spacing: -0.005em;
+    color: var(--fs-color-text-primary);
+    line-height: 1.3;
+  }
+
+  // ─── Wrapper ─────────────────────────────────────────────────
+  &__wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    height: 40px;
+    padding: 0 13px;
+    border: 1px solid var(--fs-color-border-field);
+    border-radius: var(--fs-radius-md);
+    background: var(--fs-color-surface);
+    transition: border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
+
+    &:hover:not(.fs-input__wrapper--disabled):not(.fs-input__wrapper--error):not(.fs-input__wrapper--success) {
+      border-color: var(--fs-color-border-strong);
+    }
+
+    &:focus-within:not(.fs-input__wrapper--error):not(.fs-input__wrapper--success) {
+      border-color: var(--fs-color-primary);
+      box-shadow: 0 0 0 2.5px color-mix(in srgb, var(--fs-color-primary) 15%, transparent);
+    }
+
+    &--error {
+      border-color: var(--fs-color-error) !important;
+      box-shadow: 0 0 0 2.5px color-mix(in srgb, var(--fs-color-error) 12%, transparent) !important;
+    }
+
+    &--success {
+      border-color: var(--fs-color-success) !important;
+      box-shadow: 0 0 0 2.5px color-mix(in srgb, var(--fs-color-success) 12%, transparent) !important;
+    }
+
+    &--disabled {
+      background: var(--fs-color-surface-alt);
+      opacity: 0.7;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+  }
+
+  // ─── Left icon ───────────────────────────────────────────────
+  &__icon {
+    width: 18px;
+    height: 18px;
+    color: var(--fs-color-text-secondary);
+  }
+
+  // ─── Native input ────────────────────────────────────────────
+  &__field {
+    flex: 1;
+    min-width: 0;
+    font-size: 14px;
+    font-family: inherit;
+    line-height: 1;
+    color: var(--fs-color-text-primary);
+    background: none;
+    border: none;
+    outline: none;
+    padding: 0;
+
+    &::placeholder {
+      color: var(--fs-color-text-placeholder);
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      color: var(--fs-color-text-secondary);
+    }
+
+    &[type='search']::-webkit-search-cancel-button,
+    &[type='search']::-webkit-search-decoration { display: none; }
+
+    &::-ms-reveal,
+    &::-ms-clear { display: none; }
+  }
+
+  // ─── Action buttons (clear / password toggle) ────────────────
+  &__action {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    margin-right: -4px;
+    background: none;
+    border: none;
+    border-radius: var(--fs-radius-sm);
+    padding: 0;
+    cursor: pointer;
+    color: var(--fs-color-text-secondary);
+    transition: background 120ms ease, color 120ms ease;
+
+    &:hover {
+      background: var(--fs-color-surface-alt);
+      color: var(--fs-color-text-primary);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--fs-color-primary);
+    }
+  }
+
+  &__action-icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  // ─── State icon (error / success) ────────────────────────────
+  &__state-icon {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+
+    .fs-input__wrapper--error &   { color: var(--fs-color-error); }
+    .fs-input__wrapper--success & { color: var(--fs-color-success); }
+  }
+
+  // ─── Hint ────────────────────────────────────────────────────
+  &__hint {
+    font-size: 12.5px;
+    color: var(--fs-color-text-secondary);
+    line-height: 1.4;
+  }
+
+  // ─── Validation messages ─────────────────────────────────────
+  &__message {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12.5px;
+    line-height: 1.4;
+
+    &--error   { color: var(--fs-color-error); }
+    &--success { color: var(--fs-color-success); }
+  }
+}

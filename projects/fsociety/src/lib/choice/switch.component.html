@@ -1,0 +1,38 @@
+<div class="fs-switch" [class.fs-switch--disabled]="disabled">
+
+  <label class="fs-switch__row" [for]="id">
+
+    <div class="fs-switch__track-wrap">
+      <input
+        type="checkbox"
+        role="switch"
+        class="fs-switch__native"
+        [id]="id"
+        [checked]="checked"
+        [disabled]="disabled"
+        (change)="toggle()"
+        (blur)="onBlur()"
+      />
+      <div
+        class="fs-switch__track"
+        [class.fs-switch__track--on]="checked"
+        aria-hidden="true"
+      >
+        <div class="fs-switch__thumb"></div>
+      </div>
+    </div>
+
+    @if (label || description) {
+      <div class="fs-switch__content">
+        @if (label) {
+          <span class="fs-switch__label">{{ label }}</span>
+        }
+        @if (description) {
+          <span class="fs-switch__description">{{ description }}</span>
+        }
+      </div>
+    }
+
+  </label>
+
+</div>

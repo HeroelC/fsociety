@@ -1,0 +1,58 @@
+<div
+  class="fs-rg"
+  [class.fs-rg--disabled]="disabled"
+  role="radiogroup"
+  [attr.aria-label]="label || null"
+>
+
+  @if (label) {
+    <span class="fs-rg__label">{{ label }}</span>
+  }
+  @if (description) {
+    <span class="fs-rg__desc">{{ description }}</span>
+  }
+
+  <div class="fs-rg__list">
+    @for (opt of options; track opt.value) {
+      <label
+        class="fs-rg__item"
+        [class.fs-rg__item--error]="state === 'error'"
+      >
+        <div class="fs-rg__track">
+          <input
+            type="radio"
+            class="fs-rg__native"
+            [name]="groupName"
+            [value]="opt.value"
+            [checked]="value === opt.value"
+            [disabled]="disabled"
+            (change)="select(opt)"
+            (blur)="onBlur()"
+          />
+          <div
+            class="fs-rg__dot"
+            [class.fs-rg__dot--selected]="value === opt.value"
+            [class.fs-rg__dot--error]="state === 'error'"
+            aria-hidden="true"
+          >
+            @if (value === opt.value) {
+              <div class="fs-rg__inner" aria-hidden="true"></div>
+            }
+          </div>
+        </div>
+
+        <div class="fs-rg__content">
+          <span class="fs-rg__item-label">{{ opt.label }}</span>
+          @if (opt.description) {
+            <span class="fs-rg__item-desc">{{ opt.description }}</span>
+          }
+        </div>
+      </label>
+    }
+  </div>
+
+  @if (state === 'error' && errorMessage) {
+    <span class="fs-rg__error" role="alert">{{ errorMessage }}</span>
+  }
+
+</div>

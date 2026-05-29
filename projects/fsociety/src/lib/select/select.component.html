@@ -1,0 +1,170 @@
+<div class="fs-select">
+
+  @if (label) {
+    <label class="fs-select__label" [for]="selectId">{{ label }}</label>
+  }
+
+  <div class="fs-select__container" [class.fs-select__container--open]="open">
+    <div
+      class="fs-select__wrapper"
+      [class.fs-select__wrapper--error]="state === 'error'"
+      [class.fs-select__wrapper--success]="state === 'success'"
+      [class.fs-select__wrapper--disabled]="disabled"
+      [class.fs-select__wrapper--open]="open"
+    >
+      @if (iconLeft) {
+        <span
+          class="fs-icon fs-select__icon"
+          [style.--_icon]="'url(' + iconLeft + ')'"
+          aria-hidden="true"
+        ></span>
+      }
+
+      <button
+        [id]="selectId"
+        class="fs-select__trigger"
+        type="button"
+        [disabled]="disabled"
+        [attr.aria-expanded]="open"
+        aria-haspopup="listbox"
+        (click)="toggle()"
+        (keydown)="onTriggerKeydown($event)"
+      >
+        <span
+          class="fs-select__value"
+          [class.fs-select__value--placeholder]="!selectedOption"
+        >
+          {{ selectedOption?.label ?? placeholder }}
+        </span>
+      </button>
+
+      @if (state !== 'default') {
+        <span
+          class="fs-icon fs-select__state-icon"
+          [style.--_icon]="'url(' + stateIconUrl + ')'"
+          aria-hidden="true"
+        ></span>
+      }
+
+      <span class="fs-select__chevron" aria-hidden="true">
+        <span
+          class="fs-icon"
+          [style.--_icon]="'url(' + Icons.chevronDown + ')'"
+          style="width:18px;height:18px"
+        ></span>
+      </span>
+    </div>
+
+    @if (open) {
+      <div
+        class="fs-select__menu"
+        [ngStyle]="menuStyle"
+        role="listbox"
+      >
+
+        @if (searchable) {
+          <div class="fs-select__search">
+            <span
+              class="fs-icon fs-select__search-icon"
+              [style.--_icon]="'url(' + Icons.search + ')'"
+              aria-hidden="true"
+            ></span>
+            <input
+              class="fs-select__search-input"
+              type="text"
+              placeholder="Buscar..."
+              [(ngModel)]="query"
+              (keydown)="onMenuKeydown($event)"
+              autofocus
+            />
+            @if (query) {
+              <button
+                class="fs-select__search-clear"
+                type="button"
+                aria-label="Limpiar búsqueda"
+                (mousedown)="$event.preventDefault()"
+                (click)="query = ''; highlightIndex = -1"
+              >
+                <span
+                  class="fs-icon"
+                  [style.--_icon]="'url(' + Icons.x + ')'"
+                  style="width:14px;height:14px"
+                  aria-hidden="true"
+                ></span>
+              </button>
+            }
+          </div>
+        }
+
+        <div class="fs-select__list">
+          @if (filteredOptions.length === 0) {
+            <div class="fs-select__empty">{{ emptyText }}</div>
+          }
+
+          @for (option of filteredOptions; track option.value; let i = $index) {
+            <button
+              class="fs-select__option"
+              [class.fs-select__option--selected]="option.value === value"
+              [class.fs-select__option--highlighted]="i === highlightIndex"
+              type="button"
+              role="option"
+              [attr.aria-selected]="option.value === value"
+              (mousedown)="$event.preventDefault()"
+              (click)="select(option)"
+              (mouseenter)="highlightIndex = i"
+            >
+              @if (option.icon) {
+                <span
+                  class="fs-icon fs-select__option-icon"
+                  [style.--_icon]="'url(' + option.icon + ')'"
+                  aria-hidden="true"
+                ></span>
+              }
+              <span class="fs-select__option-body">
+                <span class="fs-select__option-label">{{ option.label }}</span>
+                @if (option.desc) {
+                  <span class="fs-select__option-desc">{{ option.desc }}</span>
+                }
+              </span>
+              <span
+                class="fs-icon fs-select__option-check"
+                [style.--_icon]="'url(' + Icons.check + ')'"
+                aria-hidden="true"
+              ></span>
+            </button>
+          }
+        </div>
+
+      </div>
+    }
+  </div>
+
+  @if (hint && state === 'default') {
+    <span class="fs-select__hint">{{ hint }}</span>
+  }
+
+  @if (state === 'error' && errorMessage) {
+    <span class="fs-select__message fs-select__message--error" role="alert">
+      <span
+        class="fs-icon"
+        [style.--_icon]="'url(' + Icons.alertCircle + ')'"
+        style="width:13px;height:13px"
+        aria-hidden="true"
+      ></span>
+      {{ errorMessage }}
+    </span>
+  }
+
+  @if (state === 'success' && successMessage) {
+    <span class="fs-select__message fs-select__message--success">
+      <span
+        class="fs-icon"
+        [style.--_icon]="'url(' + Icons.circleCheck + ')'"
+        style="width:13px;height:13px"
+        aria-hidden="true"
+      ></span>
+      {{ successMessage }}
+    </span>
+  }
+
+</div>

@@ -49,6 +49,12 @@ export class FsButtonComponent {
   /** Ancho completo del contenedor */
   @Input() fullWidth = false;
 
+  /** Botón cuadrado solo con ícono — oculta el label */
+  @Input() iconOnly = false;
+
+  /** aria-label para accesibilidad cuando iconOnly = true */
+  @Input() ariaLabel?: string;
+
   /** Emite el click — no dispara si disabled o loading */
   @Output() fsClick = new EventEmitter<MouseEvent>();
 
@@ -68,6 +74,7 @@ export class FsButtonComponent {
       'fs-btn--loading':           this.loading,
       'fs-btn--disabled':          this.isDisabled,
       'fs-btn--full-width':        this.fullWidth,
+      'fs-btn--icon-only':         this.iconOnly,
     };
   }
 

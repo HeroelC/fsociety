@@ -1,0 +1,56 @@
+<div class="fs-checkbox" [class.fs-checkbox--disabled]="disabled">
+
+  <label class="fs-checkbox__row" [for]="id">
+
+    <div class="fs-checkbox__track">
+      <input
+        type="checkbox"
+        class="fs-checkbox__native"
+        [id]="id"
+        [checked]="checked"
+        [disabled]="disabled"
+        (change)="toggle()"
+        (blur)="onBlur()"
+      />
+      <div
+        class="fs-checkbox__box"
+        [class.fs-checkbox__box--checked]="checked && !indeterminate"
+        [class.fs-checkbox__box--indeterminate]="indeterminate"
+        [class.fs-checkbox__box--error]="state === 'error'"
+        aria-hidden="true"
+      >
+        @if (checked && !indeterminate) {
+          <span
+            class="fs-icon fs-checkbox__icon"
+            [style.--_icon]="'url(' + Icons.check + ')'"
+            aria-hidden="true"
+          ></span>
+        }
+        @if (indeterminate) {
+          <span
+            class="fs-icon fs-checkbox__icon"
+            [style.--_icon]="'url(' + Icons.minus + ')'"
+            aria-hidden="true"
+          ></span>
+        }
+      </div>
+    </div>
+
+    @if (label || description) {
+      <div class="fs-checkbox__content">
+        @if (label) {
+          <span class="fs-checkbox__label">{{ label }}</span>
+        }
+        @if (description) {
+          <span class="fs-checkbox__description">{{ description }}</span>
+        }
+      </div>
+    }
+
+  </label>
+
+  @if (state === 'error' && errorMessage) {
+    <span class="fs-checkbox__error" role="alert">{{ errorMessage }}</span>
+  }
+
+</div>

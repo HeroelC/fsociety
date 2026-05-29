@@ -1,0 +1,133 @@
+.fs-rg {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  // ─── Disabled ─────────────────────────────────────────────────
+  &--disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  // ─── Group header ─────────────────────────────────────────────
+  &__label {
+    font-size: 13px;
+    font-weight: 550;
+    letter-spacing: -0.005em;
+    color: var(--fs-color-text-primary);
+    line-height: 1.3;
+  }
+
+  &__desc {
+    font-size: 13px;
+    color: var(--fs-color-text-secondary);
+    line-height: 1.4;
+    margin-top: -2px;
+  }
+
+  // ─── Option list ──────────────────────────────────────────────
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  // ─── Individual option ────────────────────────────────────────
+  &__item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 8px 0;
+    cursor: pointer;
+    user-select: none;
+
+    & + & {
+      border-top: 1px solid var(--fs-color-border);
+    }
+  }
+
+  // ─── Track (native + dot stacked) ────────────────────────────
+  &__track {
+    position: relative;
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    margin-top: 1px;
+  }
+
+  &__native {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    margin: 0;
+    cursor: pointer;
+    z-index: 1;
+
+    &:focus-visible + .fs-rg__dot {
+      border-color: var(--fs-color-primary);
+      box-shadow: 0 0 0 2.5px color-mix(in srgb, var(--fs-color-primary) 18%, transparent);
+    }
+  }
+
+  // ─── Custom dot ───────────────────────────────────────────────
+  &__dot {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 1.5px solid var(--fs-color-border-field);
+    background: var(--fs-color-surface);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 130ms ease, box-shadow 150ms ease;
+    pointer-events: none;
+
+    &--selected {
+      border-color: var(--fs-color-primary);
+      border-width: 5px;
+    }
+
+    &--error:not(&--selected) {
+      border-color: var(--fs-color-error);
+    }
+
+    &--error#{&}--selected {
+      border-color: var(--fs-color-error);
+    }
+  }
+
+  &__inner {
+    display: none;
+  }
+
+  // ─── Text content ─────────────────────────────────────────────
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__item-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--fs-color-text-primary);
+    line-height: 1.4;
+  }
+
+  &__item-desc {
+    font-size: 13px;
+    color: var(--fs-color-text-secondary);
+    line-height: 1.45;
+  }
+
+  // ─── Error message ────────────────────────────────────────────
+  &__error {
+    font-size: 12.5px;
+    color: var(--fs-color-error);
+    line-height: 1.4;
+  }
+}

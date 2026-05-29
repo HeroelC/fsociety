@@ -1,2 +1,60 @@
 @use 'tokens';
 @use 'mixins';
+
+body {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+// ─── Icon utility (SVG via mask-image, color = currentColor) ─────────────────
+.fs-icon {
+  display: inline-block;
+  flex-shrink: 0;
+  background-color: currentColor;
+  mask-image: var(--_icon);
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  -webkit-mask-image: var(--_icon);
+  -webkit-mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+}
+
+// ─── Semantic UI tokens — Light (default) ────────────────────────────────────
+:root,
+[data-theme="light"] {
+  --fs-color-bg:               #f6f8fa;
+  --fs-color-surface:          #ffffff;
+  --fs-color-surface-alt:      #f6f8fa;
+  --fs-color-text-primary:     #1f2328;
+  --fs-color-text-secondary:   #656d76;
+  --fs-color-text-placeholder: #8c959f;
+  --fs-color-border:           #d0d7de;
+  --fs-color-border-field:     #d0d7de;
+  --fs-color-border-strong:    #8c959f;
+  --fs-color-primary:          var(--fs-primary-base);
+  --fs-color-error:            var(--fs-danger-base);
+  --fs-color-success:          var(--fs-success-base);
+  --fs-color-shadow-pop:       0 8px 24px -4px rgba(140, 149, 159, 0.25),
+                               0 4px 12px -4px rgba(140, 149, 159, 0.15);
+}
+
+// ─── Semantic UI tokens — Dark ────────────────────────────────────────────────
+[data-theme="dark"] {
+  --fs-color-bg:               #0d1117;
+  --fs-color-surface:          #161b22;
+  --fs-color-surface-alt:      #21262d;
+  --fs-color-text-primary:     #e6edf3;
+  --fs-color-text-secondary:   #7d8590;
+  --fs-color-text-placeholder: #6e7681;
+  --fs-color-border:           #30363d;
+  --fs-color-border-field:     #30363d;
+  --fs-color-border-strong:    #484f58;
+  --fs-color-primary:          var(--fs-primary-base);
+  --fs-color-error:            var(--fs-danger-base);
+  --fs-color-success:          var(--fs-success-base);
+  --fs-color-shadow-pop:       0 12px 34px -8px rgba(0, 0, 0, 0.55),
+                               0 4px 12px -4px rgba(0, 0, 0, 0.35);
+}

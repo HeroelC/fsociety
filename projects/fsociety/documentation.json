@@ -612,6 +612,26 @@
                 "defaultValue": "{\n  name:   'Todas las variantes',\n  render: () => ({\n    template: `\n      <div style=\"display:flex; flex-wrap:wrap; gap:12px; align-items:center;\">\n        <fs-button variant=\"primary\">Primary</fs-button>\n        <fs-button variant=\"secondary\">Secondary</fs-button>\n        <fs-button variant=\"outline\">Outline</fs-button>\n        <fs-button variant=\"ghost\">Ghost</fs-button>\n        <fs-button variant=\"danger\">Danger</fs-button>\n        <fs-button variant=\"link\">Link</fs-button>\n      </div>\n    `,\n  }),\n}"
             },
             {
+                "name": "AllVariants",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/input/input.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  render: () => ({\n    props: {\n      nombre: '',\n      email: 'ada@empresa.com',\n      password: 'supersecreta123',\n      sitio: '',\n      correoError: 'ada@@empresa',\n      cupon: 'DESIGN2026',\n      idCuenta: 'USR-00041',\n      buscar: 'formularios',\n      I,\n    },\n    template: `\n      <div style=\"display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem 1.5rem;\">\n        <fs-input label=\"Nombre\" [iconLeft]=\"I.user\" placeholder=\"Ada Lovelace\" hint=\"Tu nombre completo.\" [(ngModel)]=\"nombre\"></fs-input>\n        <fs-input label=\"Correo electrónico\" [iconLeft]=\"I.mail\" [clearable]=\"true\" [(ngModel)]=\"email\"></fs-input>\n        <fs-input type=\"password\" label=\"Contraseña\" [iconLeft]=\"I.lock\" hint=\"Mínimo 8 caracteres.\" [(ngModel)]=\"password\"></fs-input>\n        <fs-input type=\"url\" label=\"Sitio web\" [iconLeft]=\"I.world\" placeholder=\"https://\" [(ngModel)]=\"sitio\"></fs-input>\n        <fs-input type=\"email\" label=\"Correo\" [iconLeft]=\"I.mail\" state=\"error\" errorMessage=\"Ese correo no es válido.\" [(ngModel)]=\"correoError\"></fs-input>\n        <fs-input label=\"Cupón\" [iconLeft]=\"I.check\" state=\"success\" successMessage=\"¡Cupón aplicado!\" [(ngModel)]=\"cupon\"></fs-input>\n        <fs-input label=\"ID de cuenta\" [disabled]=\"true\" [(ngModel)]=\"idCuenta\"></fs-input>\n        <fs-input type=\"search\" label=\"Buscar\" [iconLeft]=\"I.search\" [clearable]=\"true\" [(ngModel)]=\"buscar\"></fs-input>\n      </div>\n    `,\n  }),\n  parameters: {\n    layout: 'padded',\n  },\n}"
+            },
+            {
+                "name": "AllVariants",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/select/select.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  render: () => ({\n    props: {\n      rol: '',\n      pais: 'ar',\n      tech: '',\n      disabledVal: 'editor',\n      ROLES,\n      PAISES,\n      TECHS,\n      I,\n    },\n    template: `\n      <div style=\"display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem 1.5rem;\">\n        <fs-select\n          label=\"Rol de usuario\"\n          placeholder=\"Seleccionar rol...\"\n          hint=\"Define los permisos.\"\n          [options]=\"ROLES\"\n          [(ngModel)]=\"rol\"\n        ></fs-select>\n\n        <fs-select\n          label=\"País\"\n          [iconLeft]=\"I.globe\"\n          placeholder=\"Seleccionar país...\"\n          [options]=\"PAISES\"\n          [(ngModel)]=\"pais\"\n        ></fs-select>\n\n        <fs-select\n          label=\"Tecnología\"\n          [iconLeft]=\"I.code\"\n          placeholder=\"Buscar tecnología...\"\n          [searchable]=\"true\"\n          [options]=\"TECHS\"\n          [(ngModel)]=\"tech\"\n        ></fs-select>\n\n        <fs-select\n          label=\"Departamento\"\n          placeholder=\"Seleccionar...\"\n          [options]=\"ROLES\"\n          state=\"error\"\n          errorMessage=\"Campo requerido.\"\n        ></fs-select>\n\n        <fs-select\n          label=\"Rol validado\"\n          [options]=\"ROLES\"\n          state=\"success\"\n          successMessage=\"Rol disponible.\"\n          [(ngModel)]=\"disabledVal\"\n        ></fs-select>\n\n        <fs-select\n          label=\"Rol asignado\"\n          [disabled]=\"true\"\n          [options]=\"ROLES\"\n          [(ngModel)]=\"disabledVal\"\n        ></fs-select>\n      </div>\n    `,\n  }),\n  parameters: {\n    layout: 'padded',\n  },\n}"
+            },
+            {
                 "name": "AutoDismiss",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -620,6 +640,46 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\n  name: 'Auto-dismiss con progress bar',\n  render: () => ({\n    template: `\n      <div style=\"display:flex; flex-direction:column; gap:10px; max-width:540px;\">\n        <fs-alert type=\"success\" title=\"Guardado\" [autoDismiss]=\"3000\">\n          Se cierra automáticamente en 3 segundos.\n        </fs-alert>\n        <fs-alert type=\"info\" title=\"Actualizando\" [autoDismiss]=\"5000\">\n          Se cierra en 5 segundos. La barra inferior indica el tiempo restante.\n        </fs-alert>\n        <fs-alert type=\"warning\" title=\"Sesión por expirar\" [autoDismiss]=\"8000\" [dismissible]=\"true\">\n          Tu sesión expira en 8 segundos. Podés cerrar este aviso o esperar.\n        </fs-alert>\n      </div>\n    `,\n  }),\n}"
+            },
+            {
+                "name": "CDN",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/button/button.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "string",
+                "defaultValue": "'https://api.iconify.design'"
+            },
+            {
+                "name": "CDN",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/input/input.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "string",
+                "defaultValue": "'https://api.iconify.design'"
+            },
+            {
+                "name": "CDN",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/select/select.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "string",
+                "defaultValue": "'https://api.iconify.design'"
+            },
+            {
+                "name": "Clearable",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/input/input.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  render: (args) => ({\n    props: { ...args, model: 'ada@empresa.com', icon: I.mail },\n    template: `\n      <fs-input\n        label=\"Correo electrónico\"\n        [iconLeft]=\"icon\"\n        [clearable]=\"true\"\n        [(ngModel)]=\"model\"\n      ></fs-input>\n    `,\n  }),\n}"
             },
             {
                 "name": "Compact",
@@ -652,6 +712,26 @@
                 "defaultValue": "{\n  name: 'Custom colors — hex',\n  render: () => ({\n    template: `\n      <div style=\"display:flex; flex-direction:column; gap:12px;\">\n        <div style=\"display:flex; flex-wrap:wrap; gap:8px; align-items:center;\">\n          <fs-badge customColor=\"#7c3aed\">NestJS</fs-badge>\n          <fs-badge customColor=\"#ea580c\">Firebase</fs-badge>\n          <fs-badge customColor=\"#14b8a6\">Tailwind</fs-badge>\n          <fs-badge customColor=\"#0f172a\">Docker</fs-badge>\n          <fs-badge customColor=\"#d97706\">Kubernetes</fs-badge>\n        </div>\n        <div style=\"display:flex; flex-wrap:wrap; gap:8px; align-items:center;\">\n          <fs-badge customColor=\"#7c3aed\" variant=\"outline\">NestJS outline</fs-badge>\n          <fs-badge customColor=\"#ea580c\" variant=\"outline\">Firebase outline</fs-badge>\n          <fs-badge customColor=\"#14b8a6\" variant=\"outline\">Tailwind outline</fs-badge>\n        </div>\n      </div>\n    `,\n  }),\n}"
             },
             {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/input/input.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    label: 'Nombre',\n    placeholder: 'Ada Lovelace',\n    iconLeft: I.user,\n    hint: 'Tu nombre completo.',\n  },\n}"
+            },
+            {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/select/select.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    label: 'Rol de usuario',\n    placeholder: 'Seleccionar rol...',\n    hint: 'Define los permisos del usuario en el sistema.',\n    options: ROLES,\n  },\n}"
+            },
+            {
                 "name": "DesignTokens",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -660,6 +740,46 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\r\n  name: 'Design tokens',\r\n}"
+            },
+            {
+                "name": "Disabled",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/input/input.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  render: (args) => ({\n    props: { ...args, model: 'USR-00041' },\n    template: `\n      <fs-input\n        label=\"ID de cuenta\"\n        [disabled]=\"true\"\n        [(ngModel)]=\"model\"\n      ></fs-input>\n    `,\n  }),\n}"
+            },
+            {
+                "name": "Disabled",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/select/select.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  render: (args) => ({\n    props: { ...args, model: 'editor' },\n    template: `\n      <fs-select\n        label=\"Rol asignado\"\n        [disabled]=\"true\"\n        [options]=\"options\"\n        [(ngModel)]=\"model\"\n      ></fs-select>\n    `,\n  }),\n  args: { options: ROLES },\n}"
+            },
+            {
+                "name": "Error",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/input/input.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  render: (args) => ({\n    props: { ...args, model: 'ada@@empresa', icon: I.mail },\n    template: `\n      <fs-input\n        type=\"email\"\n        label=\"Correo\"\n        [iconLeft]=\"icon\"\n        state=\"error\"\n        errorMessage=\"Ese correo no es válido.\"\n        [(ngModel)]=\"model\"\n      ></fs-input>\n    `,\n  }),\n}"
+            },
+            {
+                "name": "Error",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/select/select.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    label: 'Departamento',\n    placeholder: 'Seleccionar...',\n    options: ROLES,\n    state: 'error',\n    errorMessage: 'Selecciona un departamento para continuar.',\n  },\n}"
             },
             {
                 "name": "EXPERIENCE_CURRENT",
@@ -739,47 +859,47 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  name:   'Full width',\n  render: () => ({\n    template: `\n      <div style=\"max-width:320px; display:flex; flex-direction:column; gap:10px;\">\n        <fs-button [fullWidth]=\"true\">Primary full width</fs-button>\n        <fs-button [fullWidth]=\"true\" variant=\"outline\">Outline full width</fs-button>\n      </div>\n    `,\n  }),\n}"
+                "defaultValue": "{\n  name:   'Full width',\n  render: () => ({\n    template: `\n      <div style=\"max-width:320px; display:flex; flex-direction:column; gap:10px;\">\n        <fs-button [fullWidth]=\"true\">Primary full width</fs-button>\n        <fs-button [fullWidth]=\"true\" variant=\"outline\">Outline full width</fs-button>\n        <fs-button [fullWidth]=\"true\" variant=\"ghost\">Ghost full width</fs-button>\n      </div>\n    `,\n  }),\n}"
             },
             {
-                "name": "ICON_ARROW",
+                "name": "I",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
                 "file": "projects/fsociety/src/lib/button/button.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "string",
-                "defaultValue": "'M3 8h10M9 4l4 4-4 4'"
+                "type": "object",
+                "defaultValue": "{\n  trash:    `${CDN}/tabler:trash.svg`,\n  edit:     `${CDN}/tabler:edit.svg`,\n  plus:     `${CDN}/tabler:plus.svg`,\n  settings: `${CDN}/tabler:settings.svg`,\n  heart:    `${CDN}/tabler:heart.svg`,\n  download: `${CDN}/tabler:download.svg`,\n  save:     `${CDN}/tabler:device-floppy.svg`,\n  arrow:    `${CDN}/tabler:arrow-right.svg`,\n  link:     `${CDN}/tabler:external-link.svg`,\n}"
             },
             {
-                "name": "ICON_LINK",
+                "name": "I",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/input/input.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "object",
+                "defaultValue": "{\n  user:   `${CDN}/tabler:user.svg`,\n  mail:   `${CDN}/tabler:mail.svg`,\n  lock:   `${CDN}/tabler:lock.svg`,\n  world:  `${CDN}/tabler:world.svg`,\n  check:  `${CDN}/tabler:check.svg`,\n  search: `${CDN}/tabler:search.svg`,\n}"
+            },
+            {
+                "name": "I",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/select/select.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "object",
+                "defaultValue": "{\n  globe: `${CDN}/tabler:globe.svg`,\n  code:  `${CDN}/tabler:code.svg`,\n}"
+            },
+            {
+                "name": "IconOnly",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
                 "file": "projects/fsociety/src/lib/button/button.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "string",
-                "defaultValue": "'M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71'"
-            },
-            {
-                "name": "ICON_SAVE",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/fsociety/src/lib/button/button.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "string",
-                "defaultValue": "'M13 2H5a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h8l2-2V3a1 1 0 0 0-1-1zM9 12V8m0 0H7m2 0h2'"
-            },
-            {
-                "name": "ICON_TRASH",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/fsociety/src/lib/button/button.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "string",
-                "defaultValue": "'M4 6h8M7 6V4h2v2M6 6v6a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V6'"
+                "type": "Story",
+                "defaultValue": "{\n  name:   'Solo ícono',\n  render: () => ({\n    props: { I },\n    template: `\n      <div style=\"display:flex; flex-direction:column; gap:20px;\">\n\n        <div style=\"display:flex; flex-wrap:wrap; gap:10px; align-items:center;\">\n          <span style=\"font-size:12px;color:#888;width:80px\">Primary</span>\n          <fs-button variant=\"primary\"   [iconLeft]=\"I.plus\"     [iconOnly]=\"true\" size=\"sm\" ariaLabel=\"Agregar\"></fs-button>\n          <fs-button variant=\"primary\"   [iconLeft]=\"I.plus\"     [iconOnly]=\"true\" size=\"md\" ariaLabel=\"Agregar\"></fs-button>\n          <fs-button variant=\"primary\"   [iconLeft]=\"I.plus\"     [iconOnly]=\"true\" size=\"lg\" ariaLabel=\"Agregar\"></fs-button>\n        </div>\n\n        <div style=\"display:flex; flex-wrap:wrap; gap:10px; align-items:center;\">\n          <span style=\"font-size:12px;color:#888;width:80px\">Outline</span>\n          <fs-button variant=\"outline\"   [iconLeft]=\"I.edit\"     [iconOnly]=\"true\" size=\"sm\" ariaLabel=\"Editar\"></fs-button>\n          <fs-button variant=\"outline\"   [iconLeft]=\"I.edit\"     [iconOnly]=\"true\" size=\"md\" ariaLabel=\"Editar\"></fs-button>\n          <fs-button variant=\"outline\"   [iconLeft]=\"I.edit\"     [iconOnly]=\"true\" size=\"lg\" ariaLabel=\"Editar\"></fs-button>\n        </div>\n\n        <div style=\"display:flex; flex-wrap:wrap; gap:10px; align-items:center;\">\n          <span style=\"font-size:12px;color:#888;width:80px\">Ghost</span>\n          <fs-button variant=\"ghost\"     [iconLeft]=\"I.settings\" [iconOnly]=\"true\" size=\"sm\" ariaLabel=\"Configuración\"></fs-button>\n          <fs-button variant=\"ghost\"     [iconLeft]=\"I.settings\" [iconOnly]=\"true\" size=\"md\" ariaLabel=\"Configuración\"></fs-button>\n          <fs-button variant=\"ghost\"     [iconLeft]=\"I.settings\" [iconOnly]=\"true\" size=\"lg\" ariaLabel=\"Configuración\"></fs-button>\n        </div>\n\n        <div style=\"display:flex; flex-wrap:wrap; gap:10px; align-items:center;\">\n          <span style=\"font-size:12px;color:#888;width:80px\">Danger</span>\n          <fs-button variant=\"danger\"    [iconLeft]=\"I.trash\"    [iconOnly]=\"true\" size=\"sm\" ariaLabel=\"Eliminar\"></fs-button>\n          <fs-button variant=\"danger\"    [iconLeft]=\"I.trash\"    [iconOnly]=\"true\" size=\"md\" ariaLabel=\"Eliminar\"></fs-button>\n          <fs-button variant=\"danger\"    [iconLeft]=\"I.trash\"    [iconOnly]=\"true\" size=\"lg\" ariaLabel=\"Eliminar\"></fs-button>\n        </div>\n\n        <div style=\"display:flex; flex-wrap:wrap; gap:10px; align-items:center;\">\n          <span style=\"font-size:12px;color:#888;width:80px\">Disabled</span>\n          <fs-button variant=\"ghost\"  [iconLeft]=\"I.heart\"    [iconOnly]=\"true\" [disabled]=\"true\" ariaLabel=\"Me gusta\"></fs-button>\n          <fs-button variant=\"outline\" [iconLeft]=\"I.download\" [iconOnly]=\"true\" [disabled]=\"true\" ariaLabel=\"Descargar\"></fs-button>\n        </div>\n\n      </div>\n    `,\n  }),\n}"
             },
             {
                 "name": "InPortfolio",
@@ -859,7 +979,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<FsButtonComponent>",
-                "defaultValue": "{\n  title:     'fsociety/Button',\n  component: FsButtonComponent,\n  tags:      ['autodocs'],\n\n  argTypes: {\n    variant: {\n      control:     'select',\n      options:     ['primary', 'secondary', 'outline', 'ghost', 'danger', 'link'],\n      description: 'Variante visual del botón',\n      table: {\n        type:         { summary: 'FsButtonVariant' },\n        defaultValue: { summary: 'primary' },\n      },\n    },\n    size: {\n      control:     'radio',\n      options:     ['sm', 'md', 'lg'],\n      description: 'Tamaño del botón',\n      table: {\n        type:         { summary: 'FsButtonSize' },\n        defaultValue: { summary: 'md' },\n      },\n    },\n    type: {\n      control:     'radio',\n      options:     ['button', 'submit', 'reset'],\n      description: 'Tipo HTML nativo',\n      table: {\n        type:         { summary: 'FsButtonType' },\n        defaultValue: { summary: 'button' },\n      },\n    },\n    disabled: {\n      control:     'boolean',\n      description: 'Deshabilita el botón',\n      table: {\n        type:         { summary: 'boolean' },\n        defaultValue: { summary: 'false' },\n      },\n    },\n    loading: {\n      control:     'boolean',\n      description: 'Muestra spinner y deshabilita',\n      table: {\n        type:         { summary: 'boolean' },\n        defaultValue: { summary: 'false' },\n      },\n    },\n    label: {\n      control:     'text',\n      description: 'Texto del botón',\n    },\n    fullWidth: {\n      control:     'boolean',\n      description: 'Ocupa el ancho del contenedor',\n      table: {\n        type:         { summary: 'boolean' },\n        defaultValue: { summary: 'false' },\n      },\n    },\n    fsClick: {\n      action:      'fsClick',\n      description: 'Evento click (no dispara si disabled o loading)',\n    },\n  },\n}"
+                "defaultValue": "{\n  title:     'Components/Button',\n  component: FsButtonComponent,\n  tags:      ['autodocs'],\n\n  argTypes: {\n    variant: {\n      control:     'select',\n      options:     ['primary', 'secondary', 'outline', 'ghost', 'danger', 'link'],\n      description: 'Variante visual del botón',\n      table: {\n        type:         { summary: 'FsButtonVariant' },\n        defaultValue: { summary: 'primary' },\n      },\n    },\n    size: {\n      control:     'radio',\n      options:     ['sm', 'md', 'lg'],\n      description: 'Tamaño del botón',\n      table: {\n        type:         { summary: 'FsButtonSize' },\n        defaultValue: { summary: 'md' },\n      },\n    },\n    type: {\n      control:     'radio',\n      options:     ['button', 'submit', 'reset'],\n      description: 'Tipo HTML nativo',\n      table: {\n        type:         { summary: 'FsButtonType' },\n        defaultValue: { summary: 'button' },\n      },\n    },\n    disabled: {\n      control:     'boolean',\n      description: 'Deshabilita el botón',\n      table: {\n        type:         { summary: 'boolean' },\n        defaultValue: { summary: 'false' },\n      },\n    },\n    loading: {\n      control:     'boolean',\n      description: 'Muestra spinner y deshabilita',\n      table: {\n        type:         { summary: 'boolean' },\n        defaultValue: { summary: 'false' },\n      },\n    },\n    iconOnly: {\n      control:     'boolean',\n      description: 'Botón cuadrado sin label (solo ícono)',\n      table: {\n        type:         { summary: 'boolean' },\n        defaultValue: { summary: 'false' },\n      },\n    },\n    ariaLabel: {\n      control:     'text',\n      description: 'aria-label cuando iconOnly = true',\n    },\n    label: {\n      control:     'text',\n      description: 'Texto del botón',\n    },\n    fullWidth: {\n      control:     'boolean',\n      description: 'Ocupa el ancho del contenedor',\n      table: {\n        type:         { summary: 'boolean' },\n        defaultValue: { summary: 'false' },\n      },\n    },\n    fsClick: {\n      action:      'fsClick',\n      description: 'Evento click (no dispara si disabled o loading)',\n    },\n  },\n}"
             },
             {
                 "name": "meta",
@@ -875,11 +995,31 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "projects/fsociety/src/lib/input/input.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<FsInputComponent>",
+                "defaultValue": "{\n  title: 'Components/Input',\n  component: FsInputComponent,\n  decorators: [\n    moduleMetadata({\n      imports: [FsInputComponent, FormsModule],\n    }),\n  ],\n  tags: ['autodocs'],\n  argTypes: {\n    type: {\n      control: 'select',\n      options: ['text', 'email', 'password', 'url', 'search'],\n    },\n    state: {\n      control: 'select',\n      options: ['default', 'error', 'success'],\n    },\n  },\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "projects/fsociety/src/lib/profile-card/profile-card.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<FsProfileCardComponent>",
                 "defaultValue": "{\n  title:     'fsociety/ProfileCard',\n  component: FsProfileCardComponent,\n  tags:      ['autodocs'],\n  argTypes: {\n    verified:    { control: 'boolean' },\n    showActions: { control: 'boolean' },\n  },\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/select/select.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<FsSelectComponent>",
+                "defaultValue": "{\n  title: 'Components/Select',\n  component: FsSelectComponent,\n  decorators: [\n    moduleMetadata({\n      imports: [FsSelectComponent, FormsModule],\n    }),\n  ],\n  tags: ['autodocs'],\n  argTypes: {\n    state: {\n      control: 'select',\n      options: ['default', 'error', 'success'],\n    },\n    options: { control: false },\n  },\n}"
             },
             {
                 "name": "meta",
@@ -932,6 +1072,26 @@
                 "defaultValue": "{\n  name: 'Variante outline',\n  render: () => ({\n    template: `\n      <div style=\"display:flex; flex-wrap:wrap; gap:8px; align-items:center;\">\n        <fs-badge color=\"primary\"   variant=\"outline\">Primary</fs-badge>\n        <fs-badge color=\"secondary\" variant=\"outline\">Secondary</fs-badge>\n        <fs-badge color=\"success\"   variant=\"outline\">Success</fs-badge>\n        <fs-badge color=\"warning\"   variant=\"outline\">Warning</fs-badge>\n        <fs-badge color=\"danger\"    variant=\"outline\">Danger</fs-badge>\n        <fs-badge color=\"neutral\"   variant=\"outline\">Neutral</fs-badge>\n      </div>\n    `,\n  }),\n}"
             },
             {
+                "name": "PAISES",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/select/select.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "FsSelectOption[]",
+                "defaultValue": "[\n  { value: 'ar', label: 'Argentina' },\n  { value: 'mx', label: 'México' },\n  { value: 'co', label: 'Colombia' },\n  { value: 'cl', label: 'Chile' },\n  { value: 'pe', label: 'Perú' },\n  { value: 'br', label: 'Brasil' },\n  { value: 'uy', label: 'Uruguay' },\n]"
+            },
+            {
+                "name": "Password",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/input/input.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  render: (args) => ({\n    props: { ...args, model: 'supersecreta123', icon: I.lock },\n    template: `\n      <fs-input\n        type=\"password\"\n        label=\"Contraseña\"\n        hint=\"Mínimo 8 caracteres.\"\n        [iconLeft]=\"icon\"\n        [(ngModel)]=\"model\"\n      ></fs-input>\n    `,\n  }),\n}"
+            },
+            {
                 "name": "Past",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -969,7 +1129,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: {\n    variant:   'primary',\n    size:      'md',\n    label:     'Guardar cambios',\n    disabled:  false,\n    loading:   false,\n    fullWidth: false,\n  },\n}"
+                "defaultValue": "{\n  args: {\n    variant:   'primary',\n    size:      'md',\n    label:     'Guardar cambios',\n    disabled:  false,\n    loading:   false,\n    fullWidth: false,\n    iconOnly:  false,\n  },\n}"
             },
             {
                 "name": "Playground",
@@ -1009,7 +1169,37 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Preview",
-                "defaultValue": "{\n  parameters: {\n    controls: {\n      matchers: {\n        color: /(background|color)$/i,\n        date: /Date$/i,\n      },\n    },\n    backgrounds: {\n      default: 'dark',\n      values: [\n        { name: 'dark',  value: '#0d1117' },\n        { name: 'light', value: '#ffffff' },\n      ],\n    },\n  },\n}"
+                "defaultValue": "{\n  globalTypes: {\n    theme: {\n      name: 'Theme',\n      description: 'Color theme for components',\n      defaultValue: 'light',\n      toolbar: {\n        icon: 'paintbrush',\n        items: [\n          { value: 'light', title: 'Light', icon: 'sun' },\n          { value: 'dark',  title: 'Dark',  icon: 'moon' },\n        ],\n        dynamicTitle: true,\n      },\n    },\n  },\n  decorators: [\n    (storyFn, context) => {\n      const theme = (context.globals['theme'] as string) ?? 'light';\n      document.documentElement.setAttribute('data-theme', theme);\n      document.body.style.backgroundColor = theme === 'dark' ? '#0d1117' : '#ffffff';\n      document.body.style.transition = 'background-color 0.2s ease';\n      return storyFn();\n    },\n  ],\n  parameters: {\n    controls: {\n      matchers: {\n        color: /(background|color)$/i,\n        date: /Date$/i,\n      },\n    },\n    backgrounds: { disable: true },\n  },\n}"
+            },
+            {
+                "name": "ROLES",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/select/select.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "FsSelectOption[]",
+                "defaultValue": "[\n  { value: 'admin',  label: 'Administrador', desc: 'Acceso completo al sistema' },\n  { value: 'editor', label: 'Editor',         desc: 'Puede crear y editar contenido' },\n  { value: 'viewer', label: 'Visor',          desc: 'Solo lectura' },\n  { value: 'guest',  label: 'Invitado',       desc: 'Acceso muy limitado' },\n]"
+            },
+            {
+                "name": "Search",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/input/input.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  render: (args) => ({\n    props: { ...args, model: 'formularios', icon: I.search },\n    template: `\n      <fs-input\n        type=\"search\"\n        label=\"Buscar\"\n        [iconLeft]=\"icon\"\n        [clearable]=\"true\"\n        [(ngModel)]=\"model\"\n      ></fs-input>\n    `,\n  }),\n}"
+            },
+            {
+                "name": "Searchable",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/select/select.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  render: (args) => ({\n    props: { ...args, model: '', icon: I.code },\n    template: `\n      <fs-select\n        label=\"Tecnología\"\n        [iconLeft]=\"icon\"\n        placeholder=\"Seleccionar tecnología...\"\n        [searchable]=\"true\"\n        [options]=\"options\"\n        [(ngModel)]=\"model\"\n      ></fs-select>\n    `,\n  }),\n  args: { options: TECHS },\n}"
             },
             {
                 "name": "SemanticColors",
@@ -1059,7 +1249,37 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  name:   'Estados',\n  render: () => ({\n    template: `\n      <div style=\"display:flex; flex-wrap:wrap; gap:12px; align-items:center;\">\n        <fs-button>Normal</fs-button>\n        <fs-button [disabled]=\"true\">Disabled</fs-button>\n        <fs-button [loading]=\"true\">Loading</fs-button>\n        <fs-button variant=\"outline\" [disabled]=\"true\">Outline disabled</fs-button>\n        <fs-button variant=\"danger\" [loading]=\"true\">Danger loading</fs-button>\n        <fs-button variant=\"link\" [disabled]=\"true\">Link disabled</fs-button>\n      </div>\n    `,\n  }),\n}"
+                "defaultValue": "{\n  name:   'Estados',\n  render: () => ({\n    template: `\n      <div style=\"display:flex; flex-wrap:wrap; gap:12px; align-items:center;\">\n        <fs-button>Normal</fs-button>\n        <fs-button [disabled]=\"true\">Disabled</fs-button>\n        <fs-button [loading]=\"true\">Loading</fs-button>\n        <fs-button variant=\"outline\" [disabled]=\"true\">Outline disabled</fs-button>\n        <fs-button variant=\"ghost\" [disabled]=\"true\">Ghost disabled</fs-button>\n        <fs-button variant=\"danger\" [loading]=\"true\">Danger loading</fs-button>\n      </div>\n    `,\n  }),\n}"
+            },
+            {
+                "name": "Success",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/input/input.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  render: (args) => ({\n    props: { ...args, model: 'DESIGN2026', icon: I.check },\n    template: `\n      <fs-input\n        label=\"Cupón\"\n        [iconLeft]=\"icon\"\n        state=\"success\"\n        successMessage=\"¡Cupón aplicado!\"\n        [(ngModel)]=\"model\"\n      ></fs-input>\n    `,\n  }),\n}"
+            },
+            {
+                "name": "Success",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/select/select.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  render: (args) => ({\n    props: { ...args, model: 'admin' },\n    template: `\n      <fs-select\n        label=\"Rol\"\n        state=\"success\"\n        successMessage=\"Rol disponible y asignable.\"\n        [options]=\"options\"\n        [(ngModel)]=\"model\"\n      ></fs-select>\n    `,\n  }),\n  args: { options: ROLES },\n}"
+            },
+            {
+                "name": "TECHS",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/select/select.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "FsSelectOption[]",
+                "defaultValue": "[\n  { value: 'angular', label: 'Angular',  desc: 'Framework de Google' },\n  { value: 'react',   label: 'React',    desc: 'Librería de Meta' },\n  { value: 'vue',     label: 'Vue',      desc: 'Framework progresivo' },\n  { value: 'svelte',  label: 'Svelte',   desc: 'Compilador de UI' },\n  { value: 'solid',   label: 'SolidJS',  desc: 'Signals-first framework' },\n  { value: 'next',    label: 'Next.js',  desc: 'React full-stack' },\n  { value: 'nuxt',    label: 'Nuxt',     desc: 'Vue full-stack' },\n  { value: 'astro',   label: 'Astro',    desc: 'Content-first web' },\n]"
             },
             {
                 "name": "Timeline",
@@ -1112,6 +1332,16 @@
                 "defaultValue": "{\n  name: 'Con tab deshabilitada',\n  args: {\n    activeTab: 'experiencia',\n    tabs: [\n      { id: 'experiencia', label: 'Experiencia' },\n      { id: 'sobre-mi',    label: 'Sobre mí' },\n      { id: 'formacion',   label: 'Formación', disabled: true },\n      { id: 'proyectos',   label: 'Proyectos' },\n    ],\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <fs-tabs [tabs]=\"tabs\" [(activeTab)]=\"activeTab\">\n        <div style=\"padding:20px 0; color:rgba(255,255,255,0.6); font-size:13px;\">\n          Tab activa: {{ activeTab }}\n        </div>\n      </fs-tabs>\n    `,\n  }),\n}"
             },
             {
+                "name": "WithIcon",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/select/select.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  render: (args) => ({\n    props: { ...args, model: '', icon: I.globe },\n    template: `\n      <fs-select\n        label=\"País\"\n        [iconLeft]=\"icon\"\n        placeholder=\"Seleccionar país...\"\n        [options]=\"options\"\n        [(ngModel)]=\"model\"\n      ></fs-select>\n    `,\n  }),\n  args: { options: PAISES },\n}"
+            },
+            {
                 "name": "WithIcons",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -1119,7 +1349,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  name:   'Con íconos',\n  render: () => ({\n    props: {\n      iconArrow: ICON_ARROW,\n      iconSave:  ICON_SAVE,\n      iconTrash: ICON_TRASH,\n      iconLink:  ICON_LINK,\n    },\n    template: `\n      <div style=\"display:flex; flex-wrap:wrap; gap:12px; align-items:center;\">\n        <fs-button [iconRight]=\"iconArrow\">Ver más</fs-button>\n        <fs-button [iconLeft]=\"iconSave\" variant=\"outline\">Guardar</fs-button>\n        <fs-button [iconLeft]=\"iconTrash\" variant=\"danger\">Eliminar</fs-button>\n        <fs-button [iconRight]=\"iconLink\" variant=\"link\">Ver enlace</fs-button>\n      </div>\n    `,\n  }),\n}"
+                "defaultValue": "{\n  name:   'Con íconos',\n  render: () => ({\n    props: { I },\n    template: `\n      <div style=\"display:flex; flex-wrap:wrap; gap:12px; align-items:center;\">\n        <fs-button [iconRight]=\"I.arrow\">Ver más</fs-button>\n        <fs-button [iconLeft]=\"I.save\" variant=\"outline\">Guardar</fs-button>\n        <fs-button [iconLeft]=\"I.trash\" variant=\"danger\">Eliminar</fs-button>\n        <fs-button [iconLeft]=\"I.save\" variant=\"ghost\">Guardar borrador</fs-button>\n        <fs-button [iconLeft]=\"I.link\" variant=\"link\">Ver enlace</fs-button>\n      </div>\n    `,\n  }),\n}"
             },
             {
                 "name": "WithImages",
@@ -1234,8 +1464,30 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
+                "rawtype": "StoryObj<FsInputComponent>",
+                "file": "projects/fsociety/src/lib/input/input.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 184
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
                 "rawtype": "StoryObj<FsProfileCardComponent>",
                 "file": "projects/fsociety/src/lib/profile-card/profile-card.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 184
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<FsSelectComponent>",
+                "file": "projects/fsociety/src/lib/select/select.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -1339,6 +1591,16 @@
                     "defaultValue": "{\n  name:   'Todas las variantes',\n  render: () => ({\n    template: `\n      <div style=\"display:flex; flex-wrap:wrap; gap:12px; align-items:center;\">\n        <fs-button variant=\"primary\">Primary</fs-button>\n        <fs-button variant=\"secondary\">Secondary</fs-button>\n        <fs-button variant=\"outline\">Outline</fs-button>\n        <fs-button variant=\"ghost\">Ghost</fs-button>\n        <fs-button variant=\"danger\">Danger</fs-button>\n        <fs-button variant=\"link\">Link</fs-button>\n      </div>\n    `,\n  }),\n}"
                 },
                 {
+                    "name": "CDN",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/button/button.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "defaultValue": "'https://api.iconify.design'"
+                },
+                {
                     "name": "FullWidth",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
@@ -1346,47 +1608,27 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  name:   'Full width',\n  render: () => ({\n    template: `\n      <div style=\"max-width:320px; display:flex; flex-direction:column; gap:10px;\">\n        <fs-button [fullWidth]=\"true\">Primary full width</fs-button>\n        <fs-button [fullWidth]=\"true\" variant=\"outline\">Outline full width</fs-button>\n      </div>\n    `,\n  }),\n}"
+                    "defaultValue": "{\n  name:   'Full width',\n  render: () => ({\n    template: `\n      <div style=\"max-width:320px; display:flex; flex-direction:column; gap:10px;\">\n        <fs-button [fullWidth]=\"true\">Primary full width</fs-button>\n        <fs-button [fullWidth]=\"true\" variant=\"outline\">Outline full width</fs-button>\n        <fs-button [fullWidth]=\"true\" variant=\"ghost\">Ghost full width</fs-button>\n      </div>\n    `,\n  }),\n}"
                 },
                 {
-                    "name": "ICON_ARROW",
+                    "name": "I",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
                     "file": "projects/fsociety/src/lib/button/button.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "string",
-                    "defaultValue": "'M3 8h10M9 4l4 4-4 4'"
+                    "type": "object",
+                    "defaultValue": "{\n  trash:    `${CDN}/tabler:trash.svg`,\n  edit:     `${CDN}/tabler:edit.svg`,\n  plus:     `${CDN}/tabler:plus.svg`,\n  settings: `${CDN}/tabler:settings.svg`,\n  heart:    `${CDN}/tabler:heart.svg`,\n  download: `${CDN}/tabler:download.svg`,\n  save:     `${CDN}/tabler:device-floppy.svg`,\n  arrow:    `${CDN}/tabler:arrow-right.svg`,\n  link:     `${CDN}/tabler:external-link.svg`,\n}"
                 },
                 {
-                    "name": "ICON_LINK",
+                    "name": "IconOnly",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
                     "file": "projects/fsociety/src/lib/button/button.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "string",
-                    "defaultValue": "'M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71'"
-                },
-                {
-                    "name": "ICON_SAVE",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/fsociety/src/lib/button/button.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "string",
-                    "defaultValue": "'M13 2H5a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h8l2-2V3a1 1 0 0 0-1-1zM9 12V8m0 0H7m2 0h2'"
-                },
-                {
-                    "name": "ICON_TRASH",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/fsociety/src/lib/button/button.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "string",
-                    "defaultValue": "'M4 6h8M7 6V4h2v2M6 6v6a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V6'"
+                    "type": "Story",
+                    "defaultValue": "{\n  name:   'Solo ícono',\n  render: () => ({\n    props: { I },\n    template: `\n      <div style=\"display:flex; flex-direction:column; gap:20px;\">\n\n        <div style=\"display:flex; flex-wrap:wrap; gap:10px; align-items:center;\">\n          <span style=\"font-size:12px;color:#888;width:80px\">Primary</span>\n          <fs-button variant=\"primary\"   [iconLeft]=\"I.plus\"     [iconOnly]=\"true\" size=\"sm\" ariaLabel=\"Agregar\"></fs-button>\n          <fs-button variant=\"primary\"   [iconLeft]=\"I.plus\"     [iconOnly]=\"true\" size=\"md\" ariaLabel=\"Agregar\"></fs-button>\n          <fs-button variant=\"primary\"   [iconLeft]=\"I.plus\"     [iconOnly]=\"true\" size=\"lg\" ariaLabel=\"Agregar\"></fs-button>\n        </div>\n\n        <div style=\"display:flex; flex-wrap:wrap; gap:10px; align-items:center;\">\n          <span style=\"font-size:12px;color:#888;width:80px\">Outline</span>\n          <fs-button variant=\"outline\"   [iconLeft]=\"I.edit\"     [iconOnly]=\"true\" size=\"sm\" ariaLabel=\"Editar\"></fs-button>\n          <fs-button variant=\"outline\"   [iconLeft]=\"I.edit\"     [iconOnly]=\"true\" size=\"md\" ariaLabel=\"Editar\"></fs-button>\n          <fs-button variant=\"outline\"   [iconLeft]=\"I.edit\"     [iconOnly]=\"true\" size=\"lg\" ariaLabel=\"Editar\"></fs-button>\n        </div>\n\n        <div style=\"display:flex; flex-wrap:wrap; gap:10px; align-items:center;\">\n          <span style=\"font-size:12px;color:#888;width:80px\">Ghost</span>\n          <fs-button variant=\"ghost\"     [iconLeft]=\"I.settings\" [iconOnly]=\"true\" size=\"sm\" ariaLabel=\"Configuración\"></fs-button>\n          <fs-button variant=\"ghost\"     [iconLeft]=\"I.settings\" [iconOnly]=\"true\" size=\"md\" ariaLabel=\"Configuración\"></fs-button>\n          <fs-button variant=\"ghost\"     [iconLeft]=\"I.settings\" [iconOnly]=\"true\" size=\"lg\" ariaLabel=\"Configuración\"></fs-button>\n        </div>\n\n        <div style=\"display:flex; flex-wrap:wrap; gap:10px; align-items:center;\">\n          <span style=\"font-size:12px;color:#888;width:80px\">Danger</span>\n          <fs-button variant=\"danger\"    [iconLeft]=\"I.trash\"    [iconOnly]=\"true\" size=\"sm\" ariaLabel=\"Eliminar\"></fs-button>\n          <fs-button variant=\"danger\"    [iconLeft]=\"I.trash\"    [iconOnly]=\"true\" size=\"md\" ariaLabel=\"Eliminar\"></fs-button>\n          <fs-button variant=\"danger\"    [iconLeft]=\"I.trash\"    [iconOnly]=\"true\" size=\"lg\" ariaLabel=\"Eliminar\"></fs-button>\n        </div>\n\n        <div style=\"display:flex; flex-wrap:wrap; gap:10px; align-items:center;\">\n          <span style=\"font-size:12px;color:#888;width:80px\">Disabled</span>\n          <fs-button variant=\"ghost\"  [iconLeft]=\"I.heart\"    [iconOnly]=\"true\" [disabled]=\"true\" ariaLabel=\"Me gusta\"></fs-button>\n          <fs-button variant=\"outline\" [iconLeft]=\"I.download\" [iconOnly]=\"true\" [disabled]=\"true\" ariaLabel=\"Descargar\"></fs-button>\n        </div>\n\n      </div>\n    `,\n  }),\n}"
                 },
                 {
                     "name": "LinkInline",
@@ -1406,7 +1648,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Meta<FsButtonComponent>",
-                    "defaultValue": "{\n  title:     'fsociety/Button',\n  component: FsButtonComponent,\n  tags:      ['autodocs'],\n\n  argTypes: {\n    variant: {\n      control:     'select',\n      options:     ['primary', 'secondary', 'outline', 'ghost', 'danger', 'link'],\n      description: 'Variante visual del botón',\n      table: {\n        type:         { summary: 'FsButtonVariant' },\n        defaultValue: { summary: 'primary' },\n      },\n    },\n    size: {\n      control:     'radio',\n      options:     ['sm', 'md', 'lg'],\n      description: 'Tamaño del botón',\n      table: {\n        type:         { summary: 'FsButtonSize' },\n        defaultValue: { summary: 'md' },\n      },\n    },\n    type: {\n      control:     'radio',\n      options:     ['button', 'submit', 'reset'],\n      description: 'Tipo HTML nativo',\n      table: {\n        type:         { summary: 'FsButtonType' },\n        defaultValue: { summary: 'button' },\n      },\n    },\n    disabled: {\n      control:     'boolean',\n      description: 'Deshabilita el botón',\n      table: {\n        type:         { summary: 'boolean' },\n        defaultValue: { summary: 'false' },\n      },\n    },\n    loading: {\n      control:     'boolean',\n      description: 'Muestra spinner y deshabilita',\n      table: {\n        type:         { summary: 'boolean' },\n        defaultValue: { summary: 'false' },\n      },\n    },\n    label: {\n      control:     'text',\n      description: 'Texto del botón',\n    },\n    fullWidth: {\n      control:     'boolean',\n      description: 'Ocupa el ancho del contenedor',\n      table: {\n        type:         { summary: 'boolean' },\n        defaultValue: { summary: 'false' },\n      },\n    },\n    fsClick: {\n      action:      'fsClick',\n      description: 'Evento click (no dispara si disabled o loading)',\n    },\n  },\n}"
+                    "defaultValue": "{\n  title:     'Components/Button',\n  component: FsButtonComponent,\n  tags:      ['autodocs'],\n\n  argTypes: {\n    variant: {\n      control:     'select',\n      options:     ['primary', 'secondary', 'outline', 'ghost', 'danger', 'link'],\n      description: 'Variante visual del botón',\n      table: {\n        type:         { summary: 'FsButtonVariant' },\n        defaultValue: { summary: 'primary' },\n      },\n    },\n    size: {\n      control:     'radio',\n      options:     ['sm', 'md', 'lg'],\n      description: 'Tamaño del botón',\n      table: {\n        type:         { summary: 'FsButtonSize' },\n        defaultValue: { summary: 'md' },\n      },\n    },\n    type: {\n      control:     'radio',\n      options:     ['button', 'submit', 'reset'],\n      description: 'Tipo HTML nativo',\n      table: {\n        type:         { summary: 'FsButtonType' },\n        defaultValue: { summary: 'button' },\n      },\n    },\n    disabled: {\n      control:     'boolean',\n      description: 'Deshabilita el botón',\n      table: {\n        type:         { summary: 'boolean' },\n        defaultValue: { summary: 'false' },\n      },\n    },\n    loading: {\n      control:     'boolean',\n      description: 'Muestra spinner y deshabilita',\n      table: {\n        type:         { summary: 'boolean' },\n        defaultValue: { summary: 'false' },\n      },\n    },\n    iconOnly: {\n      control:     'boolean',\n      description: 'Botón cuadrado sin label (solo ícono)',\n      table: {\n        type:         { summary: 'boolean' },\n        defaultValue: { summary: 'false' },\n      },\n    },\n    ariaLabel: {\n      control:     'text',\n      description: 'aria-label cuando iconOnly = true',\n    },\n    label: {\n      control:     'text',\n      description: 'Texto del botón',\n    },\n    fullWidth: {\n      control:     'boolean',\n      description: 'Ocupa el ancho del contenedor',\n      table: {\n        type:         { summary: 'boolean' },\n        defaultValue: { summary: 'false' },\n      },\n    },\n    fsClick: {\n      action:      'fsClick',\n      description: 'Evento click (no dispara si disabled o loading)',\n    },\n  },\n}"
                 },
                 {
                     "name": "Playground",
@@ -1416,7 +1658,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: {\n    variant:   'primary',\n    size:      'md',\n    label:     'Guardar cambios',\n    disabled:  false,\n    loading:   false,\n    fullWidth: false,\n  },\n}"
+                    "defaultValue": "{\n  args: {\n    variant:   'primary',\n    size:      'md',\n    label:     'Guardar cambios',\n    disabled:  false,\n    loading:   false,\n    fullWidth: false,\n    iconOnly:  false,\n  },\n}"
                 },
                 {
                     "name": "Sizes",
@@ -1436,7 +1678,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  name:   'Estados',\n  render: () => ({\n    template: `\n      <div style=\"display:flex; flex-wrap:wrap; gap:12px; align-items:center;\">\n        <fs-button>Normal</fs-button>\n        <fs-button [disabled]=\"true\">Disabled</fs-button>\n        <fs-button [loading]=\"true\">Loading</fs-button>\n        <fs-button variant=\"outline\" [disabled]=\"true\">Outline disabled</fs-button>\n        <fs-button variant=\"danger\" [loading]=\"true\">Danger loading</fs-button>\n        <fs-button variant=\"link\" [disabled]=\"true\">Link disabled</fs-button>\n      </div>\n    `,\n  }),\n}"
+                    "defaultValue": "{\n  name:   'Estados',\n  render: () => ({\n    template: `\n      <div style=\"display:flex; flex-wrap:wrap; gap:12px; align-items:center;\">\n        <fs-button>Normal</fs-button>\n        <fs-button [disabled]=\"true\">Disabled</fs-button>\n        <fs-button [loading]=\"true\">Loading</fs-button>\n        <fs-button variant=\"outline\" [disabled]=\"true\">Outline disabled</fs-button>\n        <fs-button variant=\"ghost\" [disabled]=\"true\">Ghost disabled</fs-button>\n        <fs-button variant=\"danger\" [loading]=\"true\">Danger loading</fs-button>\n      </div>\n    `,\n  }),\n}"
                 },
                 {
                     "name": "WithIcons",
@@ -1446,7 +1688,251 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  name:   'Con íconos',\n  render: () => ({\n    props: {\n      iconArrow: ICON_ARROW,\n      iconSave:  ICON_SAVE,\n      iconTrash: ICON_TRASH,\n      iconLink:  ICON_LINK,\n    },\n    template: `\n      <div style=\"display:flex; flex-wrap:wrap; gap:12px; align-items:center;\">\n        <fs-button [iconRight]=\"iconArrow\">Ver más</fs-button>\n        <fs-button [iconLeft]=\"iconSave\" variant=\"outline\">Guardar</fs-button>\n        <fs-button [iconLeft]=\"iconTrash\" variant=\"danger\">Eliminar</fs-button>\n        <fs-button [iconRight]=\"iconLink\" variant=\"link\">Ver enlace</fs-button>\n      </div>\n    `,\n  }),\n}"
+                    "defaultValue": "{\n  name:   'Con íconos',\n  render: () => ({\n    props: { I },\n    template: `\n      <div style=\"display:flex; flex-wrap:wrap; gap:12px; align-items:center;\">\n        <fs-button [iconRight]=\"I.arrow\">Ver más</fs-button>\n        <fs-button [iconLeft]=\"I.save\" variant=\"outline\">Guardar</fs-button>\n        <fs-button [iconLeft]=\"I.trash\" variant=\"danger\">Eliminar</fs-button>\n        <fs-button [iconLeft]=\"I.save\" variant=\"ghost\">Guardar borrador</fs-button>\n        <fs-button [iconLeft]=\"I.link\" variant=\"link\">Ver enlace</fs-button>\n      </div>\n    `,\n  }),\n}"
+                }
+            ],
+            "projects/fsociety/src/lib/input/input.stories.ts": [
+                {
+                    "name": "AllVariants",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/input/input.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  render: () => ({\n    props: {\n      nombre: '',\n      email: 'ada@empresa.com',\n      password: 'supersecreta123',\n      sitio: '',\n      correoError: 'ada@@empresa',\n      cupon: 'DESIGN2026',\n      idCuenta: 'USR-00041',\n      buscar: 'formularios',\n      I,\n    },\n    template: `\n      <div style=\"display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem 1.5rem;\">\n        <fs-input label=\"Nombre\" [iconLeft]=\"I.user\" placeholder=\"Ada Lovelace\" hint=\"Tu nombre completo.\" [(ngModel)]=\"nombre\"></fs-input>\n        <fs-input label=\"Correo electrónico\" [iconLeft]=\"I.mail\" [clearable]=\"true\" [(ngModel)]=\"email\"></fs-input>\n        <fs-input type=\"password\" label=\"Contraseña\" [iconLeft]=\"I.lock\" hint=\"Mínimo 8 caracteres.\" [(ngModel)]=\"password\"></fs-input>\n        <fs-input type=\"url\" label=\"Sitio web\" [iconLeft]=\"I.world\" placeholder=\"https://\" [(ngModel)]=\"sitio\"></fs-input>\n        <fs-input type=\"email\" label=\"Correo\" [iconLeft]=\"I.mail\" state=\"error\" errorMessage=\"Ese correo no es válido.\" [(ngModel)]=\"correoError\"></fs-input>\n        <fs-input label=\"Cupón\" [iconLeft]=\"I.check\" state=\"success\" successMessage=\"¡Cupón aplicado!\" [(ngModel)]=\"cupon\"></fs-input>\n        <fs-input label=\"ID de cuenta\" [disabled]=\"true\" [(ngModel)]=\"idCuenta\"></fs-input>\n        <fs-input type=\"search\" label=\"Buscar\" [iconLeft]=\"I.search\" [clearable]=\"true\" [(ngModel)]=\"buscar\"></fs-input>\n      </div>\n    `,\n  }),\n  parameters: {\n    layout: 'padded',\n  },\n}"
+                },
+                {
+                    "name": "CDN",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/input/input.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "defaultValue": "'https://api.iconify.design'"
+                },
+                {
+                    "name": "Clearable",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/input/input.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  render: (args) => ({\n    props: { ...args, model: 'ada@empresa.com', icon: I.mail },\n    template: `\n      <fs-input\n        label=\"Correo electrónico\"\n        [iconLeft]=\"icon\"\n        [clearable]=\"true\"\n        [(ngModel)]=\"model\"\n      ></fs-input>\n    `,\n  }),\n}"
+                },
+                {
+                    "name": "Default",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/input/input.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    label: 'Nombre',\n    placeholder: 'Ada Lovelace',\n    iconLeft: I.user,\n    hint: 'Tu nombre completo.',\n  },\n}"
+                },
+                {
+                    "name": "Disabled",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/input/input.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  render: (args) => ({\n    props: { ...args, model: 'USR-00041' },\n    template: `\n      <fs-input\n        label=\"ID de cuenta\"\n        [disabled]=\"true\"\n        [(ngModel)]=\"model\"\n      ></fs-input>\n    `,\n  }),\n}"
+                },
+                {
+                    "name": "Error",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/input/input.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  render: (args) => ({\n    props: { ...args, model: 'ada@@empresa', icon: I.mail },\n    template: `\n      <fs-input\n        type=\"email\"\n        label=\"Correo\"\n        [iconLeft]=\"icon\"\n        state=\"error\"\n        errorMessage=\"Ese correo no es válido.\"\n        [(ngModel)]=\"model\"\n      ></fs-input>\n    `,\n  }),\n}"
+                },
+                {
+                    "name": "I",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/input/input.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "object",
+                    "defaultValue": "{\n  user:   `${CDN}/tabler:user.svg`,\n  mail:   `${CDN}/tabler:mail.svg`,\n  lock:   `${CDN}/tabler:lock.svg`,\n  world:  `${CDN}/tabler:world.svg`,\n  check:  `${CDN}/tabler:check.svg`,\n  search: `${CDN}/tabler:search.svg`,\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/input/input.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<FsInputComponent>",
+                    "defaultValue": "{\n  title: 'Components/Input',\n  component: FsInputComponent,\n  decorators: [\n    moduleMetadata({\n      imports: [FsInputComponent, FormsModule],\n    }),\n  ],\n  tags: ['autodocs'],\n  argTypes: {\n    type: {\n      control: 'select',\n      options: ['text', 'email', 'password', 'url', 'search'],\n    },\n    state: {\n      control: 'select',\n      options: ['default', 'error', 'success'],\n    },\n  },\n}"
+                },
+                {
+                    "name": "Password",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/input/input.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  render: (args) => ({\n    props: { ...args, model: 'supersecreta123', icon: I.lock },\n    template: `\n      <fs-input\n        type=\"password\"\n        label=\"Contraseña\"\n        hint=\"Mínimo 8 caracteres.\"\n        [iconLeft]=\"icon\"\n        [(ngModel)]=\"model\"\n      ></fs-input>\n    `,\n  }),\n}"
+                },
+                {
+                    "name": "Search",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/input/input.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  render: (args) => ({\n    props: { ...args, model: 'formularios', icon: I.search },\n    template: `\n      <fs-input\n        type=\"search\"\n        label=\"Buscar\"\n        [iconLeft]=\"icon\"\n        [clearable]=\"true\"\n        [(ngModel)]=\"model\"\n      ></fs-input>\n    `,\n  }),\n}"
+                },
+                {
+                    "name": "Success",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/input/input.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  render: (args) => ({\n    props: { ...args, model: 'DESIGN2026', icon: I.check },\n    template: `\n      <fs-input\n        label=\"Cupón\"\n        [iconLeft]=\"icon\"\n        state=\"success\"\n        successMessage=\"¡Cupón aplicado!\"\n        [(ngModel)]=\"model\"\n      ></fs-input>\n    `,\n  }),\n}"
+                }
+            ],
+            "projects/fsociety/src/lib/select/select.stories.ts": [
+                {
+                    "name": "AllVariants",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/select/select.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  render: () => ({\n    props: {\n      rol: '',\n      pais: 'ar',\n      tech: '',\n      disabledVal: 'editor',\n      ROLES,\n      PAISES,\n      TECHS,\n      I,\n    },\n    template: `\n      <div style=\"display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem 1.5rem;\">\n        <fs-select\n          label=\"Rol de usuario\"\n          placeholder=\"Seleccionar rol...\"\n          hint=\"Define los permisos.\"\n          [options]=\"ROLES\"\n          [(ngModel)]=\"rol\"\n        ></fs-select>\n\n        <fs-select\n          label=\"País\"\n          [iconLeft]=\"I.globe\"\n          placeholder=\"Seleccionar país...\"\n          [options]=\"PAISES\"\n          [(ngModel)]=\"pais\"\n        ></fs-select>\n\n        <fs-select\n          label=\"Tecnología\"\n          [iconLeft]=\"I.code\"\n          placeholder=\"Buscar tecnología...\"\n          [searchable]=\"true\"\n          [options]=\"TECHS\"\n          [(ngModel)]=\"tech\"\n        ></fs-select>\n\n        <fs-select\n          label=\"Departamento\"\n          placeholder=\"Seleccionar...\"\n          [options]=\"ROLES\"\n          state=\"error\"\n          errorMessage=\"Campo requerido.\"\n        ></fs-select>\n\n        <fs-select\n          label=\"Rol validado\"\n          [options]=\"ROLES\"\n          state=\"success\"\n          successMessage=\"Rol disponible.\"\n          [(ngModel)]=\"disabledVal\"\n        ></fs-select>\n\n        <fs-select\n          label=\"Rol asignado\"\n          [disabled]=\"true\"\n          [options]=\"ROLES\"\n          [(ngModel)]=\"disabledVal\"\n        ></fs-select>\n      </div>\n    `,\n  }),\n  parameters: {\n    layout: 'padded',\n  },\n}"
+                },
+                {
+                    "name": "CDN",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/select/select.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "defaultValue": "'https://api.iconify.design'"
+                },
+                {
+                    "name": "Default",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/select/select.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    label: 'Rol de usuario',\n    placeholder: 'Seleccionar rol...',\n    hint: 'Define los permisos del usuario en el sistema.',\n    options: ROLES,\n  },\n}"
+                },
+                {
+                    "name": "Disabled",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/select/select.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  render: (args) => ({\n    props: { ...args, model: 'editor' },\n    template: `\n      <fs-select\n        label=\"Rol asignado\"\n        [disabled]=\"true\"\n        [options]=\"options\"\n        [(ngModel)]=\"model\"\n      ></fs-select>\n    `,\n  }),\n  args: { options: ROLES },\n}"
+                },
+                {
+                    "name": "Error",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/select/select.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    label: 'Departamento',\n    placeholder: 'Seleccionar...',\n    options: ROLES,\n    state: 'error',\n    errorMessage: 'Selecciona un departamento para continuar.',\n  },\n}"
+                },
+                {
+                    "name": "I",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/select/select.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "object",
+                    "defaultValue": "{\n  globe: `${CDN}/tabler:globe.svg`,\n  code:  `${CDN}/tabler:code.svg`,\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/select/select.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<FsSelectComponent>",
+                    "defaultValue": "{\n  title: 'Components/Select',\n  component: FsSelectComponent,\n  decorators: [\n    moduleMetadata({\n      imports: [FsSelectComponent, FormsModule],\n    }),\n  ],\n  tags: ['autodocs'],\n  argTypes: {\n    state: {\n      control: 'select',\n      options: ['default', 'error', 'success'],\n    },\n    options: { control: false },\n  },\n}"
+                },
+                {
+                    "name": "PAISES",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/select/select.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "FsSelectOption[]",
+                    "defaultValue": "[\n  { value: 'ar', label: 'Argentina' },\n  { value: 'mx', label: 'México' },\n  { value: 'co', label: 'Colombia' },\n  { value: 'cl', label: 'Chile' },\n  { value: 'pe', label: 'Perú' },\n  { value: 'br', label: 'Brasil' },\n  { value: 'uy', label: 'Uruguay' },\n]"
+                },
+                {
+                    "name": "ROLES",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/select/select.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "FsSelectOption[]",
+                    "defaultValue": "[\n  { value: 'admin',  label: 'Administrador', desc: 'Acceso completo al sistema' },\n  { value: 'editor', label: 'Editor',         desc: 'Puede crear y editar contenido' },\n  { value: 'viewer', label: 'Visor',          desc: 'Solo lectura' },\n  { value: 'guest',  label: 'Invitado',       desc: 'Acceso muy limitado' },\n]"
+                },
+                {
+                    "name": "Searchable",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/select/select.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  render: (args) => ({\n    props: { ...args, model: '', icon: I.code },\n    template: `\n      <fs-select\n        label=\"Tecnología\"\n        [iconLeft]=\"icon\"\n        placeholder=\"Seleccionar tecnología...\"\n        [searchable]=\"true\"\n        [options]=\"options\"\n        [(ngModel)]=\"model\"\n      ></fs-select>\n    `,\n  }),\n  args: { options: TECHS },\n}"
+                },
+                {
+                    "name": "Success",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/select/select.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  render: (args) => ({\n    props: { ...args, model: 'admin' },\n    template: `\n      <fs-select\n        label=\"Rol\"\n        state=\"success\"\n        successMessage=\"Rol disponible y asignable.\"\n        [options]=\"options\"\n        [(ngModel)]=\"model\"\n      ></fs-select>\n    `,\n  }),\n  args: { options: ROLES },\n}"
+                },
+                {
+                    "name": "TECHS",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/select/select.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "FsSelectOption[]",
+                    "defaultValue": "[\n  { value: 'angular', label: 'Angular',  desc: 'Framework de Google' },\n  { value: 'react',   label: 'React',    desc: 'Librería de Meta' },\n  { value: 'vue',     label: 'Vue',      desc: 'Framework progresivo' },\n  { value: 'svelte',  label: 'Svelte',   desc: 'Compilador de UI' },\n  { value: 'solid',   label: 'SolidJS',  desc: 'Signals-first framework' },\n  { value: 'next',    label: 'Next.js',  desc: 'React full-stack' },\n  { value: 'nuxt',    label: 'Nuxt',     desc: 'Vue full-stack' },\n  { value: 'astro',   label: 'Astro',    desc: 'Content-first web' },\n]"
+                },
+                {
+                    "name": "WithIcon",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/select/select.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  render: (args) => ({\n    props: { ...args, model: '', icon: I.globe },\n    template: `\n      <fs-select\n        label=\"País\"\n        [iconLeft]=\"icon\"\n        placeholder=\"Seleccionar país...\"\n        [options]=\"options\"\n        [(ngModel)]=\"model\"\n      ></fs-select>\n    `,\n  }),\n  args: { options: PAISES },\n}"
                 }
             ],
             "projects/fsociety/src/lib/experience-card/experience-card.stories.ts": [
@@ -1850,7 +2336,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Preview",
-                    "defaultValue": "{\n  parameters: {\n    controls: {\n      matchers: {\n        color: /(background|color)$/i,\n        date: /Date$/i,\n      },\n    },\n    backgrounds: {\n      default: 'dark',\n      values: [\n        { name: 'dark',  value: '#0d1117' },\n        { name: 'light', value: '#ffffff' },\n      ],\n    },\n  },\n}"
+                    "defaultValue": "{\n  globalTypes: {\n    theme: {\n      name: 'Theme',\n      description: 'Color theme for components',\n      defaultValue: 'light',\n      toolbar: {\n        icon: 'paintbrush',\n        items: [\n          { value: 'light', title: 'Light', icon: 'sun' },\n          { value: 'dark',  title: 'Dark',  icon: 'moon' },\n        ],\n        dynamicTitle: true,\n      },\n    },\n  },\n  decorators: [\n    (storyFn, context) => {\n      const theme = (context.globals['theme'] as string) ?? 'light';\n      document.documentElement.setAttribute('data-theme', theme);\n      document.body.style.backgroundColor = theme === 'dark' ? '#0d1117' : '#ffffff';\n      document.body.style.transition = 'background-color 0.2s ease';\n      return storyFn();\n    },\n  ],\n  parameters: {\n    controls: {\n      matchers: {\n        color: /(background|color)$/i,\n        date: /Date$/i,\n      },\n    },\n    backgrounds: { disable: true },\n  },\n}"
                 }
             ]
         },
@@ -1935,6 +2421,19 @@
                     "kind": 184
                 }
             ],
+            "projects/fsociety/src/lib/input/input.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<FsInputComponent>",
+                    "file": "projects/fsociety/src/lib/input/input.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 184
+                }
+            ],
             "projects/fsociety/src/lib/profile-card/profile-card.stories.ts": [
                 {
                     "name": "Story",
@@ -1942,6 +2441,19 @@
                     "subtype": "typealias",
                     "rawtype": "StoryObj<FsProfileCardComponent>",
                     "file": "projects/fsociety/src/lib/profile-card/profile-card.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 184
+                }
+            ],
+            "projects/fsociety/src/lib/select/select.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<FsSelectComponent>",
+                    "file": "projects/fsociety/src/lib/select/select.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",
@@ -2176,6 +2688,16 @@
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
+                "name": "CDN",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/button/button.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
                 "name": "FullWidth",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
@@ -2186,7 +2708,7 @@
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
-                "name": "ICON_ARROW",
+                "name": "I",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
@@ -2196,27 +2718,7 @@
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
-                "name": "ICON_LINK",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/fsociety/src/lib/button/button.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "ICON_SAVE",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/fsociety/src/lib/button/button.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "ICON_TRASH",
+                "name": "IconOnly",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
@@ -2412,6 +2914,126 @@
                 "status": "low"
             },
             {
+                "filePath": "projects/fsociety/src/lib/input/input.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "AllVariants",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/input/input.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "CDN",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/input/input.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Clearable",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/input/input.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Default",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/input/input.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Disabled",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/input/input.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Error",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/input/input.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "I",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/input/input.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/input/input.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Password",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/input/input.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Search",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/input/input.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Success",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/input/input.stories.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "Story",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
                 "filePath": "projects/fsociety/src/lib/mixins.stories.ts",
                 "type": "component",
                 "linktype": "component",
@@ -2542,6 +3164,146 @@
             },
             {
                 "filePath": "projects/fsociety/src/lib/profile-card/profile-card.stories.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "Story",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/select/select.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "AllVariants",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/select/select.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "CDN",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/select/select.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Default",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/select/select.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Disabled",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/select/select.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Error",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/select/select.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "I",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/select/select.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/select/select.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "PAISES",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/select/select.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "ROLES",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/select/select.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Searchable",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/select/select.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Success",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/select/select.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "TECHS",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/select/select.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "WithIcon",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/select/select.stories.ts",
                 "type": "type alias",
                 "linktype": "miscellaneous",
                 "linksubtype": "typealias",

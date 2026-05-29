@@ -71,21 +71,28 @@
   }
 
   &--outline {
-    background:   transparent;
-    color:        var(--fs-primary-base);
-    border-color: var(--fs-primary-base);
+    background:   var(--fs-color-surface);
+    color:        var(--fs-color-text-primary);
+    border-color: var(--fs-color-border-strong);
+    box-shadow:   var(--fs-shadow-sm);
 
-    &:hover:not(:disabled)  { background: var(--fs-primary-muted); }
-    &:active:not(:disabled) { background: var(--fs-primary-subtle); }
+    &:hover:not(:disabled)  {
+      border-color: var(--fs-color-text-secondary);
+      background:   var(--fs-color-surface-alt);
+    }
+    &:active:not(:disabled) {
+      border-color: var(--fs-color-text-secondary);
+      background:   var(--fs-color-border);
+    }
   }
 
   &--ghost {
     background:   transparent;
-    color:        var(--fs-primary-base);
+    color:        var(--fs-color-text-primary);
     border-color: transparent;
 
-    &:hover:not(:disabled)  { background: var(--fs-primary-muted); }
-    &:active:not(:disabled) { background: var(--fs-primary-subtle); }
+    &:hover:not(:disabled)  { background: var(--fs-color-surface-alt); }
+    &:active:not(:disabled) { background: var(--fs-color-border); }
   }
 
   &--danger {
@@ -110,6 +117,22 @@
 
     &:hover:not(:disabled)  { text-decoration-color: var(--fs-primary-base); }
     &:active:not(:disabled) { color: var(--fs-primary-active); text-decoration-color: var(--fs-primary-active); }
+  }
+
+  // -------------------------------------------------------------------------
+  // Icon-only — cuadrado, sin label visible
+  // -------------------------------------------------------------------------
+
+  &--icon-only {
+    padding: 0;
+
+    .fs-btn__label         { display: none; }
+    .fs-btn__icon--left    { margin-right: 0; }
+    .fs-btn__icon--right   { margin-left: 0; }
+
+    &.fs-btn--sm { width: 28px; }
+    &.fs-btn--md { width: 36px; }
+    &.fs-btn--lg { width: 44px; }
   }
 
   // -------------------------------------------------------------------------
@@ -150,8 +173,8 @@
   }
 
   &__icon {
-    display:     flex;
-    align-items: center;
+    width:      16px;
+    height:     16px;
     flex-shrink: 0;
 
     &--left  { margin-right: -(t.$fs-space-1); }

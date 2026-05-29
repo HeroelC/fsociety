@@ -1,0 +1,28 @@
+<div class="fs-seg" [class.fs-seg--disabled]="disabled">
+
+  @if (label) {
+    <span class="fs-seg__label">{{ label }}</span>
+  }
+
+  <div class="fs-seg__track" role="group">
+    @for (opt of options; track opt.value) {
+      <button
+        type="button"
+        class="fs-seg__item"
+        [class.fs-seg__item--selected]="value === opt.value"
+        [disabled]="disabled"
+        (click)="select(opt)"
+      >
+        @if (opt.icon) {
+          <span
+            class="fs-icon fs-seg__icon"
+            [style.--_icon]="'url(' + opt.icon + ')'"
+            aria-hidden="true"
+          ></span>
+        }
+        {{ opt.label }}
+      </button>
+    }
+  </div>
+
+</div>

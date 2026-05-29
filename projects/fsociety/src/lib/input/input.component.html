@@ -1,0 +1,102 @@
+<div class="fs-input">
+
+  @if (label) {
+    <label class="fs-input__label" [for]="inputId">{{ label }}</label>
+  }
+
+  <div
+    class="fs-input__wrapper"
+    [class.fs-input__wrapper--error]="state === 'error'"
+    [class.fs-input__wrapper--success]="state === 'success'"
+    [class.fs-input__wrapper--disabled]="disabled"
+  >
+    @if (iconLeft) {
+      <span
+        class="fs-icon fs-input__icon"
+        [style.--_icon]="'url(' + iconLeft + ')'"
+        aria-hidden="true"
+      ></span>
+    }
+
+    <input
+      #inputEl
+      class="fs-input__field"
+      [id]="inputId"
+      [type]="inputType"
+      [placeholder]="placeholder"
+      [disabled]="disabled"
+      [readonly]="readonly"
+      [value]="value"
+      (input)="onInput($event)"
+      (blur)="onBlur()"
+    />
+
+    @if (showClearBtn) {
+      <button
+        class="fs-input__action"
+        type="button"
+        aria-label="Limpiar"
+        (mousedown)="$event.preventDefault()"
+        (click)="clear(inputEl)"
+      >
+        <span
+          class="fs-icon fs-input__action-icon"
+          [style.--_icon]="'url(' + Icons.x + ')'"
+          aria-hidden="true"
+        ></span>
+      </button>
+    }
+
+    @if (showPasswordToggle) {
+      <button
+        class="fs-input__action"
+        type="button"
+        [attr.aria-label]="showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'"
+        (click)="togglePassword()"
+      >
+        <span
+          class="fs-icon fs-input__action-icon"
+          [style.--_icon]="showPassword ? 'url(' + Icons.eyeOff + ')' : 'url(' + Icons.eye + ')'"
+          aria-hidden="true"
+        ></span>
+      </button>
+    }
+
+    @if (showStateIcon) {
+      <span
+        class="fs-icon fs-input__state-icon"
+        [style.--_icon]="'url(' + stateIconUrl + ')'"
+        aria-hidden="true"
+      ></span>
+    }
+  </div>
+
+  @if (hint && state === 'default') {
+    <span class="fs-input__hint">{{ hint }}</span>
+  }
+
+  @if (state === 'error' && errorMessage) {
+    <span class="fs-input__message fs-input__message--error" role="alert">
+      <span
+        class="fs-icon"
+        [style.--_icon]="'url(' + Icons.alertCircle + ')'"
+        style="width:13px;height:13px"
+        aria-hidden="true"
+      ></span>
+      {{ errorMessage }}
+    </span>
+  }
+
+  @if (state === 'success' && successMessage) {
+    <span class="fs-input__message fs-input__message--success">
+      <span
+        class="fs-icon"
+        [style.--_icon]="'url(' + Icons.circleCheck + ')'"
+        style="width:13px;height:13px"
+        aria-hidden="true"
+      ></span>
+      {{ successMessage }}
+    </span>
+  }
+
+</div>
