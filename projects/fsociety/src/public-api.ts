@@ -46,3 +46,13 @@ export { FsToastStackComponent } from './lib/toast/toast-stack.component';
 
 export { FsTooltipComponent } from './lib/tooltip/tooltip.component';
 export type { FsTooltipSide } from './lib/tooltip/tooltip.component';
+
+export { FsHintComponent } from './lib/hint/hint.component';
+export type { FsHintTone } from './lib/hint/hint.component';
+export { FsFieldComponent } from './lib/hint/field.component';
+
+export { FsMultiSelectComponent } from './lib/multi-select/multi-select.component';
+export type { FsMultiSelectOption } from './lib/multi-select/multi-select.component';
+
+export { FsStepsComponent } from './lib/steps/steps.component';
+export type { FsStep } from './lib/steps/steps.component';

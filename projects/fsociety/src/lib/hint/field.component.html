@@ -1,0 +1,27 @@
+<div class="fs-field">
+  @if (label) {
+    <label class="fs-field__label" [for]="htmlFor || null">
+      @if (required) {
+        <span class="fs-field__req" aria-hidden="true">*</span>
+      }
+      {{ label }}
+      @if (optional) {
+        <span class="fs-field__opt">opcional</span>
+      }
+    </label>
+  }
+
+  <ng-content></ng-content>
+
+  @switch (messageType) {
+    @case ('error') {
+      <fs-hint tone="error">{{ error }}</fs-hint>
+    }
+    @case ('success') {
+      <fs-hint tone="success">{{ success }}</fs-hint>
+    }
+    @case ('hint') {
+      <fs-hint tone="default" [icon]="false">{{ hint }}</fs-hint>
+    }
+  }
+</div>

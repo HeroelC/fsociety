@@ -1,0 +1,10 @@
+<div class="fs-hint" [attr.data-tone]="tone">
+  @if (showIcon) {
+    <span
+      class="fs-icon fs-hint__icon"
+      [style.--_icon]="'url(' + iconUrl + ')'"
+      aria-hidden="true"
+    ></span>
+  }
+  <span><ng-content></ng-content></span>
+</div>

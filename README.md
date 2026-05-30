@@ -491,6 +491,85 @@ Etiqueta flotante CSS-only — sin JS. Se muestra al hacer hover.
 
 ---
 
+### `<fs-hint>` y `<fs-field>`
+
+Texto de apoyo bajo campos de formulario, en 4 tonos. `<fs-field>` es un wrapper con label, required/optional y prioridad de mensajes (error > success > hint).
+
+```html
+<fs-hint tone="error">La contraseña es demasiado corta.</fs-hint>
+<fs-hint tone="success">Contraseña segura.</fs-hint>
+<fs-hint tone="warning">Esta cuenta ya existe.</fs-hint>
+<fs-hint tone="default">Usá entre 8 y 32 caracteres.</fs-hint>
+
+<fs-field label="Correo" [required]="true" error="Email inválido.">
+  <fs-input type="email" [(ngModel)]="email"></fs-input>
+</fs-field>
+```
+
+| Input (`fs-hint`) | Tipo | Default | Descripción |
+|---|---|---|---|
+| `tone` | `'default' \| 'error' \| 'success' \| 'warning'` | `'default'` | Tono semántico |
+| `icon` | `boolean \| string \| undefined` | `undefined` | `undefined` = auto · `false` = sin ícono · `true` = forzar · URL = custom |
+
+| Input (`fs-field`) | Tipo | Default | Descripción |
+|---|---|---|---|
+| `label` | `string` | `''` | Etiqueta del campo |
+| `required` | `boolean` | `false` | Muestra `*` rojo |
+| `optional` | `boolean` | `false` | Muestra "opcional" tenue |
+| `hint` / `error` / `success` | `string` | `''` | Mensajes (prioridad: error > success > hint) |
+
+---
+
+### `<fs-multi-select>`
+
+Dropdown de selección múltiple con chips removibles, buscador y checkboxes. Implementa `ControlValueAccessor`.
+
+```typescript
+options: FsMultiSelectOption[] = [
+  { value: 'angular',    label: 'Angular' },
+  { value: 'typescript', label: 'TypeScript' },
+];
+```
+
+```html
+<fs-multi-select [options]="options" [(ngModel)]="selected"></fs-multi-select>
+<fs-multi-select [options]="options" [max]="3" [searchable]="false" [(ngModel)]="selected"></fs-multi-select>
+```
+
+| Input | Tipo | Default | Descripción |
+|---|---|---|---|
+| `options` | `FsMultiSelectOption[]` | `[]` | Array de `{ value, label }` |
+| `placeholder` | `string` | `'Seleccionar...'` | Texto cuando no hay selección |
+| `searchable` | `boolean` | `true` | Muestra buscador |
+| `max` | `number` | `0` | Límite de selecciones (0 = sin límite) |
+| `disabled` | `boolean` | `false` | Estado deshabilitado |
+
+---
+
+### `<fs-steps>`
+
+Indicador de progreso multi-paso puramente presentacional. El padre controla `current`.
+
+```typescript
+steps: FsStep[] = [
+  { label: 'Cuenta', desc: 'Datos básicos' },
+  { label: 'Perfil', desc: 'Tu información' },
+  { label: 'Plan',   desc: 'Elige y paga' },
+  { label: 'Listo',  desc: 'Confirmación' },
+];
+```
+
+```html
+<fs-steps [steps]="steps" [current]="2"></fs-steps>
+```
+
+| Input | Tipo | Default | Descripción |
+|---|---|---|---|
+| `steps` | `FsStep[]` | `[]` | Array de `{ label, desc? }` |
+| `current` | `number` | `0` | Índice activo (0-based) |
+
+---
+
 ### `<fs-experience-card>`
 
 ```typescript
@@ -779,6 +858,9 @@ Storybook en: **https://heroelc.github.io/fsociety**
 - [x] `fs-segmented` — control segmentado con íconos opcionales
 - [x] `fs-toast` — FsToastService + fs-toast-stack, 5 tonos, auto-dismiss
 - [x] `fs-tooltip` — CSS-only, top/bottom, alto contraste
+- [x] `fs-hint` + `fs-field` — mensajes de apoyo en 4 tonos, wrapper de campo
+- [x] `fs-multi-select` — chips removibles, buscador, checkboxes, max
+- [x] `fs-steps` — stepper multi-paso, completado/activo/pendiente
 - [x] Storybook en GitHub Pages
 - [ ] GitHub Actions CI/CD
 

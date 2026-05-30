@@ -499,6 +499,125 @@ Etiqueta flotante CSS-only — sin JS. Se muestra al hacer hover sobre el elemen
 
 ---
 
+### `<fs-hint>` y `<fs-field>`
+
+Texto de apoyo bajo campos de formulario. `<fs-field>` es un wrapper con label y prioridad de mensajes (error > success > hint).
+
+```html
+<!-- fs-hint directo -->
+<fs-hint tone="default">Usá entre 8 y 32 caracteres.</fs-hint>
+<fs-hint tone="error">La contraseña es demasiado corta.</fs-hint>
+<fs-hint tone="success">Contraseña segura.</fs-hint>
+<fs-hint tone="warning">Esta cuenta ya existe.</fs-hint>
+
+<!-- fs-field wrapper (recomendado con controles del kit) -->
+<fs-field label="Correo electrónico" hint="Usá tu correo de trabajo.">
+  <fs-input type="email" placeholder="tu@empresa.com" [(ngModel)]="email"></fs-input>
+</fs-field>
+
+<fs-field label="Contraseña" [required]="true" error="Contraseña demasiado corta.">
+  <fs-input type="password" [(ngModel)]="pass"></fs-input>
+</fs-field>
+
+<fs-field label="Nombre" [optional]="true" success="Nombre disponible.">
+  <fs-input placeholder="Ada Lovelace" [(ngModel)]="nombre"></fs-input>
+</fs-field>
+```
+
+**`<fs-hint>` inputs:**
+
+| Input | Tipo | Default | Descripción |
+|---|---|---|---|
+| `tone` | `'default' \| 'error' \| 'success' \| 'warning'` | `'default'` | Tono semántico |
+| `icon` | `boolean \| string \| undefined` | `undefined` | `undefined` = auto (solo tono no-default) · `false` = sin ícono · `true` = forzar ícono · `string` = URL custom |
+
+**`<fs-field>` inputs:**
+
+| Input | Tipo | Default | Descripción |
+|---|---|---|---|
+| `label` | `string` | `''` | Etiqueta del campo |
+| `htmlFor` | `string` | `''` | `for` del label (vincula con el id del input nativo) |
+| `required` | `boolean` | `false` | Muestra `*` en rojo |
+| `optional` | `boolean` | `false` | Muestra "opcional" tenue |
+| `hint` | `string` | `''` | Texto de ayuda (solo visible si no hay error ni success) |
+| `error` | `string` | `''` | Mensaje de error — tiene prioridad máxima |
+| `success` | `string` | `''` | Mensaje de éxito — prioridad media |
+
+---
+
+### `<fs-multi-select>`
+
+Dropdown de selección múltiple con chips removibles, buscador y checkboxes. Implementa `ControlValueAccessor`.
+
+```typescript
+import { FsMultiSelectComponent, FsMultiSelectOption } from '@heroelc/fsociety';
+
+options: FsMultiSelectOption[] = [
+  { value: 'angular',    label: 'Angular' },
+  { value: 'react',      label: 'React' },
+  { value: 'typescript', label: 'TypeScript' },
+];
+```
+
+```html
+<fs-multi-select
+  placeholder="Seleccionar tecnologías..."
+  [options]="options"
+  [(ngModel)]="selected"
+></fs-multi-select>
+
+<!-- Con límite y sin buscador -->
+<fs-multi-select
+  [options]="options"
+  [max]="3"
+  [searchable]="false"
+  [(ngModel)]="selected"
+></fs-multi-select>
+```
+
+| Input | Tipo | Default | Descripción |
+|---|---|---|---|
+| `options` | `FsMultiSelectOption[]` | `[]` | Array de `{ value, label }` |
+| `placeholder` | `string` | `'Seleccionar...'` | Texto cuando no hay selección |
+| `iconLeft` | `string` | `''` | URL ícono izquierdo (Iconify CDN) |
+| `searchable` | `boolean` | `true` | Muestra buscador dentro del menú |
+| `max` | `number` | `0` | Límite de selecciones (0 = sin límite) |
+| `disabled` | `boolean` | `false` | Estado deshabilitado |
+| `emptyText` | `string` | `'Sin resultados'` | Texto cuando no hay coincidencias |
+
+---
+
+### `<fs-steps>`
+
+Indicador de progreso multi-paso. Puramente presentacional — el padre controla `current`.
+
+```typescript
+import { FsStepsComponent, FsStep } from '@heroelc/fsociety';
+
+steps: FsStep[] = [
+  { label: 'Cuenta',  desc: 'Datos básicos' },
+  { label: 'Perfil',  desc: 'Tu información' },
+  { label: 'Plan',    desc: 'Elige y paga' },
+  { label: 'Listo',   desc: 'Confirmación' },
+];
+current = 2;
+```
+
+```html
+<fs-steps [steps]="steps" [current]="current"></fs-steps>
+```
+
+| Input | Tipo | Default | Descripción |
+|---|---|---|---|
+| `steps` | `FsStep[]` | `[]` | Array de `{ label, desc? }` |
+| `current` | `number` | `0` | Índice (0-based) del paso activo |
+
+- `i < current` → **completado** (check + fondo tenue)
+- `i === current` → **activo** (número + fondo primario)
+- `i > current` → **pendiente** (número + gris)
+
+---
+
 ### `<fs-experience-card>`
 
 ```typescript
@@ -683,6 +802,9 @@ Documentación visual en Storybook: [heroelc.github.io/fsociety](https://heroelc
 - [x] `fs-segmented` — control segmentado con íconos opcionales
 - [x] `fs-toast` — FsToastService + fs-toast-stack, 5 tonos, auto-dismiss
 - [x] `fs-tooltip` — CSS-only, top/bottom, alto contraste
+- [x] `fs-hint` + `fs-field` — mensajes de apoyo en 4 tonos, wrapper de campo
+- [x] `fs-multi-select` — chips removibles, buscador, checkboxes, max
+- [x] `fs-steps` — stepper multi-paso, completado/activo/pendiente
 - [x] Storybook en GitHub Pages
 - [ ] GitHub Actions CI/CD
 

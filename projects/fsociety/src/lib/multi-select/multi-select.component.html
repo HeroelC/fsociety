@@ -1,0 +1,139 @@
+<div class="fs-ms">
+
+  <div class="fs-ms__container">
+    <div
+      class="fs-ms__wrapper"
+      [class.fs-ms__wrapper--open]="open"
+      [class.fs-ms__wrapper--disabled]="disabled"
+    >
+      @if (iconLeft) {
+        <span
+          class="fs-icon fs-ms__icon"
+          [style.--_icon]="'url(' + iconLeft + ')'"
+          aria-hidden="true"
+        ></span>
+      }
+
+      <div
+        class="fs-ms__trigger"
+        role="combobox"
+        [attr.aria-expanded]="open"
+        aria-haspopup="listbox"
+        [attr.aria-disabled]="disabled || null"
+        (click)="toggle()"
+      >
+        @if (value.length === 0) {
+          <span class="fs-ms__placeholder">{{ placeholder }}</span>
+        }
+
+        @for (val of value; track val) {
+          <span class="fs-ms__chip">
+            {{ labelOf(val) }}
+            @if (!disabled) {
+              <button
+                class="fs-ms__chip-x"
+                type="button"
+                [attr.aria-label]="'Quitar ' + labelOf(val)"
+                (mousedown)="$event.stopPropagation()"
+                (click)="removeChip(val, $event)"
+              >
+                <span
+                  class="fs-icon"
+                  [style.--_icon]="'url(' + Icons.x + ')'"
+                  style="width:13px;height:13px"
+                  aria-hidden="true"
+                ></span>
+              </button>
+            }
+          </span>
+        }
+      </div>
+
+      <span class="fs-ms__chevron" aria-hidden="true">
+        <span
+          class="fs-icon"
+          [style.--_icon]="'url(' + Icons.chevronDown + ')'"
+          style="width:18px;height:18px"
+        ></span>
+      </span>
+    </div>
+
+    @if (open) {
+      <div
+        class="fs-ms__menu"
+        [ngStyle]="menuStyle"
+        role="listbox"
+        aria-multiselectable="true"
+      >
+        @if (searchable) {
+          <div class="fs-ms__search">
+            <span
+              class="fs-icon fs-ms__search-icon"
+              [style.--_icon]="'url(' + Icons.search + ')'"
+              aria-hidden="true"
+            ></span>
+            <input
+              #searchInput
+              class="fs-ms__search-input"
+              type="text"
+              placeholder="Buscar..."
+              [(ngModel)]="query"
+            />
+            @if (query) {
+              <button
+                class="fs-ms__search-clear"
+                type="button"
+                aria-label="Limpiar búsqueda"
+                (mousedown)="$event.preventDefault()"
+                (click)="query = ''"
+              >
+                <span
+                  class="fs-icon"
+                  [style.--_icon]="'url(' + Icons.x + ')'"
+                  style="width:14px;height:14px"
+                  aria-hidden="true"
+                ></span>
+              </button>
+            }
+          </div>
+        }
+
+        <div class="fs-ms__list">
+          @if (filteredOptions.length === 0) {
+            <div class="fs-ms__empty">{{ emptyText }}</div>
+          }
+
+          @for (opt of filteredOptions; track opt.value) {
+            <button
+              class="fs-ms__option"
+              [class.fs-ms__option--selected]="isSelected(opt.value)"
+              type="button"
+              role="option"
+              [attr.aria-selected]="isSelected(opt.value)"
+              [disabled]="max > 0 && value.length >= max && !isSelected(opt.value) || null"
+              (mousedown)="$event.preventDefault()"
+              (click)="toggleOption(opt.value)"
+            >
+              <span
+                class="fs-ms__checkbox"
+                [class.fs-ms__checkbox--checked]="isSelected(opt.value)"
+                aria-hidden="true"
+              >
+                @if (isSelected(opt.value)) {
+                  <span
+                    class="fs-icon"
+                    [style.--_icon]="'url(' + Icons.check + ')'"
+                    style="width:12px;height:12px"
+                  ></span>
+                }
+              </span>
+              <span class="fs-ms__option-label">{{ opt.label }}</span>
+            </button>
+          }
+        </div>
+
+      </div>
+    }
+  </div>
+
+</div>

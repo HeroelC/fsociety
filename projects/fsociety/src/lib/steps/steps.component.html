@@ -1,0 +1,33 @@
+<div class="fs-steps" role="list">
+  @for (step of steps; track step.label; let i = $index; let last = $last) {
+    <div
+      class="fs-step"
+      [attr.data-state]="stateOf(i)"
+      role="listitem"
+    >
+      <span class="fs-step__dot" [attr.aria-label]="stateOf(i) === 'done' ? 'Completado' : 'Paso ' + (i + 1)">
+        @if (stateOf(i) === 'done') {
+          <span
+            class="fs-icon"
+            [style.--_icon]="'url(' + checkIcon + ')'"
+            style="width:16px;height:16px"
+            aria-hidden="true"
+          ></span>
+        } @else {
+          {{ i + 1 }}
+        }
+      </span>
+
+      <div class="fs-step__tx">
+        <span class="fs-step__label">{{ step.label }}</span>
+        @if (step.desc) {
+          <span class="fs-step__desc">{{ step.desc }}</span>
+        }
+      </div>
+
+      @if (!last) {
+        <span class="fs-step__line" aria-hidden="true"></span>
+      }
+    </div>
+  }
+</div>

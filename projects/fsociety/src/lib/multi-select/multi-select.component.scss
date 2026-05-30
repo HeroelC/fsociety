@@ -1,0 +1,273 @@
+@keyframes fs-ms-in {
+  from { opacity: 0; transform: translateY(-6px) scale(0.97); }
+  to   { opacity: 1; transform: none; }
+}
+
+.fs-ms {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  // ─── Container ──────────────────────────────────────────────────────────
+  &__container {
+    position: relative;
+  }
+
+  // ─── Trigger wrapper ────────────────────────────────────────────────────
+  &__wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 40px;
+    padding: 4px 8px 4px 13px;
+    border: 1px solid var(--fs-color-border-field);
+    border-radius: var(--fs-radius-md);
+    background: var(--fs-color-surface);
+    transition: border-color 180ms ease, box-shadow 180ms ease;
+    cursor: pointer;
+
+    &:hover:not(.fs-ms__wrapper--disabled):not(.fs-ms__wrapper--open) {
+      border-color: var(--fs-color-border-strong);
+    }
+
+    &--open {
+      border-color: var(--fs-color-primary);
+      box-shadow: 0 0 0 2.5px color-mix(in srgb, var(--fs-color-primary) 15%, transparent);
+    }
+
+    &--disabled {
+      background: var(--fs-color-surface-alt);
+      opacity: 0.7;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+  }
+
+  // ─── Left icon ──────────────────────────────────────────────────────────
+  &__icon {
+    width: 18px;
+    height: 18px;
+    color: var(--fs-color-text-secondary);
+    flex-shrink: 0;
+  }
+
+  // ─── Chips area ─────────────────────────────────────────────────────────
+  &__trigger {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 5px;
+    flex: 1;
+    min-width: 0;
+    padding: 3px 0;
+    cursor: pointer;
+  }
+
+  &__placeholder {
+    font-size: 14px;
+    color: var(--fs-color-text-placeholder);
+    line-height: 1;
+  }
+
+  // ─── Chip ────────────────────────────────────────────────────────────────
+  &__chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    height: 24px;
+    padding: 0 3px 0 9px;
+    background: color-mix(in srgb, var(--fs-color-primary) 12%, transparent);
+    color: var(--fs-color-primary);
+    border-radius: calc(var(--fs-radius-md) * 0.65);
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  &__chip-x {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    padding: 0;
+    border: none;
+    border-radius: 4px;
+    background: transparent;
+    color: currentColor;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 120ms ease, background 120ms ease;
+
+    &:hover {
+      opacity: 1;
+      background: color-mix(in srgb, var(--fs-color-primary) 18%, transparent);
+    }
+  }
+
+  // ─── Chevron ─────────────────────────────────────────────────────────────
+  &__chevron {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    color: var(--fs-color-text-secondary);
+    pointer-events: none;
+    transition: transform 200ms ease, color 150ms ease;
+    margin-right: -2px;
+
+    .fs-ms__wrapper--open & {
+      transform: rotate(180deg);
+      color: var(--fs-color-primary);
+    }
+  }
+
+  // ─── Dropdown menu ────────────────────────────────────────────────────────
+  &__menu {
+    position: fixed;
+    z-index: 9999;
+    box-sizing: border-box;
+    background: var(--fs-color-surface);
+    border: 1px solid var(--fs-color-border);
+    border-radius: var(--fs-radius-lg);
+    padding: 5px;
+    box-shadow: var(--fs-color-shadow-pop);
+    display: flex;
+    flex-direction: column;
+    animation: fs-ms-in 150ms cubic-bezier(0.2, 0.7, 0.3, 1);
+  }
+
+  // ─── Search ───────────────────────────────────────────────────────────────
+  &__search {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 9px 7px 10px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid var(--fs-color-border);
+  }
+
+  &__search-icon {
+    width: 16px;
+    height: 16px;
+    color: var(--fs-color-text-secondary);
+    flex-shrink: 0;
+  }
+
+  &__search-input {
+    flex: 1;
+    min-width: 0;
+    border: none;
+    outline: none;
+    background: transparent;
+    font: inherit;
+    font-size: 14px;
+    color: var(--fs-color-text-primary);
+    padding: 2px 0;
+
+    &::placeholder { color: var(--fs-color-text-placeholder); }
+  }
+
+  &__search-clear {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    border-radius: var(--fs-radius-sm);
+    color: var(--fs-color-text-secondary);
+    cursor: pointer;
+    transition: background 120ms ease, color 120ms ease;
+
+    &:hover {
+      background: var(--fs-color-surface-alt);
+      color: var(--fs-color-text-primary);
+    }
+  }
+
+  // ─── Options list ─────────────────────────────────────────────────────────
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    overflow-y: auto;
+    max-height: 256px;
+    padding: 1px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--fs-color-border-strong) transparent;
+
+    &::-webkit-scrollbar { width: 9px; }
+    &::-webkit-scrollbar-thumb {
+      background: var(--fs-color-border-strong);
+      border-radius: 5px;
+      border: 2.5px solid transparent;
+      background-clip: content-box;
+    }
+  }
+
+  // ─── Option ───────────────────────────────────────────────────────────────
+  &__option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 9px 10px;
+    border: none;
+    background: transparent;
+    border-radius: calc(var(--fs-radius-md) * 0.7);
+    cursor: pointer;
+    font: inherit;
+    font-size: 14px;
+    color: var(--fs-color-text-primary);
+    text-align: left;
+    transition: background 100ms ease;
+
+    &:hover:not(:disabled) { background: var(--fs-color-surface-alt); }
+
+    &--selected {
+      background: color-mix(in srgb, var(--fs-color-primary) 7%, transparent);
+
+      .fs-ms__option-label {
+        color: var(--fs-color-primary);
+        font-weight: 600;
+      }
+    }
+
+    &:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+  }
+
+  // ─── Inline checkbox ──────────────────────────────────────────────────────
+  &__checkbox {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    background: var(--fs-color-surface);
+    border: 1.5px solid var(--fs-color-border-strong);
+    border-radius: 5px;
+    color: #fff;
+    transition: background 120ms ease, border-color 120ms ease;
+
+    &--checked {
+      background: var(--fs-color-primary);
+      border-color: var(--fs-color-primary);
+    }
+  }
+
+  &__option-label { flex: 1; min-width: 0; }
+
+  // ─── Empty ────────────────────────────────────────────────────────────────
+  &__empty {
+    padding: 22px 12px;
+    text-align: center;
+    color: var(--fs-color-text-secondary);
+    font-size: 12.5px;
+  }
+}
