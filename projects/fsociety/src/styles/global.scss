@@ -37,6 +37,7 @@ body {
   --fs-color-primary:          var(--fs-primary-base);
   --fs-color-error:            var(--fs-danger-base);
   --fs-color-success:          var(--fs-success-base);
+  --fs-color-warning:          var(--fs-warning-base);
   --fs-color-shadow-pop:       0 8px 24px -4px rgba(140, 149, 159, 0.25),
                                0 4px 12px -4px rgba(140, 149, 159, 0.15);
 }
@@ -55,6 +56,7 @@ body {
   --fs-color-primary:          var(--fs-primary-base);
   --fs-color-error:            var(--fs-danger-base);
   --fs-color-success:          var(--fs-success-base);
+  --fs-color-warning:          var(--fs-warning-base);
   --fs-color-shadow-pop:       0 12px 34px -8px rgba(0, 0, 0, 0.55),
                                0 4px 12px -4px rgba(0, 0, 0, 0.35);
 }

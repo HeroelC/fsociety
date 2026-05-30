@@ -615,6 +615,46 @@
                 "name": "AllVariants",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "projects/fsociety/src/lib/choice/checkbox.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  render: () => ({\n    props: {\n      v1: false,\n      v2: true,\n      v3: false,\n      v4: false,\n      v5: true,\n    },\n    template: `\n      <div style=\"display: flex; flex-direction: column; gap: 1.25rem;\">\n        <fs-checkbox\n          label=\"Acepto los términos\"\n          [(ngModel)]=\"v1\"\n        ></fs-checkbox>\n\n        <fs-checkbox\n          label=\"Notificaciones por email\"\n          description=\"Recibirás resúmenes semanales y alertas importantes.\"\n          [(ngModel)]=\"v2\"\n        ></fs-checkbox>\n\n        <fs-checkbox\n          label=\"Seleccionar todo\"\n          description=\"Algunos elementos están seleccionados.\"\n          [indeterminate]=\"true\"\n        ></fs-checkbox>\n\n        <fs-checkbox\n          label=\"Acepto los términos\"\n          state=\"error\"\n          errorMessage=\"Debes aceptar los términos para continuar.\"\n          [(ngModel)]=\"v4\"\n        ></fs-checkbox>\n\n        <fs-checkbox\n          label=\"Plan Pro activo\"\n          description=\"Este ajuste lo gestiona tu administrador.\"\n          [disabled]=\"true\"\n          [(ngModel)]=\"v5\"\n        ></fs-checkbox>\n      </div>\n    `,\n  }),\n  parameters: { layout: 'padded' },\n}"
+            },
+            {
+                "name": "AllVariants",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/choice/radio-group.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  render: () => ({\n    props: { rol: '', plan: 'pro', ROLES, PLANS },\n    template: `\n      <div style=\"display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem 2rem;\">\n        <fs-radio-group\n          label=\"Rol de usuario\"\n          [options]=\"ROLES\"\n          [(ngModel)]=\"rol\"\n        ></fs-radio-group>\n\n        <fs-radio-group\n          label=\"Plan\"\n          description=\"Elige el plan que mejor se adapte a tus necesidades.\"\n          [options]=\"PLANS\"\n          [(ngModel)]=\"plan\"\n        ></fs-radio-group>\n\n        <fs-radio-group\n          label=\"Rol de usuario\"\n          [options]=\"ROLES\"\n          state=\"error\"\n          errorMessage=\"Debes seleccionar un rol para continuar.\"\n        ></fs-radio-group>\n\n        <fs-radio-group\n          label=\"Plan actual\"\n          [options]=\"PLANS\"\n          [disabled]=\"true\"\n          [(ngModel)]=\"plan\"\n        ></fs-radio-group>\n      </div>\n    `,\n  }),\n  parameters: { layout: 'padded' },\n}"
+            },
+            {
+                "name": "AllVariants",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/choice/segmented.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  render: () => ({\n    props: {\n      view:   'list',\n      period: '30d',\n      vicon:  'grid',\n      VIEWS, PERIODS, VIEWS_ICON,\n    },\n    template: `\n      <div style=\"display: flex; flex-direction: column; gap: 1.5rem; max-width: 480px;\">\n        <fs-segmented [options]=\"VIEWS\" [(ngModel)]=\"view\"></fs-segmented>\n\n        <fs-segmented label=\"Período\" [options]=\"PERIODS\" [(ngModel)]=\"period\"></fs-segmented>\n\n        <fs-segmented label=\"Vista\" [options]=\"VIEWS_ICON\" [(ngModel)]=\"vicon\"></fs-segmented>\n\n        <fs-segmented label=\"Período (deshabilitado)\" [options]=\"PERIODS\" [disabled]=\"true\" [(ngModel)]=\"period\"></fs-segmented>\n      </div>\n    `,\n  }),\n  parameters: { layout: 'padded' },\n}"
+            },
+            {
+                "name": "AllVariants",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/choice/switch.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  render: () => ({\n    props: {\n      push:   false,\n      dark:   true,\n      emails: false,\n      twofa:  true,\n    },\n    template: `\n      <div style=\"display: flex; flex-direction: column; gap: 1.25rem;\">\n        <fs-switch\n          label=\"Notificaciones push\"\n          [(ngModel)]=\"push\"\n        ></fs-switch>\n\n        <fs-switch\n          label=\"Modo oscuro\"\n          description=\"Reduce el brillo de la interfaz para ambientes con poca luz.\"\n          [(ngModel)]=\"dark\"\n        ></fs-switch>\n\n        <fs-switch\n          label=\"Resumen semanal por email\"\n          description=\"Te enviaremos un reporte cada lunes a las 9 am.\"\n          [(ngModel)]=\"emails\"\n        ></fs-switch>\n\n        <fs-switch\n          label=\"Autenticación en dos pasos\"\n          description=\"Activado por tu organización.\"\n          [disabled]=\"true\"\n          [(ngModel)]=\"twofa\"\n        ></fs-switch>\n      </div>\n    `,\n  }),\n  parameters: { layout: 'padded' },\n}"
+            },
+            {
+                "name": "AllVariants",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "projects/fsociety/src/lib/input/input.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -655,6 +695,16 @@
                 "name": "CDN",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "projects/fsociety/src/lib/choice/segmented.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "string",
+                "defaultValue": "'https://api.iconify.design'"
+            },
+            {
+                "name": "CDN",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "projects/fsociety/src/lib/input/input.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -670,6 +720,16 @@
                 "deprecationMessage": "",
                 "type": "string",
                 "defaultValue": "'https://api.iconify.design'"
+            },
+            {
+                "name": "Checked",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/choice/checkbox.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  render: (args) => ({\n    props: { ...args, model: true },\n    template: `\n      <fs-checkbox\n        label=\"Acepto los términos\"\n        description=\"He leído y acepto los términos de uso y la política de privacidad.\"\n        [(ngModel)]=\"model\"\n      ></fs-checkbox>\n    `,\n  }),\n}"
             },
             {
                 "name": "Clearable",
@@ -715,6 +775,46 @@
                 "name": "Default",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "projects/fsociety/src/lib/choice/checkbox.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    label: 'Acepto los términos',\n  },\n}"
+            },
+            {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/choice/radio-group.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    label: 'Rol de usuario',\n    options: ROLES,\n  },\n}"
+            },
+            {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/choice/segmented.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  render: (args) => ({\n    props: { ...args, model: 'list' },\n    template: `\n      <fs-segmented [options]=\"options\" [(ngModel)]=\"model\"></fs-segmented>\n    `,\n  }),\n  args: { options: VIEWS },\n}"
+            },
+            {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/choice/switch.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    label: 'Notificaciones push',\n  },\n}"
+            },
+            {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "projects/fsociety/src/lib/input/input.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -745,6 +845,36 @@
                 "name": "Disabled",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "projects/fsociety/src/lib/choice/checkbox.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  render: (args) => ({\n    props: { ...args, model: true },\n    template: `\n      <fs-checkbox\n        label=\"Plan Pro activo\"\n        description=\"Este ajuste lo gestiona tu administrador.\"\n        [disabled]=\"true\"\n        [(ngModel)]=\"model\"\n      ></fs-checkbox>\n    `,\n  }),\n}"
+            },
+            {
+                "name": "Disabled",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/choice/radio-group.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  render: (args) => ({\n    props: { ...args, model: 'pro' },\n    template: `\n      <fs-radio-group\n        label=\"Plan actual\"\n        [options]=\"options\"\n        [disabled]=\"true\"\n        [(ngModel)]=\"model\"\n      ></fs-radio-group>\n    `,\n  }),\n  args: { options: PLANS },\n}"
+            },
+            {
+                "name": "Disabled",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/choice/segmented.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  render: (args) => ({\n    props: { ...args, model: '30d' },\n    template: `\n      <fs-segmented label=\"Período\" [options]=\"options\" [disabled]=\"true\" [(ngModel)]=\"model\"></fs-segmented>\n    `,\n  }),\n  args: { options: PERIODS },\n}"
+            },
+            {
+                "name": "Disabled",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "projects/fsociety/src/lib/input/input.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -760,6 +890,46 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\n  render: (args) => ({\n    props: { ...args, model: 'editor' },\n    template: `\n      <fs-select\n        label=\"Rol asignado\"\n        [disabled]=\"true\"\n        [options]=\"options\"\n        [(ngModel)]=\"model\"\n      ></fs-select>\n    `,\n  }),\n  args: { options: ROLES },\n}"
+            },
+            {
+                "name": "DisabledOff",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/choice/switch.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    label: 'Autenticación en dos pasos',\n    description: 'Activado por tu organización.',\n    disabled: true,\n  },\n}"
+            },
+            {
+                "name": "DisabledOn",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/choice/switch.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  render: (args) => ({\n    props: { ...args, model: true },\n    template: `\n      <fs-switch\n        label=\"Autenticación en dos pasos\"\n        description=\"Activado por tu organización.\"\n        [disabled]=\"true\"\n        [(ngModel)]=\"model\"\n      ></fs-switch>\n    `,\n  }),\n}"
+            },
+            {
+                "name": "Error",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/choice/checkbox.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    label: 'Acepto los términos',\n    state: 'error',\n    errorMessage: 'Debes aceptar los términos para continuar.',\n  },\n}"
+            },
+            {
+                "name": "Error",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/choice/radio-group.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    label: 'Rol de usuario',\n    options: ROLES,\n    state: 'error',\n    errorMessage: 'Debes seleccionar un rol para continuar.',\n  },\n}"
             },
             {
                 "name": "Error",
@@ -902,6 +1072,16 @@
                 "defaultValue": "{\n  name:   'Solo ícono',\n  render: () => ({\n    props: { I },\n    template: `\n      <div style=\"display:flex; flex-direction:column; gap:20px;\">\n\n        <div style=\"display:flex; flex-wrap:wrap; gap:10px; align-items:center;\">\n          <span style=\"font-size:12px;color:#888;width:80px\">Primary</span>\n          <fs-button variant=\"primary\"   [iconLeft]=\"I.plus\"     [iconOnly]=\"true\" size=\"sm\" ariaLabel=\"Agregar\"></fs-button>\n          <fs-button variant=\"primary\"   [iconLeft]=\"I.plus\"     [iconOnly]=\"true\" size=\"md\" ariaLabel=\"Agregar\"></fs-button>\n          <fs-button variant=\"primary\"   [iconLeft]=\"I.plus\"     [iconOnly]=\"true\" size=\"lg\" ariaLabel=\"Agregar\"></fs-button>\n        </div>\n\n        <div style=\"display:flex; flex-wrap:wrap; gap:10px; align-items:center;\">\n          <span style=\"font-size:12px;color:#888;width:80px\">Outline</span>\n          <fs-button variant=\"outline\"   [iconLeft]=\"I.edit\"     [iconOnly]=\"true\" size=\"sm\" ariaLabel=\"Editar\"></fs-button>\n          <fs-button variant=\"outline\"   [iconLeft]=\"I.edit\"     [iconOnly]=\"true\" size=\"md\" ariaLabel=\"Editar\"></fs-button>\n          <fs-button variant=\"outline\"   [iconLeft]=\"I.edit\"     [iconOnly]=\"true\" size=\"lg\" ariaLabel=\"Editar\"></fs-button>\n        </div>\n\n        <div style=\"display:flex; flex-wrap:wrap; gap:10px; align-items:center;\">\n          <span style=\"font-size:12px;color:#888;width:80px\">Ghost</span>\n          <fs-button variant=\"ghost\"     [iconLeft]=\"I.settings\" [iconOnly]=\"true\" size=\"sm\" ariaLabel=\"Configuración\"></fs-button>\n          <fs-button variant=\"ghost\"     [iconLeft]=\"I.settings\" [iconOnly]=\"true\" size=\"md\" ariaLabel=\"Configuración\"></fs-button>\n          <fs-button variant=\"ghost\"     [iconLeft]=\"I.settings\" [iconOnly]=\"true\" size=\"lg\" ariaLabel=\"Configuración\"></fs-button>\n        </div>\n\n        <div style=\"display:flex; flex-wrap:wrap; gap:10px; align-items:center;\">\n          <span style=\"font-size:12px;color:#888;width:80px\">Danger</span>\n          <fs-button variant=\"danger\"    [iconLeft]=\"I.trash\"    [iconOnly]=\"true\" size=\"sm\" ariaLabel=\"Eliminar\"></fs-button>\n          <fs-button variant=\"danger\"    [iconLeft]=\"I.trash\"    [iconOnly]=\"true\" size=\"md\" ariaLabel=\"Eliminar\"></fs-button>\n          <fs-button variant=\"danger\"    [iconLeft]=\"I.trash\"    [iconOnly]=\"true\" size=\"lg\" ariaLabel=\"Eliminar\"></fs-button>\n        </div>\n\n        <div style=\"display:flex; flex-wrap:wrap; gap:10px; align-items:center;\">\n          <span style=\"font-size:12px;color:#888;width:80px\">Disabled</span>\n          <fs-button variant=\"ghost\"  [iconLeft]=\"I.heart\"    [iconOnly]=\"true\" [disabled]=\"true\" ariaLabel=\"Me gusta\"></fs-button>\n          <fs-button variant=\"outline\" [iconLeft]=\"I.download\" [iconOnly]=\"true\" [disabled]=\"true\" ariaLabel=\"Descargar\"></fs-button>\n        </div>\n\n      </div>\n    `,\n  }),\n}"
             },
             {
+                "name": "Indeterminate",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/choice/checkbox.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    label: 'Seleccionar todo',\n    description: 'Algunos elementos están seleccionados.',\n    indeterminate: true,\n  },\n}"
+            },
+            {
                 "name": "InPortfolio",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -995,6 +1175,46 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "projects/fsociety/src/lib/choice/checkbox.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<FsCheckboxComponent>",
+                "defaultValue": "{\n  title: 'Components/Checkbox',\n  component: FsCheckboxComponent,\n  decorators: [\n    moduleMetadata({\n      imports: [FsCheckboxComponent, FormsModule],\n    }),\n  ],\n  tags: ['autodocs'],\n  argTypes: {\n    state: {\n      control: 'select',\n      options: ['default', 'error'],\n    },\n  },\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/choice/radio-group.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<FsRadioGroupComponent>",
+                "defaultValue": "{\n  title: 'Components/RadioGroup',\n  component: FsRadioGroupComponent,\n  decorators: [\n    moduleMetadata({\n      imports: [FsRadioGroupComponent, FormsModule],\n    }),\n  ],\n  tags: ['autodocs'],\n  argTypes: {\n    state: {\n      control: 'select',\n      options: ['default', 'error'],\n    },\n    options: { control: false },\n  },\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/choice/segmented.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<FsSegmentedComponent>",
+                "defaultValue": "{\n  title: 'Components/Segmented',\n  component: FsSegmentedComponent,\n  decorators: [\n    moduleMetadata({\n      imports: [FsSegmentedComponent, FormsModule],\n    }),\n  ],\n  tags: ['autodocs'],\n  argTypes: {\n    options: { control: false },\n  },\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/choice/switch.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<FsSwitchComponent>",
+                "defaultValue": "{\n  title: 'Components/Switch',\n  component: FsSwitchComponent,\n  decorators: [\n    moduleMetadata({\n      imports: [FsSwitchComponent, FormsModule],\n    }),\n  ],\n  tags: ['autodocs'],\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "projects/fsociety/src/lib/input/input.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -1062,6 +1282,16 @@
                 "defaultValue": "{\n  name: 'Sin redondeo — full width',\n  render: () => ({\n    template: `\n      <div style=\"--fs-profile-radius: 0\">\n        <fs-profile-card\n          name=\"Chris Morgan\"\n          handle=\"chrismorgan\"\n          role=\"Backend Developer\"\n          avatarUrl=\"https://i.pravatar.cc/150?img=33\"\n          bannerUrl=\"https://picsum.photos/seed/banner3/800/200\"\n          [verified]=\"true\"\n          [links]=\"links\"\n          [badges]=\"badges\"\n          [stats]=\"stats\"\n        />\n      </div>\n    `,\n    props: {\n      links:  FAKE_LINKS,\n      badges: FAKE_BADGES,\n      stats:  FAKE_STATS,\n    },\n  }),\n}"
             },
             {
+                "name": "On",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/choice/switch.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  render: (args) => ({\n    props: { ...args, model: true },\n    template: `\n      <fs-switch\n        label=\"Notificaciones push\"\n        description=\"Recibirás alertas en tiempo real.\"\n        [(ngModel)]=\"model\"\n      ></fs-switch>\n    `,\n  }),\n}"
+            },
+            {
                 "name": "Outline",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -1100,6 +1330,26 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\n  name: 'Trabajo pasado',\n  args: {\n    experience: EXPERIENCE_PAST,\n    variant:    'full',\n    timeline:   false,\n  },\n}"
+            },
+            {
+                "name": "PERIODS",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/choice/segmented.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "FsSegmentOption[]",
+                "defaultValue": "[\n  { value: '7d',  label: '7 días' },\n  { value: '30d', label: '30 días' },\n  { value: '90d', label: '90 días' },\n  { value: '1y',  label: '1 año' },\n]"
+            },
+            {
+                "name": "PLANS",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/choice/radio-group.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "FsRadioOption[]",
+                "defaultValue": "[\n  { value: 'free',    label: 'Gratuito',    description: 'Hasta 3 proyectos, 500 MB de almacenamiento.' },\n  { value: 'pro',     label: 'Pro',         description: 'Proyectos ilimitados, 50 GB, soporte prioritario.' },\n  { value: 'team',    label: 'Equipo',      description: 'Todo Pro + colaboración, roles y auditoría.' },\n]"
             },
             {
                 "name": "Playground",
@@ -1175,6 +1425,16 @@
                 "name": "ROLES",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "projects/fsociety/src/lib/choice/radio-group.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "FsRadioOption[]",
+                "defaultValue": "[\n  { value: 'admin',  label: 'Administrador' },\n  { value: 'editor', label: 'Editor' },\n  { value: 'viewer', label: 'Visor' },\n]"
+            },
+            {
+                "name": "ROLES",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "projects/fsociety/src/lib/select/select.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -1200,6 +1460,16 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\n  render: (args) => ({\n    props: { ...args, model: '', icon: I.code },\n    template: `\n      <fs-select\n        label=\"Tecnología\"\n        [iconLeft]=\"icon\"\n        placeholder=\"Seleccionar tecnología...\"\n        [searchable]=\"true\"\n        [options]=\"options\"\n        [(ngModel)]=\"model\"\n      ></fs-select>\n    `,\n  }),\n  args: { options: TECHS },\n}"
+            },
+            {
+                "name": "Selected",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/choice/radio-group.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  render: (args) => ({\n    props: { ...args, model: 'pro' },\n    template: `\n      <fs-radio-group\n        label=\"Plan\"\n        description=\"Elige el plan que mejor se adapte a tus necesidades.\"\n        [options]=\"options\"\n        [(ngModel)]=\"model\"\n      ></fs-radio-group>\n    `,\n  }),\n  args: { options: PLANS },\n}"
             },
             {
                 "name": "SemanticColors",
@@ -1302,6 +1572,26 @@
                 "defaultValue": "{\n  name: '2 tabs — 50/50',\n  args: {\n    activeTab: 'info',\n    tabs: [\n      { id: 'info',     label: 'Información' },\n      { id: 'settings', label: 'Configuración' },\n    ],\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <fs-tabs [tabs]=\"tabs\" [(activeTab)]=\"activeTab\">\n        <div style=\"padding:20px 0; color:rgba(255,255,255,0.6); font-size:13px;\">\n          Tab activa: {{ activeTab }}\n        </div>\n      </fs-tabs>\n    `,\n  }),\n}"
             },
             {
+                "name": "VIEWS",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/choice/segmented.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "FsSegmentOption[]",
+                "defaultValue": "[\n  { value: 'list',  label: 'Lista' },\n  { value: 'grid',  label: 'Cuadrícula' },\n  { value: 'table', label: 'Tabla' },\n]"
+            },
+            {
+                "name": "VIEWS_ICON",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/choice/segmented.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "FsSegmentOption[]",
+                "defaultValue": "[\n  { value: 'list',  label: 'Lista',        icon: `${CDN}/tabler:list.svg` },\n  { value: 'grid',  label: 'Cuadrícula',   icon: `${CDN}/tabler:layout-grid.svg` },\n  { value: 'table', label: 'Tabla',        icon: `${CDN}/tabler:table.svg` },\n]"
+            },
+            {
                 "name": "WithActions",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -1320,6 +1610,36 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\n  name: 'Con contenido — portfolio completo',\n  args: {\n    activeTab: 'experiencia',\n    tabs: [\n      { id: 'experiencia', label: 'Experiencia' },\n      { id: 'sobre-mi',    label: 'Sobre mí' },\n      { id: 'formacion',   label: 'Formación' },\n    ],\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <fs-tabs [tabs]=\"tabs\" [(activeTab)]=\"activeTab\">\n        <div style=\"padding:24px 0;\">\n          <div *ngIf=\"activeTab === 'experiencia'\" style=\"color:rgba(255,255,255,0.6); font-size:13px; line-height:1.7;\">\n            <strong style=\"color:white\">Xcale Consulting</strong> · Frontend Developer · abr 2022 – actualidad<br/>\n            Angular, TypeScript, AWS, Node.js, Angular Material\n          </div>\n          <div *ngIf=\"activeTab === 'sobre-mi'\" style=\"color:rgba(255,255,255,0.6); font-size:13px; line-height:1.7;\">\n            Frontend Developer con 4+ años de experiencia en Angular y ecosistema frontend moderno.\n          </div>\n          <div *ngIf=\"activeTab === 'formacion'\" style=\"color:rgba(255,255,255,0.6); font-size:13px; line-height:1.7;\">\n            <strong style=\"color:white\">Universidad Nacional del Centro</strong> · Analista en Sistemas\n          </div>\n        </div>\n      </fs-tabs>\n    `,\n  }),\n}"
+            },
+            {
+                "name": "WithDescription",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/choice/checkbox.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    label: 'Notificaciones por email',\n    description: 'Recibirás resúmenes semanales y alertas importantes.',\n  },\n}"
+            },
+            {
+                "name": "WithDescription",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/choice/switch.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    label: 'Modo oscuro',\n    description: 'Reduce el brillo de la interfaz para ambientes con poca luz.',\n  },\n}"
+            },
+            {
+                "name": "WithDescriptions",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/choice/radio-group.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    label: 'Plan',\n    description: 'Elige el plan que mejor se adapte a tus necesidades.',\n    options: PLANS,\n  },\n}"
             },
             {
                 "name": "WithDisabled",
@@ -1352,6 +1672,16 @@
                 "defaultValue": "{\n  name:   'Con íconos',\n  render: () => ({\n    props: { I },\n    template: `\n      <div style=\"display:flex; flex-wrap:wrap; gap:12px; align-items:center;\">\n        <fs-button [iconRight]=\"I.arrow\">Ver más</fs-button>\n        <fs-button [iconLeft]=\"I.save\" variant=\"outline\">Guardar</fs-button>\n        <fs-button [iconLeft]=\"I.trash\" variant=\"danger\">Eliminar</fs-button>\n        <fs-button [iconLeft]=\"I.save\" variant=\"ghost\">Guardar borrador</fs-button>\n        <fs-button [iconLeft]=\"I.link\" variant=\"link\">Ver enlace</fs-button>\n      </div>\n    `,\n  }),\n}"
             },
             {
+                "name": "WithIcons",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/choice/segmented.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  render: (args) => ({\n    props: { ...args, model: 'grid' },\n    template: `\n      <fs-segmented label=\"Vista\" [options]=\"options\" [(ngModel)]=\"model\"></fs-segmented>\n    `,\n  }),\n  args: { options: VIEWS_ICON },\n}"
+            },
+            {
                 "name": "WithImages",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -1380,6 +1710,16 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\n  name: 'Sin imágenes — iniciales + degradé',\n  args: {\n    name:     'Alex Rivera',\n    handle:   'alexrivera',\n    role:     'Frontend Developer',\n    verified: false,\n    links:    FAKE_LINKS,\n    badges:   [\n      { label: 'Vue.js',  customColor: '#22c55e' },\n      { label: 'Python',  customColor: '#3b82f6' },\n      { label: 'Docker',  color: 'neutral' as const },\n    ],\n    stats: FAKE_STATS,\n  },\n}"
+            },
+            {
+                "name": "WithLabel",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/fsociety/src/lib/choice/segmented.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  render: (args) => ({\n    props: { ...args, model: '30d' },\n    template: `\n      <fs-segmented label=\"Período\" [options]=\"options\" [(ngModel)]=\"model\"></fs-segmented>\n    `,\n  }),\n  args: { options: PERIODS },\n}"
             },
             {
                 "name": "WithoutTitle",
@@ -1455,6 +1795,50 @@
                 "subtype": "typealias",
                 "rawtype": "StoryObj<FsExperienceCardComponent>",
                 "file": "projects/fsociety/src/lib/experience-card/experience-card.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 184
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<FsCheckboxComponent>",
+                "file": "projects/fsociety/src/lib/choice/checkbox.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 184
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<FsRadioGroupComponent>",
+                "file": "projects/fsociety/src/lib/choice/radio-group.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 184
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<FsSegmentedComponent>",
+                "file": "projects/fsociety/src/lib/choice/segmented.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 184
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<FsSwitchComponent>",
+                "file": "projects/fsociety/src/lib/choice/switch.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -1689,6 +2073,354 @@
                     "deprecationMessage": "",
                     "type": "Story",
                     "defaultValue": "{\n  name:   'Con íconos',\n  render: () => ({\n    props: { I },\n    template: `\n      <div style=\"display:flex; flex-wrap:wrap; gap:12px; align-items:center;\">\n        <fs-button [iconRight]=\"I.arrow\">Ver más</fs-button>\n        <fs-button [iconLeft]=\"I.save\" variant=\"outline\">Guardar</fs-button>\n        <fs-button [iconLeft]=\"I.trash\" variant=\"danger\">Eliminar</fs-button>\n        <fs-button [iconLeft]=\"I.save\" variant=\"ghost\">Guardar borrador</fs-button>\n        <fs-button [iconLeft]=\"I.link\" variant=\"link\">Ver enlace</fs-button>\n      </div>\n    `,\n  }),\n}"
+                }
+            ],
+            "projects/fsociety/src/lib/choice/checkbox.stories.ts": [
+                {
+                    "name": "AllVariants",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/choice/checkbox.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  render: () => ({\n    props: {\n      v1: false,\n      v2: true,\n      v3: false,\n      v4: false,\n      v5: true,\n    },\n    template: `\n      <div style=\"display: flex; flex-direction: column; gap: 1.25rem;\">\n        <fs-checkbox\n          label=\"Acepto los términos\"\n          [(ngModel)]=\"v1\"\n        ></fs-checkbox>\n\n        <fs-checkbox\n          label=\"Notificaciones por email\"\n          description=\"Recibirás resúmenes semanales y alertas importantes.\"\n          [(ngModel)]=\"v2\"\n        ></fs-checkbox>\n\n        <fs-checkbox\n          label=\"Seleccionar todo\"\n          description=\"Algunos elementos están seleccionados.\"\n          [indeterminate]=\"true\"\n        ></fs-checkbox>\n\n        <fs-checkbox\n          label=\"Acepto los términos\"\n          state=\"error\"\n          errorMessage=\"Debes aceptar los términos para continuar.\"\n          [(ngModel)]=\"v4\"\n        ></fs-checkbox>\n\n        <fs-checkbox\n          label=\"Plan Pro activo\"\n          description=\"Este ajuste lo gestiona tu administrador.\"\n          [disabled]=\"true\"\n          [(ngModel)]=\"v5\"\n        ></fs-checkbox>\n      </div>\n    `,\n  }),\n  parameters: { layout: 'padded' },\n}"
+                },
+                {
+                    "name": "Checked",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/choice/checkbox.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  render: (args) => ({\n    props: { ...args, model: true },\n    template: `\n      <fs-checkbox\n        label=\"Acepto los términos\"\n        description=\"He leído y acepto los términos de uso y la política de privacidad.\"\n        [(ngModel)]=\"model\"\n      ></fs-checkbox>\n    `,\n  }),\n}"
+                },
+                {
+                    "name": "Default",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/choice/checkbox.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    label: 'Acepto los términos',\n  },\n}"
+                },
+                {
+                    "name": "Disabled",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/choice/checkbox.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  render: (args) => ({\n    props: { ...args, model: true },\n    template: `\n      <fs-checkbox\n        label=\"Plan Pro activo\"\n        description=\"Este ajuste lo gestiona tu administrador.\"\n        [disabled]=\"true\"\n        [(ngModel)]=\"model\"\n      ></fs-checkbox>\n    `,\n  }),\n}"
+                },
+                {
+                    "name": "Error",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/choice/checkbox.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    label: 'Acepto los términos',\n    state: 'error',\n    errorMessage: 'Debes aceptar los términos para continuar.',\n  },\n}"
+                },
+                {
+                    "name": "Indeterminate",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/choice/checkbox.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    label: 'Seleccionar todo',\n    description: 'Algunos elementos están seleccionados.',\n    indeterminate: true,\n  },\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/choice/checkbox.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<FsCheckboxComponent>",
+                    "defaultValue": "{\n  title: 'Components/Checkbox',\n  component: FsCheckboxComponent,\n  decorators: [\n    moduleMetadata({\n      imports: [FsCheckboxComponent, FormsModule],\n    }),\n  ],\n  tags: ['autodocs'],\n  argTypes: {\n    state: {\n      control: 'select',\n      options: ['default', 'error'],\n    },\n  },\n}"
+                },
+                {
+                    "name": "WithDescription",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/choice/checkbox.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    label: 'Notificaciones por email',\n    description: 'Recibirás resúmenes semanales y alertas importantes.',\n  },\n}"
+                }
+            ],
+            "projects/fsociety/src/lib/choice/radio-group.stories.ts": [
+                {
+                    "name": "AllVariants",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/choice/radio-group.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  render: () => ({\n    props: { rol: '', plan: 'pro', ROLES, PLANS },\n    template: `\n      <div style=\"display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem 2rem;\">\n        <fs-radio-group\n          label=\"Rol de usuario\"\n          [options]=\"ROLES\"\n          [(ngModel)]=\"rol\"\n        ></fs-radio-group>\n\n        <fs-radio-group\n          label=\"Plan\"\n          description=\"Elige el plan que mejor se adapte a tus necesidades.\"\n          [options]=\"PLANS\"\n          [(ngModel)]=\"plan\"\n        ></fs-radio-group>\n\n        <fs-radio-group\n          label=\"Rol de usuario\"\n          [options]=\"ROLES\"\n          state=\"error\"\n          errorMessage=\"Debes seleccionar un rol para continuar.\"\n        ></fs-radio-group>\n\n        <fs-radio-group\n          label=\"Plan actual\"\n          [options]=\"PLANS\"\n          [disabled]=\"true\"\n          [(ngModel)]=\"plan\"\n        ></fs-radio-group>\n      </div>\n    `,\n  }),\n  parameters: { layout: 'padded' },\n}"
+                },
+                {
+                    "name": "Default",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/choice/radio-group.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    label: 'Rol de usuario',\n    options: ROLES,\n  },\n}"
+                },
+                {
+                    "name": "Disabled",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/choice/radio-group.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  render: (args) => ({\n    props: { ...args, model: 'pro' },\n    template: `\n      <fs-radio-group\n        label=\"Plan actual\"\n        [options]=\"options\"\n        [disabled]=\"true\"\n        [(ngModel)]=\"model\"\n      ></fs-radio-group>\n    `,\n  }),\n  args: { options: PLANS },\n}"
+                },
+                {
+                    "name": "Error",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/choice/radio-group.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    label: 'Rol de usuario',\n    options: ROLES,\n    state: 'error',\n    errorMessage: 'Debes seleccionar un rol para continuar.',\n  },\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/choice/radio-group.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<FsRadioGroupComponent>",
+                    "defaultValue": "{\n  title: 'Components/RadioGroup',\n  component: FsRadioGroupComponent,\n  decorators: [\n    moduleMetadata({\n      imports: [FsRadioGroupComponent, FormsModule],\n    }),\n  ],\n  tags: ['autodocs'],\n  argTypes: {\n    state: {\n      control: 'select',\n      options: ['default', 'error'],\n    },\n    options: { control: false },\n  },\n}"
+                },
+                {
+                    "name": "PLANS",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/choice/radio-group.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "FsRadioOption[]",
+                    "defaultValue": "[\n  { value: 'free',    label: 'Gratuito',    description: 'Hasta 3 proyectos, 500 MB de almacenamiento.' },\n  { value: 'pro',     label: 'Pro',         description: 'Proyectos ilimitados, 50 GB, soporte prioritario.' },\n  { value: 'team',    label: 'Equipo',      description: 'Todo Pro + colaboración, roles y auditoría.' },\n]"
+                },
+                {
+                    "name": "ROLES",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/choice/radio-group.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "FsRadioOption[]",
+                    "defaultValue": "[\n  { value: 'admin',  label: 'Administrador' },\n  { value: 'editor', label: 'Editor' },\n  { value: 'viewer', label: 'Visor' },\n]"
+                },
+                {
+                    "name": "Selected",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/choice/radio-group.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  render: (args) => ({\n    props: { ...args, model: 'pro' },\n    template: `\n      <fs-radio-group\n        label=\"Plan\"\n        description=\"Elige el plan que mejor se adapte a tus necesidades.\"\n        [options]=\"options\"\n        [(ngModel)]=\"model\"\n      ></fs-radio-group>\n    `,\n  }),\n  args: { options: PLANS },\n}"
+                },
+                {
+                    "name": "WithDescriptions",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/choice/radio-group.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    label: 'Plan',\n    description: 'Elige el plan que mejor se adapte a tus necesidades.',\n    options: PLANS,\n  },\n}"
+                }
+            ],
+            "projects/fsociety/src/lib/choice/segmented.stories.ts": [
+                {
+                    "name": "AllVariants",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/choice/segmented.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  render: () => ({\n    props: {\n      view:   'list',\n      period: '30d',\n      vicon:  'grid',\n      VIEWS, PERIODS, VIEWS_ICON,\n    },\n    template: `\n      <div style=\"display: flex; flex-direction: column; gap: 1.5rem; max-width: 480px;\">\n        <fs-segmented [options]=\"VIEWS\" [(ngModel)]=\"view\"></fs-segmented>\n\n        <fs-segmented label=\"Período\" [options]=\"PERIODS\" [(ngModel)]=\"period\"></fs-segmented>\n\n        <fs-segmented label=\"Vista\" [options]=\"VIEWS_ICON\" [(ngModel)]=\"vicon\"></fs-segmented>\n\n        <fs-segmented label=\"Período (deshabilitado)\" [options]=\"PERIODS\" [disabled]=\"true\" [(ngModel)]=\"period\"></fs-segmented>\n      </div>\n    `,\n  }),\n  parameters: { layout: 'padded' },\n}"
+                },
+                {
+                    "name": "CDN",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/choice/segmented.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "defaultValue": "'https://api.iconify.design'"
+                },
+                {
+                    "name": "Default",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/choice/segmented.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  render: (args) => ({\n    props: { ...args, model: 'list' },\n    template: `\n      <fs-segmented [options]=\"options\" [(ngModel)]=\"model\"></fs-segmented>\n    `,\n  }),\n  args: { options: VIEWS },\n}"
+                },
+                {
+                    "name": "Disabled",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/choice/segmented.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  render: (args) => ({\n    props: { ...args, model: '30d' },\n    template: `\n      <fs-segmented label=\"Período\" [options]=\"options\" [disabled]=\"true\" [(ngModel)]=\"model\"></fs-segmented>\n    `,\n  }),\n  args: { options: PERIODS },\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/choice/segmented.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<FsSegmentedComponent>",
+                    "defaultValue": "{\n  title: 'Components/Segmented',\n  component: FsSegmentedComponent,\n  decorators: [\n    moduleMetadata({\n      imports: [FsSegmentedComponent, FormsModule],\n    }),\n  ],\n  tags: ['autodocs'],\n  argTypes: {\n    options: { control: false },\n  },\n}"
+                },
+                {
+                    "name": "PERIODS",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/choice/segmented.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "FsSegmentOption[]",
+                    "defaultValue": "[\n  { value: '7d',  label: '7 días' },\n  { value: '30d', label: '30 días' },\n  { value: '90d', label: '90 días' },\n  { value: '1y',  label: '1 año' },\n]"
+                },
+                {
+                    "name": "VIEWS",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/choice/segmented.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "FsSegmentOption[]",
+                    "defaultValue": "[\n  { value: 'list',  label: 'Lista' },\n  { value: 'grid',  label: 'Cuadrícula' },\n  { value: 'table', label: 'Tabla' },\n]"
+                },
+                {
+                    "name": "VIEWS_ICON",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/choice/segmented.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "FsSegmentOption[]",
+                    "defaultValue": "[\n  { value: 'list',  label: 'Lista',        icon: `${CDN}/tabler:list.svg` },\n  { value: 'grid',  label: 'Cuadrícula',   icon: `${CDN}/tabler:layout-grid.svg` },\n  { value: 'table', label: 'Tabla',        icon: `${CDN}/tabler:table.svg` },\n]"
+                },
+                {
+                    "name": "WithIcons",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/choice/segmented.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  render: (args) => ({\n    props: { ...args, model: 'grid' },\n    template: `\n      <fs-segmented label=\"Vista\" [options]=\"options\" [(ngModel)]=\"model\"></fs-segmented>\n    `,\n  }),\n  args: { options: VIEWS_ICON },\n}"
+                },
+                {
+                    "name": "WithLabel",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/choice/segmented.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  render: (args) => ({\n    props: { ...args, model: '30d' },\n    template: `\n      <fs-segmented label=\"Período\" [options]=\"options\" [(ngModel)]=\"model\"></fs-segmented>\n    `,\n  }),\n  args: { options: PERIODS },\n}"
+                }
+            ],
+            "projects/fsociety/src/lib/choice/switch.stories.ts": [
+                {
+                    "name": "AllVariants",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/choice/switch.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  render: () => ({\n    props: {\n      push:   false,\n      dark:   true,\n      emails: false,\n      twofa:  true,\n    },\n    template: `\n      <div style=\"display: flex; flex-direction: column; gap: 1.25rem;\">\n        <fs-switch\n          label=\"Notificaciones push\"\n          [(ngModel)]=\"push\"\n        ></fs-switch>\n\n        <fs-switch\n          label=\"Modo oscuro\"\n          description=\"Reduce el brillo de la interfaz para ambientes con poca luz.\"\n          [(ngModel)]=\"dark\"\n        ></fs-switch>\n\n        <fs-switch\n          label=\"Resumen semanal por email\"\n          description=\"Te enviaremos un reporte cada lunes a las 9 am.\"\n          [(ngModel)]=\"emails\"\n        ></fs-switch>\n\n        <fs-switch\n          label=\"Autenticación en dos pasos\"\n          description=\"Activado por tu organización.\"\n          [disabled]=\"true\"\n          [(ngModel)]=\"twofa\"\n        ></fs-switch>\n      </div>\n    `,\n  }),\n  parameters: { layout: 'padded' },\n}"
+                },
+                {
+                    "name": "Default",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/choice/switch.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    label: 'Notificaciones push',\n  },\n}"
+                },
+                {
+                    "name": "DisabledOff",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/choice/switch.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    label: 'Autenticación en dos pasos',\n    description: 'Activado por tu organización.',\n    disabled: true,\n  },\n}"
+                },
+                {
+                    "name": "DisabledOn",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/choice/switch.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  render: (args) => ({\n    props: { ...args, model: true },\n    template: `\n      <fs-switch\n        label=\"Autenticación en dos pasos\"\n        description=\"Activado por tu organización.\"\n        [disabled]=\"true\"\n        [(ngModel)]=\"model\"\n      ></fs-switch>\n    `,\n  }),\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/choice/switch.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<FsSwitchComponent>",
+                    "defaultValue": "{\n  title: 'Components/Switch',\n  component: FsSwitchComponent,\n  decorators: [\n    moduleMetadata({\n      imports: [FsSwitchComponent, FormsModule],\n    }),\n  ],\n  tags: ['autodocs'],\n}"
+                },
+                {
+                    "name": "On",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/choice/switch.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  render: (args) => ({\n    props: { ...args, model: true },\n    template: `\n      <fs-switch\n        label=\"Notificaciones push\"\n        description=\"Recibirás alertas en tiempo real.\"\n        [(ngModel)]=\"model\"\n      ></fs-switch>\n    `,\n  }),\n}"
+                },
+                {
+                    "name": "WithDescription",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/fsociety/src/lib/choice/switch.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    label: 'Modo oscuro',\n    description: 'Reduce el brillo de la interfaz para ambientes con poca luz.',\n  },\n}"
                 }
             ],
             "projects/fsociety/src/lib/input/input.stories.ts": [
@@ -2421,6 +3153,58 @@
                     "kind": 184
                 }
             ],
+            "projects/fsociety/src/lib/choice/checkbox.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<FsCheckboxComponent>",
+                    "file": "projects/fsociety/src/lib/choice/checkbox.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 184
+                }
+            ],
+            "projects/fsociety/src/lib/choice/radio-group.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<FsRadioGroupComponent>",
+                    "file": "projects/fsociety/src/lib/choice/radio-group.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 184
+                }
+            ],
+            "projects/fsociety/src/lib/choice/segmented.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<FsSegmentedComponent>",
+                    "file": "projects/fsociety/src/lib/choice/segmented.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 184
+                }
+            ],
+            "projects/fsociety/src/lib/choice/switch.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<FsSwitchComponent>",
+                    "file": "projects/fsociety/src/lib/choice/switch.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 184
+                }
+            ],
             "projects/fsociety/src/lib/input/input.stories.ts": [
                 {
                     "name": "Story",
@@ -2785,6 +3569,386 @@
             },
             {
                 "filePath": "projects/fsociety/src/lib/button/button.stories.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "Story",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/choice/checkbox.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "AllVariants",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/choice/checkbox.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Checked",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/choice/checkbox.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Default",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/choice/checkbox.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Disabled",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/choice/checkbox.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Error",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/choice/checkbox.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Indeterminate",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/choice/checkbox.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/choice/checkbox.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "WithDescription",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/choice/checkbox.stories.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "Story",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/choice/radio-group.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "AllVariants",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/choice/radio-group.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Default",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/choice/radio-group.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Disabled",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/choice/radio-group.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Error",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/choice/radio-group.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/choice/radio-group.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "PLANS",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/choice/radio-group.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "ROLES",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/choice/radio-group.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Selected",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/choice/radio-group.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "WithDescriptions",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/choice/radio-group.stories.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "Story",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/choice/segmented.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "AllVariants",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/choice/segmented.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "CDN",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/choice/segmented.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Default",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/choice/segmented.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Disabled",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/choice/segmented.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/choice/segmented.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "PERIODS",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/choice/segmented.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "VIEWS",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/choice/segmented.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "VIEWS_ICON",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/choice/segmented.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "WithIcons",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/choice/segmented.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "WithLabel",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/choice/segmented.stories.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "Story",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/choice/switch.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "AllVariants",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/choice/switch.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Default",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/choice/switch.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "DisabledOff",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/choice/switch.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "DisabledOn",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/choice/switch.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/choice/switch.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "On",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/choice/switch.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "WithDescription",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/fsociety/src/lib/choice/switch.stories.ts",
                 "type": "type alias",
                 "linktype": "miscellaneous",
                 "linksubtype": "typealias",

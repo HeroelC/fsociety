@@ -1,76 +1,12 @@
-@use '../../styles/tokens' as t;
-@use 'sass:map';
-
-// ---------------------------------------------------------------------------
-// Tokens del componente
-// ---------------------------------------------------------------------------
-
-$alert-types: (
-  'info': (
-    bg:     rgba(37,  99,  235, 0.12),
-    border: rgba(37,  99,  235, 0.35),
-    color:  #93c5fd,
-    accent: #2563eb,
-  ),
-  'success': (
-    bg:     rgba(34,  197, 94,  0.10),
-    border: rgba(34,  197, 94,  0.30),
-    color:  #86efac,
-    accent: #22c55e,
-  ),
-  'warning': (
-    bg:     rgba(245, 158, 11,  0.10),
-    border: rgba(245, 158, 11,  0.30),
-    color:  #fcd34d,
-    accent: #f59e0b,
-  ),
-  'danger': (
-    bg:     rgba(244, 63,  94,  0.10),
-    border: rgba(244, 63,  94,  0.30),
-    color:  #fb7185,
-    accent: #f43f5e,
-  ),
-  'neutral': (
-    bg:     rgba(255, 255, 255, 0.04),
-    border: rgba(255, 255, 255, 0.10),
-    color:  rgba(255, 255, 255, 0.70),
-    accent: rgba(255, 255, 255, 0.30),
-  ),
-);
-
-// ---------------------------------------------------------------------------
-// Animaciones
-// ---------------------------------------------------------------------------
-
+// ─── Entry animation ──────────────────────────────────────────────────────────
 @keyframes fs-alert-in {
-  from {
-    opacity:    0;
-    transform:  translateY(-10px);
-    max-height: 0;
-    padding:    0 t.$fs-space-4;
-  }
-  to {
-    opacity:    1;
-    transform:  translateY(0);
-    max-height: 300px;
-  }
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes fs-alert-out {
-  from {
-    opacity:       1;
-    transform:     translateY(0);
-    max-height:    300px;
-    margin-bottom: 0;
-  }
-  to {
-    opacity:       0;
-    transform:     translateY(-8px);
-    max-height:    0;
-    padding-top:   0;
-    padding-bottom: 0;
-    margin-bottom: 0;
-  }
+  from { opacity: 1; transform: translateY(0);  max-height: 200px; margin-bottom: 0; }
+  to   { opacity: 0; transform: translateY(-4px); max-height: 0; padding-top: 0; padding-bottom: 0; margin-bottom: 0; }
 }
 
 @keyframes fs-alert-progress {
@@ -78,145 +14,134 @@ $alert-types: (
   to   { width: 0%; }
 }
 
-// ---------------------------------------------------------------------------
-// Base
-// ---------------------------------------------------------------------------
-
+// ─── Base ─────────────────────────────────────────────────────────────────────
 .fs-alert {
-  display:        flex;
-  gap:            t.$fs-space-3;
-  align-items:    flex-start;
-  border-radius:  t.$fs-radius-lg;
-  padding:        t.$fs-space-3 t.$fs-space-4;
-  border:         0.5px solid transparent;
-  position:       relative;
-  overflow:       hidden;
-  width:          100%;
-
-  // estados de animación
-  &--entering {
-    animation: fs-alert-in 280ms #{t.$fs-ease-default} forwards;
-  }
-
-  &--visible {
-    opacity:   1;
-    transform: translateY(0);
-  }
+  display: flex;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: var(--fs-radius-md);
+  border: 1px solid transparent;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  animation: fs-alert-in 240ms ease forwards;
 
   &--exiting {
-    animation: fs-alert-out 220ms #{t.$fs-ease-in} forwards;
+    animation: fs-alert-out 220ms ease forwards;
     pointer-events: none;
   }
 
-  // -------------------------------------------------------------------------
-  // Variantes por tipo — generadas con @each
-  // -------------------------------------------------------------------------
+  // ─── Tones ──────────────────────────────────────────────────────────────────
+  &[data-tone="info"] {
+    background: color-mix(in srgb, var(--fs-color-primary) 10%, var(--fs-color-surface));
+    border-color: color-mix(in srgb, var(--fs-color-primary) 28%, transparent);
 
-  @each $type, $values in $alert-types {
-    &--#{$type} {
-      // variante filled (default)
-      &.fs-alert--filled {
-        background:   map.get($values, 'bg');
-        border-color: map.get($values, 'border');
-        color:        map.get($values, 'color');
-
-        .fs-alert__progress {
-          background: map.get($values, 'accent');
-        }
-      }
-
-      // variante accent — borde izquierdo
-      &.fs-alert--accent {
-        background:    map.get($values, 'bg');
-        border-color:  map.get($values, 'border');
-        color:         map.get($values, 'color');
-        border-left:   3px solid map.get($values, 'accent');
-        border-radius: 0 t.$fs-radius-lg t.$fs-radius-lg 0;
-
-        .fs-alert__progress {
-          background: map.get($values, 'accent');
-        }
-      }
-    }
+    .fs-alert__icon { color: var(--fs-color-primary); }
   }
 
-  // -------------------------------------------------------------------------
-  // Ícono
-  // -------------------------------------------------------------------------
+  &[data-tone="success"] {
+    background: color-mix(in srgb, var(--fs-color-success) 10%, var(--fs-color-surface));
+    border-color: color-mix(in srgb, var(--fs-color-success) 32%, transparent);
 
+    .fs-alert__icon { color: var(--fs-color-success); }
+  }
+
+  &[data-tone="warning"] {
+    background: color-mix(in srgb, var(--fs-color-warning) 10%, var(--fs-color-surface));
+    border-color: color-mix(in srgb, var(--fs-color-warning) 36%, transparent);
+
+    .fs-alert__icon { color: var(--fs-color-warning); }
+  }
+
+  &[data-tone="danger"] {
+    background: color-mix(in srgb, var(--fs-color-error) 10%, var(--fs-color-surface));
+    border-color: color-mix(in srgb, var(--fs-color-error) 32%, transparent);
+
+    .fs-alert__icon { color: var(--fs-color-error); }
+  }
+
+  // ─── Icon ─────────────────────────────────────────────────────────────────
   &__icon {
+    width: 19px;
+    height: 19px;
     flex-shrink: 0;
-    margin-top:  1px;
-    stroke:      currentColor;
+    margin-top: 1px;
   }
 
-  // -------------------------------------------------------------------------
-  // Cuerpo
-  // -------------------------------------------------------------------------
-
+  // ─── Body ─────────────────────────────────────────────────────────────────
   &__body {
-    flex:    1;
+    flex: 1;
     min-width: 0;
   }
 
   &__title {
-    font-size:     t.$fs-text-sm;
-    font-weight:   t.$fs-font-semi;
-    font-family:   t.$fs-font-sans;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--fs-color-text-primary);
+    line-height: 1.4;
     margin-bottom: 2px;
-    line-height:   1.4;
   }
 
-  &__desc {
-    font-size:   t.$fs-text-xs;
-    font-family: t.$fs-font-sans;
-    line-height: 1.6;
-    opacity:     0.85;
-
-    code {
-      font-family:  t.$fs-font-mono;
-      font-size:    11px;
-      background:   rgba(255, 255, 255, 0.08);
-      padding:      1px 5px;
-      border-radius: t.$fs-radius-sm;
-    }
+  &__tx {
+    font-size: 13px;
+    color: var(--fs-color-text-secondary);
+    line-height: 1.5;
   }
 
-  // -------------------------------------------------------------------------
-  // Botón cerrar
-  // -------------------------------------------------------------------------
+  // ─── Action buttons slot ──────────────────────────────────────────────────
+  &__actions:has(> *) {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+  }
 
+  // ─── Close button ─────────────────────────────────────────────────────────
   &__close {
-    display:         flex;
-    align-items:     center;
+    display: flex;
+    align-items: center;
     justify-content: center;
-    background:      transparent;
-    border:          none;
-    cursor:          pointer;
-    color:           inherit;
-    opacity:         0.5;
-    padding:         0;
-    flex-shrink:     0;
-    border-radius:   t.$fs-radius-sm;
-    transition:      opacity t.$fs-duration-fast t.$fs-ease-default;
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    margin: -4px -4px 0 0;
+    background: none;
+    border: none;
+    border-radius: var(--fs-radius-sm);
+    padding: 0;
+    cursor: pointer;
+    color: var(--fs-color-text-secondary);
+    transition: background 120ms ease, color 120ms ease;
 
-    &:hover { opacity: 1; }
+    &:hover {
+      background: color-mix(in srgb, var(--fs-color-text-primary) 8%, transparent);
+      color: var(--fs-color-text-primary);
+    }
 
     &:focus-visible {
-      @include t.focus-ring($color: currentColor, $offset: 2px);
+      outline: 2px solid var(--fs-color-primary);
+      outline-offset: 1px;
     }
   }
 
-  // -------------------------------------------------------------------------
-  // Progress bar de auto-dismiss
-  // -------------------------------------------------------------------------
+  &__close-icon {
+    width: 15px;
+    height: 15px;
+  }
 
+  // ─── Auto-dismiss progress bar ────────────────────────────────────────────
   &__progress {
-    position:      absolute;
-    bottom:        0;
-    left:          0;
-    height:        2px;
-    border-radius: 0 0 t.$fs-radius-lg 0;
-    animation:     fs-alert-progress linear forwards;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    border-radius: 0;
+    animation: fs-alert-progress linear forwards;
+
+    .fs-alert[data-tone="info"]    & { background: var(--fs-color-primary); }
+    .fs-alert[data-tone="success"] & { background: var(--fs-color-success); }
+    .fs-alert[data-tone="warning"] & { background: var(--fs-color-warning); }
+    .fs-alert[data-tone="danger"]  & { background: var(--fs-color-error); }
   }
 }

@@ -15,7 +15,7 @@ export * from './lib/tabs/tabs.component';
 export type { FsTab } from './lib/tabs/tabs.component';
 
 export * from './lib/alert/alert.component';
-export type { FsAlertType, FsAlertVariant } from './lib/alert/alert.component';
+export type { FsAlertTone } from './lib/alert/alert.component';
 
 export * from './lib/experience-card/experience-card.component';
 export type { FsExperienceCard, FsExperienceBadge } from './lib/experience-card/experience-card.component';
@@ -39,3 +39,10 @@ export { FsSwitchComponent } from './lib/choice/switch.component';
 
 export { FsSegmentedComponent } from './lib/choice/segmented.component';
 export type { FsSegmentOption } from './lib/choice/segmented.component';
+
+export { FsToastService } from './lib/toast/toast.service';
+export type { FsToastTone, FsToastItem, FsToastOptions } from './lib/toast/toast.service';
+export { FsToastStackComponent } from './lib/toast/toast-stack.component';
+
+export { FsTooltipComponent } from './lib/tooltip/tooltip.component';
+export type { FsTooltipSide } from './lib/tooltip/tooltip.component';
