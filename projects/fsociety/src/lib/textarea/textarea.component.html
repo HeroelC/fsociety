@@ -1,0 +1,77 @@
+<div class="fs-ta">
+
+  @if (label) {
+    <label class="fs-ta__label" [for]="inputId">{{ label }}</label>
+  }
+
+  <div
+    class="fs-ta__wrapper"
+    [class.fs-ta__wrapper--error]="state === 'error'"
+    [class.fs-ta__wrapper--success]="state === 'success'"
+    [class.fs-ta__wrapper--disabled]="disabled"
+  >
+    <textarea
+      #field
+      [id]="inputId"
+      class="fs-ta__field"
+      [class.fs-ta__field--no-resize]="resize !== 'vertical'"
+      [rows]="rows"
+      [placeholder]="placeholder"
+      [value]="value"
+      [attr.maxlength]="maxlength ?? null"
+      [disabled]="disabled"
+      [readonly]="readonly"
+      (input)="onInput($event)"
+      (blur)="onBlur()"
+    ></textarea>
+
+    @if (showStateIcon) {
+      <span
+        class="fs-icon fs-ta__state-icon"
+        [style.--_icon]="'url(' + stateIconUrl + ')'"
+        aria-hidden="true"
+      ></span>
+    }
+  </div>
+
+  <!-- The footer holds the hint and the counter on one line, so a long hint and
+       the count never fight for the same space. -->
+  @if (hint || counterVisible || (state !== 'default' && (errorMessage || successMessage))) {
+    <div class="fs-ta__foot">
+      <span class="fs-ta__foot-msg">
+        @if (state === 'error' && errorMessage) {
+          <span class="fs-ta__message fs-ta__message--error" role="alert">
+            <span
+              class="fs-icon"
+              [style.--_icon]="'url(' + Icons.alertCircle + ')'"
+              style="width:13px;height:13px"
+              aria-hidden="true"
+            ></span>
+            {{ errorMessage }}
+          </span>
+        } @else if (state === 'success' && successMessage) {
+          <span class="fs-ta__message fs-ta__message--success">
+            <span
+              class="fs-icon"
+              [style.--_icon]="'url(' + Icons.circleCheck + ')'"
+              style="width:13px;height:13px"
+              aria-hidden="true"
+            ></span>
+            {{ successMessage }}
+          </span>
+        } @else if (hint) {
+          <span class="fs-ta__hint">{{ hint }}</span>
+        }
+      </span>
+
+      @if (counterVisible) {
+        <span
+          class="fs-ta__counter"
+          [class.fs-ta__counter--near]="counterNearLimit"
+          aria-live="polite"
+        >{{ counterText }}</span>
+      }
+    </div>
+  }
+
+</div>
