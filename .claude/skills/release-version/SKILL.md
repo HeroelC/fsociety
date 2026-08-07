@@ -116,15 +116,21 @@ Note for reasoning about impact: a caret range on `0.0.x` pins the patch.
 picked up `0.0.19` either. Do not argue that a minor "leaves consumers behind"
 where a patch would not have — on `0.0.x` that is false.
 
-#### Commit bodies: no `#` before hex
+#### Commit bodies: no bare `#`
 
-Conventional-changelog reads `#` followed by anything as an issue reference, so a
-hex colour in a commit body becomes a link to an issue that does not exist.
-Write `0d1117`, or wrap it in backticks.
+Conventional-changelog reads `#` followed by anything as an issue reference, so
+anything after a `#` in a commit body becomes a link — to an issue that usually
+does not exist.
 
-`clean-changelog.js` now strips those from `CHANGELOG.md` in the `after:bump`
-hook, so a slip no longer reaches the published changelog. Do not rely on it as a
-licence to be sloppy — it only handles hex-shaped refs.
+- **Hex colours** (`#0d1117`) are stripped automatically by
+  `clean-changelog.js`, wired to the `before:git:beforeRelease` hook.
+- **Decimal numbers** (`#42`) are *not*, and cannot be: a decimal ref is
+  indistinguishable from a real issue, so the script deliberately leaves it
+  alone. Mentioning `#42` in prose — even while describing a test — puts a dead
+  link in the changelog. This has already happened once, in v0.4.0.
+
+Write `0d1117`, "issue 42", or wrap it in backticks. Do not treat the cleaner as
+a licence to be sloppy: it only covers the hex-shaped half of the problem.
 
 ### 4. Dry run first
 

@@ -885,11 +885,14 @@ Dos cosas que conviene tener presentes:
 - **`--dry-run` no ejecuta los hooks.** Sirve para confirmar el número de versión
   y el changelog, no para verificar el sync. La verificación real es mirar el
   commit después.
-- **No pongas colores hex con `#` en el cuerpo de un commit.** El parser del
-  changelog lee `#0d1117` como referencia a un issue y te genera links basura.
-  `clean-changelog.js` los limpia solo en el hook `after:bump`, así que un
-  descuido ya no llega al changelog publicado — pero escribilos sin numeral o
-  entre backticks igual.
+- **No escribas `#` seguido de nada en el cuerpo de un commit**, salvo que sea un
+  issue real que quieras linkear. El parser del changelog convierte todo `#algo`
+  en referencia a un issue.
+  - `#0d1117` y otros hex los limpia solo `clean-changelog.js` en el hook
+    `before:git:beforeRelease`.
+  - `#42` en prosa **no se puede limpiar**: un número decimal es indistinguible
+    de un issue de verdad, así que el script lo deja pasar a propósito. Escribí
+    "el issue 42" o ponelo entre backticks.
 
 Y una advertencia de semver: **cambiar de banda** de madurez no es algo mecánico.
 Salir de `0.0.x` (a `0.1.0`) o salir de pre-release (a `1.0.0`) son decisiones
