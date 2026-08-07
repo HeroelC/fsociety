@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.0](https://github.com/heroelc/fsociety/compare/v0.5.0...v0.6.0) (2026-08-07)
+
+### Features
+
+* **date-range-picker:** add a two-month range calendar ([ba1dfcd](https://github.com/heroelc/fsociety/commit/ba1dfcd77360e8cb4fa9ef298a93ec973eb86d9d))
+* **otp:** add a verification code field ([57506cc](https://github.com/heroelc/fsociety/commit/57506ccd22bb45718dc57a060f32d4ea4688005a))
+
 ## [0.5.0](https://github.com/heroelc/fsociety/compare/v0.4.0...v0.5.0) (2026-08-07)
 
 ### Features
