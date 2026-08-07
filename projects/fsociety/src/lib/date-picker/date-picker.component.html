@@ -1,0 +1,209 @@
+<div class="fs-dp">
+
+  @if (label) {
+    <label class="fs-dp__label" [for]="inputId">{{ label }}</label>
+  }
+
+  <div class="fs-dp__container">
+    <div
+      #anchor
+      class="fs-dp__wrapper"
+      [class.fs-dp__wrapper--error]="state === 'error'"
+      [class.fs-dp__wrapper--success]="state === 'success'"
+      [class.fs-dp__wrapper--disabled]="disabled"
+      [class.fs-dp__wrapper--open]="open"
+    >
+      <span
+        class="fs-icon fs-dp__icon"
+        [style.--_icon]="'url(' + Icons.calendar + ')'"
+        aria-hidden="true"
+      ></span>
+
+      <!-- A real text input, so a far-off date can be typed instead of paged to.
+           role=combobox + aria-expanded is what tells a screen reader the field
+           owns a popup grid. -->
+      <input
+        #field
+        [id]="inputId"
+        class="fs-dp__field"
+        type="text"
+        inputmode="numeric"
+        autocomplete="off"
+        role="combobox"
+        aria-haspopup="grid"
+        [attr.aria-expanded]="open"
+        [attr.aria-controls]="inputId + '-cal'"
+        [placeholder]="placeholder"
+        [value]="text"
+        [disabled]="disabled"
+        [readonly]="readonly"
+        (input)="onTextInput($event)"
+        (blur)="onBlur()"
+        (keydown)="onFieldKeydown($event)"
+      />
+
+      @if (showClearBtn) {
+        <button
+          class="fs-dp__clear"
+          type="button"
+          aria-label="Limpiar fecha"
+          (mousedown)="$event.preventDefault()"
+          (click)="clear()"
+        >
+          <span
+            class="fs-icon"
+            [style.--_icon]="'url(' + Icons.x + ')'"
+            style="width:14px;height:14px"
+            aria-hidden="true"
+          ></span>
+        </button>
+      }
+
+      @if (showStateIcon) {
+        <span
+          class="fs-icon fs-dp__state-icon"
+          [style.--_icon]="'url(' + stateIconUrl + ')'"
+          aria-hidden="true"
+        ></span>
+      }
+
+      <button
+        class="fs-dp__toggle"
+        type="button"
+        tabindex="-1"
+        [attr.aria-label]="open ? 'Cerrar calendario' : 'Abrir calendario'"
+        [disabled]="disabled || readonly"
+        (click)="toggle()"
+      >
+        <span
+          class="fs-icon fs-dp__chevron"
+          [class.fs-dp__chevron--open]="open"
+          [style.--_icon]="'url(' + Icons.chevronDown + ')'"
+          aria-hidden="true"
+        ></span>
+      </button>
+    </div>
+
+    @if (open) {
+      <div
+        class="fs-dp__calendar"
+        [fsAnchoredPopover]="anchor"
+        [popoverMatchWidth]="false"
+        [id]="inputId + '-cal'"
+        role="dialog"
+        [attr.aria-label]="label || 'Calendario'"
+        (keydown)="onCalendarKeydown($event)"
+      >
+
+        <div class="fs-dp__cal-head">
+          <button
+            class="fs-dp__nav"
+            type="button"
+            aria-label="Mes anterior"
+            (mousedown)="$event.preventDefault()"
+            (click)="shiftMonth(-1)"
+          >
+            <span
+              class="fs-icon"
+              [style.--_icon]="'url(' + Icons.chevronLeft + ')'"
+              aria-hidden="true"
+            ></span>
+          </button>
+
+          <span class="fs-dp__cal-title" aria-live="polite">{{ monthLabel }}</span>
+
+          <button
+            class="fs-dp__nav"
+            type="button"
+            aria-label="Mes siguiente"
+            (mousedown)="$event.preventDefault()"
+            (click)="shiftMonth(1)"
+          >
+            <span
+              class="fs-icon"
+              [style.--_icon]="'url(' + Icons.chevronRight + ')'"
+              aria-hidden="true"
+            ></span>
+          </button>
+        </div>
+
+        <div class="fs-dp__grid" role="grid">
+          <div class="fs-dp__dow" role="row">
+            @for (d of weekdays; track $index) {
+              <span class="fs-dp__dow-cell" role="columnheader">{{ d }}</span>
+            }
+          </div>
+
+          @for (week of weeks; track $index) {
+            <div class="fs-dp__week" role="row">
+              @for (cell of week; track cell.date.getTime()) {
+                <button
+                  class="fs-dp__day"
+                  type="button"
+                  role="gridcell"
+                  tabindex="-1"
+                  [class.fs-dp__day--selected]="cell.selected"
+                  [class.fs-dp__day--today]="cell.today"
+                  [class.fs-dp__day--outside]="cell.outside"
+                  [class.fs-dp__day--focused]="isFocused(cell.date)"
+                  [disabled]="cell.disabled"
+                  [attr.aria-selected]="cell.selected"
+                  [attr.aria-current]="cell.today ? 'date' : null"
+                  (mousedown)="$event.preventDefault()"
+                  (click)="select(cell.date)"
+                >{{ cell.day }}</button>
+              }
+            </div>
+          }
+        </div>
+
+        @if (showFooter) {
+          <div class="fs-dp__cal-foot">
+            <button
+              class="fs-dp__foot-btn"
+              type="button"
+              (mousedown)="$event.preventDefault()"
+              (click)="selectToday()"
+            >{{ todayLabel }}</button>
+            <button
+              class="fs-dp__foot-btn"
+              type="button"
+              (mousedown)="$event.preventDefault()"
+              (click)="clear()"
+            >{{ clearLabel }}</button>
+          </div>
+        }
+
+      </div>
+    }
+  </div>
+
+  @if (hint && state === 'default') {
+    <span class="fs-dp__hint">{{ hint }}</span>
+  }
+
+  @if (state === 'error' && errorMessage) {
+    <span class="fs-dp__message fs-dp__message--error" role="alert">
+      <span
+        class="fs-icon"
+        [style.--_icon]="'url(' + Icons.alertCircle + ')'"
+        style="width:13px;height:13px"
+        aria-hidden="true"
+      ></span>
+      {{ errorMessage }}
+    </span>
+  }
+
+  @if (state === 'success' && successMessage) {
+    <span class="fs-dp__message fs-dp__message--success">
+      <span
+        class="fs-icon"
+        [style.--_icon]="'url(' + Icons.circleCheck + ')'"
+        style="width:13px;height:13px"
+        aria-hidden="true"
+      ></span>
+      {{ successMessage }}
+    </span>
+  }
+
+</div>

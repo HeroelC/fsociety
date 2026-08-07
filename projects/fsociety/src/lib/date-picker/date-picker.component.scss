@@ -1,0 +1,303 @@
+@use '../../styles/overlay' as overlay;
+
+@keyframes fs-dp-in {
+  from { opacity: 0; transform: translateY(-6px) scale(0.97); }
+  to   { opacity: 1; transform: none; }
+}
+
+.fs-dp {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  // ─── Label ────────────────────────────────────────────────────
+  &__label {
+    font-size: 13px;
+    font-weight: 550;
+    letter-spacing: -0.005em;
+    color: var(--fs-color-text-primary);
+    line-height: 1.3;
+  }
+
+  &__container {
+    position: relative;
+  }
+
+  // ─── Field wrapper — matches fs-input so both line up in a form ───────────
+  &__wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    height: 40px;
+    padding: 0 8px 0 13px;
+    border: 1px solid var(--fs-color-border-field);
+    border-radius: var(--fs-radius-md);
+    background: var(--fs-color-surface);
+    transition: border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
+
+    &:hover:not(.fs-dp__wrapper--disabled):not(.fs-dp__wrapper--open):not(.fs-dp__wrapper--error):not(.fs-dp__wrapper--success) {
+      border-color: var(--fs-color-border-strong);
+    }
+
+    &:focus-within:not(.fs-dp__wrapper--error):not(.fs-dp__wrapper--success),
+    &--open {
+      border-color: var(--fs-color-primary);
+      box-shadow: 0 0 0 2.5px color-mix(in srgb, var(--fs-color-primary) 15%, transparent);
+    }
+
+    &--error {
+      border-color: var(--fs-color-error) !important;
+      box-shadow: 0 0 0 2.5px color-mix(in srgb, var(--fs-color-error) 12%, transparent) !important;
+    }
+
+    &--success {
+      border-color: var(--fs-color-success) !important;
+      box-shadow: 0 0 0 2.5px color-mix(in srgb, var(--fs-color-success) 12%, transparent) !important;
+    }
+
+    &--disabled {
+      background: var(--fs-color-surface-alt);
+      opacity: 0.7;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+  }
+
+  &__icon {
+    width: 18px;
+    height: 18px;
+    color: var(--fs-color-text-secondary);
+    flex-shrink: 0;
+  }
+
+  &__field {
+    flex: 1;
+    min-width: 0;
+    font-size: 14px;
+    font-family: inherit;
+    line-height: 1;
+    color: var(--fs-color-text-primary);
+    background: none;
+    border: none;
+    outline: none;
+    padding: 0;
+    // Tabular figures stop the field from twitching as digits are typed.
+    font-variant-numeric: tabular-nums;
+
+    &::placeholder { color: var(--fs-color-text-placeholder); }
+    &:disabled { cursor: not-allowed; }
+  }
+
+  &__clear,
+  &__toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 26px;
+    height: 26px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    border-radius: var(--fs-radius-sm);
+    color: var(--fs-color-text-secondary);
+    cursor: pointer;
+    transition: background 120ms ease, color 120ms ease;
+
+    &:hover:not(:disabled) {
+      background: var(--fs-color-surface-alt);
+      color: var(--fs-color-text-primary);
+    }
+
+    &:disabled { cursor: not-allowed; }
+  }
+
+  &__chevron {
+    width: 18px;
+    height: 18px;
+    transition: transform 200ms ease, color 150ms ease;
+
+    &--open {
+      transform: rotate(180deg);
+      color: var(--fs-color-primary);
+    }
+  }
+
+  &__state-icon {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+
+    .fs-dp__wrapper--error &   { color: var(--fs-color-error); }
+    .fs-dp__wrapper--success & { color: var(--fs-color-success); }
+  }
+
+  // ─── Calendar panel ──────────────────────────────────────────────────────
+  // Rendered in the top layer via FsAnchoredPopoverDirective. A calendar is the
+  // worst case for clipping — it is tall, and it usually lives inside a card or
+  // a scrolling form.
+  &__calendar {
+    @include overlay.popover-surface;
+
+    z-index: 9999;
+    box-sizing: border-box;
+    width: 280px;
+    padding: 12px;
+    background: var(--fs-color-surface);
+    border: 1px solid var(--fs-color-border);
+    border-radius: var(--fs-radius-lg);
+    box-shadow: var(--fs-color-shadow-pop);
+    animation: fs-dp-in 150ms cubic-bezier(0.2, 0.7, 0.3, 1);
+  }
+
+  &__cal-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4px;
+    margin-bottom: 8px;
+  }
+
+  &__cal-title {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--fs-color-text-primary);
+    // Month names differ in length, so a fixed centre keeps the chevrons still.
+    flex: 1;
+    text-align: center;
+  }
+
+  &__nav {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    border-radius: var(--fs-radius-sm);
+    color: var(--fs-color-text-secondary);
+    cursor: pointer;
+    transition: background 120ms ease, color 120ms ease;
+
+    .fs-icon { width: 17px; height: 17px; }
+
+    &:hover {
+      background: var(--fs-color-surface-alt);
+      color: var(--fs-color-text-primary);
+    }
+  }
+
+  // ─── Grid ────────────────────────────────────────────────────────────────
+  &__dow,
+  &__week {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+  }
+
+  &__dow { margin-bottom: 2px; }
+
+  &__dow-cell {
+    text-align: center;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--fs-color-text-secondary);
+    padding: 4px 0;
+    text-transform: uppercase;
+  }
+
+  &__day {
+    aspect-ratio: 1;
+    display: grid;
+    place-items: center;
+    border: none;
+    background: transparent;
+    border-radius: calc(var(--fs-radius-md) * 0.8);
+    font: inherit;
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+    color: var(--fs-color-text-primary);
+    cursor: pointer;
+    transition: background 100ms ease, color 100ms ease;
+
+    &:hover:not(:disabled):not(.fs-dp__day--selected) {
+      background: var(--fs-color-surface-alt);
+    }
+
+    // Leading and trailing days from the neighbouring months. Kept visible but
+    // dimmed — hiding them would make the six-row grid look broken.
+    &--outside {
+      color: var(--fs-color-text-placeholder);
+    }
+
+    &--today:not(&--selected) {
+      font-weight: 700;
+      color: var(--fs-color-primary);
+    }
+
+    &--selected {
+      background: var(--fs-color-primary);
+      color: #fff;
+      font-weight: 600;
+    }
+
+    // The keyboard cursor, distinct from the selection: you can move across the
+    // grid without committing, so both states have to be visible at once.
+    &--focused:not(&--selected) {
+      box-shadow: inset 0 0 0 1.5px var(--fs-color-primary);
+    }
+
+    &:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+  }
+
+  // ─── Footer ──────────────────────────────────────────────────────────────
+  &__cal-foot {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid var(--fs-color-border);
+  }
+
+  &__foot-btn {
+    font: inherit;
+    font-size: 12.5px;
+    font-weight: 500;
+    padding: 5px 10px;
+    border: none;
+    background: transparent;
+    border-radius: var(--fs-radius-sm);
+    color: var(--fs-color-primary);
+    cursor: pointer;
+    transition: background 120ms ease;
+
+    &:hover {
+      background: color-mix(in srgb, var(--fs-color-primary) 10%, transparent);
+    }
+  }
+
+  // ─── Hint / messages ─────────────────────────────────────────────────────
+  &__hint {
+    font-size: 12.5px;
+    color: var(--fs-color-text-secondary);
+    line-height: 1.4;
+  }
+
+  &__message {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12.5px;
+    line-height: 1.4;
+
+    &--error   { color: var(--fs-color-error); }
+    &--success { color: var(--fs-color-success); }
+  }
+}

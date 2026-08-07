@@ -337,6 +337,73 @@ options: FsSelectOption[] = [
 |---|---|---|
 | `valueChange` | `EventEmitter<string>` | Emite el valor seleccionado |
 
+### `<fs-date-picker>`
+
+Campo de fecha **tipeable** con calendario. Implementa `ControlValueAccessor`, así
+que anda con `[(ngModel)]` y con formularios reactivos. El valor del modelo es un
+`Date` a medianoche, o `null`.
+
+```html
+<fs-date-picker
+  label="Fecha de nacimiento"
+  hint="Podés tipearla o elegirla del calendario."
+  [(ngModel)]="fechaNacimiento"
+></fs-date-picker>
+
+<!-- Acotado a un rango -->
+<fs-date-picker
+  label="Fecha de la reserva"
+  [min]="hoy"
+  [max]="finDeTemporada"
+  [(ngModel)]="reserva"
+></fs-date-picker>
+
+<!-- Otro locale: cambia el formato y los nombres de mes y día -->
+<fs-date-picker label="Date" locale="en-US" [firstDayOfWeek]="0"></fs-date-picker>
+```
+
+| Input | Tipo | Default | Descripción |
+|---|---|---|---|
+| `label` | `string` | `''` | Etiqueta visible |
+| `placeholder` | `string` | `'dd/mm/aaaa'` | Placeholder del campo |
+| `hint` | `string` | `''` | Texto de ayuda |
+| `locale` | `string` | `'es-AR'` | BCP 47 — define el formato tipeado y los nombres de mes/día |
+| `firstDayOfWeek` | `number` | `1` | Primer día de la semana (0 domingo … 1 lunes) |
+| `min` | `Date \| string \| null` | — | Fecha mínima seleccionable |
+| `max` | `Date \| string \| null` | — | Fecha máxima seleccionable |
+| `clearable` | `boolean` | `true` | Muestra la X para limpiar |
+| `showFooter` | `boolean` | `true` | Muestra el pie con Hoy / Limpiar |
+| `todayLabel` | `string` | `'Hoy'` | Texto del botón Hoy |
+| `clearLabel` | `string` | `'Limpiar'` | Texto del botón Limpiar |
+| `disabled` | `boolean` | `false` | Estado deshabilitado |
+| `readonly` | `boolean` | `false` | Solo lectura — no se tipea ni se abre |
+| `state` | `'default' \| 'error' \| 'success'` | `'default'` | Estado de validación |
+| `errorMessage` / `successMessage` | `string` | `''` | Mensajes de validación |
+
+| Output | Tipo | Descripción |
+|---|---|---|
+| `valueChange` | `EventEmitter<Date \| null>` | Emite la fecha seleccionada |
+
+**Lo que acepta al tipear.** El separador puede ser `/`, `-`, `.` o espacio, el año
+puede tener 2 o 4 dígitos, y el orden de día y mes lo define el `locale` — salvo
+que empiece con 4 dígitos, que se lee como ISO. Un año de 2 dígitos se interpreta
+en una ventana de ±50 años alrededor de hoy, así que `90` es 1990 y `26` es 2026.
+
+Mientras escribís, el modelo solo se actualiza cuando el texto parsea a una fecha
+válida y dentro del rango: pisarlo en cada tecla pelearía con vos a mitad de
+`15/03/1990`. Al salir del campo, lo que no parsea vuelve al valor del modelo, así
+que el texto visible nunca contradice el valor.
+
+Fechas imposibles se rechazan: `31/02` y `29/02/2023` dan `null` en vez de rodar a
+marzo como haría `new Date()`.
+
+**Teclado:** `↓` abre · flechas mueven el cursor cruzando de mes · `Inicio`/`Fin`
+van al borde de la semana · `PageUp`/`PageDown` cambian de mes (con `Shift`, de
+año) · `Enter` selecciona · `Esc` cierra.
+
+> El calendario se renderiza en el **top layer** vía `[fsAnchoredPopover]`, así que
+> no lo recorta ningún contenedor con `overflow` o `transform`.
+
 ---
 
 ### Selección — `<fs-checkbox>`, `<fs-radio-group>`, `<fs-switch>`, `<fs-segmented>`
@@ -945,6 +1012,7 @@ Storybook en: **https://heroelc.github.io/fsociety**
 - [x] `fs-hint` + `fs-field` — mensajes de apoyo en 4 tonos, wrapper de campo
 - [x] `fs-multi-select` — chips removibles, buscador, checkboxes, max
 - [x] `fs-steps` — stepper multi-paso, completado/activo/pendiente
+- [x] `fs-date-picker` — campo tipeable + calendario, min/max, locale via Intl, teclado
 - [x] Temas light y dark vía `data-theme`, con capa semántica de tokens
 - [x] `[fsAnchoredPopover]` — overlays en el top layer, sin recortes
 - [x] Storybook en GitHub Pages, con paleta de marca en vivo

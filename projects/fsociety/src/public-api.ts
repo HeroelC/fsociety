@@ -32,6 +32,9 @@ export type { FsPopoverAlign, FsPopoverSide } from './lib/overlay/anchored-popov
 export { FsSelectComponent } from './lib/select/select.component';
 export type { FsSelectOption, FsSelectState } from './lib/select/select.component';
 
+export { FsDatePickerComponent } from './lib/date-picker/date-picker.component';
+export type { FsDatePickerState, FsCalendarDay } from './lib/date-picker/date-picker.component';
+
 export { FsCheckboxComponent } from './lib/choice/checkbox.component';
 export type { FsCheckboxState } from './lib/choice/checkbox.component';
 
