@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.4.0](https://github.com/heroelc/fsociety/compare/v0.3.0...v0.4.0) (2026-08-07)
+
+### Features
+
+* **date-picker:** add a typeable date field with a calendar ([9f99d49](https://github.com/heroelc/fsociety/commit/9f99d498780d8bc0ee76c0428521d45189ff5251))
+
+### Bug Fixes
+
+* **date-picker:** guard inputs so an unset binding cannot leak into the DOM ([d49154c](https://github.com/heroelc/fsociety/commit/d49154c69e2f8a5cd8288162bb5e934d3408d7c4))
+* **release:** strip hex colours from changelog refs, and fix the band guard ([c97c85b](https://github.com/heroelc/fsociety/commit/c97c85b68504f4baa051750c28a9ba48482f43c7)), closes [#42](https://github.com/heroelc/fsociety/issues/42)
+
 ## [0.3.0](https://github.com/heroelc/fsociety/compare/v0.2.0...v0.3.0) (2026-08-07)
 
 ### Features
