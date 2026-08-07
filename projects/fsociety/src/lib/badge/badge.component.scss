@@ -29,6 +29,7 @@ $badge-colors: (
   &--sm {
     font-size: t.$fs-text-xs;        // era 10px → 12px
     padding:   t.$fs-space-1 t.$fs-space-3;
+    gap:       5px;                  // 4px dejaba el ícono pegado al label
 
     .fs-badge__icon svg { width: 11px; height: 11px; }
   }
@@ -36,6 +37,7 @@ $badge-colors: (
   &--md {
     font-size: t.$fs-text-sm;        // era 12px → 14px
     padding:   t.$fs-space-1 t.$fs-space-3;
+    gap:       6px;
 
     .fs-badge__icon svg { width: 13px; height: 13px; }
   }
@@ -67,6 +69,40 @@ $badge-colors: (
 
       .fs-badge__dot { background: map.get($values, 'base'); }
     }
+  }
+
+  // -------------------------------------------------------------------------
+  // customColor — mismo criterio que las variantes semánticas, pero derivado
+  // de un color arbitrario que el componente publica en --fs-badge-custom.
+  //
+  // Las semánticas usan fondo stop-50 (claro) con texto stop-800 (oscuro), que
+  // da 5.5:1 a 9.5:1. Acá se replica mezclando contra los tokens del tema:
+  // --fs-color-text-primary es casi negro en light y casi blanco en dark, así
+  // que mezclar la marca hacia él OSCURECE en light y ACLARA en dark. El
+  // contraste se corrige con el tema sin ninguna lógica extra.
+  //
+  // Pesos elegidos midiendo WCAG sobre varios tonos, incluidos los difíciles
+  // (ámbar, amarillo): filled queda en 5.3:1 como peor caso y outline en 4.7:1.
+  // Más marca en el texto se leía mejor de lejos pero no llegaba a AA.
+  // -------------------------------------------------------------------------
+
+  &--custom {
+    &.fs-badge--filled {
+      background:   color-mix(in srgb, var(--fs-badge-custom) 12%, var(--fs-color-surface));
+      border-color: color-mix(in srgb, var(--fs-badge-custom) 30%, transparent);
+      color:        color-mix(in srgb, var(--fs-badge-custom) 55%, var(--fs-color-text-primary));
+    }
+
+    // Sin relleno el texto queda sobre la página, que es el caso más exigente,
+    // así que se diluye un poco más. El borde se queda con el color pleno: es la
+    // señal de marca y un borde de 1px no necesita ratio de texto.
+    &.fs-badge--outline {
+      background:   transparent;
+      border-color: var(--fs-badge-custom);
+      color:        color-mix(in srgb, var(--fs-badge-custom) 45%, var(--fs-color-text-primary));
+    }
+
+    .fs-badge__dot { background: var(--fs-badge-custom); }
   }
 
   // -------------------------------------------------------------------------

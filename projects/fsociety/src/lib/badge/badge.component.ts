@@ -110,30 +110,19 @@ export class FsBadgeComponent implements OnChanges {
     this.removed.emit();
   }
 
-  private buildCustomStyles(hex: string): Record<string, string> {
-    // Convertir hex a rgb para poder usar con opacidad
-    const r = parseInt(hex.slice(1, 3), 16);
-    const g = parseInt(hex.slice(3, 5), 16);
-    const b = parseInt(hex.slice(5, 7), 16);
-
-    if (this.variant === 'outline') {
-      return {
-        'background':   'transparent',
-        'color':        hex,
-        'border-color': hex,
-      };
-    }
-
-    return {
-      'background':   `rgba(${r}, ${g}, ${b}, 0.15)`,
-      'color':        this.lightenHex(r, g, b),
-      'border-color': `rgba(${r}, ${g}, ${b}, 0.30)`,
-    };
-  }
-
-  private lightenHex(r: number, g: number, b: number): string {
-    // Mezcla con blanco al 60% para el texto
-    const mix = (c: number) => Math.round(c + (255 - c) * 0.6);
-    return `rgb(${mix(r)}, ${mix(g)}, ${mix(b)})`;
+  /**
+   * Solo publica el color; el mezclado lo hace CSS con color-mix() en el SCSS.
+   *
+   * Antes se calculaba acá en JS, y el texto se mezclaba 60% hacia BLANCO —
+   * pensado para cuando los badges vivían sobre fondo oscuro. Sobre un badge
+   * claro eso daba 1.3:1 de contraste, ilegible. Y al ser JS no podía saber el
+   * tema activo, así que no había forma de invertirlo.
+   *
+   * En CSS el mezclado puede referenciar los tokens del tema, y así se invierte
+   * solo. Acepta cualquier color válido de CSS, no solo #rrggbb: la versión
+   * anterior parseaba el hex a mano y devolvía NaN con formato corto.
+   */
+  private buildCustomStyles(color: string): Record<string, string> {
+    return { '--fs-badge-custom': color };
   }
 }
