@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.3.0](https://github.com/heroelc/fsociety/compare/v0.2.0...v0.3.0) (2026-08-07)
+
+### Features
+
+* **overlay:** export the popover align and side types ([13755a8](https://github.com/heroelc/fsociety/commit/13755a879545c9a127a5c338fb79448706b47650))
+* **storybook:** add a live brand palette playground ([da9288f](https://github.com/heroelc/fsociety/commit/da9288fd5ee64365f2855d3ce804882a4b59139b)), closes [#2563eb](https://github.com/heroelc/fsociety/issues/2563eb) [#e11d48](https://github.com/heroelc/fsociety/issues/e11d48) [#7c3aed](https://github.com/heroelc/fsociety/issues/7c3aed)
+
+### Bug Fixes
+
+* **badge,profile-card:** tint icons with currentColor instead of using img ([7dfbe43](https://github.com/heroelc/fsociety/commit/7dfbe430ef190ef29c53f8c2c191ddc405ffff2f))
+* **badge:** make customColor readable, and let the theme flip it ([82f821b](https://github.com/heroelc/fsociety/commit/82f821b000ebe97e87fa52d339ad6b56a266f632))
+* **docs:** use colour-agnostic icon URLs and drop the dead LinkedIn slug ([02b2264](https://github.com/heroelc/fsociety/commit/02b2264be92047129160aff7bb6d935950bc9495))
+
 ## [0.2.0](https://github.com/heroelc/fsociety/compare/v0.1.0...v0.2.0) (2026-08-07)
 
 ### Bug Fixes
