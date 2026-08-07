@@ -1,0 +1,233 @@
+<div class="fs-dr">
+
+  @if (label) {
+    <label class="fs-dr__label" [for]="inputId + '-start'">{{ label }}</label>
+  }
+
+  <div class="fs-dr__container">
+    <!-- One shell holding both fields, so the pair reads as a single control. -->
+    <div
+      #anchor
+      class="fs-dr__wrapper"
+      [class.fs-dr__wrapper--error]="state === 'error'"
+      [class.fs-dr__wrapper--success]="state === 'success'"
+      [class.fs-dr__wrapper--disabled]="disabled"
+      [class.fs-dr__wrapper--open]="open"
+    >
+      <span
+        class="fs-icon fs-dr__icon"
+        [style.--_icon]="'url(' + Icons.calendar + ')'"
+        aria-hidden="true"
+      ></span>
+
+      <input
+        [id]="inputId + '-start'"
+        class="fs-dr__field"
+        type="text"
+        inputmode="numeric"
+        autocomplete="off"
+        role="combobox"
+        aria-haspopup="grid"
+        [attr.aria-expanded]="open"
+        [placeholder]="startPlaceholder"
+        [value]="startText"
+        [disabled]="disabled"
+        [readonly]="readonly"
+        (focus)="openCalendar()"
+        (input)="onStartInput($event)"
+        (blur)="onFieldBlur()"
+      />
+
+      <span
+        class="fs-icon fs-dr__arrow"
+        [style.--_icon]="'url(' + Icons.arrowRight + ')'"
+        aria-hidden="true"
+      ></span>
+
+      <input
+        [id]="inputId + '-end'"
+        class="fs-dr__field"
+        type="text"
+        inputmode="numeric"
+        autocomplete="off"
+        [attr.aria-label]="endPlaceholder"
+        [placeholder]="endPlaceholder"
+        [value]="endText"
+        [disabled]="disabled"
+        [readonly]="readonly"
+        (focus)="openCalendar()"
+        (input)="onEndInput($event)"
+        (blur)="onFieldBlur()"
+      />
+
+      @if (showClearBtn) {
+        <button
+          class="fs-dr__clear"
+          type="button"
+          aria-label="Limpiar rango"
+          (mousedown)="$event.preventDefault()"
+          (click)="clear()"
+        >
+          <span
+            class="fs-icon"
+            [style.--_icon]="'url(' + Icons.x + ')'"
+            style="width:14px;height:14px"
+            aria-hidden="true"
+          ></span>
+        </button>
+      }
+
+      @if (showStateIcon) {
+        <span
+          class="fs-icon fs-dr__state-icon"
+          [style.--_icon]="'url(' + stateIconUrl + ')'"
+          aria-hidden="true"
+        ></span>
+      }
+    </div>
+
+    @if (open) {
+      <div
+        class="fs-dr__calendar"
+        [fsAnchoredPopover]="anchor"
+        [popoverMatchWidth]="false"
+        role="dialog"
+        [attr.aria-label]="label || 'Rango de fechas'"
+      >
+        @if (presets.length) {
+          <div class="fs-dr__presets">
+            @for (p of presets; track p.label) {
+              <button
+                class="fs-dr__preset"
+                type="button"
+                (mousedown)="$event.preventDefault()"
+                (click)="applyPreset(p)"
+              >{{ p.label }}</button>
+            }
+          </div>
+        }
+
+        <div class="fs-dr__body">
+          <div class="fs-dr__head">
+            <button
+              class="fs-dr__nav"
+              type="button"
+              aria-label="Mes anterior"
+              (mousedown)="$event.preventDefault()"
+              (click)="shiftMonth(-1)"
+            >
+              <span
+                class="fs-icon"
+                [style.--_icon]="'url(' + Icons.chevronLeft + ')'"
+                aria-hidden="true"
+              ></span>
+            </button>
+
+            <div class="fs-dr__titles">
+              @for (m of visibleMonths; track m.getTime()) {
+                <span class="fs-dr__title" aria-live="polite">{{ labelFor(m) }}</span>
+              }
+            </div>
+
+            <button
+              class="fs-dr__nav"
+              type="button"
+              aria-label="Mes siguiente"
+              (mousedown)="$event.preventDefault()"
+              (click)="shiftMonth(1)"
+            >
+              <span
+                class="fs-icon"
+                [style.--_icon]="'url(' + Icons.chevronRight + ')'"
+                aria-hidden="true"
+              ></span>
+            </button>
+          </div>
+
+          <!-- mouseleave on the row of months, not on each cell: leaving one cell
+               for the next would drop the preview between every step. -->
+          <div class="fs-dr__months" (mouseleave)="hovered = null">
+            @for (m of visibleMonths; track m.getTime()) {
+              <div class="fs-dr__month" role="grid">
+                <div class="fs-dr__dow" role="row">
+                  @for (d of weekdays; track $index) {
+                    <span class="fs-dr__dow-cell" role="columnheader">{{ d }}</span>
+                  }
+                </div>
+
+                @for (week of weeksFor(m); track $index) {
+                  <div class="fs-dr__week" role="row">
+                    @for (cell of week; track cell.date.getTime()) {
+                      <button
+                        class="fs-dr__day"
+                        type="button"
+                        role="gridcell"
+                        [class.fs-dr__day--selected]="cell.selected"
+                        [class.fs-dr__day--today]="cell.today"
+                        [class.fs-dr__day--outside]="cell.outside"
+                        [class.fs-dr__day--in-range]="cell.inRange"
+                        [class.fs-dr__day--range-start]="cell.rangeStart"
+                        [class.fs-dr__day--range-end]="cell.rangeEnd"
+                        [disabled]="cell.disabled"
+                        [attr.aria-selected]="cell.selected"
+                        [attr.aria-current]="cell.today ? 'date' : null"
+                        (mousedown)="$event.preventDefault()"
+                        (click)="onDayClick(cell)"
+                        (mouseenter)="onDayHover(cell)"
+                      >{{ cell.day }}</button>
+                    }
+                  </div>
+                }
+              </div>
+            }
+          </div>
+
+          <div class="fs-dr__foot">
+            <span class="fs-dr__foot-hint">
+              @if (picking === 'end' && value.start) {
+                Elegí la fecha de fin
+              } @else {
+                Elegí la fecha de inicio
+              }
+            </span>
+            <button
+              class="fs-dr__foot-btn"
+              type="button"
+              (mousedown)="$event.preventDefault()"
+              (click)="clear()"
+            >{{ clearLabel }}</button>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+
+  @if (hint && state === 'default') {
+    <span class="fs-dr__hint">{{ hint }}</span>
+  }
+
+  @if (state === 'error' && errorMessage) {
+    <span class="fs-dr__message fs-dr__message--error" role="alert">
+      <span
+        class="fs-icon"
+        [style.--_icon]="'url(' + Icons.alertCircle + ')'"
+        style="width:13px;height:13px"
+        aria-hidden="true"
+      ></span>
+      {{ errorMessage }}
+    </span>
+  }
+
+  @if (state === 'success' && successMessage) {
+    <span class="fs-dr__message fs-dr__message--success">
+      <span
+        class="fs-icon"
+        [style.--_icon]="'url(' + Icons.circleCheck + ')'"
+        style="width:13px;height:13px"
+        aria-hidden="true"
+      ></span>
+      {{ successMessage }}
+    </span>
+  }
+
+</div>
