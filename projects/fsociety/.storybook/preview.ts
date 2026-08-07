@@ -23,8 +23,9 @@ const preview: Preview = {
   decorators: [
     (storyFn, context) => {
       const theme = (context.globals['theme'] as string) ?? 'light';
+      // Surface colors are driven from [data-theme] in preview-head.html so that
+      // Docs pages get the same treatment as the Canvas.
       document.documentElement.setAttribute('data-theme', theme);
-      document.body.style.backgroundColor = theme === 'dark' ? '#0d1117' : '#ffffff';
       document.body.style.transition = 'background-color 0.2s ease';
       return storyFn();
     },

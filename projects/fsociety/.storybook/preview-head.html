@@ -1,3 +1,75 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+<style>
+  /* ---------------------------------------------------------------------------
+     Storybook surfaces follow the active fsociety theme.
+
+     The theme toolbar sets [data-theme] on <html>, which switches the
+     --fs-color-* tokens the components consume. Storybook's own chrome does not
+     react to it, so on Docs pages every story used to render its dark-theme
+     colors on Storybook's light background — light text on white, unreadable.
+
+     !important is required here: these surfaces are painted by Storybook's
+     Emotion-generated styles. This file only affects the Storybook preview and
+     is never shipped with the library.
+     --------------------------------------------------------------------------- */
+
+  /* ─── Surfaces ─────────────────────────────────────────────────────────── */
+
+  /* Canvas body, Docs page, and every story preview block inside a Docs page */
+  [data-theme] .sb-show-main,
+  [data-theme] .sbdocs-wrapper,
+  [data-theme] .sbdocs-content,
+  [data-theme] .docs-story,
+  [data-theme] .sbdocs-preview,
+  [data-theme] .sb-story {
+    background-color: var(--fs-color-bg) !important;
+  }
+
+  /* ─── Docs typography ──────────────────────────────────────────────────── */
+
+  [data-theme] .sbdocs-title,
+  [data-theme] .sbdocs-content h1,
+  [data-theme] .sbdocs-content h2,
+  [data-theme] .sbdocs-content h3,
+  [data-theme] .sbdocs-content h4,
+  [data-theme] .sbdocs-content strong {
+    color: var(--fs-color-text-primary) !important;
+  }
+
+  [data-theme] .sbdocs-content h1,
+  [data-theme] .sbdocs-content h2 {
+    border-bottom-color: var(--fs-color-border) !important;
+  }
+
+  [data-theme] .sbdocs-subtitle,
+  [data-theme] .sbdocs-content p,
+  [data-theme] .sbdocs-content li,
+  [data-theme] .sbdocs-toc a {
+    color: var(--fs-color-text-secondary) !important;
+  }
+
+  /* ─── Args table ───────────────────────────────────────────────────────── */
+
+  [data-theme] .docblock-argstable-head th {
+    color: var(--fs-color-text-secondary) !important;
+  }
+
+  [data-theme] .docblock-argstable-body {
+    background-color: var(--fs-color-surface) !important;
+  }
+
+  [data-theme] .docblock-argstable-body tr td {
+    background-color: var(--fs-color-surface) !important;
+    color: var(--fs-color-text-primary) !important;
+    border-top-color: var(--fs-color-border) !important;
+  }
+
+  [data-theme] .docblock-emptyblock {
+    background-color: var(--fs-color-surface) !important;
+    color: var(--fs-color-text-secondary) !important;
+    border-color: var(--fs-color-border) !important;
+  }
+</style>
