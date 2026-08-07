@@ -1,0 +1,108 @@
+<div class="fs-num">
+
+  @if (label) {
+    <label class="fs-num__label" [for]="inputId">{{ label }}</label>
+  }
+
+  <div
+    class="fs-num__wrapper"
+    [class.fs-num__wrapper--error]="state === 'error'"
+    [class.fs-num__wrapper--success]="state === 'success'"
+    [class.fs-num__wrapper--disabled]="disabled"
+  >
+    <button
+      class="fs-num__step fs-num__step--down"
+      type="button"
+      tabindex="-1"
+      [attr.aria-label]="decrementLabel"
+      [disabled]="!canDecrement"
+      (click)="step_(-1)"
+    >
+      <span
+        class="fs-icon"
+        [style.--_icon]="'url(' + Icons.minus + ')'"
+        aria-hidden="true"
+      ></span>
+    </button>
+
+    <div class="fs-num__body">
+      @if (prefix) {
+        <span class="fs-num__affix" aria-hidden="true">{{ prefix }}</span>
+      }
+
+      <input
+        #field
+        [id]="inputId"
+        class="fs-num__field"
+        type="number"
+        inputmode="decimal"
+        [placeholder]="placeholder"
+        [value]="text"
+        [attr.min]="min ?? null"
+        [attr.max]="max ?? null"
+        [step]="step"
+        [disabled]="disabled"
+        [readonly]="readonly"
+        (input)="onTextInput($event)"
+        (blur)="onBlur()"
+        (keydown)="onKeydown($event)"
+      />
+
+      @if (suffix) {
+        <span class="fs-num__affix" aria-hidden="true">{{ suffix }}</span>
+      }
+
+      @if (showStateIcon) {
+        <span
+          class="fs-icon fs-num__state-icon"
+          [style.--_icon]="'url(' + stateIconUrl + ')'"
+          aria-hidden="true"
+        ></span>
+      }
+    </div>
+
+    <button
+      class="fs-num__step fs-num__step--up"
+      type="button"
+      tabindex="-1"
+      [attr.aria-label]="incrementLabel"
+      [disabled]="!canIncrement"
+      (click)="step_(1)"
+    >
+      <span
+        class="fs-icon"
+        [style.--_icon]="'url(' + Icons.plus + ')'"
+        aria-hidden="true"
+      ></span>
+    </button>
+  </div>
+
+  @if (hint && state === 'default') {
+    <span class="fs-num__hint">{{ hint }}</span>
+  }
+
+  @if (state === 'error' && errorMessage) {
+    <span class="fs-num__message fs-num__message--error" role="alert">
+      <span
+        class="fs-icon"
+        [style.--_icon]="'url(' + Icons.alertCircle + ')'"
+        style="width:13px;height:13px"
+        aria-hidden="true"
+      ></span>
+      {{ errorMessage }}
+    </span>
+  }
+
+  @if (state === 'success' && successMessage) {
+    <span class="fs-num__message fs-num__message--success">
+      <span
+        class="fs-icon"
+        [style.--_icon]="'url(' + Icons.circleCheck + ')'"
+        style="width:13px;height:13px"
+        aria-hidden="true"
+      ></span>
+      {{ successMessage }}
+    </span>
+  }
+
+</div>
