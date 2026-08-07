@@ -546,6 +546,106 @@ impredecible.
 
 ---
 
+### `<fs-modal>`
+
+Diálogo modal construido sobre **`<dialog>` nativo** con `showModal()`.
+
+```html
+<fs-button (click)="abierto = true">Abrir</fs-button>
+
+<fs-modal [(open)]="abierto" heading="Confirmar acción">
+  <p>Esto va a archivar el proyecto.</p>
+
+  <div modalFooter>
+    <fs-button variant="outline" (click)="abierto = false">Cancelar</fs-button>
+    <fs-button variant="danger" (click)="archivar()">Archivar</fs-button>
+  </div>
+</fs-modal>
+```
+
+| Input | Tipo | Default | Descripción |
+|---|---|---|---|
+| `open` | `boolean` | `false` | Two-way: `[(open)]` |
+| `heading` | `string` | `''` | Título del header |
+| `size` | `'sm' \| 'md' \| 'lg' \| 'full'` | `'md'` | 380 · 520 · 760px · casi todo el viewport |
+| `width` | `string` | — | Cualquier longitud CSS; pisa el preset |
+| `closeOnBackdrop` | `boolean` | `true` | Clickear el fondo cierra |
+| `closeOnEscape` | `boolean` | `true` | `Escape` cierra |
+| `showClose` | `boolean` | `true` | Muestra la X |
+| `closeLabel` | `string` | `'Cerrar'` | `aria-label` de la X |
+| `lockScroll` | `boolean` | `true` | Bloquea el scroll de la página de atrás |
+
+| Output | Tipo | Descripción |
+|---|---|---|
+| `openChange` | `EventEmitter<boolean>` | Para el two-way binding |
+| `closed` | `EventEmitter<void>` | Emite después de cerrarse, sin importar qué lo cerró |
+
+| Slot | Selector | Descripción |
+|---|---|---|
+| Default | — | Cuerpo del modal |
+| Footer | `[modalFooter]` | Botones de acción. Sin contenido, el footer no ocupa lugar |
+
+---
+
+### `<fs-drawer>`
+
+El mismo `<dialog>` nativo, con el panel pegado a un borde en vez de centrado.
+
+```html
+<fs-drawer [(open)]="abierto" heading="Filtros" side="right" size="400px">
+  <fs-input label="Buscar"></fs-input>
+
+  <div drawerFooter>
+    <fs-button variant="primary" (click)="aplicar()">Aplicar</fs-button>
+  </div>
+</fs-drawer>
+```
+
+Tiene los mismos inputs y outputs que `<fs-modal>`, con dos diferencias:
+
+| Input | Tipo | Default | Descripción |
+|---|---|---|---|
+| `side` | `'right' \| 'left' \| 'top' \| 'bottom'` | `'right'` | Borde del que entra |
+| `size` | `string` | `'400px'` | Ancho para left/right, alto para top/bottom |
+
+El slot del footer es `[drawerFooter]`.
+
+---
+
+#### Por qué `<dialog>` nativo
+
+`showModal()` resuelve cuatro cosas que un overlay hecho a mano tiene que
+construir, y que normalmente quedan mal:
+
+- **Focus trap.** `Tab` no se puede escapar del diálogo a la página de atrás.
+- **Focus restore.** Al cerrar, el foco vuelve a lo que estaba enfocado antes.
+- **Fondo inerte de verdad.** `aria-modal="true"` es una *declaración*, no una
+  garantía: sin `inert`, un lector de pantalla llega igual al contenido de atrás.
+- **Top layer.** Ningún `z-index` puede poner algo encima. Los dropdowns de esta
+  librería viven en el top layer con `z-index: 9999`, así que un overlay con
+  `z-index: 100` los tendría **por arriba** del modal.
+
+`Escape` también lo maneja el navegador: dispara `cancel` y después `close`.
+
+Lo que sí queda de nuestro lado, porque el nativo no lo hace: cerrar al clickear
+el fondo, bloquear el scroll de la página, y mantener `open` sincronizado cuando
+el navegador cierra el diálogo por su cuenta.
+
+El scroll lock compensa el ancho de la barra con `padding-right`. Sin eso, esconder
+la barra reflowea la página y se ve como un salto lateral al abrir.
+
+> **Los dos componentes usan `ViewEncapsulation.None`**, y no es un descuido:
+> `::backdrop` no es descendiente del componente, así que la encapsulación
+> emulada de Angular reescribe el selector a algo que nunca matchea. Es la única
+> forma de estilarlo. Todas las reglas están namespaceadas bajo `.fs-modal` y
+> `.fs-drawer` para que no se escape nada.
+
+La animación de salida usa `transition-behavior: allow-discrete` con
+`@starting-style`. Un `<dialog>` togglea `display`, así que sin eso solo se podría
+animar la entrada.
+
+---
+
 ### `<fs-slider>`
 
 Control de rango. Implementa `ControlValueAccessor`; el valor es un `number`.
@@ -1395,6 +1495,8 @@ Documentación visual en Storybook: [heroelc.github.io/fsociety](https://heroelc
 - [x] `fs-otp` — código de verificación, autofill de SMS, pegado inteligente
 - [x] `fs-slider` — marcas, límites, formato propio, decimales sin drift
 - [x] `fs-rating` — fracciones en readonly, un solo tab stop, icono configurable
+- [x] `fs-modal` — <dialog> nativo: focus trap, fondo inerte, top layer
+- [x] `fs-drawer` — mismo dialog, panel en cualquiera de los 4 bordes
 - [x] Temas light y dark vía `data-theme`, con capa semántica de tokens
 - [x] `[fsAnchoredPopover]` — overlays en el top layer, sin recortes
 - [x] Storybook en GitHub Pages, con paleta de marca en vivo

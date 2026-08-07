@@ -45,6 +45,12 @@ export type {
 export { FsOtpComponent } from './lib/otp/otp.component';
 export type { FsOtpState, FsOtpMode } from './lib/otp/otp.component';
 
+export { FsModalComponent } from './lib/dialog/modal.component';
+export type { FsModalSize } from './lib/dialog/modal.component';
+
+export { FsDrawerComponent } from './lib/dialog/drawer.component';
+export type { FsDrawerSide } from './lib/dialog/drawer.component';
+
 export { FsSliderComponent } from './lib/slider/slider.component';
 export type { FsSliderState, FsSliderValuePosition } from './lib/slider/slider.component';
 
