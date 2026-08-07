@@ -760,7 +760,7 @@ export class FsTokensDocComponent {
 // ─── Meta ─────────────────────────────────────────────────────────────────────
 
 const meta: Meta<FsTokensDocComponent> = {
-  title: 'fsociety/Tokens',
+  title: 'Foundations/Tokens',
   component: FsTokensDocComponent,
   tags: ['autodocs'],
   parameters: {

@@ -951,7 +951,7 @@ export class FsMixinsDocComponent {
 // ─── Meta ─────────────────────────────────────────────────────────────────────
 
 const meta: Meta<FsMixinsDocComponent> = {
-  title: 'fsociety/Mixins',
+  title: 'Foundations/Mixins',
   component: FsMixinsDocComponent,
   tags: ['autodocs'],
   parameters: {
