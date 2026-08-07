@@ -4,9 +4,17 @@ import {
   ElementRef,
   Input,
   NgZone,
+  OnChanges,
   OnDestroy,
+  SimpleChanges,
   inject,
 } from '@angular/core';
+
+/** Horizontal alignment of the popover against its anchor. */
+export type FsPopoverAlign = 'start' | 'center';
+
+/** Side the popover prefers. It still flips when that side has no room. */
+export type FsPopoverSide = 'bottom' | 'top';
 
 /**
  * Renders the host element in the browser's top layer, anchored to a trigger.
@@ -38,7 +46,7 @@ import {
   standalone: true,
   host: { popover: 'manual' },
 })
-export class FsAnchoredPopoverDirective implements AfterViewInit, OnDestroy {
+export class FsAnchoredPopoverDirective implements AfterViewInit, OnChanges, OnDestroy {
   /** Element the popover is aligned against. */
   @Input({ alias: 'fsAnchoredPopover', required: true }) anchor!: HTMLElement;
 
@@ -48,32 +56,60 @@ export class FsAnchoredPopoverDirective implements AfterViewInit, OnDestroy {
   /** Match the anchor's width. Disable for popovers that size themselves. */
   @Input() popoverMatchWidth = true;
 
+  /** Align the popover's left edge to the anchor's, or centre it. */
+  @Input() popoverAlign: FsPopoverAlign = 'start';
+
+  /** Side to prefer. Either way it flips when that side has no room. */
+  @Input() popoverSide: FsPopoverSide = 'bottom';
+
+  /**
+   * Drives visibility explicitly. Leave unset for content already gated behind
+   * an `@if`, which shows on init and hides on destroy. Set it when the element
+   * stays in the DOM and only its visibility toggles, so CSS can transition
+   * `:popover-open` in both directions.
+   */
+  @Input() popoverOpen?: boolean;
+
   private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
   private readonly zone = inject(NgZone);
 
   private readonly reposition = () => this.position();
 
   ngAfterViewInit(): void {
-    const el = this.host.nativeElement;
-
-    if (this.supportsPopover(el)) {
-      el.showPopover();
+    if (this.popoverOpen === undefined) {
+      this.show();
+    } else if (this.popoverOpen) {
+      this.show();
     }
 
-    this.position();
-
-    // Scroll is captured so that scrolling any ancestor keeps the menu pinned.
-    // Outside Angular: positioning writes to style directly, no CD needed.
+    // Scroll is captured so that scrolling any ancestor keeps the popover
+    // pinned. Outside Angular: positioning writes to style directly, no CD.
     this.zone.runOutsideAngular(() => {
       window.addEventListener('scroll', this.reposition, true);
       window.addEventListener('resize', this.reposition);
     });
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (!changes['popoverOpen'] || changes['popoverOpen'].isFirstChange()) return;
+    this.popoverOpen ? this.show() : this.hide();
+  }
+
   ngOnDestroy(): void {
     window.removeEventListener('scroll', this.reposition, true);
     window.removeEventListener('resize', this.reposition);
+    this.hide();
+  }
 
+  private show(): void {
+    const el = this.host.nativeElement;
+    if (this.supportsPopover(el) && !el.matches(':popover-open')) {
+      el.showPopover();
+    }
+    this.position();
+  }
+
+  private hide(): void {
     const el = this.host.nativeElement;
     if (this.supportsPopover(el) && el.isConnected && el.matches(':popover-open')) {
       el.hidePopover();
@@ -89,17 +125,29 @@ export class FsAnchoredPopoverDirective implements AfterViewInit, OnDestroy {
       el.style.width = `${rect.width}px`;
     }
 
-    // Flip above the anchor when the menu would run past the viewport bottom
-    // and there is genuinely more space above.
     const height = el.offsetHeight;
     const spaceBelow = window.innerHeight - rect.bottom - this.popoverOffset;
     const spaceAbove = rect.top - this.popoverOffset;
-    const flip = height > spaceBelow && spaceAbove > spaceBelow;
 
-    el.style.left = `${rect.left}px`;
-    el.style.top = flip
+    // Honour the preferred side, but flip when it has no room and the other
+    // side has more.
+    const wantsTop = this.popoverSide === 'top';
+    const fitsPreferred = (wantsTop ? spaceAbove : spaceBelow) >= height;
+    const onTop = fitsPreferred
+      ? wantsTop
+      : (wantsTop ? spaceBelow <= spaceAbove : spaceAbove > spaceBelow);
+
+    el.style.top = onTop
       ? `${rect.top - this.popoverOffset - height}px`
       : `${rect.bottom + this.popoverOffset}px`;
+
+    const left = this.popoverAlign === 'center'
+      ? rect.left + rect.width / 2 - el.offsetWidth / 2
+      : rect.left;
+
+    // Keep it inside the viewport when centring pushes it past an edge.
+    const maxLeft = window.innerWidth - el.offsetWidth - 4;
+    el.style.left = `${Math.max(4, Math.min(left, maxLeft))}px`;
   }
 
   private supportsPopover(el: HTMLElement): boolean {

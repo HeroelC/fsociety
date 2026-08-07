@@ -1,8 +1,27 @@
-<span class="fs-tip-wrap">
+<!--
+  The listeners live on the wrapper, not the host: :host is display: contents,
+  which generates no box, and mouseenter/mouseleave do not bubble — so a host
+  listener would never fire.
+-->
+<span
+  #anchor
+  class="fs-tip-wrap"
+  (mouseenter)="open = true"
+  (mouseleave)="open = false"
+  (focusin)="open = true"
+  (focusout)="open = false"
+  (keydown.escape)="open = false"
+>
   <ng-content></ng-content>
-  <span
-    class="fs-tip"
-    [attr.data-side]="side"
-    role="tooltip"
-  >{{ label }}</span>
 </span>
+
+<span
+  class="fs-tip"
+  role="tooltip"
+  [fsAnchoredPopover]="anchor"
+  [popoverOpen]="open"
+  [popoverSide]="side"
+  popoverAlign="center"
+  [popoverMatchWidth]="false"
+  [popoverOffset]="8"
+>{{ label }}</span>

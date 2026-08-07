@@ -1,4 +1,10 @@
-<div class="fs-toaster" aria-live="polite" aria-label="Notificaciones">
+<div
+  #toaster
+  class="fs-toaster"
+  popover="manual"
+  aria-live="polite"
+  aria-label="Notificaciones"
+>
   @for (toast of toastService.toasts(); track toast.id) {
     <div class="fs-toast" [attr.data-tone]="toast.tone" role="status">
 
