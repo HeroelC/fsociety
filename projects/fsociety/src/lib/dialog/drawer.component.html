@@ -1,0 +1,55 @@
+<!--
+  Same shape as fs-modal: the <dialog> is the click target for the backdrop, and
+  everything visible lives in the panel. Here the dialog is stretched to the full
+  viewport and the panel is pinned to one edge.
+-->
+<dialog
+  #dialog
+  class="fs-drawer"
+  [class.fs-drawer--right]="side === 'right'"
+  [class.fs-drawer--left]="side === 'left'"
+  [class.fs-drawer--top]="side === 'top'"
+  [class.fs-drawer--bottom]="side === 'bottom'"
+  [attr.aria-labelledby]="heading ? drawerId + '-title' : null"
+  [style.--fs-drawer-size]="size"
+  (click)="onDialogClick($event)"
+  (cancel)="onNativeCancel($event)"
+  (close)="onNativeClose()"
+>
+  <div class="fs-drawer__panel">
+
+    @if (heading || showClose) {
+      <div class="fs-drawer__head">
+        @if (heading) {
+          <h2 class="fs-drawer__title" [id]="drawerId + '-title'">{{ heading }}</h2>
+        } @else {
+          <span></span>
+        }
+
+        @if (showClose) {
+          <button
+            class="fs-drawer__close"
+            type="button"
+            [attr.aria-label]="closeLabel"
+            (click)="requestClose()"
+          >
+            <span
+              class="fs-icon"
+              [style.--_icon]="'url(' + Icons.x + ')'"
+              aria-hidden="true"
+            ></span>
+          </button>
+        }
+      </div>
+    }
+
+    <div class="fs-drawer__body">
+      <ng-content></ng-content>
+    </div>
+
+    <div class="fs-drawer__foot">
+      <ng-content select="[drawerFooter]"></ng-content>
+    </div>
+
+  </div>
+</dialog>

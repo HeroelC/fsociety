@@ -1,0 +1,53 @@
+<!--
+  The <dialog> itself carries no padding and no visible box: a backdrop click has
+  to land on this element and nowhere else, which is how it is told apart from a
+  click on the content.
+-->
+<dialog
+  #dialog
+  class="fs-modal"
+  [attr.aria-labelledby]="heading ? modalId + '-title' : null"
+  [style.--fs-modal-width]="resolvedWidth"
+  (click)="onDialogClick($event)"
+  (cancel)="onNativeCancel($event)"
+  (close)="onNativeClose()"
+>
+  <div class="fs-modal__panel">
+
+    @if (heading || showClose) {
+      <div class="fs-modal__head">
+        @if (heading) {
+          <h2 class="fs-modal__title" [id]="modalId + '-title'">{{ heading }}</h2>
+        } @else {
+          <span></span>
+        }
+
+        @if (showClose) {
+          <button
+            class="fs-modal__close"
+            type="button"
+            [attr.aria-label]="closeLabel"
+            (click)="requestClose()"
+          >
+            <span
+              class="fs-icon"
+              [style.--_icon]="'url(' + Icons.x + ')'"
+              aria-hidden="true"
+            ></span>
+          </button>
+        }
+      </div>
+    }
+
+    <div class="fs-modal__body">
+      <ng-content></ng-content>
+    </div>
+
+    <!-- :has keeps the footer's border and padding out of the layout when no
+         footer content was projected. -->
+    <div class="fs-modal__foot">
+      <ng-content select="[modalFooter]"></ng-content>
+    </div>
+
+  </div>
+</dialog>

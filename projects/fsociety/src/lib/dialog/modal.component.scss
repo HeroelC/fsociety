@@ -1,0 +1,158 @@
+// ---------------------------------------------------------------------------
+// fs-modal
+//
+// ViewEncapsulation.None, because ::backdrop cannot be reached through Angular's
+// emulated encapsulation — the backdrop is not a descendant of the component, so
+// the rewritten selector never matches. Every rule below is therefore namespaced
+// under .fs-modal so nothing leaks out.
+// ---------------------------------------------------------------------------
+
+.fs-modal {
+  --fs-modal-width: 520px;
+
+  // The dialog is the full-viewport box the browser centres content in. No
+  // padding and no background: a backdrop click has to land here, and only here.
+  width: var(--fs-modal-width);
+  max-width: calc(100vw - 32px);
+  max-height: calc(100vh - 48px);
+  padding: 0;
+  border: none;
+  background: none;
+  overflow: visible;
+  color: var(--fs-color-text-primary);
+
+  // Enter and exit both animate. A native dialog toggles `display`, so the
+  // transition needs allow-discrete to keep the element alive on the way out,
+  // and @starting-style to have somewhere to come from on the way in.
+  opacity: 0;
+  transform: translateY(12px) scale(0.97);
+  transition:
+    opacity 220ms cubic-bezier(0.2, 0.8, 0.3, 1),
+    transform 220ms cubic-bezier(0.2, 0.8, 0.3, 1),
+    overlay 220ms allow-discrete,
+    display 220ms allow-discrete;
+
+  &[open] {
+    opacity: 1;
+    transform: none;
+
+    @starting-style {
+      opacity: 0;
+      transform: translateY(12px) scale(0.97);
+    }
+  }
+
+  &::backdrop {
+    background: color-mix(in srgb, #0a0a12 52%, transparent);
+    -webkit-backdrop-filter: blur(2px);
+    backdrop-filter: blur(2px);
+    opacity: 0;
+    transition:
+      opacity 180ms ease,
+      overlay 180ms allow-discrete,
+      display 180ms allow-discrete;
+  }
+
+  &[open]::backdrop {
+    opacity: 1;
+
+    @starting-style { opacity: 0; }
+  }
+
+  // ─── Panel — the visible card ────────────────────────────────────────────
+  &__panel {
+    display: flex;
+    flex-direction: column;
+    // Bounded by the dialog so a long body scrolls inside instead of pushing the
+    // header and footer off screen.
+    max-height: calc(100vh - 48px);
+    background: var(--fs-color-surface);
+    border: 1px solid var(--fs-color-border);
+    border-radius: calc(var(--fs-radius-lg) + 4px);
+    box-shadow: var(--fs-color-shadow-pop);
+    overflow: hidden;
+  }
+
+  &__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-shrink: 0;
+    padding: 18px 20px;
+    border-bottom: 1px solid var(--fs-color-border);
+  }
+
+  &__title {
+    margin: 0;
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--fs-color-text-primary);
+  }
+
+  &__close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    border-radius: var(--fs-radius-sm);
+    color: var(--fs-color-text-secondary);
+    cursor: pointer;
+    transition: background 120ms ease, color 120ms ease;
+
+    .fs-icon { width: 17px; height: 17px; }
+
+    &:hover {
+      background: var(--fs-color-surface-alt);
+      color: var(--fs-color-text-primary);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--fs-color-primary);
+      outline-offset: 1px;
+    }
+  }
+
+  &__body {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    padding: 20px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--fs-color-text-secondary);
+
+    scrollbar-width: thin;
+    scrollbar-color: var(--fs-color-border-strong) transparent;
+
+    &::-webkit-scrollbar { width: 9px; }
+    &::-webkit-scrollbar-thumb {
+      background: var(--fs-color-border-strong);
+      border-radius: 5px;
+      border: 2.5px solid transparent;
+      background-clip: content-box;
+    }
+  }
+
+  // Collapsed unless something was projected into the slot, so an empty footer
+  // does not leave a stray border and 16px of padding.
+  &__foot {
+    display: none;
+    flex-shrink: 0;
+    padding: 16px 20px;
+    border-top: 1px solid var(--fs-color-border);
+
+    &:has(> *) {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+  }
+}

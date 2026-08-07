@@ -64,14 +64,16 @@
     // Vertical only: horizontal resizing would break out of the form's column.
     resize: vertical;
 
+    // Declared before the nested rules below. Sass is changing how a declaration
+    // that follows a nested rule is ordered, to match CSS — keeping them up here
+    // sidesteps the deprecation and the behaviour change.
+    scrollbar-width: thin;
+    scrollbar-color: var(--fs-color-border-strong) transparent;
+
     &--no-resize { resize: none; }
 
     &::placeholder { color: var(--fs-color-text-placeholder); }
     &:disabled { cursor: not-allowed; }
-
-    // The resize handle would otherwise sit under the state icon.
-    scrollbar-width: thin;
-    scrollbar-color: var(--fs-color-border-strong) transparent;
 
     &::-webkit-scrollbar { width: 9px; }
     &::-webkit-scrollbar-thumb {
