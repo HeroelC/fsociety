@@ -546,6 +546,117 @@ impredecible.
 
 ---
 
+### `<fs-slider>`
+
+Control de rango. Implementa `ControlValueAccessor`; el valor es un `number`.
+
+```html
+<fs-slider label="Volumen" unit="%" [(ngModel)]="volumen"></fs-slider>
+
+<!-- Con marcas y límites -->
+<fs-slider label="Nivel" [min]="1" [max]="5" [ticks]="true" [showBounds]="true" [(ngModel)]="nivel"></fs-slider>
+
+<!-- Formato propio -->
+<fs-slider label="Presupuesto" [min]="0" [max]="100000" [step]="1000" [formatValue]="money" [(ngModel)]="monto"></fs-slider>
+```
+
+| Input | Tipo | Default | Descripción |
+|---|---|---|---|
+| `label` / `hint` | `string` | `''` | |
+| `min` / `max` | `number` | `0` / `100` | Límites |
+| `step` | `number` | `1` | Incremento |
+| `unit` | `string` | `''` | Se agrega al valor mostrado |
+| `valuePosition` | `'right' \| 'top' \| 'none'` | `'right'` | Dónde va el valor |
+| `showBounds` | `boolean` | `false` | Imprime min y max bajo la barra |
+| `ticks` | `boolean \| number` | `false` | `true` = una por paso · número = esa cantidad |
+| `formatValue` | `(v: number) => string` | — | Formatea el valor mostrado |
+| `disabled` | `boolean` | `false` | |
+| `state` | `'default' \| 'error' \| 'success'` | `'default'` | |
+| `errorMessage` / `successMessage` | `string` | `''` | |
+
+| Output | Tipo | Descripción |
+|---|---|---|
+| `valueChange` | `EventEmitter<number>` | Emite el valor |
+
+**CSS custom properties:**
+
+```css
+fs-slider {
+  --fs-slider-track:      var(--fs-color-surface-alt);
+  --fs-slider-thumb:      #ffffff;
+  --fs-slider-thumb-size: 20px;
+  --fs-slider-height:     7px;
+}
+```
+
+> El knob es claro en los dos temas a propósito: se lee como un control físico, y
+> uno del color de la superficie desaparecería sobre la barra en dark.
+
+**Las marcas se omiten cuando quedarían a menos de 3% de distancia.** Con `step: 1`
+sobre 0–100 serían 101 marcas y se leerían como una barra sólida, así que no se
+dibujan. Y con `min === max` —que pasa mientras un formulario carga sus límites—
+el porcentaje se guarda en 0 en vez de dar `NaN` y romper el gradiente.
+
+---
+
+### `<fs-rating>`
+
+Puntuación con estrellas. Implementa `ControlValueAccessor`; el valor es un
+`number`.
+
+```html
+<fs-rating label="¿Cómo estuvo?" [(ngModel)]="puntaje"></fs-rating>
+
+<!-- Mostrar un promedio -->
+<fs-rating [readonly]="true" [showValue]="true" [ngModel]="4.2"></fs-rating>
+
+<!-- Corazones, 10 puntos -->
+<fs-rating icon="heart" [count]="10" [(ngModel)]="puntaje"></fs-rating>
+```
+
+| Input | Tipo | Default | Descripción |
+|---|---|---|---|
+| `label` / `hint` | `string` | `''` | |
+| `count` | `number` | `5` | Cantidad de glifos, acotado a 1–20 |
+| `icon` | `'star' \| 'heart' \| string` | `'star'` | Los dos primeros vienen incluidos; cualquier otro string se toma como URL |
+| `allowClear` | `boolean` | `true` | Clickear el valor actual lo borra |
+| `readonly` | `boolean` | `false` | Solo lectura, y admite fracciones |
+| `showValue` | `boolean` | `false` | Imprime el número al lado |
+| `formatValue` | `(v: number) => string` | — | Formatea ese número |
+| `disabled` | `boolean` | `false` | |
+| `state` | `'default' \| 'error'` | `'default'` | |
+| `errorMessage` | `string` | `''` | |
+
+| Output | Tipo | Descripción |
+|---|---|---|
+| `valueChange` | `EventEmitter<number>` | Emite el valor |
+
+**CSS custom properties:**
+
+```css
+fs-rating {
+  --fs-rating-color: #f5a623;
+  --fs-rating-empty: var(--fs-color-border-strong);
+  --fs-rating-size:  26px;
+  --fs-rating-gap:   3px;
+}
+```
+
+> El color es un ámbar con nombre, no un token semántico: esto es una puntuación,
+> no una advertencia, y mapearlo a `--fs-color-warning` lo arrastraría cada vez
+> que cambie ese tono. Se pisa con `--fs-rating-color`.
+
+**`readonly` acepta fracciones**, que es el caso más común de un rating: mostrar un
+promedio de 4.2. La capa de relleno se recorta a un porcentaje, así que un glifo
+parcial sale sin un segundo camino de render. En ese modo no hay botones ni tab
+stop — es un `role="img"`.
+
+**Es un solo tab stop.** Las flechas mueven el valor, no el foco; `Inicio` y `Fin`
+van a los extremos y `Supr` borra. Un botón tabulable por estrella significaría
+cinco tabs para pasar un control.
+
+---
+
 ### `<fs-number-input>`
 
 Campo numérico con stepper. Implementa `ControlValueAccessor`. El valor del
@@ -1282,6 +1393,8 @@ Documentación visual en Storybook: [heroelc.github.io/fsociety](https://heroelc
 - [x] `fs-file-upload` — dropzone, File reales, validación de tipo/tamaño/cantidad
 - [x] `fs-date-range-picker` — dos meses, preview, presets, maxSpan
 - [x] `fs-otp` — código de verificación, autofill de SMS, pegado inteligente
+- [x] `fs-slider` — marcas, límites, formato propio, decimales sin drift
+- [x] `fs-rating` — fracciones en readonly, un solo tab stop, icono configurable
 - [x] Temas light y dark vía `data-theme`, con capa semántica de tokens
 - [x] `[fsAnchoredPopover]` — overlays en el top layer, sin recortes
 - [x] Storybook en GitHub Pages, con paleta de marca en vivo
