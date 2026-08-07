@@ -130,16 +130,16 @@ El Storybook usa esas mismas dos secciones.
 <fs-badge color="success" [dot]="true">Activo</fs-badge>
 <fs-badge color="neutral" variant="outline">ESLint</fs-badge>
 
-<!-- con imagen (simpleicons, assets, etc.) -->
+<!-- con ícono monocromo — se tiñe con el color del badge -->
 <fs-badge color="danger"
-  imgLeft="https://cdn.simpleicons.org/angular/white"
+  imgLeft="https://api.iconify.design/simple-icons:angular.svg"
   imgLeftAlt="Angular">
   Angular
 </fs-badge>
 
 <!-- con color hex personalizado -->
 <fs-badge customColor="#7c3aed"
-  imgLeft="https://cdn.simpleicons.org/nestjs/white">
+  imgLeft="https://api.iconify.design/simple-icons:nestjs.svg">
   NestJS
 </fs-badge>
 
@@ -156,16 +156,29 @@ El Storybook usa esas mismas dos secciones.
 | `dot` | `boolean` | `false` | Punto de estado |
 | `iconLeft` | `string` | — | SVG path ícono izquierdo (viewBox 0 0 24 24) |
 | `iconRight` | `string` | — | SVG path ícono derecho |
-| `imgLeft` | `string` | — | URL o ruta imagen izquierda (prioridad sobre iconLeft) |
-| `imgRight` | `string` | — | URL o ruta imagen derecha |
-| `imgLeftAlt` | `string` | `''` | Alt text para imgLeft |
-| `imgRightAlt` | `string` | `''` | Alt text para imgRight |
+| `imgLeft` | `string` | — | URL de ícono izquierdo (prioridad sobre iconLeft) |
+| `imgRight` | `string` | — | URL de ícono derecho |
+| `imgLeftAlt` | `string` | `''` | Descripción del ícono izquierdo |
+| `imgRightAlt` | `string` | `''` | Descripción del ícono derecho |
 | `iconOnly` | `boolean` | `false` | Badge circular sin label |
 | `removable` | `boolean` | `false` | Muestra botón X |
 
 | Output | Tipo | Descripción |
 |---|---|---|
 | `removed` | `EventEmitter<void>` | Emite al clickear el X |
+
+> **`imgLeft` / `imgRight` esperan un ícono monocromo.** Se pintan con
+> `mask-image` tomando el color del texto del badge, así que se adaptan al tono y
+> al tema solos — y no hace falta un color en la URL. No sirven para artwork a
+> color: solo se usa la silueta.
+>
+> Por eso los ejemplos usan `api.iconify.design/simple-icons:*.svg` sin sufijo de
+> color. Un `<img>` no funcionaría: dentro de un `<img>` el SVG es un documento
+> aislado, `currentColor` no hereda, y el ícono queda del color que traiga
+> embebido — invisible cuando coincide con el fondo.
+>
+> Los íconos son decorativos (`aria-hidden`), así que el `Alt` no se renderiza:
+> el label del badge ya comunica el significado.
 
 ---
 
@@ -682,9 +695,9 @@ experience = {
   ],
   bulletsPreview: 2,
   badges: [
-    { label: 'Angular',     color: 'danger',  imgLeft: 'https://cdn.simpleicons.org/angular/white' },
-    { label: 'TypeScript',  color: 'primary', imgLeft: 'https://cdn.simpleicons.org/typescript/white' },
-    { label: 'AWS',         customColor: '#ea580c', imgLeft: 'https://cdn.simpleicons.org/amazonaws/white' },
+    { label: 'Angular',     color: 'danger',  imgLeft: 'https://api.iconify.design/simple-icons:angular.svg' },
+    { label: 'TypeScript',  color: 'primary', imgLeft: 'https://api.iconify.design/simple-icons:typescript.svg' },
+    { label: 'AWS',         customColor: '#ea580c', imgLeft: 'https://api.iconify.design/simple-icons:amazonaws.svg' },
     { label: 'ESLint',      color: 'neutral' },
   ],
 };
@@ -735,14 +748,14 @@ fs-experience-card {
 
 ```typescript
 links = [
-  { label: 'linkedin.com/in/johndoe', url: 'https://linkedin.com/in/johndoe', imgUrl: 'https://cdn.simpleicons.org/linkedin/white', imgAlt: 'LinkedIn' },
-  { label: 'github.com/johndoe',      url: 'https://github.com/johndoe',      imgUrl: 'https://cdn.simpleicons.org/github/white',   imgAlt: 'GitHub' },
+  { label: 'linkedin.com/in/johndoe', url: 'https://linkedin.com/in/johndoe', imgUrl: 'https://api.iconify.design/simple-icons:linkedin.svg', imgAlt: 'LinkedIn' },
+  { label: 'github.com/johndoe',      url: 'https://github.com/johndoe',      imgUrl: 'https://api.iconify.design/simple-icons:github.svg',   imgAlt: 'GitHub' },
   { label: 'Buenos Aires, Argentina' },
 ];
 badges = [
-  { label: 'Angular',    color: 'danger',  imgLeft: 'https://cdn.simpleicons.org/angular/white' },
-  { label: 'TypeScript', color: 'primary', imgLeft: 'https://cdn.simpleicons.org/typescript/white' },
-  { label: 'NestJS',     customColor: '#7c3aed', imgLeft: 'https://cdn.simpleicons.org/nestjs/white' },
+  { label: 'Angular',    color: 'danger',  imgLeft: 'https://api.iconify.design/simple-icons:angular.svg' },
+  { label: 'TypeScript', color: 'primary', imgLeft: 'https://api.iconify.design/simple-icons:typescript.svg' },
+  { label: 'NestJS',     customColor: '#7c3aed', imgLeft: 'https://api.iconify.design/simple-icons:nestjs.svg' },
 ];
 stats = [
   { value: '4+',  label: 'años exp.'  },

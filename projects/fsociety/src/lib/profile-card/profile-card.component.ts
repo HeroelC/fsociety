@@ -30,7 +30,7 @@ export interface FsProfileLink {
   icon?: string;
   /**
    * URL o ruta de imagen para el ícono del link.
-   * Ejemplo: 'https://cdn.simpleicons.org/linkedin/white'
+   * Ejemplo: 'https://api.iconify.design/simple-icons:linkedin.svg'
    * Tiene prioridad sobre icon si ambos están definidos.
    */
   imgUrl?: string;

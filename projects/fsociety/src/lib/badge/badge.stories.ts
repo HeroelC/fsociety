@@ -19,7 +19,7 @@ const meta: Meta<FsBadgeComponent> = {
     size:        { control: 'radio',   options: ['sm','md'] },
     imgLeft: {
       control: 'text',
-      description: 'URL de imagen izquierda — ej: https://cdn.simpleicons.org/angular/white',
+      description: 'URL de imagen izquierda — ej: https://api.iconify.design/simple-icons:angular.svg',
     },
     imgRight: {
       control: 'text',
@@ -129,32 +129,32 @@ export const WithImages: Story = {
     template: `
       <div style="display:flex; flex-wrap:wrap; gap:8px; align-items:center;">
         <fs-badge color="danger"
-          imgLeft="https://cdn.simpleicons.org/angular/white"
+          imgLeft="https://api.iconify.design/simple-icons:angular.svg"
           imgLeftAlt="Angular">
           Angular
         </fs-badge>
         <fs-badge color="primary"
-          imgLeft="https://cdn.simpleicons.org/typescript/white"
+          imgLeft="https://api.iconify.design/simple-icons:typescript.svg"
           imgLeftAlt="TypeScript">
           TypeScript
         </fs-badge>
         <fs-badge color="success"
-          imgLeft="https://cdn.simpleicons.org/nodedotjs/white"
+          imgLeft="https://api.iconify.design/simple-icons:nodedotjs.svg"
           imgLeftAlt="Node.js">
           Node.js
         </fs-badge>
         <fs-badge customColor="#7c3aed"
-          imgLeft="https://cdn.simpleicons.org/nestjs/white"
+          imgLeft="https://api.iconify.design/simple-icons:nestjs.svg"
           imgLeftAlt="NestJS">
           NestJS
         </fs-badge>
         <fs-badge customColor="#ea580c"
-          imgLeft="https://cdn.simpleicons.org/firebase/white"
+          imgLeft="https://api.iconify.design/simple-icons:firebase.svg"
           imgLeftAlt="Firebase">
           Firebase
         </fs-badge>
         <fs-badge customColor="#0ea5e9"
-          imgLeft="https://cdn.simpleicons.org/amazonaws/white"
+          imgLeft="https://api.iconify.design/simple-icons:amazonaws.svg"
           imgLeftAlt="AWS">
           AWS
         </fs-badge>

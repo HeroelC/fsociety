@@ -53,7 +53,7 @@ export class FsBadgeComponent implements OnChanges {
 
   /**
    * URL o ruta de imagen izquierda.
-   * Ejemplo: 'assets/icons/angular.svg' o 'https://cdn.simpleicons.org/angular/white'
+   * Ejemplo: 'assets/icons/angular.svg' o 'https://api.iconify.design/simple-icons:angular.svg'
    * Tiene prioridad sobre iconLeft si ambos están definidos.
    */
   @Input() imgLeft?: string;

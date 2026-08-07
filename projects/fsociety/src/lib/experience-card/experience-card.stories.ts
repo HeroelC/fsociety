@@ -22,22 +22,22 @@ const EXPERIENCE_CURRENT = {
     {
       label:   'Angular',
       color:   'danger' as const,
-      imgLeft: 'https://cdn.simpleicons.org/angular/white',
+      imgLeft: 'https://api.iconify.design/simple-icons:angular.svg',
     },
     {
       label:   'TypeScript',
       color:   'primary' as const,
-      imgLeft: 'https://cdn.simpleicons.org/typescript/white',
+      imgLeft: 'https://api.iconify.design/simple-icons:typescript.svg',
     },
     {
       label:   'Node.js',
       color:   'success' as const,
-      imgLeft: 'https://cdn.simpleicons.org/nodedotjs/white',
+      imgLeft: 'https://api.iconify.design/simple-icons:nodedotjs.svg',
     },
     {
       label:       'AWS',
       customColor: '#ea580c',
-      imgLeft:     'https://cdn.simpleicons.org/amazonaws/white',
+      imgLeft:     'https://api.iconify.design/simple-icons:amazonaws.svg',
     },
     { label: 'ESLint', color: 'neutral' as const },
     { label: 'Husky',  color: 'neutral' as const },
@@ -59,17 +59,17 @@ const EXPERIENCE_PAST = {
     {
       label:   'Angular',
       color:   'danger' as const,
-      imgLeft: 'https://cdn.simpleicons.org/angular/white',
+      imgLeft: 'https://api.iconify.design/simple-icons:angular.svg',
     },
     {
       label:   'Ionic',
       customColor: '#3880ff',
-      imgLeft: 'https://cdn.simpleicons.org/ionic/white',
+      imgLeft: 'https://api.iconify.design/simple-icons:ionic.svg',
     },
     {
       label:   'JavaScript',
       color:   'warning' as const,
-      imgLeft: 'https://cdn.simpleicons.org/javascript/white',
+      imgLeft: 'https://api.iconify.design/simple-icons:javascript.svg',
     },
     { label: 'Git', color: 'neutral' as const },
   ],
@@ -89,12 +89,12 @@ const EXPERIENCE_EARLY = {
     {
       label:       'Vue.js',
       customColor: '#22c55e',
-      imgLeft:     'https://cdn.simpleicons.org/vuedotjs/white',
+      imgLeft:     'https://api.iconify.design/simple-icons:vuedotjs.svg',
     },
     {
       label:   'JavaScript',
       color:   'warning' as const,
-      imgLeft: 'https://cdn.simpleicons.org/javascript/white',
+      imgLeft: 'https://api.iconify.design/simple-icons:javascript.svg',
     },
     { label: 'SCSS', color: 'neutral' as const },
   ],

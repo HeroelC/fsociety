@@ -22,19 +22,19 @@ const FAKE_LINKS = [
   {
     label:        'johndoe@example.com',
     encodedEmail: 'am9obmRvZUBleGFtcGxlLmNvbQ==', // btoa('johndoe@example.com')
-    imgUrl:       'https://cdn.simpleicons.org/gmail/white',
+    imgUrl:       'https://api.iconify.design/simple-icons:gmail.svg',
     imgAlt:       'Email',
   },
   {
     label:  'linkedin.com/in/johndoe',
     url:    'https://linkedin.com/in/johndoe',
-    imgUrl: 'https://cdn.simpleicons.org/linkedin/white',
+    imgUrl: 'https://api.iconify.design/simple-icons:linkedin.svg',
     imgAlt: 'LinkedIn',
   },
   {
     label:  'github.com/johndoe',
     url:    'https://github.com/johndoe',
-    imgUrl: 'https://cdn.simpleicons.org/github/white',
+    imgUrl: 'https://api.iconify.design/simple-icons:github.svg',
     imgAlt: 'GitHub',
   },
   {
@@ -44,10 +44,10 @@ const FAKE_LINKS = [
 ];
 
 const FAKE_BADGES = [
-  { label: 'Angular',    color: 'danger'  as const, imgLeft: 'https://cdn.simpleicons.org/angular/white' },
-  { label: 'TypeScript', color: 'primary' as const, imgLeft: 'https://cdn.simpleicons.org/typescript/white' },
-  { label: 'AWS',        customColor: '#ea580c',    imgLeft: 'https://cdn.simpleicons.org/amazonaws/white' },
-  { label: 'NestJS',     customColor: '#7c3aed',    imgLeft: 'https://cdn.simpleicons.org/nestjs/white' },
+  { label: 'Angular',    color: 'danger'  as const, imgLeft: 'https://api.iconify.design/simple-icons:angular.svg' },
+  { label: 'TypeScript', color: 'primary' as const, imgLeft: 'https://api.iconify.design/simple-icons:typescript.svg' },
+  { label: 'AWS',        customColor: '#ea580c',    imgLeft: 'https://api.iconify.design/simple-icons:amazonaws.svg' },
+  { label: 'NestJS',     customColor: '#7c3aed',    imgLeft: 'https://api.iconify.design/simple-icons:nestjs.svg' },
 ];
 
 const FAKE_STATS = [
