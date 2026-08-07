@@ -1,2 +1,13 @@
+// Single entry point for everything the library's styles provide.
+//
+//   @use '@heroelc/fsociety/styles';
+//
+// 'global' is not optional: it defines the semantic --fs-color-* layer that 17
+// component stylesheets consume, and the .fs-icon utility every icon relies on.
+// Importing only 'tokens' leaves components without colors and icons.
 @forward 'tokens';
-@forward 'mixins';
+// focus-ring is hidden here because 'mixins' only delegates to the definition in
+// 'tokens'. Forwarding both names collided, which is why `@use '.../styles'`
+// failed to compile at all before.
+@forward 'mixins' hide focus-ring;
+@forward 'global';

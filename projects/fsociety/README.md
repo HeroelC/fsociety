@@ -25,15 +25,41 @@ npm install @heroelc/fsociety
 
 ## Setup rápido
 
-### 1. Cargar los tokens en `styles.scss`
+### 1. Cargar los estilos en `styles.scss`
 
 ```scss
 // src/styles.scss de tu app Angular
-@use '@heroelc/fsociety/styles/tokens';
-@use '@heroelc/fsociety/styles/mixins'; // opcional — clases utilitarias
+@use '@heroelc/fsociety/styles';
 ```
 
-Esto emite todas las CSS custom properties (`--fs-primary-base`, `--fs-primary-hover`, etc.) en `:root`, disponibles globalmente en toda la app.
+Esa línea es todo lo que necesitás. Emite:
+
+- La paleta completa como CSS custom properties (`--fs-primary-base`, `--fs-primary-hover`, …) en `:root`.
+- La **capa semántica** (`--fs-color-surface`, `--fs-color-text-primary`, `--fs-color-border`, …), que es la que hace que los componentes tengan color y que responden al tema activo.
+- La utilidad `.fs-icon`, que todos los iconos de la librería usan vía `mask-image`.
+- Las clases utilitarias (`flex-center`, `pl-6`, `truncate`, …).
+
+> **No alcanza con importar solo `styles/tokens`.** La capa semántica y `.fs-icon` viven en `styles/global`, y 17 stylesheets de componentes dependen de ellas. Sin eso los componentes se renderizan sin fondo, sin bordes y con los iconos invisibles.
+
+Si preferís control granular, los entry points son:
+
+| Entry point | Qué trae |
+|---|---|
+| `@heroelc/fsociety/styles` | todo lo de abajo |
+| `@heroelc/fsociety/styles/tokens` | paleta, radios, espaciados, tipografía |
+| `@heroelc/fsociety/styles/global` | capa semántica `--fs-color-*`, `.fs-icon`, `box-sizing` |
+| `@heroelc/fsociety/styles/mixins` | mixins SCSS + clases utilitarias |
+| `@heroelc/fsociety/styles/overlay` | solo el mixin `popover-surface` (no emite CSS) |
+
+### 1b. Elegir el tema
+
+Los componentes siguen el atributo `data-theme` en la raíz del documento:
+
+```html
+<html data-theme="dark">
+```
+
+Sin el atributo, se usa el tema claro.
 
 ### 2. Importar componentes
 

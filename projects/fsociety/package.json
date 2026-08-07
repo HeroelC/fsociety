@@ -38,6 +38,9 @@
     "./styles/overlay": {
       "sass": "./_overlay.scss"
     },
+    "./styles/global": {
+      "sass": "./global.scss"
+    },
     "./styles": {
       "sass": "./_index.scss"
     }
