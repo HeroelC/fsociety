@@ -206,7 +206,8 @@
     }
 
     &:focus-visible {
-      @include t.focus-ring($color: var(--fs-primary-base));
+      // Sits on the card, so the inner ring matches the card background.
+      @include t.focus-ring($color: var(--fs-primary-base), $inner: var(--fs-profile-bg));
     }
   }
 

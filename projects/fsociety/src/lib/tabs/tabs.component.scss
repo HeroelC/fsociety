@@ -95,7 +95,8 @@
     }
 
     &:focus-visible {
-      @include t.focus-ring($color: var(--fs-primary-base));
+      // Sits on the tab header, so the inner ring matches its background.
+      @include t.focus-ring($color: var(--fs-primary-base), $inner: var(--fs-tab-bg));
     }
   }
 

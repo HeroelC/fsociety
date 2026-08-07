@@ -223,7 +223,8 @@
     transition:    color t.$fs-duration-fast t.$fs-ease-default;
 
     &:hover { color: var(--fs-primary-hover); }
-    &:focus-visible { @include t.focus-ring($color: var(--fs-primary-base)); }
+    // Sits on the card, so the inner ring matches the card background.
+    &:focus-visible { @include t.focus-ring($color: var(--fs-primary-base), $inner: var(--fs-exp-bg)); }
   }
 
   &__toggle-icon {

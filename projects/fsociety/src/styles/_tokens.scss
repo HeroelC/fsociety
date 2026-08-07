@@ -280,10 +280,26 @@ $fs-shadow-lg:  0 10px 15px rgba(0, 0, 0, 0.08), 0 4px 6px rgba(0, 0, 0, 0.04);
 $fs-shadow-xl:  0 20px 25px rgba(0, 0, 0, 0.09), 0 8px 10px rgba(0, 0, 0, 0.04);
 $fs-shadow-none: none;
 
-// Focus ring — siempre del color del token activo
-@mixin focus-ring($color: $primary-base, $offset: 2px) {
+// Focus ring — siempre del color del token activo.
+//
+// ESTA es la implementación que usan los componentes: todos hacen
+// `@use '../../styles/tokens' as t` y llaman `t.focus-ring(...)`. _mixins.scss
+// delega acá para que haya una sola.
+//
+// El anillo interno separa el ring del elemento, así que tiene que ser del color
+// del fondo. Estaba hardcodeado en `white`, que sobre un fondo oscuro dibujaba un
+// halo blanco. Ahora sigue el tema.
+//
+// $inner permite pisarlo cuando el elemento no está sobre el fondo de página
+// (por ejemplo el avatar de profile-card, que está sobre la superficie de la card).
+@mixin focus-ring(
+  $color: var(--fs-primary-base),
+  $offset: 2px,
+  $inner: var(--fs-color-bg)
+) {
   outline: none;
-  box-shadow: 0 0 0 $offset white, 0 0 0 ($offset + 2px) $color;
+  box-shadow: 0 0 0 $offset $inner,
+              0 0 0 ($offset + 2px) $color;
 }
 
 

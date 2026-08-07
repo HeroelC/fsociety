@@ -328,13 +328,18 @@ $breakpoints: (
 // 5. VISUAL / UI
 // -----------------------------------------------------------------------------
 
-// Focus ring accesible — ya definido en tokens, se re-exporta acá
+// Focus ring accesible — delega en tokens, que es la única implementación.
+// Antes había una copia acá con su propio anillo interno, y como los componentes
+// llaman a la de tokens, arreglar esta no cambiaba nada en la librería.
 // @param $color  — color del ring (default: primary)
 // @param $offset — separación del elemento (default: 2px)
-@mixin focus-ring($color: var(--fs-primary-base), $offset: 2px) {
-  outline: none;
-  box-shadow: 0 0 0 $offset var(--fs-profile-avatar-border, var(--fs-color-bg)),
-              0 0 0 ($offset + 2px) $color;
+// @param $inner  — color del anillo interno (default: el fondo del tema)
+@mixin focus-ring(
+  $color: var(--fs-primary-base),
+  $offset: 2px,
+  $inner: var(--fs-color-bg)
+) {
+  @include t.focus-ring($color, $offset, $inner);
 }
 
 // Card surface — fondo elevado y borde sutil, base de todos los componentes.
