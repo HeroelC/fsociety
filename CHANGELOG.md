@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.5.0](https://github.com/heroelc/fsociety/compare/v0.4.0...v0.5.0) (2026-08-07)
+
+### Features
+
+* **file-upload:** add a dropzone that keeps the real File objects ([e5388ff](https://github.com/heroelc/fsociety/commit/e5388ff3ab22de1d322ff64135227cba4230bd2d))
+* **number-input:** add a stepper number field ([590f6f3](https://github.com/heroelc/fsociety/commit/590f6f34d70de32c2eff4704c1e987835b6cada5))
+* **textarea:** add a textarea with counter and auto-grow ([10d88f8](https://github.com/heroelc/fsociety/commit/10d88f831374526fa4075175a0eab5aac5584a79))
+
 ## [0.4.0](https://github.com/heroelc/fsociety/compare/v0.3.0...v0.4.0) (2026-08-07)
 
 ### Features
