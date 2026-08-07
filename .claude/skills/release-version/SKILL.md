@@ -46,8 +46,17 @@ git status --porcelain
 ```
 
 `release-it` refuses to run with a dirty tree (`requireCleanWorkingDir` defaults
-to true). If there are changes, stop and ask the user whether to commit them
-first — do not commit unrelated work into a release.
+to true).
+
+If the changes **are** the work being released, commit them first as
+conventional commits — they are what the changelog is generated from — then
+release on top. If they are unrelated, stop and ask; never sweep unrelated work
+into a release.
+
+If a *generated* file keeps reappearing here, do not commit it to get past the
+check: gitignore it instead. `projects/fsociety/documentation.json` (Compodoc
+output, ~500 KB, rewritten by every Storybook build) used to do exactly this and
+is now ignored.
 
 ### 2. Confirm the branch
 
@@ -71,7 +80,28 @@ git log $(git describe --tags --abbrev=0)..HEAD --oneline
 - only `fix:` / `chore:` / `docs:` → patch
 
 State the level you inferred and why, then continue. Ask only if the history is
-genuinely ambiguous.
+genuinely ambiguous — **or if the guard below applies.**
+
+#### Guard: never cross a leading-zero boundary on your own
+
+**STOP and ask** when the inferred bump would change the first non-zero segment:
+
+- `0.0.x` → `0.1.0`
+- `0.x.y` → `1.0.0`
+
+Those are project-identity decisions, not mechanical ones, and a published
+version number can never be reused. State the current version, the level you
+inferred, why, and let the user choose. Do not proceed on inference alone.
+
+This guard exists because it was already gotten wrong: `0.0.18` went to `0.1.0`
+on inferred `minor` (a genuinely new public directive) when the project had been
+shipping every change — features included — as a `0.0.x` patch. The result was
+semver-correct and was kept, but the call belonged to the user.
+
+Note for reasoning about impact: a caret range on `0.0.x` pins the patch.
+`^0.0.18` resolves to `>=0.0.18 <0.0.19`, so those consumers would not have
+picked up `0.0.19` either. Do not argue that a minor "leaves consumers behind"
+where a patch would not have — on `0.0.x` that is false.
 
 ### 4. Dry run first
 
