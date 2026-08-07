@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NgStyle } from '@angular/common';
 import type { Meta, StoryObj } from '@storybook/angular';
 
 // ─── Component ────────────────────────────────────────────────────────────────
@@ -6,6 +7,10 @@ import type { Meta, StoryObj } from '@storybook/angular';
 @Component({
   selector: 'fs-mixins-doc',
   standalone: true,
+  // NgStyle is required: the flex, padding, margin and typography demos all
+  // drive their previews through [ngStyle]. Without it every one of those
+  // bindings fails and the demos render as empty boxes.
+  imports: [NgStyle],
   template: `
     <div class="doc">
 
@@ -208,9 +213,56 @@ import type { Meta, StoryObj } from '@storybook/angular';
             <code class="vis-code">&#64;include reset-button</code>
           </div>
 
+          <div class="visual-item">
+            <button class="vis-btn-focus">enfocame con Tab</button>
+            <code class="vis-code">&#64;include focus-ring</code>
+          </div>
+
         </div>
 
-        <div class="sub-label" style="margin-top:20px">border-radius</div>
+        <p class="section-desc" style="margin-top:14px">
+          <strong>card-surface</strong>, <strong>glass</strong> y
+          <strong>divider</strong> derivan de los tokens semánticos, así que
+          siguen el tema activo. Probá el toggle de tema en la toolbar.
+        </p>
+      </section>
+
+      <!-- OVERLAY ──────────────────────────────────────────── -->
+      <section>
+        <div class="section-header">
+          <h2 class="section-title">Overlay / top layer</h2>
+          <p class="section-desc">
+            Un dropdown con <code>position: fixed</code> igual queda recortado si
+            algún ancestro tiene <code>transform</code>, <code>filter</code>,
+            <code>contain</code> o <code>backdrop-filter</code>: ese ancestro pasa
+            a ser su containing block. La Popover API lo evita subiendo el
+            elemento al top layer, donde ningún <code>overflow</code> lo alcanza.
+          </p>
+        </div>
+
+        <div class="code-block" style="margin-bottom:14px">
+          <div class="code-label">SCSS — resetea los estilos de user-agent de [popover]</div>
+          <pre>{{ popoverScssExample }}</pre>
+        </div>
+
+        <div class="code-block">
+          <div class="code-label">HTML — anclá el popover al trigger</div>
+          <pre>{{ popoverHtmlExample }}</pre>
+        </div>
+
+        <p class="section-desc" style="margin-top:14px">
+          <code>FsAnchoredPopoverDirective</code> se encarga de mostrar el
+          popover, posicionarlo contra el ancla, seguirlo en scroll y resize, y
+          voltearlo hacia arriba cuando no hay lugar abajo. Es lo que usan
+          internamente <code>fs-select</code> y <code>fs-multi-select</code>.
+        </p>
+      </section>
+
+      <!-- RADII ────────────────────────────────────────────── -->
+      <section>
+        <div class="section-header">
+          <h2 class="section-title">Border radius</h2>
+        </div>
         <div class="radii-row">
           @for (r of radii; track r.name) {
             <div class="radius-item">
@@ -622,6 +674,25 @@ import type { Meta, StoryObj } from '@storybook/angular';
       font-size: 13px;
     }
 
+    /* Reproduce el mixin focus-ring: el anillo interno usa el fondo del tema,
+       así que se lee tanto en light como en dark. */
+    .vis-btn-focus {
+      background: var(--fs-color-surface);
+      border: 1px solid var(--fs-color-border);
+      border-radius: var(--fs-radius-md);
+      padding: 7px 12px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 12.5px;
+      color: var(--fs-color-text-primary);
+    }
+
+    .vis-btn-focus:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 2px var(--fs-color-bg),
+                  0 0 0 4px var(--fs-color-primary);
+    }
+
     .radii-row {
       display: flex;
       flex-wrap: wrap;
@@ -850,6 +921,30 @@ export class FsMixinsDocComponent {
 
   // degradé indicator (como los tabs)
   .bar { @include m.gradient-indicator; }
+}`;
+
+  popoverScssExample = `@use '@heroelc/fsociety/styles/overlay' as overlay;
+
+.my-menu {
+  // Primero: neutraliza inset, margin, border y padding del user-agent
+  @include overlay.popover-surface;
+
+  // Después: tu propio box model
+  background:    var(--fs-color-surface);
+  border:        1px solid var(--fs-color-border);
+  border-radius: var(--fs-radius-lg);
+  padding:       5px;
+  box-shadow:    var(--fs-color-shadow-pop);
+}`;
+
+  popoverHtmlExample = `<div class="field" #anchor>
+  <button (click)="open = !open">Abrir</button>
+</div>
+
+@if (open) {
+  <div class="my-menu" [fsAnchoredPopover]="anchor">
+    <!-- se renderiza en el top layer -->
+  </div>
 }`;
 }
 
