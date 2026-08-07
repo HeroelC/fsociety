@@ -35,6 +35,15 @@ export type { FsSelectOption, FsSelectState } from './lib/select/select.componen
 export { FsDatePickerComponent } from './lib/date-picker/date-picker.component';
 export type { FsDatePickerState, FsCalendarDay } from './lib/date-picker/date-picker.component';
 
+export { FsNumberInputComponent } from './lib/number-input/number-input.component';
+export type { FsNumberInputState } from './lib/number-input/number-input.component';
+
+export { FsTextareaComponent } from './lib/textarea/textarea.component';
+export type { FsTextareaState, FsTextareaResize } from './lib/textarea/textarea.component';
+
+export { FsFileUploadComponent, fsFormatFileSize } from './lib/file-upload/file-upload.component';
+export type { FsFileUploadState, FsUploadFile, FsFileRejection } from './lib/file-upload/file-upload.component';
+
 export { FsCheckboxComponent } from './lib/choice/checkbox.component';
 export type { FsCheckboxState } from './lib/choice/checkbox.component';
 

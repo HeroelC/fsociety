@@ -435,6 +435,143 @@ año) · `Enter` selecciona · `Esc` cierra.
 
 ---
 
+### `<fs-number-input>`
+
+Campo numérico con stepper. Implementa `ControlValueAccessor`. El valor del
+modelo es un `number`, o `null` cuando está vacío.
+
+```html
+<fs-number-input label="Cantidad" [min]="1" [max]="99" [(ngModel)]="cantidad"></fs-number-input>
+
+<!-- Con prefijo o sufijo -->
+<fs-number-input label="Precio" prefix="$" [step]="100" [(ngModel)]="precio"></fs-number-input>
+<fs-number-input label="Peso" suffix="kg" [step]="0.5" [(ngModel)]="peso"></fs-number-input>
+```
+
+| Input | Tipo | Default | Descripción |
+|---|---|---|---|
+| `label` / `hint` / `placeholder` | `string` | `''` | Etiqueta, ayuda y placeholder |
+| `min` / `max` | `number` | — | Límites. Sin ellos no hay tope |
+| `step` | `number` | `1` | Incremento de los botones y las flechas |
+| `prefix` / `suffix` | `string` | `''` | Texto pegado al número — símbolo o unidad |
+| `allowEmpty` | `boolean` | `true` | Si es `false`, al salir vacío vuelve a `min` |
+| `disabled` / `readonly` | `boolean` | `false` | |
+| `state` | `'default' \| 'error' \| 'success'` | `'default'` | Estado de validación |
+| `errorMessage` / `successMessage` | `string` | `''` | Mensajes |
+| `decrementLabel` / `incrementLabel` | `string` | `'Disminuir'` / `'Aumentar'` | `aria-label` de los botones |
+
+| Output | Tipo | Descripción |
+|---|---|---|
+| `valueChange` | `EventEmitter<number \| null>` | Emite el valor |
+
+**Decimales sin drift.** El resultado se redondea a la precisión del `step`, así
+que diez pasos de `0.1` dan `1` y no `0.9999999999999999`.
+
+**Se puede vaciar.** Mientras tipeás, una entrada a medio escribir (`-`, `0.`)
+no se toca; el valor se acota y redondea al salir del campo. Los botones se
+deshabilitan solos en los límites, y `PageUp` / `PageDown` mueven diez pasos.
+
+---
+
+### `<fs-textarea>`
+
+Área de texto con la misma API de etiquetas y estados que `<fs-input>`.
+Implementa `ControlValueAccessor`.
+
+```html
+<fs-textarea
+  label="Comentario"
+  placeholder="Contanos qué te pareció…"
+  [rows]="3"
+  [(ngModel)]="comentario"
+></fs-textarea>
+
+<!-- Con contador -->
+<fs-textarea label="Bio" [maxlength]="160" [(ngModel)]="bio"></fs-textarea>
+
+<!-- Crece con el contenido -->
+<fs-textarea label="Notas" resize="auto" [(ngModel)]="notas"></fs-textarea>
+```
+
+| Input | Tipo | Default | Descripción |
+|---|---|---|---|
+| `label` / `hint` / `placeholder` | `string` | `''` | |
+| `rows` | `number` | `3` | Altura inicial |
+| `maxlength` | `number` | — | Tope de caracteres. Activa el contador |
+| `showCounter` | `boolean` | `false` | Muestra el contador sin tope |
+| `resize` | `'vertical' \| 'none' \| 'auto'` | `'vertical'` | `auto` sigue al contenido y desactiva el arrastre |
+| `disabled` / `readonly` | `boolean` | `false` | |
+| `state` | `'default' \| 'error' \| 'success'` | `'default'` | |
+| `errorMessage` / `successMessage` | `string` | `''` | |
+
+| Output | Tipo | Descripción |
+|---|---|---|
+| `valueChange` | `EventEmitter<string>` | Emite el texto |
+
+El contador pasa a color de advertencia al llegar al 90% del límite. El pie
+comparte una línea entre el mensaje y el contador, así que un hint largo y la
+cuenta no se pelean por el espacio.
+
+---
+
+### `<fs-file-upload>`
+
+Dropzone con lista de archivos. Implementa `ControlValueAccessor`, y **el valor
+del modelo son objetos `File` reales** — no metadata — así que el formulario los
+puede subir.
+
+```html
+<fs-file-upload label="Adjuntos" [(ngModel)]="archivos"></fs-file-upload>
+
+<!-- Un solo archivo, solo imágenes -->
+<fs-file-upload
+  label="Foto de perfil"
+  accept="image/*"
+  [multiple]="false"
+></fs-file-upload>
+
+<!-- Con validación -->
+<fs-file-upload
+  label="Comprobantes"
+  accept=".pdf"
+  [maxSize]="10485760"
+  [maxFiles]="3"
+  (rejected)="onRechazados($event)"
+></fs-file-upload>
+```
+
+| Input | Tipo | Default | Descripción |
+|---|---|---|---|
+| `label` | `string` | `''` | Etiqueta |
+| `accept` | `string` | `''` | Igual que el input nativo: `.pdf,image/*` |
+| `multiple` | `boolean` | `true` | Con `false` cada archivo reemplaza al anterior |
+| `maxSize` | `number` | `0` | Tope por archivo en bytes. `0` = sin tope |
+| `maxFiles` | `number` | `0` | Cantidad máxima. `0` = sin tope |
+| `hint` / `title` / `subtitle` | `string` | ver defaults | Textos de la dropzone |
+| `removeLabel` | `string` | `'Quitar'` | Prefijo del `aria-label` de borrar |
+| `disabled` | `boolean` | `false` | |
+| `state` | `'default' \| 'error'` | `'default'` | |
+| `errorMessage` | `string` | `''` | Mensaje de error |
+
+| Output | Tipo | Descripción |
+|---|---|---|
+| `valueChange` | `EventEmitter<File[]>` | Emite los archivos en cola |
+| `rejected` | `EventEmitter<FsFileRejection[]>` | Los que se rechazaron, con el motivo |
+
+`FsFileRejection` trae `{ file, reason: 'type' \| 'size' \| 'count', message }`.
+Los rechazos también se muestran inline debajo de la dropzone.
+
+> **`accept` se valida en el drop, no solo en el input.** El atributo nativo no
+> se aplica al drag & drop, así que sin esa validación un archivo arrastrado de
+> cualquier tipo entraría igual. Se soportan extensión (`.pdf`), MIME exacto
+> (`application/pdf`) y wildcard (`image/*`).
+>
+> La dropzone es un `<button>`, así que `Enter` y `Espacio` abren el selector. El
+> resaltado al arrastrar cuenta `dragenter` menos `dragleave`: un booleano simple
+> parpadea al pasar el puntero sobre el ícono o el texto.
+
+---
+
 ### Selección — `<fs-checkbox>`, `<fs-radio-group>`, `<fs-switch>`, `<fs-segmented>`
 
 Todos implementan `ControlValueAccessor`.
@@ -1029,6 +1166,9 @@ Documentación visual en Storybook: [heroelc.github.io/fsociety](https://heroelc
 - [x] `fs-multi-select` — chips removibles, buscador, checkboxes, max
 - [x] `fs-steps` — stepper multi-paso, completado/activo/pendiente
 - [x] `fs-date-picker` — campo tipeable + calendario, min/max, locale via Intl, teclado
+- [x] `fs-number-input` — stepper, prefijo/sufijo, decimales sin drift
+- [x] `fs-textarea` — contador, auto-grow, estados
+- [x] `fs-file-upload` — dropzone, File reales, validación de tipo/tamaño/cantidad
 - [x] Temas light y dark vía `data-theme`, con capa semántica de tokens
 - [x] `[fsAnchoredPopover]` — overlays en el top layer, sin recortes
 - [x] Storybook en GitHub Pages, con paleta de marca en vivo
