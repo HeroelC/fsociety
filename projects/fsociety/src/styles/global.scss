@@ -1,6 +1,22 @@
 @use 'tokens';
 @use 'mixins';
 
+// ─── Box sizing ───────────────────────────────────────────────────────────────
+// Library elements size padding and borders inside their declared width.
+// Without this, anything combining `width: 100%` with padding overflows its
+// container — .fs-alert (100% + 16px padding + 1px border each side) pushed 34px
+// past its parent and produced a horizontal scrollbar. Nine component
+// stylesheets had the same shape.
+//
+// Scoped to fs-* classes on purpose: this is a global stylesheet, and forcing
+// border-box on a consumer's whole document would be their decision, not ours.
+// :where() keeps specificity at zero so any consumer rule still wins.
+:where([class^='fs-'], [class*=' fs-']),
+:where([class^='fs-'], [class*=' fs-'])::before,
+:where([class^='fs-'], [class*=' fs-'])::after {
+  box-sizing: border-box;
+}
+
 body {
   font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
