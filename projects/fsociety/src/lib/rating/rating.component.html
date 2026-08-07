@@ -1,0 +1,93 @@
+<div class="fs-rate" [class.fs-rate--disabled]="disabled">
+
+  @if (label) {
+    <span class="fs-rate__label" [id]="inputId + '-label'">{{ label }}</span>
+  }
+
+  <div class="fs-rate__row">
+    <!-- One tab stop for the whole group, with arrows moving the value — the
+         reference made every glyph its own tab stop, so a 5-star rating cost
+         five tabs to pass. -->
+    <div
+      class="fs-rate__glyphs"
+      [class.fs-rate__glyphs--interactive]="interactive"
+      [attr.role]="readonly ? 'img' : 'slider'"
+      [attr.tabindex]="tabIndexFor"
+      [attr.aria-labelledby]="label ? inputId + '-label' : null"
+      [attr.aria-label]="label ? null : 'Valoración'"
+      [attr.aria-valuenow]="readonly ? null : value"
+      [attr.aria-valuemin]="readonly ? null : 0"
+      [attr.aria-valuemax]="readonly ? null : count"
+      [attr.aria-valuetext]="ariaLabelFor(value)"
+      [attr.aria-disabled]="disabled || null"
+      (keydown)="onKeydown($event)"
+      (mouseleave)="onLeave()"
+      (blur)="onBlur()"
+    >
+      <!-- Base layer: every glyph muted. -->
+      <span class="fs-rate__layer" aria-hidden="true">
+        @for (n of items; track n) {
+          <span
+            class="fs-icon fs-rate__glyph"
+            [style.--_icon]="'url(' + iconUrl + ')'"
+          ></span>
+        }
+      </span>
+
+      <!-- Fill layer: the same row, clipped to a percentage. One overlay handles
+           whole values and fractions alike, which is what lets readonly show a
+           4.2 average without a separate rendering path. -->
+      <span
+        class="fs-rate__layer fs-rate__layer--fill"
+        [class.fs-rate__layer--error]="state === 'error'"
+        [style.width.%]="fillPercent"
+        aria-hidden="true"
+      >
+        @for (n of items; track n) {
+          <span
+            class="fs-icon fs-rate__glyph"
+            [style.--_icon]="'url(' + iconUrl + ')'"
+          ></span>
+        }
+      </span>
+
+      <!-- Hit areas, on top and transparent. Buttons only when interactive, so
+           readonly has nothing focusable. -->
+      @if (interactive) {
+        <span class="fs-rate__hits">
+          @for (n of items; track n) {
+            <button
+              class="fs-rate__hit"
+              type="button"
+              tabindex="-1"
+              [attr.aria-label]="ariaLabelFor(n)"
+              (mouseenter)="onEnter(n)"
+              (click)="pick(n)"
+            ></button>
+          }
+        </span>
+      }
+    </div>
+
+    @if (showValue) {
+      <span class="fs-rate__value">{{ displayValue }}</span>
+    }
+  </div>
+
+  @if (hint && state === 'default') {
+    <span class="fs-rate__hint">{{ hint }}</span>
+  }
+
+  @if (state === 'error' && errorMessage) {
+    <span class="fs-rate__message" role="alert">
+      <span
+        class="fs-icon"
+        [style.--_icon]="'url(' + Icons.alertCircle + ')'"
+        style="width:13px;height:13px"
+        aria-hidden="true"
+      ></span>
+      {{ errorMessage }}
+    </span>
+  }
+
+</div>

@@ -1,0 +1,128 @@
+// ---------------------------------------------------------------------------
+// fs-rating — CSS custom properties configurables
+//
+//   fs-rating {
+//     --fs-rating-color:       #f5a623;
+//     --fs-rating-empty:       var(--fs-color-border-strong);
+//     --fs-rating-size:        26px;
+//     --fs-rating-gap:         3px;
+//   }
+// ---------------------------------------------------------------------------
+
+.fs-rate {
+  // A named amber rather than a semantic token: this is a rating, not a warning,
+  // and mapping it to --fs-color-warning would drag it along whenever the warning
+  // hue changes. Overridable, and it reads on both themes.
+  --fs-rating-color: #f5a623;
+  --fs-rating-empty: var(--fs-color-border-strong);
+  --fs-rating-size:  26px;
+  --fs-rating-gap:   3px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  &--disabled {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
+  &__label {
+    font-size: 13px;
+    font-weight: 550;
+    letter-spacing: -0.005em;
+    color: var(--fs-color-text-primary);
+    line-height: 1.3;
+  }
+
+  &__row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  // ─── Glyph stack ─────────────────────────────────────────────────────────
+  // Three layers pinned on top of each other: muted base, clipped fill, hit
+  // areas. inline-flex sizes the box to the glyphs so the clip percentage maps
+  // to the row and not to some wider container.
+  &__glyphs {
+    position: relative;
+    display: inline-flex;
+    width: max-content;
+    border-radius: var(--fs-radius-sm);
+    outline: none;
+
+    &--interactive { cursor: pointer; }
+
+    &:focus-visible {
+      box-shadow: 0 0 0 2.5px color-mix(in srgb, var(--fs-color-primary) 25%, transparent);
+    }
+  }
+
+  &__layer {
+    display: inline-flex;
+    gap: var(--fs-rating-gap);
+    color: var(--fs-rating-empty);
+    // The fill layer is clipped by width, so the row must not reflow.
+    white-space: nowrap;
+    pointer-events: none;
+
+    &--fill {
+      position: absolute;
+      inset: 0 auto 0 0;
+      overflow: hidden;
+      color: var(--fs-rating-color);
+      transition: width 120ms ease;
+    }
+
+    &--error { color: var(--fs-color-error); }
+  }
+
+  &__glyph {
+    width: var(--fs-rating-size);
+    height: var(--fs-rating-size);
+    flex-shrink: 0;
+  }
+
+  // ─── Hit areas ───────────────────────────────────────────────────────────
+  // Transparent buttons over the glyphs. tabindex -1 keeps them out of the tab
+  // order; the group above owns focus and the keyboard.
+  &__hits {
+    position: absolute;
+    inset: 0;
+    display: inline-flex;
+    gap: var(--fs-rating-gap);
+  }
+
+  &__hit {
+    width: var(--fs-rating-size);
+    height: var(--fs-rating-size);
+    flex-shrink: 0;
+    padding: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  &__value {
+    font-size: 13.5px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    color: var(--fs-color-text-secondary);
+  }
+
+  &__hint {
+    font-size: 12.5px;
+    color: var(--fs-color-text-secondary);
+    line-height: 1.4;
+  }
+
+  &__message {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12.5px;
+    line-height: 1.4;
+    color: var(--fs-color-error);
+  }
+}
