@@ -197,19 +197,21 @@ activeTab = 'experiencia';
 | `activeTabChange` | `EventEmitter<string>` | Two-way binding |
 | `tabChange` | `EventEmitter<FsTab>` | Emite el objeto FsTab completo |
 
-**CSS custom properties configurables:**
+**CSS custom properties configurables.** Por defecto derivan de los tokens
+semánticos, así que siguen el tema activo. Pisá solo las que necesites:
 
 ```css
 fs-tabs {
-  --fs-tab-bg:             #0d1117;
-  --fs-tab-color:          rgba(255,255,255,0.40);
-  --fs-tab-color-hover:    rgba(255,255,255,0.70);
-  --fs-tab-color-active:   #ffffff;
-  --fs-tab-border:         rgba(255,255,255,0.08);
-  --fs-tab-hover-bg:       rgba(255,255,255,0.03);
+  --fs-tab-bg:             var(--fs-color-bg);
+  --fs-tab-color:          var(--fs-color-text-secondary);
+  --fs-tab-color-hover:    color-mix(in srgb, var(--fs-color-text-primary) 70%, transparent);
+  --fs-tab-color-active:   var(--fs-color-text-primary);
+  --fs-tab-border:         var(--fs-color-border);
+  --fs-tab-hover-bg:       color-mix(in srgb, var(--fs-color-text-primary) 5%, transparent);
   --fs-tab-indicator-from: var(--fs-primary-base);
   --fs-tab-indicator-to:   var(--fs-tertiary-base);
-  --fs-tab-indicator-glow: rgba(34,211,238,0.45);
+  --fs-tab-indicator-glow: color-mix(in srgb, var(--fs-tab-indicator-to) 45%, transparent);
+  --fs-tab-radius:         8px;
 }
 ```
 
@@ -519,7 +521,12 @@ Devuelve el `id: string` del toast creado.
 
 ### `<fs-tooltip>`
 
-Etiqueta flotante CSS-only — sin JS. Se muestra al hacer hover sobre el elemento interno.
+Etiqueta flotante que aparece al hacer hover o al enfocar con el teclado, y se
+cierra con `Escape`.
+
+Se renderiza en el **top layer** del navegador, así que no la recorta ningún
+ancestro con `overflow`, `transform` o `contain` — el caso típico es un tooltip
+dentro de una card o de un área con scroll.
 
 ```html
 <fs-tooltip label="Guardar cambios">
@@ -758,6 +765,70 @@ fs-profile-card {
 
 ---
 
+## `[fsAnchoredPopover]`
+
+La primitiva que usan internamente `fs-select`, `fs-multi-select` y `fs-tooltip`.
+Está exportada porque el problema que resuelve aparece en cualquier dropdown
+propio.
+
+**El problema:** `position: fixed` no alcanza para escapar de un contenedor.
+Cualquier ancestro con `transform`, `filter`, `backdrop-filter`, `contain` o
+`will-change` pasa a ser el containing block de sus descendientes fixed, así que
+el menú se posiciona **y se recorta** contra ese ancestro en vez del viewport.
+Por eso un dropdown dentro de una card o de un área con scroll queda cortado.
+
+La directiva usa la Popover API: el elemento se pinta en el **top layer**, donde
+ningún `overflow` ni `transform` de ancestro lo alcanza.
+
+```html
+<div class="mi-campo" #anchor>
+  <button (click)="open = !open">Abrir</button>
+</div>
+
+@if (open) {
+  <div class="mi-menu" [fsAnchoredPopover]="anchor">…</div>
+}
+```
+
+```scss
+@use '@heroelc/fsociety/styles/overlay' as overlay;
+
+.mi-menu {
+  // Primero: neutraliza inset, margin, border y padding del user-agent
+  @include overlay.popover-surface;
+
+  // Después: tu propio box model
+  background:    var(--fs-color-surface);
+  border:        1px solid var(--fs-color-border);
+  border-radius: var(--fs-radius-lg);
+  padding:       5px;
+  box-shadow:    var(--fs-color-shadow-pop);
+}
+```
+
+El mixin `popover-surface` no es opcional: el user-agent le aplica a todo
+`[popover]` un `inset: 0` y `margin: auto` que, sin resetear, estiran y centran
+el elemento en la pantalla en vez de anclarlo al trigger.
+
+| Input | Tipo | Default | Descripción |
+|---|---|---|---|
+| `fsAnchoredPopover` | `HTMLElement` | — | Elemento contra el que se alinea |
+| `popoverOffset` | `number` | `6` | Separación vertical del ancla, en px |
+| `popoverMatchWidth` | `boolean` | `true` | Toma el ancho del ancla |
+| `popoverAlign` | `FsPopoverAlign` | `'start'` | `'start'` alinea bordes izquierdos · `'center'` centra |
+| `popoverSide` | `FsPopoverSide` | `'bottom'` | Lado preferido; se voltea si no hay lugar |
+| `popoverOpen` | `boolean \| undefined` | `undefined` | Visibilidad explícita. Sin setear, se muestra al inicializarse — pensado para contenido detrás de un `@if` |
+
+Seguí el scroll y el resize solo, se voltea hacia arriba cuando no hay espacio
+abajo, y queda contenido dentro del viewport. Si el navegador no soporta
+`showPopover`, degrada al comportamiento in-flow anterior en vez de desaparecer.
+
+> Usá `popoverOpen` cuando el elemento se queda en el DOM y solo alterna
+> visibilidad: así el CSS puede transicionar `:popover-open` en los dos sentidos
+> con `transition-behavior: allow-discrete` y `@starting-style`.
+
+---
+
 ## Sistema de tokens
 
 ```scss
@@ -775,15 +846,44 @@ fs-profile-card {
 
 Colores disponibles: `primary · secondary · tertiary · neutral · success · warning · danger`
 
-### Theming por app
+### Capa semántica
+
+Encima de la paleta hay tokens que describen **rol**, no color, y son los que
+consumen los componentes. Son los que cambian con `data-theme`:
 
 ```scss
-@use '@heroelc/fsociety/styles/tokens' with (
+--fs-color-bg               // fondo de página
+--fs-color-surface          // superficie elevada (cards, campos, menús)
+--fs-color-surface-alt      // superficie secundaria (hover de filas)
+--fs-color-text-primary     // texto principal
+--fs-color-text-secondary   // texto secundario
+--fs-color-text-placeholder // placeholders
+--fs-color-border           // bordes
+--fs-color-border-field     // bordes de campos de formulario
+--fs-color-border-strong    // bordes en hover
+--fs-color-primary          // color de marca activo
+--fs-color-error · --fs-color-success · --fs-color-warning
+--fs-color-shadow-pop       // sombra de menús y popovers
+```
+
+### Cambiar la marca
+
+```scss
+@use '@heroelc/fsociety/styles' with (
   $fs-primary-hex:   #7c3aed,
   $fs-secondary-hex: #0891b2,
   $fs-tertiary-hex:  #0d9488,
 );
 ```
+
+Sass recalcula las diez paradas de cada escala en build time. Las familias
+configurables son `$fs-primary-hex`, `$fs-secondary-hex`, `$fs-tertiary-hex`,
+`$fs-neutral-hex`, `$fs-success-hex`, `$fs-warning-hex` y `$fs-danger-hex`.
+
+> Probá colores en vivo antes de decidir: la página **Foundations → Branding**
+> del [Storybook](https://heroelc.github.io/fsociety) tiene selectores de color
+> que recalculan el sistema entero al instante y te dan este mismo snippet listo
+> para copiar.
 
 ---
 
@@ -842,11 +942,13 @@ Documentación visual en Storybook: [heroelc.github.io/fsociety](https://heroelc
 - [x] `fs-switch` — toggle on/off, descripción
 - [x] `fs-segmented` — control segmentado con íconos opcionales
 - [x] `fs-toast` — FsToastService + fs-toast-stack, 5 tonos, auto-dismiss
-- [x] `fs-tooltip` — CSS-only, top/bottom, alto contraste
+- [x] `fs-tooltip` — top/bottom, alto contraste, top layer
 - [x] `fs-hint` + `fs-field` — mensajes de apoyo en 4 tonos, wrapper de campo
 - [x] `fs-multi-select` — chips removibles, buscador, checkboxes, max
 - [x] `fs-steps` — stepper multi-paso, completado/activo/pendiente
-- [x] Storybook en GitHub Pages
+- [x] Temas light y dark vía `data-theme`, con capa semántica de tokens
+- [x] `[fsAnchoredPopover]` — overlays en el top layer, sin recortes
+- [x] Storybook en GitHub Pages, con paleta de marca en vivo
 - [ ] GitHub Actions CI/CD
 
 ---

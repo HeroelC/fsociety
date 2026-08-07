@@ -25,15 +25,38 @@ npm install @heroelc/fsociety
 
 ## Setup rápido
 
-### 1. Cargar los tokens en `styles.scss`
+### 1. Cargar los estilos en `styles.scss`
 
 ```scss
 // src/styles.scss de tu app Angular
-@use '@heroelc/fsociety/styles/tokens';
-@use '@heroelc/fsociety/styles/mixins'; // opcional — clases utilitarias
+@use '@heroelc/fsociety/styles';
 ```
 
-Esto emite todas las CSS custom properties (`--fs-primary-base`, `--fs-primary-hover`, etc.) en `:root`, disponibles globalmente en toda la app.
+Esa línea es todo lo que necesitás. Emite la paleta (`--fs-primary-base`, …), la
+**capa semántica** (`--fs-color-surface`, `--fs-color-text-primary`, …) que es la
+que le da color a los componentes, la utilidad `.fs-icon` que usan todos los
+íconos, y las clases utilitarias.
+
+> **No alcanza con importar solo `styles/tokens`.** La capa semántica y `.fs-icon`
+> viven en `styles/global`, y 17 stylesheets de componentes dependen de ellas.
+
+| Entry point | Qué trae |
+|---|---|
+| `@heroelc/fsociety/styles` | todo lo de abajo |
+| `@heroelc/fsociety/styles/tokens` | paleta, radios, espaciados, tipografía |
+| `@heroelc/fsociety/styles/global` | capa semántica `--fs-color-*`, `.fs-icon`, `box-sizing` |
+| `@heroelc/fsociety/styles/mixins` | mixins SCSS + clases utilitarias |
+| `@heroelc/fsociety/styles/overlay` | solo el mixin `popover-surface` (no emite CSS) |
+
+### 1b. Elegir el tema
+
+Los componentes siguen el atributo `data-theme` en la raíz del documento:
+
+```html
+<html data-theme="dark">
+```
+
+Sin el atributo, se usa el tema claro.
 
 ### 2. Importar componentes
 
@@ -156,19 +179,18 @@ activeTab = 'experiencia';
 | `activeTabChange` | `EventEmitter<string>` | Two-way binding |
 | `tabChange` | `EventEmitter<FsTab>` | Emite el objeto FsTab completo |
 
-**CSS custom properties configurables:**
+**CSS custom properties configurables.** Por defecto derivan de los tokens
+semánticos, así que siguen el tema activo:
 
 ```css
 fs-tabs {
-  --fs-tab-bg:             #0d1117;
-  --fs-tab-color:          rgba(255,255,255,0.40);
-  --fs-tab-color-hover:    rgba(255,255,255,0.70);
-  --fs-tab-color-active:   #ffffff;
-  --fs-tab-border:         rgba(255,255,255,0.08);
-  --fs-tab-hover-bg:       rgba(255,255,255,0.03);
+  --fs-tab-bg:             var(--fs-color-bg);
+  --fs-tab-color:          var(--fs-color-text-secondary);
+  --fs-tab-color-active:   var(--fs-color-text-primary);
+  --fs-tab-border:         var(--fs-color-border);
   --fs-tab-indicator-from: var(--fs-primary-base);
   --fs-tab-indicator-to:   var(--fs-tertiary-base);
-  --fs-tab-indicator-glow: rgba(34,211,238,0.45);
+  --fs-tab-radius:         8px;
 }
 ```
 
@@ -188,12 +210,13 @@ fs-tabs {
 <!-- Con botones de acción via slot [alertAction] -->
 <fs-alert tone="warning" title="Tu plan expira pronto">
   Quedan 3 días de tu prueba gratuita.
-  <div alertAction>
-    <fs-button variant="outline" size="sm">Recordar luego</fs-button>
-    <fs-button variant="primary" size="sm">Renovar ahora</fs-button>
-  </div>
+  <fs-button alertAction variant="outline" size="sm">Recordar luego</fs-button>
+  <fs-button alertAction variant="primary" size="sm">Renovar ahora</fs-button>
 </fs-alert>
 ```
+
+Poné `alertAction` en **cada** botón: el slot los separa entre sí. Si en cambio
+los envolvés en un solo elemento, también funciona.
 
 | Input | Tipo | Default | Descripción |
 |---|---|---|---|
@@ -472,7 +495,9 @@ Devuelve el `id: string` del toast creado. **`FsToastService.remove(id)`** — c
 
 ### `<fs-tooltip>`
 
-Etiqueta flotante CSS-only — sin JS. Se muestra al hacer hover.
+Etiqueta flotante que aparece al hacer hover o al enfocar con el teclado, y se
+cierra con `Escape`. Se renderiza en el **top layer**, así que no la recorta
+ningún ancestro con `overflow` o `transform`.
 
 ```html
 <fs-tooltip label="Guardar cambios">
@@ -689,12 +714,20 @@ Colores disponibles: `primary · secondary · tertiary · neutral · success · 
 ### Theming por app
 
 ```scss
-@use '@heroelc/fsociety/styles/tokens' with (
+@use '@heroelc/fsociety/styles' with (
   $fs-primary-hex:   #7c3aed,
   $fs-secondary-hex: #0891b2,
   $fs-tertiary-hex:  #0d9488,
 );
 ```
+
+Familias configurables: `$fs-primary-hex`, `$fs-secondary-hex`,
+`$fs-tertiary-hex`, `$fs-neutral-hex`, `$fs-success-hex`, `$fs-warning-hex`,
+`$fs-danger-hex`.
+
+> Probá colores en vivo antes de decidir: **Foundations → Branding** en el
+> [Storybook](https://heroelc.github.io/fsociety) recalcula el sistema entero al
+> instante y te da este snippet listo para copiar.
 
 ---
 
@@ -747,18 +780,44 @@ npm run build:lib -- --watch
 
 ## Versionado
 
-Usa [Conventional Commits](https://www.conventionalcommits.org/) + [release-it](https://github.com/release-it/release-it).
+Usa [Conventional Commits](https://www.conventionalcommits.org/) +
+[release-it](https://github.com/release-it/release-it), configurado en
+`.release-it.json`.
 
 ```bash
-# patch 0.0.15 → 0.0.16
-git commit -m "fix(button): corregir hover en dark mode"
-
-# minor 0.0.16 → 0.1.0
-git commit -m "feat(input): agregar componente fs-input"
-
-# major 0.1.0 → 1.0.0
-git commit -m "feat!: renombrar prefijo a fs-"
+npm run release:patch   # 0.2.0 → 0.2.1
+npm run release:minor   # 0.2.0 → 0.3.0
+npm run release:major   # 0.2.0 → 1.0.0
+npm run release:dry     # ver qué haría, sin tocar nada
 ```
+
+Un release produce **un solo commit** con los dos manifests ya sincronizados:
+
+```
+chore: release v0.2.0
+  CHANGELOG.md
+  package-lock.json
+  package.json
+  projects/fsociety/package.json
+```
+
+Eso funciona porque el hook `after:bump` de `.release-it.json` corre
+`sync-version.js` antes de que release-it haga `git add . --update`. Si algún día
+volvés a necesitar un segundo commit para alinear la versión, revisá primero que
+el archivo de config siga llamándose `.release-it.json` **con el punto**: sin él,
+release-it no lo lee y no avisa.
+
+Dos cosas que conviene tener presentes:
+
+- **`--dry-run` no ejecuta los hooks.** Sirve para confirmar el número de versión
+  y el changelog, no para verificar el sync. La verificación real es mirar el
+  commit después.
+- **No pongas colores hex con `#` en el cuerpo de un commit.** El parser del
+  changelog lee `#0d1117` como referencia a un issue y te genera links basura.
+
+Y una advertencia de semver: cruzar un cero inicial (`0.0.x → 0.1.0`, o
+`0.x.y → 1.0.0`) es una decisión de identidad del proyecto, no algo mecánico. Un
+número publicado no se puede reusar.
 
 ---
 
@@ -779,34 +838,49 @@ npm set //registry.npmjs.org/:_authToken TU_TOKEN_AQUI
 ### Publicar nueva versión — flujo completo
 
 ```bash
-# 1. desde la raíz del workspace — commit con convención
+# 1. commitear el trabajo con conventional commits (es de donde sale el changelog)
 git add .
 git commit -m "fix: descripción del cambio"
 
-# 2. generar el release (bumps version + CHANGELOG + git tag + push)
-npm run release -- patch
+# 2. release: bump + sync + CHANGELOG + commit + tag, todo en uno
+npm run release:patch      # o release:minor / release:major
 
-# 3. build:lib sincroniza la versión a projects/fsociety/package.json y buildea
+# 3. push del commit y del tag
+git push --follow-tags
+
+# 4. build y publicar
 npm run build:lib
+cd dist/fsociety && npm publish --access public && cd ../..
 
-# 4. ir a dist y publicar
-cd dist/fsociety
-npm publish --access public
-
-# 5. volver a la raíz
-cd ../..
+# 5. storybook
+npm run build-storybook && npm run deploy-storybook
 ```
 
-> `npm run build:lib` ejecuta `sync-version.js` antes del build — copia la versión del `package.json` raíz al `projects/fsociety/package.json` automáticamente.
+El release **no** pushea ni publica en npm por su cuenta: `git.push` está
+desactivado y `npm.publish` está en `false` en `.release-it.json`, a propósito.
 
 ### Verificar publicación
 
 ```bash
-npm show @heroelc/fsociety version
+# ojo: npm cachea metadata, así que sin --prefer-online podés ver la versión vieja
+npm view @heroelc/fsociety version --prefer-online
+npm dist-tag ls @heroelc/fsociety
 ```
 
-> Error 403 versión ya publicada → corrí `npm run release` antes del build.
-> Error 403 autenticación → token expiró, repetir configuración.
+Antes de publicar vale la pena mirar qué se va a subir:
+
+```bash
+cd dist/fsociety && npm pack --dry-run
+```
+
+Chequeá que estén los cuatro partials SCSS (`_index`, `_mixins`, `_overlay`,
+`_tokens`) y `global.scss`. Si agregás un partial nuevo en `src/styles/`, hay que
+sumarlo a los `assets` de `projects/fsociety/ng-package.json` **y** al mapa
+`exports` de `projects/fsociety/package.json`, o el build de los consumidores se
+rompe.
+
+> Error 403 versión ya publicada → corré el release antes del build.
+> Error 403 autenticación → el token expiró, repetí la configuración.
 
 ---
 
@@ -857,11 +931,13 @@ Storybook en: **https://heroelc.github.io/fsociety**
 - [x] `fs-switch` — toggle on/off, descripción
 - [x] `fs-segmented` — control segmentado con íconos opcionales
 - [x] `fs-toast` — FsToastService + fs-toast-stack, 5 tonos, auto-dismiss
-- [x] `fs-tooltip` — CSS-only, top/bottom, alto contraste
+- [x] `fs-tooltip` — top/bottom, alto contraste, top layer
 - [x] `fs-hint` + `fs-field` — mensajes de apoyo en 4 tonos, wrapper de campo
 - [x] `fs-multi-select` — chips removibles, buscador, checkboxes, max
 - [x] `fs-steps` — stepper multi-paso, completado/activo/pendiente
-- [x] Storybook en GitHub Pages
+- [x] Temas light y dark vía `data-theme`, con capa semántica de tokens
+- [x] `[fsAnchoredPopover]` — overlays en el top layer, sin recortes
+- [x] Storybook en GitHub Pages, con paleta de marca en vivo
 - [ ] GitHub Actions CI/CD
 
 ---
