@@ -1,0 +1,96 @@
+<div class="fs-sl" [class.fs-sl--disabled]="disabled">
+
+  <!-- Label and the value share a row when the value sits on top, so a wide
+       slider does not push the number away from its label. -->
+  @if (label || valuePosition === 'top') {
+    <div class="fs-sl__header">
+      @if (label) {
+        <label class="fs-sl__label" [for]="inputId">{{ label }}</label>
+      }
+      @if (valuePosition === 'top') {
+        <span class="fs-sl__value fs-sl__value--inline">{{ displayValue }}</span>
+      }
+    </div>
+  }
+
+  <div class="fs-sl__row">
+    <div class="fs-sl__track-area">
+      <input
+        [id]="inputId"
+        class="fs-sl__input"
+        [class.fs-sl__input--error]="state === 'error'"
+        [class.fs-sl__input--success]="state === 'success'"
+        type="range"
+        [min]="min"
+        [max]="max"
+        [step]="step"
+        [value]="value"
+        [disabled]="disabled"
+        [attr.aria-valuetext]="displayValue"
+        [style.background]="trackBackground"
+        (input)="onInput($event)"
+        (blur)="onBlur()"
+      />
+
+      @if (tickPercents.length) {
+        <!-- Purely decorative, and behind the thumb: the input stays the only
+             thing that receives pointer and keyboard events. -->
+        <div class="fs-sl__ticks" aria-hidden="true">
+          @for (p of tickPercents; track p) {
+            <span class="fs-sl__tick" [style.left.%]="p"></span>
+          }
+        </div>
+      }
+    </div>
+
+    @if (valuePosition === 'right') {
+      <span class="fs-sl__value">{{ displayValue }}</span>
+    }
+
+    @if (showStateIcon) {
+      <span
+        class="fs-icon fs-sl__state-icon"
+        [class.fs-sl__state-icon--error]="state === 'error'"
+        [class.fs-sl__state-icon--success]="state === 'success'"
+        [style.--_icon]="'url(' + stateIconUrl + ')'"
+        aria-hidden="true"
+      ></span>
+    }
+  </div>
+
+  @if (showBounds) {
+    <div class="fs-sl__bounds" aria-hidden="true">
+      <span>{{ boundsMin }}</span>
+      <span>{{ boundsMax }}</span>
+    </div>
+  }
+
+  @if (hint && state === 'default') {
+    <span class="fs-sl__hint">{{ hint }}</span>
+  }
+
+  @if (state === 'error' && errorMessage) {
+    <span class="fs-sl__message fs-sl__message--error" role="alert">
+      <span
+        class="fs-icon"
+        [style.--_icon]="'url(' + Icons.alertCircle + ')'"
+        style="width:13px;height:13px"
+        aria-hidden="true"
+      ></span>
+      {{ errorMessage }}
+    </span>
+  }
+
+  @if (state === 'success' && successMessage) {
+    <span class="fs-sl__message fs-sl__message--success">
+      <span
+        class="fs-icon"
+        [style.--_icon]="'url(' + Icons.circleCheck + ')'"
+        style="width:13px;height:13px"
+        aria-hidden="true"
+      ></span>
+      {{ successMessage }}
+    </span>
+  }
+
+</div>

@@ -1,0 +1,220 @@
+// ---------------------------------------------------------------------------
+// fs-slider — CSS custom properties configurables
+//
+// Derivan de los tokens semánticos, así que siguen el tema activo:
+//
+//   fs-slider {
+//     --fs-slider-track:       var(--fs-color-surface-alt);
+//     --fs-slider-thumb:       #ffffff;
+//     --fs-slider-thumb-size:  20px;
+//     --fs-slider-height:      7px;
+//   }
+// ---------------------------------------------------------------------------
+
+.fs-sl {
+  --fs-slider-track:      var(--fs-color-surface-alt);
+  // A light knob on purpose, in both themes: it reads as a physical control, and
+  // a surface-coloured thumb would vanish into the track in dark.
+  --fs-slider-thumb:      #ffffff;
+  --fs-slider-thumb-size: 20px;
+  --fs-slider-height:     7px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  &--disabled {
+    opacity: 0.55;
+    pointer-events: none;
+  }
+
+  &__header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  &__label {
+    font-size: 13px;
+    font-weight: 550;
+    letter-spacing: -0.005em;
+    color: var(--fs-color-text-primary);
+    line-height: 1.3;
+  }
+
+  &__row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  // Positioning context for the ticks.
+  &__track-area {
+    position: relative;
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    // Room for the thumb to overhang the track without being clipped.
+    height: var(--fs-slider-thumb-size);
+  }
+
+  // ─── The range input ─────────────────────────────────────────────────────
+  // The filled portion is a gradient on the element itself rather than a second
+  // div, so there is nothing to keep in sync with the thumb.
+  &__input {
+    appearance: none;
+    -webkit-appearance: none;
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: var(--fs-slider-height);
+    margin: 0;
+    border-radius: var(--fs-radius-full);
+    border: 1px solid var(--fs-color-border);
+    background: var(--fs-slider-track);
+    outline: none;
+    cursor: pointer;
+
+    &:disabled { cursor: not-allowed; }
+
+    // ── Thumb: WebKit and Firefox need separate rules; they cannot be
+    //    combined in one selector list, a browser drops the whole block on an
+    //    unknown pseudo-element.
+    &::-webkit-slider-thumb {
+      appearance: none;
+      -webkit-appearance: none;
+      width: var(--fs-slider-thumb-size);
+      height: var(--fs-slider-thumb-size);
+      border-radius: 50%;
+      background: var(--fs-slider-thumb);
+      border: 1px solid var(--fs-color-border-strong);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+      cursor: grab;
+      transition: transform 100ms ease;
+    }
+
+    &::-webkit-slider-thumb:active {
+      transform: scale(1.12);
+      cursor: grabbing;
+    }
+
+    &::-moz-range-thumb {
+      width: var(--fs-slider-thumb-size);
+      height: var(--fs-slider-thumb-size);
+      border-radius: 50%;
+      background: var(--fs-slider-thumb);
+      border: 1px solid var(--fs-color-border-strong);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+      cursor: grab;
+      transition: transform 100ms ease;
+    }
+
+    &::-moz-range-thumb:active { transform: scale(1.12); }
+
+    // Firefox paints its own track fill on top of the background gradient.
+    &::-moz-range-track {
+      background: transparent;
+      border-radius: var(--fs-radius-full);
+    }
+
+    &:focus-visible {
+      box-shadow: 0 0 0 2.5px color-mix(in srgb, var(--fs-color-primary) 25%, transparent);
+    }
+
+    &--error {
+      border-color: var(--fs-color-error);
+      &:focus-visible {
+        box-shadow: 0 0 0 2.5px color-mix(in srgb, var(--fs-color-error) 25%, transparent);
+      }
+    }
+
+    &--success {
+      border-color: var(--fs-color-success);
+      &:focus-visible {
+        box-shadow: 0 0 0 2.5px color-mix(in srgb, var(--fs-color-success) 25%, transparent);
+      }
+    }
+  }
+
+  // ─── Ticks ───────────────────────────────────────────────────────────────
+  // Under the input (z-index 0 vs 1) and pointer-events: none, so they never
+  // steal a drag.
+  &__ticks {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  &__tick {
+    position: absolute;
+    top: 50%;
+    width: 2px;
+    height: 2px;
+    // Centres the mark on its percentage instead of hanging it to the right.
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: var(--fs-color-border-strong);
+  }
+
+  // ─── Value readout ───────────────────────────────────────────────────────
+  &__value {
+    flex-shrink: 0;
+    min-width: 48px;
+    text-align: center;
+    padding: 5px 9px;
+    font-size: 13px;
+    font-weight: 600;
+    // Tabular figures stop the readout from resizing as you drag.
+    font-variant-numeric: tabular-nums;
+    color: var(--fs-color-text-primary);
+    background: var(--fs-color-surface-alt);
+    border-radius: var(--fs-radius-sm);
+
+    // On top of the label there is no box — it reads as part of the header.
+    &--inline {
+      min-width: 0;
+      padding: 0;
+      background: none;
+      font-size: 13px;
+      color: var(--fs-color-primary);
+    }
+  }
+
+  &__state-icon {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+
+    &--error   { color: var(--fs-color-error); }
+    &--success { color: var(--fs-color-success); }
+  }
+
+  &__bounds {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11.5px;
+    font-variant-numeric: tabular-nums;
+    color: var(--fs-color-text-placeholder);
+  }
+
+  // ─── Hint / messages ─────────────────────────────────────────────────────
+  &__hint {
+    font-size: 12.5px;
+    color: var(--fs-color-text-secondary);
+    line-height: 1.4;
+  }
+
+  &__message {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12.5px;
+    line-height: 1.4;
+
+    &--error   { color: var(--fs-color-error); }
+    &--success { color: var(--fs-color-success); }
+  }
+}
