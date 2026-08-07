@@ -105,7 +105,7 @@ const EXPERIENCE_EARLY = {
 // ---------------------------------------------------------------------------
 
 const meta: Meta<FsExperienceCardComponent> = {
-  title:     'fsociety/Experience Card',
+  title:     'Compositions/ExperienceCard',
   component: FsExperienceCardComponent,
   tags:      ['autodocs'],
   argTypes: {
@@ -232,16 +232,16 @@ export const InPortfolio: Story = {
     template: `
       <div style="max-width:600px;">
         <div style="
-          background:#0d1117;
+          background:var(--fs-color-surface);
           border-radius:12px;
           overflow:hidden;
-          border:0.5px solid rgba(255,255,255,0.08);
+          border:0.5px solid var(--fs-color-border);
         ">
           <div style="padding:20px 20px 0;">
-            <div style="font-size:15px; font-weight:600; color:#fff; margin-bottom:4px;">
+            <div style="font-size:15px; font-weight:600; color:var(--fs-color-text-primary); margin-bottom:4px;">
               John Doe
             </div>
-            <div style="font-size:12px; color:rgba(255,255,255,0.4);">
+            <div style="font-size:12px; color:var(--fs-color-text-secondary);">
               Senior Frontend Developer
             </div>
           </div>

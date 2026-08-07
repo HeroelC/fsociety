@@ -54,6 +54,21 @@ export class MyComponent {}
 
 ## Componentes
 
+La librería separa lo que expone en dos grupos, y la línea es el **acoplamiento
+al dominio**, no el tamaño:
+
+| Grupo | Qué es | Ejemplos |
+|---|---|---|
+| **Components** | Primitivas de UI genéricas. No saben nada del dominio de tu app. | `fs-button`, `fs-input`, `fs-select`, `fs-tabs`, `fs-toast` |
+| **Compositions** | Composiciones opinionadas que sí modelan un dominio: reciben datos estructurados y renderizan un layout completo. | `fs-profile-card`, `fs-experience-card` |
+
+Un `fs-button` no sabe de qué habla tu producto. Un `fs-profile-card` sí: espera
+una persona, con stats y links. Esperá reemplazar o pisar más estilos en una
+Composition que en un Component — están pensadas para arrancar rápido, no para
+cubrir todos los casos.
+
+El Storybook usa esas mismas dos secciones.
+
 ### `<fs-button>`
 
 ```html

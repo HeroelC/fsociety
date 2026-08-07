@@ -92,7 +92,7 @@ export const FieldWrapper: Story = {
 
         <fs-field label="Nombre" htmlFor="nombre1" [optional]="true"
           success="Nombre disponible.">
-          <fs-input placeholder="Heroel" [(ngModel)]="nombre"></fs-input>
+          <fs-input placeholder="John Doe" [(ngModel)]="nombre"></fs-input>
         </fs-field>
 
       </div>

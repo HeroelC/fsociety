@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/angular';
 import { FsBadgeComponent } from './badge.component';
 
 const meta: Meta<FsBadgeComponent> = {
-  title:     'fsociety/Badge',
+  title:     'Components/Badge',
   component: FsBadgeComponent,
   tags:      ['autodocs'],
   argTypes: {
@@ -193,13 +193,13 @@ export const Sizes: Story = {
     template: `
       <div style="display:flex; flex-direction:column; gap:12px;">
         <div style="display:flex; flex-wrap:wrap; gap:8px; align-items:center;">
-          <span style="font-size:11px;color:rgba(255,255,255,0.4);min-width:20px">md</span>
+          <span style="font-size:11px;color:var(--fs-color-text-secondary);min-width:20px">md</span>
           <fs-badge color="primary"  size="md">Angular</fs-badge>
           <fs-badge color="success"  size="md">Node.js</fs-badge>
           <fs-badge color="neutral"  size="md">ESLint</fs-badge>
         </div>
         <div style="display:flex; flex-wrap:wrap; gap:8px; align-items:center;">
-          <span style="font-size:11px;color:rgba(255,255,255,0.4);min-width:20px">sm</span>
+          <span style="font-size:11px;color:var(--fs-color-text-secondary);min-width:20px">sm</span>
           <fs-badge color="primary"  size="sm">Angular</fs-badge>
           <fs-badge color="success"  size="sm">Node.js</fs-badge>
           <fs-badge color="neutral"  size="sm">ESLint</fs-badge>

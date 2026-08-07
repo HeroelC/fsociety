@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/angular';
 import { FsProfileCardComponent } from './profile-card.component';
 
 const meta: Meta<FsProfileCardComponent> = {
-  title:     'fsociety/ProfileCard',
+  title:     'Compositions/ProfileCard',
   component: FsProfileCardComponent,
   tags:      ['autodocs'],
   argTypes: {

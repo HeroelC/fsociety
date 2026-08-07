@@ -1,10 +1,16 @@
 import type { Meta, StoryObj } from '@storybook/angular';
+import { moduleMetadata } from '@storybook/angular';
 import { FsTabsComponent } from './tabs.component';
 
 const meta: Meta<FsTabsComponent> = {
-  title:     'fsociety/Tabs',
+  title:     'Components/Tabs',
   component: FsTabsComponent,
-  tags:      ['autodocs'],
+  decorators: [
+    moduleMetadata({
+      imports: [FsTabsComponent],
+    }),
+  ],
+  tags: ['autodocs'],
 
   argTypes: {
     tabs: {
@@ -29,6 +35,10 @@ const meta: Meta<FsTabsComponent> = {
 export default meta;
 type Story = StoryObj<FsTabsComponent>;
 
+/** Estilos del contenido proyectado — siguen el tema activo */
+const bodyStyle =
+  'padding:20px 0; color:var(--fs-color-text-secondary); font-size:13px;';
+
 // ---------------------------------------------------------------------------
 // Portfolio — 3 tabs (caso real)
 // ---------------------------------------------------------------------------
@@ -44,10 +54,10 @@ export const Portfolio: Story = {
     ],
   },
   render: (args) => ({
-    props: args,
+    props: { ...args, bodyStyle },
     template: `
       <fs-tabs [tabs]="tabs" [(activeTab)]="activeTab">
-        <div style="padding:20px 0; color:rgba(255,255,255,0.6); font-size:13px;">
+        <div [style]="bodyStyle">
           Tab activa: {{ activeTab }}
         </div>
       </fs-tabs>
@@ -71,10 +81,10 @@ export const FourTabs: Story = {
     ],
   },
   render: (args) => ({
-    props: args,
+    props: { ...args, bodyStyle },
     template: `
       <fs-tabs [tabs]="tabs" [(activeTab)]="activeTab">
-        <div style="padding:20px 0; color:rgba(255,255,255,0.6); font-size:13px;">
+        <div [style]="bodyStyle">
           Tab activa: {{ activeTab }}
         </div>
       </fs-tabs>
@@ -96,10 +106,10 @@ export const TwoTabs: Story = {
     ],
   },
   render: (args) => ({
-    props: args,
+    props: { ...args, bodyStyle },
     template: `
       <fs-tabs [tabs]="tabs" [(activeTab)]="activeTab">
-        <div style="padding:20px 0; color:rgba(255,255,255,0.6); font-size:13px;">
+        <div [style]="bodyStyle">
           Tab activa: {{ activeTab }}
         </div>
       </fs-tabs>
@@ -123,10 +133,10 @@ export const WithDisabled: Story = {
     ],
   },
   render: (args) => ({
-    props: args,
+    props: { ...args, bodyStyle },
     template: `
       <fs-tabs [tabs]="tabs" [(activeTab)]="activeTab">
-        <div style="padding:20px 0; color:rgba(255,255,255,0.6); font-size:13px;">
+        <div [style]="bodyStyle">
           Tab activa: {{ activeTab }}
         </div>
       </fs-tabs>
@@ -149,20 +159,30 @@ export const WithContent: Story = {
     ],
   },
   render: (args) => ({
-    props: args,
+    props: {
+      ...args,
+      bodyStyle:  'color:var(--fs-color-text-secondary); font-size:13px; line-height:1.7;',
+      titleStyle: 'color:var(--fs-color-text-primary);',
+    },
     template: `
       <fs-tabs [tabs]="tabs" [(activeTab)]="activeTab">
         <div style="padding:24px 0;">
-          <div *ngIf="activeTab === 'experiencia'" style="color:rgba(255,255,255,0.6); font-size:13px; line-height:1.7;">
-            <strong style="color:white">Xcale Consulting</strong> · Frontend Developer · abr 2022 – actualidad<br/>
-            Angular, TypeScript, AWS, Node.js, Angular Material
-          </div>
-          <div *ngIf="activeTab === 'sobre-mi'" style="color:rgba(255,255,255,0.6); font-size:13px; line-height:1.7;">
-            Frontend Developer con 4+ años de experiencia en Angular y ecosistema frontend moderno.
-          </div>
-          <div *ngIf="activeTab === 'formacion'" style="color:rgba(255,255,255,0.6); font-size:13px; line-height:1.7;">
-            <strong style="color:white">Universidad Nacional del Centro</strong> · Analista en Sistemas
-          </div>
+          @if (activeTab === 'experiencia') {
+            <div [style]="bodyStyle">
+              <strong [style]="titleStyle">Acme Corp</strong> · Frontend Developer · 2022 – actualidad<br/>
+              Angular, TypeScript, RxJS, Node.js
+            </div>
+          }
+          @if (activeTab === 'sobre-mi') {
+            <div [style]="bodyStyle">
+              Perfil de ejemplo para mostrar contenido proyectado dentro de las tabs.
+            </div>
+          }
+          @if (activeTab === 'formacion') {
+            <div [style]="bodyStyle">
+              <strong [style]="titleStyle">Example University</strong> · Analista en Sistemas
+            </div>
+          }
         </div>
       </fs-tabs>
     `,
