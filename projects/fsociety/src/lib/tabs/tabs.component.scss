@@ -3,6 +3,10 @@
 // ---------------------------------------------------------------------------
 // fs-tabs — CSS custom properties configurables
 //
+// Los defaults derivan de los tokens semánticos (--fs-color-*), por lo que el
+// componente sigue el tema activo — [data-theme="light"] / [data-theme="dark"] —
+// sin configuración adicional.
+//
 // Sobreescribir desde la app consumidora:
 //
 //   fs-tabs {
@@ -20,15 +24,15 @@
 
 .fs-tabs {
   // Valores por defecto — se pueden pisar desde fuera sin tocar la lib
-  --fs-tab-bg:             #0d1117;
-  --fs-tab-color:          rgba(255, 255, 255, 0.40);
-  --fs-tab-color-hover:    rgba(255, 255, 255, 0.70);
-  --fs-tab-color-active:   #ffffff;
-  --fs-tab-border:         rgba(255, 255, 255, 0.08);
-  --fs-tab-hover-bg:       rgba(255, 255, 255, 0.03);
+  --fs-tab-bg:             var(--fs-color-bg);
+  --fs-tab-color:          var(--fs-color-text-secondary);
+  --fs-tab-color-hover:    color-mix(in srgb, var(--fs-color-text-primary) 70%, transparent);
+  --fs-tab-color-active:   var(--fs-color-text-primary);
+  --fs-tab-border:         var(--fs-color-border);
+  --fs-tab-hover-bg:       color-mix(in srgb, var(--fs-color-text-primary) 5%, transparent);
   --fs-tab-indicator-from: var(--fs-primary-base);
   --fs-tab-indicator-to:   var(--fs-tertiary-base);
-  --fs-tab-indicator-glow: rgba(34, 211, 238, 0.45);
+  --fs-tab-indicator-glow: color-mix(in srgb, var(--fs-tab-indicator-to) 45%, transparent);
   --fs-tab-radius:         #{t.$fs-radius-lg};
 
   display:        flex;

@@ -1,21 +1,33 @@
 @use '../../styles/tokens' as t;
 
+// ---------------------------------------------------------------------------
+// Los valores por defecto derivan de los tokens semánticos (--fs-color-*), así
+// que la card sigue el tema activo — [data-theme="light"] / [data-theme="dark"].
+//
+// El banner y el avatar son superficies decorativas de marca: mantienen su color
+// propio en ambos temas a propósito, porque el contenido que va arriba está
+// pensado sobre ese fondo azul.
+//
+// Cada --fs-profile-* se puede pisar desde la app consumidora sin tocar la lib.
+// ---------------------------------------------------------------------------
+
 .fs-profile {
-  --fs-profile-bg:            #0d1117;
-  --fs-profile-border:        rgba(255, 255, 255, 0.08);
+  --fs-profile-bg:            var(--fs-color-surface);
+  --fs-profile-border:        var(--fs-color-border);
   --fs-profile-banner-from:   #1e3a5f;
   --fs-profile-banner-to:     #0f2035;
   --fs-profile-avatar-bg:     #1d3557;
   --fs-profile-avatar-color:  #60a5fa;
-  --fs-profile-avatar-border: #0d1117;
-  --fs-profile-name:          #ffffff;
-  --fs-profile-handle:        rgba(255, 255, 255, 0.35);
-  --fs-profile-role:          rgba(255, 255, 255, 0.50);
-  --fs-profile-link:          #60a5fa;
-  --fs-profile-stat-value:    #ffffff;
-  --fs-profile-stat-label:    rgba(255, 255, 255, 0.30);
-  --fs-profile-stats-border:  rgba(255, 255, 255, 0.06);
-  --fs-profile-divider:       rgba(255, 255, 255, 0.06);
+  // Recorta el avatar del fondo de la card, así que tiene que igualar --fs-profile-bg
+  --fs-profile-avatar-border: var(--fs-color-surface);
+  --fs-profile-name:          var(--fs-color-text-primary);
+  --fs-profile-handle:        var(--fs-color-text-placeholder);
+  --fs-profile-role:          var(--fs-color-text-secondary);
+  --fs-profile-link:          var(--fs-color-primary);
+  --fs-profile-stat-value:    var(--fs-color-text-primary);
+  --fs-profile-stat-label:    var(--fs-color-text-placeholder);
+  --fs-profile-stats-border:  var(--fs-color-border);
+  --fs-profile-divider:       var(--fs-color-border);
 
   // Radio configurable — ponelo en 0 si la card va a full width sin margen
   --fs-profile-radius: #{t.$fs-radius-xl};
@@ -187,10 +199,10 @@
 
     &--outline {
       background:   transparent;
-      color:        rgba(255, 255, 255, 0.7);
-      border:       0.5px solid rgba(255, 255, 255, 0.15);
-      &:hover  { border-color: rgba(255, 255, 255, 0.30); }
-      &:active { background: rgba(255, 255, 255, 0.05); }
+      color:        var(--fs-color-text-secondary);
+      border:       0.5px solid var(--fs-color-border);
+      &:hover  { border-color: var(--fs-color-border-strong); }
+      &:active { background: var(--fs-color-surface-alt); }
     }
 
     &:focus-visible {

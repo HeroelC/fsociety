@@ -1,21 +1,28 @@
 @use '../../styles/tokens' as t;
 
+// ---------------------------------------------------------------------------
+// Los valores por defecto derivan de los tokens semánticos (--fs-color-*), así
+// que la card sigue el tema activo — [data-theme="light"] / [data-theme="dark"].
+// Cada --fs-exp-* se puede pisar desde la app consumidora sin tocar la lib.
+// ---------------------------------------------------------------------------
+
 .fs-exp {
-  --fs-exp-bg:            #0d1117;
-  --fs-exp-border:        rgba(255, 255, 255, 0.08);
-  --fs-exp-company:       rgba(255, 255, 255, 0.45);
-  --fs-exp-role:          #ffffff;
-  --fs-exp-date:          rgba(255, 255, 255, 0.35);
-  --fs-exp-duration:      rgba(255, 255, 255, 0.20);
-  --fs-exp-bullet:        rgba(255, 255, 255, 0.60);
+  --fs-exp-bg:            var(--fs-color-surface);
+  --fs-exp-border:        var(--fs-color-border);
+  --fs-exp-company:       var(--fs-color-text-secondary);
+  --fs-exp-role:          var(--fs-color-text-primary);
+  --fs-exp-date:          var(--fs-color-text-secondary);
+  --fs-exp-duration:      var(--fs-color-text-placeholder);
+  --fs-exp-bullet:        var(--fs-color-text-secondary);
   --fs-exp-bullet-arrow:  var(--fs-primary-base);
-  --fs-exp-divider:       rgba(255, 255, 255, 0.06);
-  --fs-exp-logo-bg:       #161b22;
-  --fs-exp-logo-border:   rgba(255, 255, 255, 0.10);
-  --fs-exp-logo-text:     rgba(255, 255, 255, 0.45);
+  --fs-exp-divider:       var(--fs-color-border);
+  --fs-exp-logo-bg:       var(--fs-color-surface-alt);
+  --fs-exp-logo-border:   var(--fs-color-border);
+  --fs-exp-logo-text:     var(--fs-color-text-secondary);
   --fs-exp-toggle:        var(--fs-primary-base);
   --fs-exp-dot-current:   var(--fs-success-base);
-  --fs-exp-dot-past:      rgba(255, 255, 255, 0.20);
+  --fs-exp-dot-past:      var(--fs-color-border-strong);
+  --fs-exp-border-hover:  var(--fs-color-border-strong);
 
   // Radio configurable — ponelo en 0 si la card va a full width
   --fs-exp-radius: #{t.$fs-radius-xl};
@@ -66,7 +73,7 @@
     padding:       t.$fs-space-6;    // era space-5 → más padding
     transition:    border-color t.$fs-duration-fast t.$fs-ease-default;
 
-    &:hover { border-color: rgba(255, 255, 255, 0.14); }
+    &:hover { border-color: var(--fs-exp-border-hover); }
   }
 
   // -------------------------------------------------------------------------

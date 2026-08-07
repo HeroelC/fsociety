@@ -1,6 +1,10 @@
 @use 'tokens' as t;
 @use 'sass:map';
 
+// Re-exportado para que los consumidores lleguen a popover-surface desde el
+// entry point público de mixins. 'overlay' no emite CSS.
+@forward 'overlay';
+
 // =============================================================================
 // fsociety · _mixins.scss
 // Mixins reutilizables + clases utilitarias generadas automáticamente
@@ -329,29 +333,37 @@ $breakpoints: (
 // @param $offset — separación del elemento (default: 2px)
 @mixin focus-ring($color: var(--fs-primary-base), $offset: 2px) {
   outline: none;
-  box-shadow: 0 0 0 $offset var(--fs-profile-avatar-border, #0d1117),
+  box-shadow: 0 0 0 $offset var(--fs-profile-avatar-border, var(--fs-color-bg)),
               0 0 0 ($offset + 2px) $color;
 }
 
-// Card con fondo navy y borde sutil — base de todos los componentes
+// Card surface — fondo elevado y borde sutil, base de todos los componentes.
+// Usa tokens semánticos, así que sigue el tema activo.
 @mixin card-surface($radius: t.$fs-radius-xl) {
-  background:    #0d1117;
-  border:        0.5px solid rgba(255, 255, 255, 0.08);
+  background:    var(--fs-color-surface);
+  border:        0.5px solid var(--fs-color-border);
   border-radius: $radius;
   transition:    border-color t.$fs-duration-fast t.$fs-ease-default;
 
   &:hover {
-    border-color: rgba(255, 255, 255, 0.14);
+    border-color: var(--fs-color-border-strong);
   }
 }
 
-// Glass — fondo translúcido con blur
-// @param $opacity — opacidad del fondo (default: 0.05)
+// Glass — fondo translúcido con blur.
+// El velo se mezcla desde el color de texto, así que en dark aclara y en light
+// oscurece — invirtiéndose solo con el tema.
+//
+// OJO: backdrop-filter crea un containing block. Cualquier dropdown con
+// position:fixed que quede por debajo de este elemento se recorta acá. Usá
+// FsAnchoredPopoverDirective para los menús que tengan que escapar.
+//
+// @param $opacity — opacidad del velo (default: 0.05)
 @mixin glass($opacity: 0.05) {
-  background:      rgba(255, 255, 255, $opacity);
+  background:      color-mix(in srgb, var(--fs-color-text-primary) #{$opacity * 100%}, transparent);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  border:          0.5px solid rgba(255, 255, 255, 0.1);
+  border:          0.5px solid color-mix(in srgb, var(--fs-color-text-primary) 10%, transparent);
 }
 
 // Visually hidden — oculto visualmente pero accesible para screen readers
@@ -389,8 +401,8 @@ $breakpoints: (
 }
 
 // Divider — línea separadora horizontal
-// @param $color — color del borde (default: sutil)
-@mixin divider($color: rgba(255, 255, 255, 0.06)) {
+// @param $color — color del borde (default: el borde del tema activo)
+@mixin divider($color: var(--fs-color-border)) {
   height:     0.5px;
   background: $color;
   border:     none;
