@@ -71,13 +71,16 @@
         (click)="handleLinkClick($event, link)"
       >
         <!-- imagen del link (prioridad sobre icon SVG) -->
-        <img
+        <!-- Enmascarada, no <img>: dentro de un <img> el SVG es un documento
+             aislado y currentColor no hereda, así que el ícono quedaba del color
+             embebido en la URL — invisible sobre la card en tema claro. Y una URL
+             caída mostraba el placeholder de imagen rota del navegador. -->
+        <span
           *ngIf="link.imgUrl"
-          [src]="link.imgUrl"
-          [alt]="link.imgAlt || ''"
-          class="fs-profile__link-img"
+          class="fs-icon fs-profile__link-img"
+          [style.--_icon]="'url(' + link.imgUrl + ')'"
           aria-hidden="true"
-        />
+        ></span>
         <!-- ícono SVG (solo si no hay imgUrl) -->
         <svg
           *ngIf="link.icon && !link.imgUrl"

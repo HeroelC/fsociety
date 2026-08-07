@@ -242,14 +242,14 @@
     direction:    rtl;
   }
 
+  // Enmascarado vía .fs-icon, así que toma el color del link. Se alinea con el
+  // tamaño del SVG de al lado (el pin de ubicación) para que la lista no baile.
+  // Sin object-fit ni border-radius: ya no es una imagen, es una silueta.
   &__link-img {
     width:        14px;
     height:       14px;
-    object-fit:   contain;
     display:      block;
     flex-shrink:  0;
-    opacity:      0.6;
-    border-radius: 2px;
   }
 
   // -------------------------------------------------------------------------

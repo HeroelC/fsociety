@@ -4,8 +4,12 @@
   <span *ngIf="dot" class="fs-badge__dot" aria-hidden="true"></span>
 
   <!-- imagen izquierda (prioridad sobre iconLeft) -->
+  <!-- Se pinta con mask-image + currentColor, no con <img>: dentro de un <img>
+       el SVG es un documento aislado, currentColor no hereda y el ícono queda
+       del color que trae embebido — invisible cuando ese color coincide con el
+       fondo. Enmascarado toma el color del texto del badge y sigue el tema. -->
   <span *ngIf="imgLeft" class="fs-badge__icon fs-badge__icon--left" aria-hidden="true">
-    <img [src]="imgLeft" [alt]="imgLeftAlt" class="fs-badge__img" />
+    <span class="fs-icon fs-badge__img" [style.--_icon]="'url(' + imgLeft + ')'"></span>
   </span>
 
   <!-- ícono izquierdo SVG (solo si no hay imgLeft) -->
@@ -22,7 +26,7 @@
 
   <!-- imagen derecha (prioridad sobre iconRight) -->
   <span *ngIf="imgRight" class="fs-badge__icon fs-badge__icon--right" aria-hidden="true">
-    <img [src]="imgRight" [alt]="imgRightAlt" class="fs-badge__img" />
+    <span class="fs-icon fs-badge__img" [style.--_icon]="'url(' + imgRight + ')'"></span>
   </span>
 
   <!-- ícono derecho SVG (solo si no hay imgRight) -->

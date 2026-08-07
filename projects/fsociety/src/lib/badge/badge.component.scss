@@ -86,10 +86,11 @@ $badge-colors: (
     flex-shrink: 0;
   }
 
+  // Enmascarado vía .fs-icon, así que hereda el color del texto del badge.
+  // object-fit ya no aplica: el sizing lo controla mask-size: contain.
   &__img {
     width:         12px;
     height:        12px;
-    object-fit:    contain;
     display:       block;
     flex-shrink:   0;
 
