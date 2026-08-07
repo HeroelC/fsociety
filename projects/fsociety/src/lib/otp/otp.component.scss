@@ -1,0 +1,112 @@
+.fs-otp {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  &__label {
+    font-size: 13px;
+    font-weight: 550;
+    letter-spacing: -0.005em;
+    color: var(--fs-color-text-primary);
+    line-height: 1.3;
+  }
+
+  &__cells {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    // Wraps rather than overflowing: 8+ cells do not fit a narrow column.
+    flex-wrap: wrap;
+  }
+
+  &__cell {
+    width: 42px;
+    height: 46px;
+    padding: 0;
+    text-align: center;
+    font-family: inherit;
+    font-size: 19px;
+    font-weight: 600;
+    // Tabular figures stop the cells from twitching as digits land.
+    font-variant-numeric: tabular-nums;
+    color: var(--fs-color-text-primary);
+    background: var(--fs-color-surface);
+    border: 1px solid var(--fs-color-border-field);
+    border-radius: var(--fs-radius-md);
+    outline: none;
+    transition: border-color 150ms ease, box-shadow 150ms ease, background 150ms ease;
+
+    // A filled cell reads as done without shouting.
+    &--filled { border-color: var(--fs-color-border-strong); }
+
+    &:hover:not(:disabled):not(:focus) { border-color: var(--fs-color-border-strong); }
+
+    &:focus {
+      border-color: var(--fs-color-primary);
+      box-shadow: 0 0 0 2.5px color-mix(in srgb, var(--fs-color-primary) 15%, transparent);
+    }
+
+    &--error {
+      border-color: var(--fs-color-error) !important;
+
+      &:focus {
+        box-shadow: 0 0 0 2.5px color-mix(in srgb, var(--fs-color-error) 12%, transparent) !important;
+      }
+    }
+
+    &--success {
+      border-color: var(--fs-color-success) !important;
+
+      &:focus {
+        box-shadow: 0 0 0 2.5px color-mix(in srgb, var(--fs-color-success) 12%, transparent) !important;
+      }
+    }
+
+    &:disabled {
+      background: var(--fs-color-surface-alt);
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    // The spin buttons would appear if a consumer switched this to type=number.
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  }
+
+  &__sep {
+    color: var(--fs-color-text-placeholder);
+    font-weight: 600;
+    user-select: none;
+    // Nudged in so the separator sits closer to the gap than to either cell.
+    margin: 0 -2px;
+  }
+
+  &__state-icon {
+    width: 18px;
+    height: 18px;
+    margin-left: 2px;
+
+    &--error   { color: var(--fs-color-error); }
+    &--success { color: var(--fs-color-success); }
+  }
+
+  &__hint {
+    font-size: 12.5px;
+    color: var(--fs-color-text-secondary);
+    line-height: 1.4;
+  }
+
+  &__message {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12.5px;
+    line-height: 1.4;
+
+    &--error   { color: var(--fs-color-error); }
+    &--success { color: var(--fs-color-success); }
+  }
+}

@@ -1,0 +1,80 @@
+<div class="fs-otp">
+
+  @if (label) {
+    <label class="fs-otp__label" [for]="inputId + '-0'">{{ label }}</label>
+  }
+
+  <!-- role=group ties the cells together for assistive tech, which would
+       otherwise announce six unrelated one-character fields. -->
+  <div
+    class="fs-otp__cells"
+    role="group"
+    [attr.aria-label]="label || 'Código de verificación'"
+  >
+    @for (i of indexes; track i) {
+      @if (groupAt && i === groupAt) {
+        <span class="fs-otp__sep" aria-hidden="true">{{ separator }}</span>
+      }
+
+      <input
+        #cell
+        [id]="inputId + '-' + i"
+        class="fs-otp__cell"
+        [class.fs-otp__cell--filled]="!!chars[i]"
+        [class.fs-otp__cell--error]="state === 'error'"
+        [class.fs-otp__cell--success]="state === 'success'"
+        type="text"
+        [attr.inputmode]="mode === 'numeric' ? 'numeric' : 'text'"
+        [attr.autocomplete]="i === 0 ? 'one-time-code' : 'off'"
+        [attr.aria-label]="'Dígito ' + (i + 1) + ' de ' + length"
+        maxlength="1"
+        [value]="chars[i] || ''"
+        [disabled]="disabled"
+        (input)="onCellInput(i, $event)"
+        (keydown)="onCellKeydown(i, $event)"
+        (paste)="onPaste(i, $event)"
+        (focus)="onFocus($event)"
+        (blur)="onBlur()"
+      />
+    }
+
+    @if (showStateIcon) {
+      <span
+        class="fs-icon fs-otp__state-icon"
+        [class.fs-otp__state-icon--error]="state === 'error'"
+        [class.fs-otp__state-icon--success]="state === 'success'"
+        [style.--_icon]="'url(' + stateIconUrl + ')'"
+        aria-hidden="true"
+      ></span>
+    }
+  </div>
+
+  @if (hint && state === 'default') {
+    <span class="fs-otp__hint">{{ hint }}</span>
+  }
+
+  @if (state === 'error' && errorMessage) {
+    <span class="fs-otp__message fs-otp__message--error" role="alert">
+      <span
+        class="fs-icon"
+        [style.--_icon]="'url(' + Icons.alertCircle + ')'"
+        style="width:13px;height:13px"
+        aria-hidden="true"
+      ></span>
+      {{ errorMessage }}
+    </span>
+  }
+
+  @if (state === 'success' && successMessage) {
+    <span class="fs-otp__message fs-otp__message--success">
+      <span
+        class="fs-icon"
+        [style.--_icon]="'url(' + Icons.circleCheck + ')'"
+        style="width:13px;height:13px"
+        aria-hidden="true"
+      ></span>
+      {{ successMessage }}
+    </span>
+  }
+
+</div>
