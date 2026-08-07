@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.2.0](https://github.com/heroelc/fsociety/compare/v0.1.0...v0.2.0) (2026-08-07)
+
+### Bug Fixes
+
+* **alert:** space the action buttons when they share a wrapper ([f59d488](https://github.com/heroelc/fsociety/commit/f59d48801bd1022a77dc4133fb6dbbab4f80201c))
+* **overlay:** move the tooltip and the toast stack to the top layer ([05c49ff](https://github.com/heroelc/fsociety/commit/05c49ff1e0d04174bca6e0cf8fe5fb3903113433))
+* **styles:** give focus-ring one implementation and fix its inner ring ([f36d1f9](https://github.com/heroelc/fsociety/commit/f36d1f927982a461eca73c87d8d167db4f2eadab))
+* **styles:** make the semantic token layer reachable for consumers ([4e48051](https://github.com/heroelc/fsociety/commit/4e480517f73cb4bfd6366651b60466cf14afdebc))
+* **styles:** stop fs-* elements overflowing their container ([fcfc8a4](https://github.com/heroelc/fsociety/commit/fcfc8a4f6ce4ff0e6d90ce5a0e98c914d02cf76d))
+
 ## [0.1.0](https://github.com/heroelc/fsociety/compare/0.0.18...v0.1.0) (2026-08-07)
 
 ### Features
