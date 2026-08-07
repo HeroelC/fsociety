@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.0](https://github.com/heroelc/fsociety/compare/v0.6.0...v0.7.0) (2026-08-07)
+
+### Features
+
+* **rating:** add a star rating with a readonly fractional mode ([f18f964](https://github.com/heroelc/fsociety/commit/f18f964cba496752075ff9f0fc44cf4b348b18fe))
+* **slider:** add a range control ([d0cef98](https://github.com/heroelc/fsociety/commit/d0cef98335d3dab75e80d8dee0df6ad8e88f1ff3))
+
 ## [0.6.0](https://github.com/heroelc/fsociety/compare/v0.5.0...v0.6.0) (2026-08-07)
 
 ### Features
