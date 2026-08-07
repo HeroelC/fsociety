@@ -11,6 +11,9 @@
     "build-storybook": "ng run fsociety:build-storybook",
     "deploy-storybook": "storybook-to-ghpages --existing-output-dir=storybook-static",
     "release": "release-it",
+    "release:patch": "release-it patch",
+    "release:minor": "release-it minor",
+    "release:major": "release-it major",
     "release:dry": "release-it --dry-run",
     "sync-version": "node sync-version.js",
     "build:lib": "npm run sync-version && ng build fsociety"

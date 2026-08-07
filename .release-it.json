@@ -5,6 +5,9 @@
       "preset": "conventionalcommits"
     }
   },
+  "hooks": {
+    "after:bump": "node sync-version.js"
+  },
   "git": {
     "commitMessage": "chore: release v${version}",
     "tagName": "v${version}"

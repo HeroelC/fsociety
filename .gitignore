@@ -43,3 +43,7 @@ Thumbs.db
 
 *storybook.log
 storybook-static
+
+# Local agent tooling state
+.atl/
+.claude/settings.local.json
