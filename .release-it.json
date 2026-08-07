@@ -6,7 +6,8 @@
     }
   },
   "hooks": {
-    "after:bump": "node sync-version.js"
+    "after:bump": "node sync-version.js",
+    "before:git:beforeRelease": "node clean-changelog.js"
   },
   "git": {
     "commitMessage": "chore: release v${version}",

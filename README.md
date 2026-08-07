@@ -820,10 +820,14 @@ Dos cosas que conviene tener presentes:
   commit después.
 - **No pongas colores hex con `#` en el cuerpo de un commit.** El parser del
   changelog lee `#0d1117` como referencia a un issue y te genera links basura.
+  `clean-changelog.js` los limpia solo en el hook `after:bump`, así que un
+  descuido ya no llega al changelog publicado — pero escribilos sin numeral o
+  entre backticks igual.
 
-Y una advertencia de semver: cruzar un cero inicial (`0.0.x → 0.1.0`, o
-`0.x.y → 1.0.0`) es una decisión de identidad del proyecto, no algo mecánico. Un
-número publicado no se puede reusar.
+Y una advertencia de semver: **cambiar de banda** de madurez no es algo mecánico.
+Salir de `0.0.x` (a `0.1.0`) o salir de pre-release (a `1.0.0`) son decisiones
+sobre el proyecto y las decidís vos. Un `0.2.0 → 0.3.0` en cambio es un minor
+ordinario y no requiere ceremonia. Un número publicado no se puede reusar.
 
 ---
 

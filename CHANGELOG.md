@@ -5,7 +5,7 @@
 ### Features
 
 * **overlay:** export the popover align and side types ([13755a8](https://github.com/heroelc/fsociety/commit/13755a879545c9a127a5c338fb79448706b47650))
-* **storybook:** add a live brand palette playground ([da9288f](https://github.com/heroelc/fsociety/commit/da9288fd5ee64365f2855d3ce804882a4b59139b)), closes [#2563eb](https://github.com/heroelc/fsociety/issues/2563eb) [#e11d48](https://github.com/heroelc/fsociety/issues/e11d48) [#7c3aed](https://github.com/heroelc/fsociety/issues/7c3aed)
+* **storybook:** add a live brand palette playground ([da9288f](https://github.com/heroelc/fsociety/commit/da9288fd5ee64365f2855d3ce804882a4b59139b))
 
 ### Bug Fixes
 
@@ -35,7 +35,7 @@
 * **docs:** restore the mixins demos and document the overlay mixins ([eb61589](https://github.com/heroelc/fsociety/commit/eb61589d64d90191840ee7e69c18f59f4e5b1904))
 * **release:** read the release-it config and sync the lib version in one commit ([14f590d](https://github.com/heroelc/fsociety/commit/14f590d451fe1cde4a80d3663b9267a1f6678dca))
 * **storybook:** make Docs pages follow the active theme ([d852193](https://github.com/heroelc/fsociety/commit/d8521932a4510db78468c336fbdc55a088258322))
-* **theme:** drive component colors from the semantic tokens ([fb5b3d3](https://github.com/heroelc/fsociety/commit/fb5b3d38c716b1ff920548df01adbd04e1e513e8)), closes [#0d1117](https://github.com/heroelc/fsociety/issues/0d1117) [#0d1117](https://github.com/heroelc/fsociety/issues/0d1117) [#0d1117](https://github.com/heroelc/fsociety/issues/0d1117) [#0d1117](https://github.com/heroelc/fsociety/issues/0d1117)
+* **theme:** drive component colors from the semantic tokens ([fb5b3d3](https://github.com/heroelc/fsociety/commit/fb5b3d38c716b1ff920548df01adbd04e1e513e8))
 
 ## 0.0.18 (2026-05-30)
 

@@ -82,26 +82,49 @@ git log $(git describe --tags --abbrev=0)..HEAD --oneline
 State the level you inferred and why, then continue. Ask only if the history is
 genuinely ambiguous — **or if the guard below applies.**
 
-#### Guard: never cross a leading-zero boundary on your own
+#### Guard: never change maturity band on your own
 
-**STOP and ask** when the inferred bump would change the first non-zero segment:
+The project sits in one of three **bands**. Moving between them is a statement
+about the project, not arithmetic:
 
-- `0.0.x` → `0.1.0`
-- `0.x.y` → `1.0.0`
+| From | To | Band change? |
+|---|---|---|
+| `0.0.18` | `0.0.19` | no — routine patch |
+| `0.2.0` | `0.2.1` | no — routine patch |
+| `0.2.0` | `0.3.0` | no — routine minor, still `0.x` |
+| `0.0.18` | `0.1.0` | **yes** — leaving `0.0.x` |
+| `0.3.0` | `1.0.0` | **yes** — leaving pre-release |
 
-Those are project-identity decisions, not mechanical ones, and a published
-version number can never be reused. State the current version, the level you
-inferred, why, and let the user choose. Do not proceed on inference alone.
+**STOP and ask only for the last two.** Anything that stays inside the same band
+is a normal bump: state the level and proceed.
+
+State the current version, the level you inferred, why, and let the user choose.
+A published version number can never be reused, so this is not recoverable.
 
 This guard exists because it was already gotten wrong: `0.0.18` went to `0.1.0`
 on inferred `minor` (a genuinely new public directive) when the project had been
 shipping every change — features included — as a `0.0.x` patch. The result was
 semver-correct and was kept, but the call belonged to the user.
 
+> The rule was first written as "changes the first non-zero segment". That reads
+> as firing on `0.2.0 → 0.3.0`, since the minor is the first non-zero segment
+> there — which is an ordinary minor and exactly what a `0.x` library should do.
+> Bands are the thing that matters; do not reintroduce the segment wording.
+
 Note for reasoning about impact: a caret range on `0.0.x` pins the patch.
 `^0.0.18` resolves to `>=0.0.18 <0.0.19`, so those consumers would not have
 picked up `0.0.19` either. Do not argue that a minor "leaves consumers behind"
 where a patch would not have — on `0.0.x` that is false.
+
+#### Commit bodies: no `#` before hex
+
+Conventional-changelog reads `#` followed by anything as an issue reference, so a
+hex colour in a commit body becomes a link to an issue that does not exist.
+Write `0d1117`, or wrap it in backticks.
+
+`clean-changelog.js` now strips those from `CHANGELOG.md` in the `after:bump`
+hook, so a slip no longer reaches the published changelog. Do not rely on it as a
+licence to be sloppy — it only handles hex-shaped refs.
 
 ### 4. Dry run first
 
