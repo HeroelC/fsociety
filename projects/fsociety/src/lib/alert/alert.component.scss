@@ -89,12 +89,28 @@
   }
 
   // ─── Action buttons slot ──────────────────────────────────────────────────
+  // Spaces several [alertAction] siblings projected straight into the slot.
   &__actions:has(> *) {
     display: flex;
     align-items: center;
     gap: 8px;
     flex-wrap: wrap;
     margin-top: 10px;
+  }
+
+  // A consumer may instead pass ONE wrapper element holding the buttons — the
+  // form the README documented. Then the slot has a single child, so the gap
+  // above never reaches the buttons and they render flush against each other
+  // (Angular strips whitespace-only text nodes, so there is not even a space).
+  //
+  // Scoped component styles cannot reach projected content, and ::ng-deep is
+  // still the only way to do it — Angular ships no replacement. :only-child
+  // limits this to the wrapper case, so it never alters the sibling form.
+  &__actions ::ng-deep [alertAction]:only-child {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
   }
 
   // ─── Close button ─────────────────────────────────────────────────────────

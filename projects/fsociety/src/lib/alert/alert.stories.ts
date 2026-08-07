@@ -98,23 +98,21 @@ export const WithActions: Story = {
     template: `
       <div style="display: flex; flex-direction: column; gap: 10px; max-width: 560px;">
 
+        <!-- Preferred: one [alertAction] per button, spaced by the slot itself -->
         <fs-alert tone="warning" title="Tu plan expira pronto">
           Quedan 3 días de tu prueba gratuita. Renovalo para no perder el acceso.
-          <div alertAction>
-            <fs-button variant="outline" size="sm">Recordar luego</fs-button>
-            <fs-button variant="primary" size="sm">Renovar ahora</fs-button>
-          </div>
+          <fs-button alertAction variant="outline" size="sm">Recordar luego</fs-button>
+          <fs-button alertAction variant="primary" size="sm">Renovar ahora</fs-button>
         </fs-alert>
 
         <fs-alert tone="danger" title="No se pudo procesar el pago">
           Revisá los datos de tu tarjeta e intentá de nuevo.
-          <div alertAction>
-            <fs-button variant="primary" size="sm">Reintentar</fs-button>
-          </div>
+          <fs-button alertAction variant="primary" size="sm">Reintentar</fs-button>
         </fs-alert>
 
+        <!-- Also supported: a single wrapper holding the buttons -->
         <fs-alert tone="info" title="Nueva versión disponible">
-          fsociety v0.0.16 está disponible con mejoras de rendimiento.
+          Hay una versión nueva disponible con mejoras de rendimiento.
           <div alertAction>
             <fs-button variant="outline" size="sm">Ver cambios</fs-button>
             <fs-button variant="primary" size="sm">Actualizar</fs-button>

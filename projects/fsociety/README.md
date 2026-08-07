@@ -229,12 +229,12 @@ fs-tabs {
 <!-- Con botones de acción via slot [alertAction] -->
 <fs-alert tone="warning" title="Tu plan expira pronto">
   Quedan 3 días de tu prueba gratuita.
-  <div alertAction>
-    <fs-button variant="outline" size="sm">Recordar luego</fs-button>
-    <fs-button variant="primary" size="sm">Renovar ahora</fs-button>
-  </div>
+  <fs-button alertAction variant="outline" size="sm">Recordar luego</fs-button>
+  <fs-button alertAction variant="primary" size="sm">Renovar ahora</fs-button>
 </fs-alert>
 ```
+
+Poné `alertAction` en **cada** botón: el slot los separa entre sí. Si en cambio los envolvés en un solo elemento, también funciona — el wrapper se acomoda como fila con el mismo espaciado.
 
 | Input | Tipo | Default | Descripción |
 |---|---|---|---|
@@ -246,7 +246,7 @@ fs-tabs {
 | Slot | Selector | Descripción |
 |---|---|---|
 | Default | — | Texto descriptivo del alert |
-| Action | `[alertAction]` | Botones de acción (se renderizan debajo del texto) |
+| Action | `[alertAction]` | Botones de acción (debajo del texto). Uno por botón, o un único wrapper |
 
 | Output | Tipo | Descripción |
 |---|---|---|
