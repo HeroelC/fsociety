@@ -2,6 +2,7 @@
 
   <div class="fs-ms__container">
     <div
+      #anchor
       class="fs-ms__wrapper"
       [class.fs-ms__wrapper--open]="open"
       [class.fs-ms__wrapper--disabled]="disabled"
@@ -61,7 +62,7 @@
     @if (open) {
       <div
         class="fs-ms__menu"
-        [ngStyle]="menuStyle"
+        [fsAnchoredPopover]="anchor"
         role="listbox"
         aria-multiselectable="true"
       >

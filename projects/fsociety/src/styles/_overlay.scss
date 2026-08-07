@@ -1,0 +1,42 @@
+// =============================================================================
+// fsociety · _overlay.scss
+// Mixins para elementos que se renderizan en el top layer del navegador.
+//
+// Este partial NO emite CSS: solo define mixins. Por eso se puede @use desde el
+// SCSS de un componente sin arrastrar las clases utilitarias de _mixins.scss.
+//
+//   @use '../../styles/overlay' as overlay;
+//   .mi-menu { @include overlay.popover-surface; }
+// =============================================================================
+
+
+// Neutraliza los estilos que el user-agent aplica a los elementos [popover],
+// para que el box model propio del componente sobreviva a subir al top layer.
+//
+// El UA aplica aproximadamente esto:
+//   [popover] { position: fixed; inset: 0; margin: auto; width: fit-content;
+//               height: fit-content; border: solid; padding: 0.25em;
+//               overflow: auto; background: Canvas; color: CanvasText; }
+//
+// Sin resetear `inset` y `margin`, el elemento se estira y se centra en la
+// pantalla en vez de quedar anclado al trigger.
+//
+// Incluir ANTES de las declaraciones propias del componente, para que estas
+// puedan pisar el fondo, el borde y el padding.
+//
+// La posición final (top / left / width) la escribe FsAnchoredPopoverDirective
+// como estilo inline, así que gana sobre lo que se declare acá.
+@mixin popover-surface {
+  position:   fixed;
+  inset:      auto;
+  margin:     0;
+  width:      auto;
+  height:     auto;
+  max-width:  none;
+  max-height: none;
+  overflow:   visible;
+  border:     none;
+  padding:    0;
+  background: none;
+  color:      inherit;
+}

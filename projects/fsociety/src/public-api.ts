@@ -26,6 +26,8 @@ export type { FsProfileStat, FsProfileLink, FsProfileBadge } from './lib/profile
 export { FsInputComponent } from './lib/input/input.component';
 export type { FsInputType, FsInputState } from './lib/input/input.component';
 
+export { FsAnchoredPopoverDirective } from './lib/overlay/anchored-popover.directive';
+
 export { FsSelectComponent } from './lib/select/select.component';
 export type { FsSelectOption, FsSelectState } from './lib/select/select.component';
 

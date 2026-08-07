@@ -1,3 +1,5 @@
+@use '../../styles/overlay' as overlay;
+
 @keyframes fs-ms-in {
   from { opacity: 0; transform: translateY(-6px) scale(0.97); }
   to   { opacity: 1; transform: none; }
@@ -122,8 +124,11 @@
   }
 
   // ─── Dropdown menu ────────────────────────────────────────────────────────
+  // Sube al top layer vía FsAnchoredPopoverDirective para no quedar recortado
+  // por ancestros con overflow o transform.
   &__menu {
-    position: fixed;
+    @include overlay.popover-surface;
+
     z-index: 9999;
     box-sizing: border-box;
     background: var(--fs-color-surface);

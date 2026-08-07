@@ -1,6 +1,7 @@
-import { Component, Input, Output, EventEmitter, HostListener, ElementRef, forwardRef, OnDestroy } from '@angular/core';
+import { Component, Input, Output, EventEmitter, HostListener, ElementRef, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { FsAnchoredPopoverDirective } from '../overlay/anchored-popover.directive';
 
 const CDN = 'https://api.iconify.design';
 const ICONS = {
@@ -26,7 +27,7 @@ let selectIdCounter = 0;
 @Component({
   selector: 'fs-select',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, FsAnchoredPopoverDirective],
   templateUrl: './select.component.html',
   styleUrl: './select.component.scss',
   providers: [
@@ -37,7 +38,7 @@ let selectIdCounter = 0;
     },
   ],
 })
-export class FsSelectComponent implements ControlValueAccessor, OnDestroy {
+export class FsSelectComponent implements ControlValueAccessor {
   @Input() label = '';
   @Input() placeholder = 'Seleccionar...';
   @Input() hint = '';
@@ -59,12 +60,9 @@ export class FsSelectComponent implements ControlValueAccessor, OnDestroy {
   open = false;
   query = '';
   highlightIndex = -1;
-  menuStyle: Record<string, string> = {};
 
   private _onChange: (value: string) => void = () => {};
   private _onTouched: () => void = () => {};
-  private readonly _scrollHandler = () => this.updateMenuPosition();
-  private readonly _resizeHandler = () => this.updateMenuPosition();
 
   constructor(private el: ElementRef) {}
 
@@ -94,9 +92,6 @@ export class FsSelectComponent implements ControlValueAccessor, OnDestroy {
     this.query = '';
     const idx = this.options.findIndex(o => o.value === this.value);
     this.highlightIndex = idx >= 0 ? idx : -1;
-    this.updateMenuPosition();
-    window.addEventListener('scroll', this._scrollHandler, true);
-    window.addEventListener('resize', this._resizeHandler);
   }
 
   close(): void {
@@ -104,33 +99,6 @@ export class FsSelectComponent implements ControlValueAccessor, OnDestroy {
     this.query = '';
     this.highlightIndex = -1;
     this._onTouched();
-    window.removeEventListener('scroll', this._scrollHandler, true);
-    window.removeEventListener('resize', this._resizeHandler);
-  }
-
-  private updateMenuPosition(): void {
-    const wrapper: HTMLElement | null = this.el.nativeElement.querySelector('.fs-select__wrapper');
-    if (!wrapper) return;
-    const wrapperRect = wrapper.getBoundingClientRect();
-
-    // A probe detects if any ancestor has a CSS transform that shifts the
-    // position:fixed coordinate system away from the viewport origin.
-    const probe = document.createElement('div');
-    probe.style.cssText = 'position:fixed;top:0;left:0;width:0;height:0;pointer-events:none;visibility:hidden';
-    this.el.nativeElement.appendChild(probe);
-    const probeRect = probe.getBoundingClientRect();
-    this.el.nativeElement.removeChild(probe);
-
-    this.menuStyle = {
-      top: `${wrapperRect.bottom + 6 - probeRect.top}px`,
-      left: `${wrapperRect.left - probeRect.left}px`,
-      width: `${wrapperRect.width}px`,
-    };
-  }
-
-  ngOnDestroy(): void {
-    window.removeEventListener('scroll', this._scrollHandler, true);
-    window.removeEventListener('resize', this._resizeHandler);
   }
 
   select(option: FsSelectOption): void {

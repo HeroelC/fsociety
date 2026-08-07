@@ -6,6 +6,7 @@
 
   <div class="fs-select__container" [class.fs-select__container--open]="open">
     <div
+      #anchor
       class="fs-select__wrapper"
       [class.fs-select__wrapper--error]="state === 'error'"
       [class.fs-select__wrapper--success]="state === 'success'"
@@ -58,7 +59,7 @@
     @if (open) {
       <div
         class="fs-select__menu"
-        [ngStyle]="menuStyle"
+        [fsAnchoredPopover]="anchor"
         role="listbox"
       >
 

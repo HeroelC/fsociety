@@ -35,6 +35,9 @@
     "./styles/mixins": {
       "sass": "./_mixins.scss"
     },
+    "./styles/overlay": {
+      "sass": "./_overlay.scss"
+    },
     "./styles": {
       "sass": "./_index.scss"
     }

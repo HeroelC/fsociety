@@ -5,10 +5,10 @@ import {
   HostListener,
   ViewChild,
   forwardRef,
-  OnDestroy,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { FsAnchoredPopoverDirective } from '../overlay/anchored-popover.directive';
 
 const CDN = 'https://api.iconify.design';
 const ICONS = {
@@ -26,7 +26,7 @@ export interface FsMultiSelectOption {
 @Component({
   selector: 'fs-multi-select',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, FsAnchoredPopoverDirective],
   templateUrl: './multi-select.component.html',
   styleUrl: './multi-select.component.scss',
   providers: [
@@ -37,7 +37,7 @@ export interface FsMultiSelectOption {
     },
   ],
 })
-export class FsMultiSelectComponent implements ControlValueAccessor, OnDestroy {
+export class FsMultiSelectComponent implements ControlValueAccessor {
   readonly Icons = ICONS;
 
   @Input() options: FsMultiSelectOption[] = [];
@@ -53,12 +53,9 @@ export class FsMultiSelectComponent implements ControlValueAccessor, OnDestroy {
   value: string[] = [];
   open = false;
   query = '';
-  menuStyle: Record<string, string> = {};
 
   private _onChange: (value: string[]) => void = () => {};
   private _onTouched: () => void = () => {};
-  private readonly _scrollHandler = () => this.updateMenuPosition();
-  private readonly _resizeHandler = () => this.updateMenuPosition();
 
   constructor(private el: ElementRef) {}
 
@@ -84,9 +81,6 @@ export class FsMultiSelectComponent implements ControlValueAccessor, OnDestroy {
   openMenu(): void {
     this.open = true;
     this.query = '';
-    this.updateMenuPosition();
-    window.addEventListener('scroll', this._scrollHandler, true);
-    window.addEventListener('resize', this._resizeHandler);
     if (this.searchable) {
       setTimeout(() => this.searchInputRef?.nativeElement?.focus(), 10);
     }
@@ -96,8 +90,6 @@ export class FsMultiSelectComponent implements ControlValueAccessor, OnDestroy {
     this.open = false;
     this.query = '';
     this._onTouched();
-    window.removeEventListener('scroll', this._scrollHandler, true);
-    window.removeEventListener('resize', this._resizeHandler);
   }
 
   toggleOption(val: string): void {
@@ -117,29 +109,6 @@ export class FsMultiSelectComponent implements ControlValueAccessor, OnDestroy {
   private setValue(next: string[]): void {
     this.value = next;
     this._onChange(next);
-  }
-
-  private updateMenuPosition(): void {
-    const wrapper: HTMLElement | null = this.el.nativeElement.querySelector('.fs-ms__wrapper');
-    if (!wrapper) return;
-    const rect = wrapper.getBoundingClientRect();
-
-    const probe = document.createElement('div');
-    probe.style.cssText = 'position:fixed;top:0;left:0;width:0;height:0;pointer-events:none;visibility:hidden';
-    this.el.nativeElement.appendChild(probe);
-    const probeRect = probe.getBoundingClientRect();
-    this.el.nativeElement.removeChild(probe);
-
-    this.menuStyle = {
-      top:   `${rect.bottom + 6 - probeRect.top}px`,
-      left:  `${rect.left - probeRect.left}px`,
-      width: `${rect.width}px`,
-    };
-  }
-
-  ngOnDestroy(): void {
-    window.removeEventListener('scroll', this._scrollHandler, true);
-    window.removeEventListener('resize', this._resizeHandler);
   }
 
   @HostListener('document:mousedown', ['$event'])

@@ -18,6 +18,11 @@
     },
     {
       "input": "src/styles",
+      "glob": "_overlay.scss",
+      "output": "/"
+    },
+    {
+      "input": "src/styles",
       "glob": "_index.scss",
       "output": "/"
     },

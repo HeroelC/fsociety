@@ -1,3 +1,5 @@
+@use '../../styles/overlay' as overlay;
+
 .fs-select {
   display: flex;
   flex-direction: column;
@@ -123,8 +125,11 @@
   }
 
   // ─── Dropdown menu ───────────────────────────────────────────
+  // Sube al top layer vía FsAnchoredPopoverDirective para no quedar recortado
+  // por ancestros con overflow o transform.
   &__menu {
-    position: fixed;
+    @include overlay.popover-surface;
+
     z-index: 9999;
     box-sizing: border-box;
     background: var(--fs-color-surface);
