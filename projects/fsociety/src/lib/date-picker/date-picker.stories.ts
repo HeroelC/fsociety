@@ -35,9 +35,20 @@ type Story = StoryObj<FsDatePickerComponent>;
 // ─── Default ─────────────────────────────────────────────────────────────────
 
 export const Default: Story = {
+  // Every input the template binds needs a value here. A binding whose arg is
+  // missing resolves to undefined, and for a DOM property like placeholder the
+  // browser stringifies that — the empty field would read "undefined".
   args: {
     label: 'Fecha de nacimiento',
     hint: 'Podés tipearla o elegirla del calendario.',
+    placeholder: 'dd/mm/aaaa',
+    locale: 'es-AR',
+    firstDayOfWeek: 1,
+    state: 'default',
+    disabled: false,
+    readonly: false,
+    clearable: true,
+    showFooter: true,
   },
   render: (args) => ({
     props: args,
@@ -48,6 +59,12 @@ export const Default: Story = {
           [hint]="hint"
           [placeholder]="placeholder"
           [locale]="locale"
+          [firstDayOfWeek]="firstDayOfWeek"
+          [state]="state"
+          [disabled]="disabled"
+          [readonly]="readonly"
+          [clearable]="clearable"
+          [showFooter]="showFooter"
         ></fs-date-picker>
       </div>
     `,

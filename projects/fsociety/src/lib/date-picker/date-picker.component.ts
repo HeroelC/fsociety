@@ -38,6 +38,53 @@ export interface FsCalendarDay {
 
 let datePickerIdCounter = 0;
 
+// ─── Input guards ───────────────────────────────────────────────────────────
+// A binding that resolves to null or undefined must not reach the DOM. Angular
+// writes the property as-is and the browser stringifies it, so
+// `[placeholder]="maybeUndefined"` makes the empty field read "undefined".
+//
+// These are plain function declarations on purpose: @Input({ transform }) is
+// resolved statically by the AOT compiler, so a factory call like
+// `textOr('dd/mm/aaaa')` fails with NG1010 — the transform has to be a
+// reference, not the result of calling something.
+
+function orText(value: string | null | undefined, fallback: string): string {
+  return value === null || value === undefined || value === '' ? fallback : value;
+}
+
+function placeholderInput(value: string | null | undefined): string {
+  return orText(value, 'dd/mm/aaaa');
+}
+
+function localeInput(value: string | null | undefined): string {
+  return orText(value, 'es-AR');
+}
+
+function todayLabelInput(value: string | null | undefined): string {
+  return orText(value, 'Hoy');
+}
+
+function clearLabelInput(value: string | null | undefined): string {
+  return orText(value, 'Limpiar');
+}
+
+/**
+ * The week start feeds modular arithmetic, so an unset binding is worse than
+ * cosmetic: `undefined % 7` is NaN, which turns every cell of the grid into an
+ * Invalid Date.
+ *
+ * null and '' are rejected before coercing, because `Number(null)` is 0 — so
+ * `[firstDayOfWeek]="config?.weekStart"` on a null config would silently mean
+ * Sunday rather than falling back to the documented Monday.
+ *
+ * A valid number is wrapped into 0–6, so 7 reads as Sunday and -1 as Saturday.
+ */
+function weekStartInput(value: number | string | null | undefined): number {
+  if (value === null || value === undefined || value === '') return 1;
+  const n = Number(value);
+  return Number.isFinite(n) ? ((n % 7) + 7) % 7 : 1;
+}
+
 /** Midnight of the given date, so comparisons ignore the time component. */
 function startOfDay(d: Date): Date {
   const c = new Date(d);
@@ -72,7 +119,7 @@ export class FsDatePickerComponent implements ControlValueAccessor {
   readonly Icons = ICONS;
 
   @Input() label = '';
-  @Input() placeholder = 'dd/mm/aaaa';
+  @Input({ transform: placeholderInput }) placeholder = 'dd/mm/aaaa';
   @Input() hint = '';
   @Input() disabled = false;
   @Input() readonly = false;
@@ -86,10 +133,10 @@ export class FsDatePickerComponent implements ControlValueAccessor {
    * Month/weekday names come from Intl rather than a hardcoded array, because
    * this ships on npm and cannot assume Spanish.
    */
-  @Input() locale = 'es-AR';
+  @Input({ transform: localeInput }) locale = 'es-AR';
 
-  /** First day of the week: 0 Sunday … 1 Monday. */
-  @Input() firstDayOfWeek = 1;
+  /** First day of the week: 0 Sunday … 1 Monday. Normalised into 0–6. */
+  @Input({ transform: weekStartInput }) firstDayOfWeek = 1;
 
   /** Earliest selectable date. Days before it render disabled. */
   @Input() min?: Date | string | null;
@@ -100,8 +147,8 @@ export class FsDatePickerComponent implements ControlValueAccessor {
   /** Hides the Today / Clear footer. */
   @Input() showFooter = true;
 
-  @Input() todayLabel = 'Hoy';
-  @Input() clearLabel = 'Limpiar';
+  @Input({ transform: todayLabelInput }) todayLabel = 'Hoy';
+  @Input({ transform: clearLabelInput }) clearLabel = 'Limpiar';
 
   @Output() valueChange = new EventEmitter<Date | null>();
 
@@ -153,7 +200,7 @@ export class FsDatePickerComponent implements ControlValueAccessor {
     const base = Array.from({ length: 7 }, (_, i) =>
       fmt.format(new Date(2024, 0, 7 + i)),
     );
-    const offset = ((this.firstDayOfWeek % 7) + 7) % 7;
+    const offset = this.firstDayOfWeek;   // ya normalizado 0-6 por el transform
     return [...base.slice(offset), ...base.slice(0, offset)];
   }
 
@@ -168,7 +215,7 @@ export class FsDatePickerComponent implements ControlValueAccessor {
     const month = this.view.getMonth();
     const today = startOfDay(new Date());
     const first = new Date(year, month, 1);
-    const offset = ((this.firstDayOfWeek % 7) + 7) % 7;
+    const offset = this.firstDayOfWeek;   // ya normalizado 0-6 por el transform
     const lead = (first.getDay() - offset + 7) % 7;
 
     const cells: FsCalendarDay[] = [];
@@ -348,13 +395,13 @@ export class FsDatePickerComponent implements ControlValueAccessor {
       case 'ArrowDown':  move(7); break;
       case 'Home': {
         event.preventDefault();
-        const offset = ((this.firstDayOfWeek % 7) + 7) % 7;
+        const offset = this.firstDayOfWeek;   // ya normalizado 0-6 por el transform
         move(-(((cursor.getDay() - offset) + 7) % 7));
         break;
       }
       case 'End': {
         event.preventDefault();
-        const offset = ((this.firstDayOfWeek % 7) + 7) % 7;
+        const offset = this.firstDayOfWeek;   // ya normalizado 0-6 por el transform
         move(6 - (((cursor.getDay() - offset) + 7) % 7));
         break;
       }
