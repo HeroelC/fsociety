@@ -435,6 +435,117 @@ año) · `Enter` selecciona · `Esc` cierra.
 
 ---
 
+### `<fs-date-range-picker>`
+
+Rango de fechas con dos meses en pantalla y preview al pasar el mouse. Implementa
+`ControlValueAccessor`; el valor del modelo es `{ start, end }`.
+
+```html
+<fs-date-range-picker label="Período" [(ngModel)]="periodo"></fs-date-range-picker>
+
+<!-- Con atajos -->
+<fs-date-range-picker label="Reporte" [presets]="presets" [(ngModel)]="periodo"></fs-date-range-picker>
+
+<!-- Máximo 7 noches -->
+<fs-date-range-picker label="Reserva" [maxSpan]="7" [(ngModel)]="periodo"></fs-date-range-picker>
+```
+
+```typescript
+import type { FsDateRange, FsDateRangePreset } from '@heroelc/fsociety';
+
+periodo: FsDateRange = { start: null, end: null };
+
+presets: FsDateRangePreset[] = [
+  { label: 'Últimos 7 días', range: () => ({ start: hace(6), end: hoy() }) },
+  { label: 'Este mes',       range: () => ({ start: inicioDeMes(), end: hoy() }) },
+];
+```
+
+| Input | Tipo | Default | Descripción |
+|---|---|---|---|
+| `label` / `hint` | `string` | `''` | |
+| `startPlaceholder` / `endPlaceholder` | `string` | `'Desde'` / `'Hasta'` | Placeholders de los dos campos |
+| `months` | `1 \| 2` | `2` | Meses en pantalla. `1` para columnas angostas |
+| `locale` | `string` | `'es-AR'` | BCP 47 — formato y nombres, vía Intl |
+| `firstDayOfWeek` | `number` | `1` | 0 domingo … 1 lunes |
+| `min` / `max` | `Date \| string \| null` | — | Límites duros |
+| `maxSpan` | `number` | `0` | Largo máximo del rango en días. `0` = sin tope |
+| `presets` | `FsDateRangePreset[]` | `[]` | Atajos en la columna izquierda |
+| `clearable` | `boolean` | `true` | Muestra la X |
+| `disabled` / `readonly` | `boolean` | `false` | |
+| `state` | `'default' \| 'error' \| 'success'` | `'default'` | |
+| `errorMessage` / `successMessage` | `string` | `''` | |
+
+| Output | Tipo | Descripción |
+|---|---|---|
+| `valueChange` | `EventEmitter<FsDateRange>` | Emite el rango |
+
+> **Es un componente aparte del `<fs-date-picker>`, no un modo.** Un `mode="range"`
+> haría que `value` fuera `Date | [Date, Date] | null`, una unión que cambia el
+> contrato del `ControlValueAccessor` según un input: `[(ngModel)]` quedaría
+> ambiguo y cada consumidor tendría que narrowear. Los dos comparten la lógica de
+> calendario internamente, así que un bug de grilla se arregla una sola vez.
+
+Los dos extremos de `FsDateRange` pueden ser `null` por separado — es lo que pasa
+mientras el rango está a medio elegir. Por eso es un par de nullables y no una
+tupla.
+
+**Detalles de comportamiento.** El rango se previsualiza siguiendo el mouse antes
+del segundo clic. Con `maxSpan`, una vez elegido el inicio los días más allá del
+tope quedan **deshabilitados**, no rechazados después del clic. Clickear un día
+anterior al inicio se toma como nuevo inicio, y un rango tipeado al revés se
+ordena en el blur en vez de descartarse.
+
+---
+
+### `<fs-otp>`
+
+Campo de código de verificación. Implementa `ControlValueAccessor`; el valor es el
+código concatenado.
+
+```html
+<fs-otp label="Código de verificación" [(ngModel)]="codigo"></fs-otp>
+
+<!-- Agrupado, y avisando cuando se completa -->
+<fs-otp [length]="6" [groupAt]="3" (completed)="verificar($event)"></fs-otp>
+
+<!-- Alfanumérico -->
+<fs-otp label="Invitación" mode="alphanumeric" [length]="6"></fs-otp>
+```
+
+| Input | Tipo | Default | Descripción |
+|---|---|---|---|
+| `label` / `hint` | `string` | `''` | |
+| `length` | `number` | `6` | Cantidad de celdas, acotado a 1–12 |
+| `mode` | `'numeric' \| 'alphanumeric'` | `'numeric'` | Alfanumérico pasa a mayúsculas solo |
+| `groupAt` | `number` | — | Dibuja un separador antes de ese índice |
+| `separator` | `string` | `'–'` | Carácter del separador |
+| `selectOnFocus` | `boolean` | `true` | Selecciona el contenido al enfocar, así tipear sobrescribe |
+| `disabled` | `boolean` | `false` | |
+| `state` | `'default' \| 'error' \| 'success'` | `'default'` | |
+| `errorMessage` / `successMessage` | `string` | `''` | |
+
+| Output | Tipo | Descripción |
+|---|---|---|
+| `valueChange` | `EventEmitter<string>` | Emite en cada cambio |
+| `completed` | `EventEmitter<string>` | Emite cuando todas las celdas están llenas |
+
+> **La primera celda lleva `autocomplete="one-time-code"`.** Es lo que habilita el
+> autofill del SMS en iOS y Android. Sin eso el usuario tiene que salir de la app
+> a copiar el código a mano.
+
+**Pegar funciona desde la celda enfocada.** Pegar el código completo en la primera
+llena todas; pegar dos dígitos en la cuarta llena la cuarta y la quinta y deja las
+anteriores intactas. Y el desborde de un solo evento se reparte en las celdas
+siguientes en vez de descartarse — eso es lo que hace que el autofill del SMS,
+que entrega todo el código a un solo campo, funcione.
+
+`Backspace` sobre una celda llena la vacía y **se queda ahí**; solo retrocede si
+ya estaba vacía. Si saltara siempre, borrar dos caracteres seguidos se vuelve
+impredecible.
+
+---
+
 ### `<fs-number-input>`
 
 Campo numérico con stepper. Implementa `ControlValueAccessor`. El valor del
@@ -1169,6 +1280,8 @@ Documentación visual en Storybook: [heroelc.github.io/fsociety](https://heroelc
 - [x] `fs-number-input` — stepper, prefijo/sufijo, decimales sin drift
 - [x] `fs-textarea` — contador, auto-grow, estados
 - [x] `fs-file-upload` — dropzone, File reales, validación de tipo/tamaño/cantidad
+- [x] `fs-date-range-picker` — dos meses, preview, presets, maxSpan
+- [x] `fs-otp` — código de verificación, autofill de SMS, pegado inteligente
 - [x] Temas light y dark vía `data-theme`, con capa semántica de tokens
 - [x] `[fsAnchoredPopover]` — overlays en el top layer, sin recortes
 - [x] Storybook en GitHub Pages, con paleta de marca en vivo

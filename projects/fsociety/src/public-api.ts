@@ -35,6 +35,16 @@ export type { FsSelectOption, FsSelectState } from './lib/select/select.componen
 export { FsDatePickerComponent } from './lib/date-picker/date-picker.component';
 export type { FsDatePickerState, FsCalendarDay } from './lib/date-picker/date-picker.component';
 
+export { FsDateRangePickerComponent } from './lib/date-picker/date-range-picker.component';
+export type {
+  FsDateRangePickerState,
+  FsDateRange,
+  FsDateRangePreset,
+} from './lib/date-picker/date-range-picker.component';
+
+export { FsOtpComponent } from './lib/otp/otp.component';
+export type { FsOtpState, FsOtpMode } from './lib/otp/otp.component';
+
 export { FsNumberInputComponent } from './lib/number-input/number-input.component';
 export type { FsNumberInputState } from './lib/number-input/number-input.component';
 
