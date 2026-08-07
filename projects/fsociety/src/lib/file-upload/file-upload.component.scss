@@ -1,0 +1,214 @@
+.fs-up {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  &__label {
+    font-size: 13px;
+    font-weight: 550;
+    letter-spacing: -0.005em;
+    color: var(--fs-color-text-primary);
+    line-height: 1.3;
+  }
+
+  // ─── Dropzone ────────────────────────────────────────────────────────────
+  &__dropzone {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    width: 100%;
+    padding: 26px 20px;
+    text-align: center;
+    font: inherit;
+    cursor: pointer;
+    background: var(--fs-color-surface-alt);
+    border: 1.5px dashed var(--fs-color-border-strong);
+    border-radius: calc(var(--fs-radius-lg) + 4px);
+    color: var(--fs-color-text-secondary);
+    transition: border-color 150ms ease, background 150ms ease;
+
+    &:hover:not(:disabled),
+    &--dragging {
+      border-color: var(--fs-color-primary);
+      background: color-mix(in srgb, var(--fs-color-primary) 6%, var(--fs-color-surface));
+    }
+
+    // Solid while dragging, so the zone reads as armed rather than just hovered.
+    &--dragging {
+      border-style: solid;
+    }
+
+    &--error {
+      border-color: var(--fs-color-error);
+      background: color-mix(in srgb, var(--fs-color-error) 6%, var(--fs-color-surface));
+    }
+
+    &:focus-visible {
+      outline: none;
+      border-color: var(--fs-color-primary);
+      box-shadow: 0 0 0 2.5px color-mix(in srgb, var(--fs-color-primary) 15%, transparent);
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  }
+
+  &__dz-icon {
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    margin-bottom: 4px;
+    border-radius: var(--fs-radius-full);
+    background: color-mix(in srgb, var(--fs-color-primary) 12%, transparent);
+    color: var(--fs-color-primary);
+
+    .fs-icon { width: 21px; height: 21px; }
+  }
+
+  &__dz-text {
+    font-size: 14px;
+    color: var(--fs-color-text-primary);
+
+    b {
+      font-weight: 650;
+      color: var(--fs-color-primary);
+    }
+  }
+
+  &__dz-hint {
+    font-size: 12.5px;
+    color: var(--fs-color-text-placeholder);
+  }
+
+  // The native input stays in the DOM for form semantics and the file picker,
+  // but never shows — `hidden` would also work, this keeps it focusable-adjacent
+  // without affecting layout.
+  &__native {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  // ─── Rejections ──────────────────────────────────────────────────────────
+  &__rejections {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  &__rejection {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12.5px;
+    line-height: 1.4;
+    color: var(--fs-color-error);
+  }
+
+  // ─── File list ───────────────────────────────────────────────────────────
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+
+  &__row {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    padding: 9px 11px;
+    background: var(--fs-color-surface);
+    border: 1px solid var(--fs-color-border);
+    border-radius: var(--fs-radius-md);
+  }
+
+  &__row-icon {
+    display: grid;
+    place-items: center;
+    flex: 0 0 auto;
+    width: 32px;
+    height: 32px;
+    border-radius: var(--fs-radius-sm);
+    background: var(--fs-color-surface-alt);
+    color: var(--fs-color-text-secondary);
+
+    .fs-icon { width: 17px; height: 17px; }
+  }
+
+  &__row-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__row-name {
+    font-size: 14px;
+    color: var(--fs-color-text-primary);
+    // File names are long and unbreakable; without this the row pushes the form
+    // wider instead of truncating.
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__row-size {
+    font-size: 12.5px;
+    color: var(--fs-color-text-placeholder);
+    font-variant-numeric: tabular-nums;
+  }
+
+  &__remove {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    border-radius: var(--fs-radius-sm);
+    color: var(--fs-color-text-secondary);
+    cursor: pointer;
+    transition: background 120ms ease, color 120ms ease;
+
+    .fs-icon { width: 16px; height: 16px; }
+
+    &:hover:not(:disabled) {
+      background: color-mix(in srgb, var(--fs-color-error) 10%, transparent);
+      color: var(--fs-color-error);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--fs-color-primary);
+      outline-offset: 1px;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  // ─── Message ─────────────────────────────────────────────────────────────
+  &__message {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12.5px;
+    line-height: 1.4;
+    color: var(--fs-color-error);
+  }
+}

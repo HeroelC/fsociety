@@ -1,0 +1,111 @@
+<div class="fs-up">
+
+  @if (label) {
+    <label class="fs-up__label" [for]="inputId">{{ label }}</label>
+  }
+
+  <!-- A button, so Enter and Space open the picker without extra key handling.
+       The drag listeners live here too; dragDepth is what keeps the highlight
+       from flickering as the pointer crosses the icon and the text. -->
+  <button
+    class="fs-up__dropzone"
+    [class.fs-up__dropzone--dragging]="dragging"
+    [class.fs-up__dropzone--error]="state === 'error'"
+    type="button"
+    [disabled]="disabled"
+    (click)="openPicker()"
+    (dragenter)="onDragEnter($event)"
+    (dragover)="onDragOver($event)"
+    (dragleave)="onDragLeave($event)"
+    (drop)="onDrop($event)"
+  >
+    <span class="fs-up__dz-icon" aria-hidden="true">
+      <span
+        class="fs-icon"
+        [style.--_icon]="'url(' + Icons.upload + ')'"
+      ></span>
+    </span>
+
+    <span class="fs-up__dz-text">
+      <b>{{ title }}</b> {{ subtitle }}
+    </span>
+
+    @if (hint) {
+      <span class="fs-up__dz-hint">{{ hint }}</span>
+    }
+  </button>
+
+  <input
+    #input
+    [id]="inputId"
+    class="fs-up__native"
+    type="file"
+    [accept]="accept"
+    [multiple]="multiple"
+    [disabled]="disabled"
+    (change)="onPicked($event)"
+  />
+
+  @if (rejections.length) {
+    <div class="fs-up__rejections" role="alert">
+      @for (r of rejections; track r.message) {
+        <span class="fs-up__rejection">
+          <span
+            class="fs-icon"
+            [style.--_icon]="'url(' + Icons.alertCircle + ')'"
+            style="width:13px;height:13px"
+            aria-hidden="true"
+          ></span>
+          {{ r.message }}
+        </span>
+      }
+    </div>
+  }
+
+  @if (files.length) {
+    <div class="fs-up__list">
+      @for (f of files; track f.id) {
+        <div class="fs-up__row">
+          <span class="fs-up__row-icon" aria-hidden="true">
+            <span
+              class="fs-icon"
+              [style.--_icon]="'url(' + Icons.file + ')'"
+            ></span>
+          </span>
+
+          <span class="fs-up__row-meta">
+            <span class="fs-up__row-name" [title]="f.name">{{ f.name }}</span>
+            <span class="fs-up__row-size">{{ formatSize(f.size) }}</span>
+          </span>
+
+          <button
+            class="fs-up__remove"
+            type="button"
+            [attr.aria-label]="removeLabel + ' ' + f.name"
+            [disabled]="disabled"
+            (click)="remove(f.id)"
+          >
+            <span
+              class="fs-icon"
+              [style.--_icon]="'url(' + Icons.trash + ')'"
+              aria-hidden="true"
+            ></span>
+          </button>
+        </div>
+      }
+    </div>
+  }
+
+  @if (state === 'error' && errorMessage) {
+    <span class="fs-up__message" role="alert">
+      <span
+        class="fs-icon"
+        [style.--_icon]="'url(' + Icons.alertCircle + ')'"
+        style="width:13px;height:13px"
+        aria-hidden="true"
+      ></span>
+      {{ errorMessage }}
+    </span>
+  }
+
+</div>
