@@ -1,0 +1,51 @@
+<div class="fs-accordion">
+  @for (item of items; track item.id) {
+    <div
+      class="fs-accordion__item"
+      [class.fs-accordion__item--open]="isOpen(item)"
+      [class.fs-accordion__item--disabled]="item.disabled"
+    >
+      <!-- A heading wrapping the button is what puts the panels in the document
+           outline, so a screen reader can jump between them. -->
+      <h3 class="fs-accordion__heading">
+        <button
+          type="button"
+          class="fs-accordion__head"
+          [id]="headId(item)"
+          [attr.aria-expanded]="isOpen(item)"
+          [attr.aria-controls]="panelId(item)"
+          [disabled]="item.disabled"
+          (click)="toggle(item)"
+        >
+          <span class="fs-accordion__title">{{ item.title }}</span>
+          <span
+            class="fs-icon fs-accordion__chevron"
+            [style.--_icon]="'url(' + Icons.chevronDown + ')'"
+            aria-hidden="true"
+          ></span>
+        </button>
+      </h3>
+
+      <!-- 0fr → 1fr animates to the content's real height without measuring it.
+           `inert` while collapsed keeps the hidden panel out of the tab order —
+           the grid track is zero-height but the content is still rendered. -->
+      <div
+        class="fs-accordion__body"
+        [id]="panelId(item)"
+        role="region"
+        [attr.aria-labelledby]="headId(item)"
+        [attr.inert]="isOpen(item) ? null : ''"
+      >
+        <div class="fs-accordion__inner">
+          <div class="fs-accordion__panel">
+            @if (asTemplate(item.content); as tpl) {
+              <ng-container *ngTemplateOutlet="tpl"></ng-container>
+            } @else {
+              {{ item.content }}
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+</div>

@@ -1,0 +1,137 @@
+// ---------------------------------------------------------------------------
+// fs-accordion — configurable CSS custom properties
+//
+//   fs-accordion {
+//     --fs-accordion-bg:        var(--fs-color-surface);
+//     --fs-accordion-border:    var(--fs-color-border);
+//     --fs-accordion-radius:    var(--fs-radius-lg);
+//     --fs-accordion-hover-bg:  var(--fs-color-surface-alt);
+//     --fs-accordion-accent:    var(--fs-color-primary);
+//     --fs-accordion-pad-x:     18px;
+//     --fs-accordion-pad-y:     15px;
+//   }
+//
+// Every default resolves to a semantic token, so light and dark follow
+// [data-theme] with no extra configuration.
+// ---------------------------------------------------------------------------
+
+:host {
+  display: block;
+}
+
+.fs-accordion {
+  --fs-accordion-bg:       var(--fs-color-surface);
+  --fs-accordion-border:   var(--fs-color-border);
+  --fs-accordion-radius:   var(--fs-radius-lg);
+  --fs-accordion-hover-bg: var(--fs-color-surface-alt);
+  --fs-accordion-accent:   var(--fs-color-primary);
+  --fs-accordion-pad-x:    18px;
+  --fs-accordion-pad-y:    15px;
+
+  display: flex;
+  flex-direction: column;
+  background: var(--fs-accordion-bg);
+  border: 1px solid var(--fs-accordion-border);
+  border-radius: var(--fs-accordion-radius);
+  // Clips the first and last header's hover background to the rounded corners.
+  overflow: hidden;
+
+  // ─── Item ────────────────────────────────────────────────────────────────
+  // Divider on the adjacent sibling, so the outer border is never doubled.
+  &__item + &__item {
+    border-top: 1px solid var(--fs-accordion-border);
+  }
+
+  &__item--disabled {
+    opacity: 0.5;
+  }
+
+  // ─── Header ──────────────────────────────────────────────────────────────
+  &__heading {
+    margin: 0;
+    font: inherit;
+  }
+
+  &__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    width: 100%;
+    padding: var(--fs-accordion-pad-y) var(--fs-accordion-pad-x);
+    border: none;
+    background: transparent;
+    font: inherit;
+    text-align: left;
+    color: var(--fs-color-text-primary);
+    cursor: pointer;
+    transition: background 120ms ease;
+
+    &:hover:not(:disabled) {
+      background: var(--fs-accordion-hover-bg);
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--fs-accordion-accent);
+      // Negative, because the button fills the item edge to edge and a positive
+      // offset would be clipped by the container's overflow.
+      outline-offset: -2px;
+    }
+  }
+
+  &__title {
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+    line-height: 1.4;
+  }
+
+  &__chevron {
+    width: 18px;
+    height: 18px;
+    color: var(--fs-color-text-secondary);
+    transition: transform 200ms ease, color 200ms ease;
+  }
+
+  &__item--open &__chevron {
+    transform: rotate(180deg);
+    color: var(--fs-accordion-accent);
+  }
+
+  // ─── Panel ───────────────────────────────────────────────────────────────
+  // The grid row animates from 0fr to 1fr, which reaches the content's natural
+  // height without measuring it in JS. The inner wrapper owns the overflow
+  // because a zero-height track does not clip on its own.
+  &__body {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 250ms ease;
+  }
+
+  &__item--open &__body {
+    grid-template-rows: 1fr;
+  }
+
+  &__inner {
+    overflow: hidden;
+  }
+
+  &__panel {
+    padding: 0 var(--fs-accordion-pad-x) 16px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--fs-color-text-secondary);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &__body,
+    &__chevron,
+    &__head {
+      transition: none;
+    }
+  }
+}
