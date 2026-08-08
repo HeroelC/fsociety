@@ -140,12 +140,39 @@ npm run release:dry
 
 Use it to confirm the **target version** and the changelog preview.
 
-Do NOT use it to verify the sync. In dry-run, release-it logs write commands
-without executing them (`isDryRun && isWrite` short-circuits in
-`lib/shell.js`), and hooks are dispatched with `write` unset, so
-`node sync-version.js` is printed but never runs. The changeset preview will
-therefore *not* list `projects/fsociety/package.json`. That is expected and is
-not a failure. The real check is step 6.
+Do NOT use it to verify the sync. Hooks are dispatched with `write` unset, so
+`node sync-version.js` is printed but never runs, and the changeset preview
+will *not* list `projects/fsociety/package.json`. That is expected and is not a
+failure. The real check is step 6.
+
+#### The dry run is not read-only
+
+It bumps `package.json` and `package-lock.json` **for real**, every time, and
+release-it does not put them back. Left alone, the next command fails with
+`ERROR Working dir must be clean.` — the preview breaks the release it was
+meant to de-risk.
+
+The cause is upstream and is not configurable. `lib/plugin/npm/npm.js` builds
+the options for every npm command from one shared helper:
+
+```js
+const getOptions = () => ({ write: false, env: getNpmEnv() });
+```
+
+`write: false` is correct for `npm ping`, `npm whoami` and `npm show`, which
+only read. But `bump()` reuses it for `npm version`, and `lib/shell.js` gates
+the dry run on exactly that flag — `if (isDryRun && isWrite)` — so the bump is
+classified as a read and runs. Unchanged as of release-it 21.0.1, so upgrading
+does not help.
+
+`npm run release:dry` therefore goes through `release-dry.js`, which restores
+the manifests afterwards whether the preview passed or failed. **Do not call
+`release-it --dry-run` directly** — that is the raw command, and it leaves the
+mess.
+
+The wrapper refuses to start when the manifests are already dirty, since its
+restore is a hard `git checkout` and would otherwise discard real edits. If it
+stops for that reason, commit or stash first; do not work around it.
 
 ### 5. Release
 
