@@ -1,0 +1,16 @@
+@if (labelled) {
+  <span class="fs-divider__line" aria-hidden="true"></span>
+
+  <span class="fs-divider__label">
+    @if (icon) {
+      <span
+        class="fs-icon fs-divider__icon"
+        [style.--_icon]="'url(' + icon + ')'"
+        aria-hidden="true"
+      ></span>
+    }
+    {{ label }}
+  </span>
+
+  <span class="fs-divider__line" aria-hidden="true"></span>
+}

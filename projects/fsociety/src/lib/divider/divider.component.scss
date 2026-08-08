@@ -1,0 +1,96 @@
+// ---------------------------------------------------------------------------
+// fs-divider — configurable CSS custom properties
+//
+//   fs-divider {
+//     --fs-divider-color:       var(--fs-color-border);
+//     --fs-divider-dash-color:  var(--fs-color-border-strong);
+//     --fs-divider-label-color: var(--fs-color-text-placeholder);
+//     --fs-divider-gap:         12px;
+//     --fs-divider-inset:       28px;   // short side when align is left/right
+//   }
+// ---------------------------------------------------------------------------
+
+:host {
+  --fs-divider-color:       var(--fs-color-border);
+  --fs-divider-dash-color:  var(--fs-color-border-strong);
+  --fs-divider-label-color: var(--fs-color-text-placeholder);
+  --fs-divider-gap:         12px;
+  --fs-divider-inset:       28px;
+
+  display: block;
+  width: 100%;
+  height: 1px;
+  background: var(--fs-divider-color);
+}
+
+// A dashed rule cannot be a background, so the box collapses to zero height and
+// the border draws the line. Same trick on the other axis for vertical.
+:host(.fs-divider--dashed) {
+  height: 0;
+  background: none;
+  border-top: 1px dashed var(--fs-divider-dash-color);
+}
+
+// ─── Vertical ───────────────────────────────────────────────────────────────
+// `align-self: stretch` is why this sits on the host and not on a wrapper: it
+// only works if the divider itself is the flex child of the row.
+:host(.fs-divider--vertical) {
+  display: inline-block;
+  width: 1px;
+  height: auto;
+  align-self: stretch;
+  background: var(--fs-divider-color);
+  border-top: 0;
+}
+
+:host(.fs-divider--vertical.fs-divider--dashed) {
+  width: 0;
+  background: none;
+  border-top: 0;
+  border-left: 1px dashed var(--fs-divider-dash-color);
+}
+
+// ─── Labelled ───────────────────────────────────────────────────────────────
+// Declared after the variants so it wins on source order: the host stops being
+// the line and becomes the row that holds two of them.
+:host(.fs-divider--labelled) {
+  display: flex;
+  align-items: center;
+  gap: var(--fs-divider-gap);
+  height: auto;
+  background: none;
+  border-top: 0;
+}
+
+.fs-divider__line {
+  flex: 1;
+  height: 1px;
+  background: var(--fs-divider-color);
+}
+
+:host(.fs-divider--dashed) .fs-divider__line {
+  height: 0;
+  background: none;
+  border-top: 1px dashed var(--fs-divider-dash-color);
+}
+
+:host(.fs-divider--left) .fs-divider__line:first-child,
+:host(.fs-divider--right) .fs-divider__line:last-child {
+  flex: 0 0 var(--fs-divider-inset);
+}
+
+.fs-divider__label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--fs-divider-label-color);
+  white-space: nowrap;
+}
+
+.fs-divider__icon {
+  width: 14px;
+  height: 14px;
+}
