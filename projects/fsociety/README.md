@@ -556,10 +556,8 @@ Diálogo modal construido sobre **`<dialog>` nativo** con `showModal()`.
 <fs-modal [(open)]="abierto" heading="Confirmar acción">
   <p>Esto va a archivar el proyecto.</p>
 
-  <div modalFooter>
-    <fs-button variant="outline" (click)="abierto = false">Cancelar</fs-button>
-    <fs-button variant="danger" (click)="archivar()">Archivar</fs-button>
-  </div>
+  <fs-button modalFooter variant="outline" (click)="abierto = false">Cancelar</fs-button>
+  <fs-button modalFooter variant="danger" (click)="archivar()">Archivar</fs-button>
 </fs-modal>
 ```
 
@@ -585,6 +583,10 @@ Diálogo modal construido sobre **`<dialog>` nativo** con `showModal()`.
 | Default | — | Cuerpo del modal |
 | Footer | `[modalFooter]` | Botones de acción. Sin contenido, el footer no ocupa lugar |
 
+> El slot **es** la fila: pone el `display: flex` y el `gap`. Por eso el atributo va
+> en cada botón, no en un `<div>` que los envuelva — un wrapper se come el `gap` y
+> los botones salen pegados.
+
 ---
 
 ### `<fs-drawer>`
@@ -595,9 +597,7 @@ El mismo `<dialog>` nativo, con el panel pegado a un borde en vez de centrado.
 <fs-drawer [(open)]="abierto" heading="Filtros" side="right" size="400px">
   <fs-input label="Buscar"></fs-input>
 
-  <div drawerFooter>
-    <fs-button variant="primary" (click)="aplicar()">Aplicar</fs-button>
-  </div>
+  <fs-button drawerFooter variant="primary" (click)="aplicar()">Aplicar</fs-button>
 </fs-drawer>
 ```
 

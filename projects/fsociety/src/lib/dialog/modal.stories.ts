@@ -67,10 +67,8 @@ export const Default: Story = {
           más tarde desde la papelera.
         </p>
 
-        <div modalFooter>
-          <fs-button variant="outline" (click)="open = false">Cancelar</fs-button>
-          <fs-button variant="danger" (click)="open = false">Archivar</fs-button>
-        </div>
+        <fs-button modalFooter variant="outline" (click)="open = false">Cancelar</fs-button>
+        <fs-button modalFooter variant="danger" (click)="open = false">Archivar</fs-button>
       </fs-modal>
     `,
   }),
@@ -109,9 +107,7 @@ export const NativeBehaviour: Story = {
         </p>
         <fs-input label="Nombre" placeholder="Escribí algo"></fs-input>
 
-        <div modalFooter>
-          <fs-button variant="outline" (click)="open = false">Cerrar</fs-button>
-        </div>
+        <fs-button modalFooter variant="outline" (click)="open = false">Cerrar</fs-button>
       </fs-modal>
     `,
   }),
@@ -150,9 +146,7 @@ export const AboveOverlays: Story = {
           Su panel también sube al top layer, por encima del modal.
         </p>
 
-        <div modalFooter>
-          <fs-button variant="outline" (click)="open = false">Cerrar</fs-button>
-        </div>
+        <fs-button modalFooter variant="outline" (click)="open = false">Cerrar</fs-button>
       </fs-modal>
     `,
   }),
@@ -215,10 +209,8 @@ export const LongBody: Story = {
           </p>
         }
 
-        <div modalFooter>
-          <fs-button variant="outline" (click)="open = false">Rechazar</fs-button>
-          <fs-button variant="primary" (click)="open = false">Aceptar</fs-button>
-        </div>
+        <fs-button modalFooter variant="outline" (click)="open = false">Rechazar</fs-button>
+        <fs-button modalFooter variant="primary" (click)="open = false">Aceptar</fs-button>
       </fs-modal>
     `,
   }),
@@ -251,10 +243,8 @@ export const NotDismissable: Story = {
       >
         <p style="margin:0">Probá Escape o clickear afuera: no cierra.</p>
 
-        <div modalFooter>
-          <fs-button variant="outline" (click)="open = false">No</fs-button>
-          <fs-button variant="primary" (click)="open = false">Sí, dale</fs-button>
-        </div>
+        <fs-button modalFooter variant="outline" (click)="open = false">No</fs-button>
+        <fs-button modalFooter variant="primary" (click)="open = false">Sí, dale</fs-button>
       </fs-modal>
     `,
   }),

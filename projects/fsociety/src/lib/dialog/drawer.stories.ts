@@ -80,10 +80,8 @@ export const Default: Story = {
           <fs-switch label="Solo los míos"></fs-switch>
         </div>
 
-        <div drawerFooter>
-          <fs-button variant="outline" (click)="open = false">Limpiar</fs-button>
-          <fs-button variant="primary" (click)="open = false">Aplicar</fs-button>
-        </div>
+        <fs-button drawerFooter variant="outline" (click)="open = false">Limpiar</fs-button>
+        <fs-button drawerFooter variant="primary" (click)="open = false">Aplicar</fs-button>
       </fs-drawer>
     `,
   }),
@@ -171,9 +169,7 @@ export const LongBody: Story = {
           </p>
         }
 
-        <div drawerFooter>
-          <fs-button variant="outline" (click)="open = false">Cerrar</fs-button>
-        </div>
+        <fs-button drawerFooter variant="outline" (click)="open = false">Cerrar</fs-button>
       </fs-drawer>
     `,
   }),
@@ -211,9 +207,7 @@ export const WithOverlays: Story = {
           <fs-select label="Uno abajo, con scroll de por medio" [options]="options"></fs-select>
         </div>
 
-        <div drawerFooter>
-          <fs-button variant="outline" (click)="open = false">Cerrar</fs-button>
-        </div>
+        <fs-button drawerFooter variant="outline" (click)="open = false">Cerrar</fs-button>
       </fs-drawer>
     `,
   }),
@@ -238,9 +232,7 @@ export const NotDismissable: Story = {
       >
         <p style="margin:0">Escape y el click afuera están desactivados.</p>
 
-        <div drawerFooter>
-          <fs-button variant="primary" (click)="open = false">Listo</fs-button>
-        </div>
+        <fs-button drawerFooter variant="primary" (click)="open = false">Listo</fs-button>
       </fs-drawer>
     `,
   }),
