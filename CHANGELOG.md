@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.8.0](https://github.com/heroelc/fsociety/compare/v0.7.0...v0.8.0) (2026-08-08)
+
+### Features
+
+* **accordion:** add fs-accordion with a measured-free height animation ([7db6448](https://github.com/heroelc/fsociety/commit/7db64481b670528575d6c7d289d6e632699c0648))
+* **card:** add fs-card, fs-row-card and fs-stat-card ([36d02cc](https://github.com/heroelc/fsociety/commit/36d02cceedff20d8457bfe6bd9344614b923b66e))
+* **dialog:** add fs-modal and fs-drawer on native dialog ([8d7135e](https://github.com/heroelc/fsociety/commit/8d7135edfb0b4ba791316f1a6c8cf099c58509bd))
+* **divider:** add fs-divider ([934129a](https://github.com/heroelc/fsociety/commit/934129a8922e66d45cf5b63e572f42d6ea30d7bd))
+
+### Bug Fixes
+
+* **drawer:** only lay out the dialog while it is open ([fe752e5](https://github.com/heroelc/fsociety/commit/fe752e5f5037b87903a568b3b46060525d1b9169))
+
 ## [0.7.0](https://github.com/heroelc/fsociety/compare/v0.6.0...v0.7.0) (2026-08-07)
 
 ### Features
