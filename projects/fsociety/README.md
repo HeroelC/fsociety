@@ -1207,6 +1207,177 @@ current = 2;
 
 ---
 
+### `<fs-accordion>`
+
+Paneles colapsables. Uno abierto por vez, o varios con `multiple`.
+
+```typescript
+items: FsAccordionItem[] = [
+  { id: 'cancel', title: '¿Cómo cancelo?', content: 'Desde Ajustes → Facturación.' },
+  { id: 'plan',   title: '¿Puedo cambiar de plan?', content: 'Sí, se prorratea.' },
+];
+
+abiertos = ['cancel'];
+```
+
+```html
+<fs-accordion [items]="items" [(open)]="abiertos"></fs-accordion>
+```
+
+| Input | Tipo | Default | Descripción |
+|---|---|---|---|
+| `items` | `FsAccordionItem[]` | `[]` | `{ id, title, content?, disabled? }` |
+| `multiple` | `boolean` | `false` | Permite más de un panel abierto |
+| `open` | `string[]` | `[]` | Ids abiertos. Two-way: `[(open)]` |
+
+| Output | Tipo | Descripción |
+|---|---|---|
+| `openChange` | `EventEmitter<string[]>` | Para el two-way binding |
+| `itemToggle` | `EventEmitter<FsAccordionToggle>` | `{ item, open }` del que cambió |
+
+`content` acepta un `string` o un `TemplateRef`, así que un panel que necesita
+markup real no obliga a armar otro componente:
+
+```html
+<ng-template #factura>
+  <p>El próximo cobro es el 12 de septiembre.</p>
+  <fs-button variant="outline" size="sm" label="Ver factura"></fs-button>
+</ng-template>
+
+<fs-accordion [items]="[{ id: 'f', title: 'Facturación', content: factura }]"></fs-accordion>
+```
+
+| Custom property | Default |
+|---|---|
+| `--fs-accordion-bg` | `var(--fs-color-surface)` |
+| `--fs-accordion-border` | `var(--fs-color-border)` |
+| `--fs-accordion-radius` | `var(--fs-radius-lg)` |
+| `--fs-accordion-hover-bg` | `var(--fs-color-surface-alt)` |
+| `--fs-accordion-accent` | `var(--fs-color-primary)` |
+| `--fs-accordion-pad-x` / `-pad-y` | `18px` / `15px` |
+
+> La animación de altura es `grid-template-rows: 0fr → 1fr`. Llega a la altura
+> real del contenido sin medir nada en JS y sin un `max-height` inventado que
+> recorte los paneles largos.
+>
+> El panel cerrado **sigue renderizado** — el track mide cero, no es
+> `display: none` — así que lleva `inert` para quedar fuera del orden de tabulado.
+> Sin eso, tabulando se cae adentro de un panel que no se ve.
+
+---
+
+### `<fs-divider>`
+
+Separador sólido o punteado, con etiqueta opcional, y variante vertical.
+
+```html
+<fs-divider></fs-divider>
+<fs-divider variant="dashed"></fs-divider>
+<fs-divider label="o continuá con"></fs-divider>
+<fs-divider [icon]="iconoSparkle" label="Nuevo"></fs-divider>
+<fs-divider label="Agosto 2026" align="left"></fs-divider>
+
+<div style="display:flex; align-items:center; gap:14px">
+  <span>Editar</span>
+  <fs-divider orientation="vertical"></fs-divider>
+  <span>Duplicar</span>
+</div>
+```
+
+| Input | Tipo | Default | Descripción |
+|---|---|---|---|
+| `orientation` | `'horizontal' \| 'vertical'` | `'horizontal'` | Eje |
+| `variant` | `'solid' \| 'dashed'` | `'solid'` | Tipo de línea |
+| `label` | `string` | `''` | Texto centrado en la línea |
+| `icon` | `string` | — | URL del ícono, antes del label |
+| `align` | `'center' \| 'left' \| 'right'` | `'center'` | Posición del label |
+
+| Custom property | Default |
+|---|---|
+| `--fs-divider-color` | `var(--fs-color-border)` |
+| `--fs-divider-dash-color` | `var(--fs-color-border-strong)` |
+| `--fs-divider-label-color` | `var(--fs-color-text-placeholder)` |
+| `--fs-divider-gap` | `12px` |
+| `--fs-divider-inset` | `28px` (lado corto cuando `align` no es `center`) |
+
+> El estilo vive en el **host**, no en un wrapper interno. El separador vertical
+> toma la altura de la fila con `align-self: stretch`, y `stretch` solo aplica al
+> hijo flex en sí: un elemento en el medio lo rompe. Necesita un contenedor flex.
+>
+> Una línea punteada no puede ser un `background`, así que esas variantes colapsan
+> la caja a cero en un eje y dibujan la línea con un `border`.
+
+---
+
+### Cards — `<fs-card>`, `<fs-row-card>`, `<fs-stat-card>`
+
+Tres formas distintas, no una con un flag de layout: la vertical tiene media y
+pie, la horizontal tiene una acción inline, y la de métrica es un número.
+
+#### `<fs-card>`
+
+```html
+<fs-card [icon]="iconoSparkle" title="Plan Pro" subtitle="Para equipos en crecimiento">
+  <div cardMedia><img src="portada.jpg" alt=""></div>
+
+  Incluye asientos ilimitados, soporte prioritario y reportes avanzados.
+
+  <fs-button cardFooter variant="primary" size="sm" label="Elegir plan" [fullWidth]="true"></fs-button>
+</fs-card>
+```
+
+| Input | Tipo | Default | Descripción |
+|---|---|---|---|
+| `icon` | `string` | — | URL del ícono del header |
+| `title` | `string` | `''` | Título |
+| `subtitle` | `string` | `''` | Bajada |
+| `tone` | `'success' \| 'danger' \| 'warning' \| 'info'` | — | Tiñe el borde y agrega el glifo de estado |
+| `interactive` | `boolean` | `false` | Señal visual de hover |
+
+| Slot | Selector | Descripción |
+|---|---|---|
+| Media | `[cardMedia]` | Imagen o degradé arriba, en 16/9 |
+| Default | — | Cuerpo |
+| Footer | `[cardFooter]` | Acciones. Igual que el modal: el atributo va en cada botón |
+
+#### `<fs-row-card>`
+
+```html
+<fs-row-card tone="success" title="Dominio verificado" subtitle="app.acme-corp.com">
+  <fs-badge cardAction color="success" label="Activo" [dot]="true"></fs-badge>
+</fs-row-card>
+```
+
+Mismos `icon`, `title`, `subtitle` y `tone`. El slot de la acción es `[cardAction]`.
+Con `tone`, el glifo de estado pisa al `icon`: una fila de estado se lee como estado.
+
+#### `<fs-stat-card>`
+
+```html
+<fs-stat-card label="Ingresos (MRR)" value="$12,480" delta="+8.2%" deltaTone="success"></fs-stat-card>
+```
+
+| Input | Tipo | Default | Descripción |
+|---|---|---|---|
+| `label` | `string` | `''` | Nombre de la métrica |
+| `value` | `string \| number` | `''` | Ya formateado — moneda y separadores son tuyos |
+| `delta` | `string` | `''` | Pill de variación. Vacío, no se muestra |
+| `deltaTone` | `'success' \| 'danger' \| 'neutral'` | `'success'` | Si esa variación es buena o mala |
+| `icon` | `string` | — | URL del ícono, al lado del label |
+
+> `deltaTone` **no** se deduce del signo, y es a propósito: un churn que sube es
+> `+0.4%` y sigue siendo malo. El tono lo decide quien conoce la métrica.
+
+> Los tintes de estado salen de un `color-mix` contra el borde y la superficie —
+> el mismo enfoque que `fs-alert` — en vez de un color claro fijo. Un tinte
+> hardcodeado se lava en dark.
+>
+> `interactive` es solo el hover y **no** hace la card operable. Una card con un
+> botón en el pie no puede ser ella misma un botón: eso es anidar controles. Si
+> toda la card tiene que ser clickeable, el elemento interactivo lo ponés vos.
+
+---
+
 ### `<fs-experience-card>`
 
 ```typescript
@@ -1497,6 +1668,9 @@ Documentación visual en Storybook: [heroelc.github.io/fsociety](https://heroelc
 - [x] `fs-rating` — fracciones en readonly, un solo tab stop, icono configurable
 - [x] `fs-modal` — <dialog> nativo: focus trap, fondo inerte, top layer
 - [x] `fs-drawer` — mismo dialog, panel en cualquiera de los 4 bordes
+- [x] `fs-accordion` — altura con grid 0fr→1fr, sin medir en JS, panel cerrado inerte
+- [x] `fs-divider` — sólido/punteado, con label, y vertical que estira con la fila
+- [x] `fs-card` + `fs-row-card` + `fs-stat-card` — tres formas, tintes de estado que aguantan dark
 - [x] Temas light y dark vía `data-theme`, con capa semántica de tokens
 - [x] `[fsAnchoredPopover]` — overlays en el top layer, sin recortes
 - [x] Storybook en GitHub Pages, con paleta de marca en vivo

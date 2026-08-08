@@ -93,3 +93,21 @@ export type { FsMultiSelectOption } from './lib/multi-select/multi-select.compon
 
 export { FsStepsComponent } from './lib/steps/steps.component';
 export type { FsStep } from './lib/steps/steps.component';
+
+export { FsAccordionComponent } from './lib/accordion/accordion.component';
+export type { FsAccordionItem, FsAccordionToggle } from './lib/accordion/accordion.component';
+
+export { FsDividerComponent } from './lib/divider/divider.component';
+export type {
+  FsDividerOrientation,
+  FsDividerVariant,
+  FsDividerAlign,
+} from './lib/divider/divider.component';
+
+export { FsCardComponent } from './lib/card/card.component';
+export type { FsCardTone } from './lib/card/card.component';
+
+export { FsRowCardComponent } from './lib/card/row-card.component';
+
+export { FsStatCardComponent } from './lib/card/stat-card.component';
+export type { FsStatDeltaTone } from './lib/card/stat-card.component';
