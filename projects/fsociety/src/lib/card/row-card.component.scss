@@ -1,0 +1,101 @@
+// ---------------------------------------------------------------------------
+// fs-row-card — configurable CSS custom properties
+//
+//   fs-row-card {
+//     --fs-row-card-bg:     var(--fs-color-surface);
+//     --fs-row-card-border: var(--fs-color-border);
+//     --fs-row-card-radius: var(--fs-radius-lg);
+//   }
+// ---------------------------------------------------------------------------
+
+:host {
+  display: block;
+}
+
+.fs-row-card {
+  --fs-row-card-bg:     var(--fs-color-surface);
+  --fs-row-card-border: var(--fs-color-border);
+  --fs-row-card-radius: var(--fs-radius-lg);
+
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  background: var(--fs-row-card-bg);
+  border: 1px solid var(--fs-row-card-border);
+  border-radius: var(--fs-row-card-radius);
+
+  &__icon {
+    display: inline-grid;
+    place-items: center;
+    flex: 0 0 auto;
+    width: 38px;
+    height: 38px;
+    border-radius: var(--fs-radius-lg);
+    background: var(--fs-color-surface-alt);
+    color: var(--fs-color-text-secondary);
+
+    .fs-icon {
+      width: 18px;
+      height: 18px;
+    }
+
+    &[data-tone='success'] {
+      background: color-mix(in srgb, var(--fs-color-success) 14%, transparent);
+      color: var(--fs-color-success);
+    }
+
+    &[data-tone='danger'] {
+      background: color-mix(in srgb, var(--fs-color-error) 14%, transparent);
+      color: var(--fs-color-error);
+    }
+
+    &[data-tone='warning'] {
+      background: color-mix(in srgb, var(--fs-color-warning) 16%, transparent);
+      color: var(--fs-color-warning);
+    }
+
+    &[data-tone='info'] {
+      background: color-mix(in srgb, var(--fs-color-primary) 12%, transparent);
+      color: var(--fs-color-primary);
+    }
+  }
+
+  // min-width: 0 so a long title truncates instead of pushing the action out of
+  // the card.
+  &__text {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__title {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.4;
+    color: var(--fs-color-text-primary);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__subtitle {
+    font-size: 12.5px;
+    line-height: 1.4;
+    color: var(--fs-color-text-secondary);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__action {
+    display: none;
+    flex: 0 0 auto;
+
+    &:has(> *) {
+      display: block;
+    }
+  }
+}

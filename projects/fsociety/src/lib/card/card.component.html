@@ -1,0 +1,65 @@
+<div
+  class="fs-card"
+  [class.fs-card--interactive]="interactive"
+  [attr.data-tone]="tone || null"
+>
+  <!-- Media, footer and body content are all optional slots. Each wrapper hides
+       itself with :has() when nothing lands in it, so an empty slot costs no
+       padding and no border. -->
+  <div class="fs-card__media">
+    <ng-content select="[cardMedia]"></ng-content>
+  </div>
+
+  <div class="fs-card__body">
+    @if (hasHeader) {
+      <div class="fs-card__head">
+        @if (icon) {
+          <span class="fs-card__icon" [attr.data-tone]="tone || null">
+            <span
+              class="fs-icon"
+              [style.--_icon]="'url(' + icon + ')'"
+              aria-hidden="true"
+            ></span>
+          </span>
+        } @else if (toneIcon) {
+          <span class="fs-card__icon" [attr.data-tone]="tone">
+            <span
+              class="fs-icon"
+              [style.--_icon]="'url(' + toneIcon + ')'"
+              aria-hidden="true"
+            ></span>
+          </span>
+        }
+
+        <!-- With a custom icon the tone still needs somewhere to show, so it
+             gets its own small badge on the opposite end of the header. -->
+        @if (icon && toneIcon) {
+          <span class="fs-card__tone-dot" [attr.data-tone]="tone">
+            <span
+              class="fs-icon"
+              [style.--_icon]="'url(' + toneIcon + ')'"
+              aria-hidden="true"
+            ></span>
+          </span>
+        }
+      </div>
+    }
+
+    @if (title) {
+      <h3 class="fs-card__title">{{ title }}</h3>
+    }
+
+    @if (subtitle) {
+      <p class="fs-card__subtitle">{{ subtitle }}</p>
+    }
+
+    <!-- One line on purpose: the body slot usually receives bare text, which
+         :has(> *) cannot see, so this one hides itself with :empty instead and
+         must not carry whitespace of its own. -->
+    <div class="fs-card__content"><ng-content></ng-content></div>
+  </div>
+
+  <div class="fs-card__foot">
+    <ng-content select="[cardFooter]"></ng-content>
+  </div>
+</div>

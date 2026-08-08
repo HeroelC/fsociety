@@ -1,0 +1,18 @@
+<div class="fs-stat-card">
+  <div class="fs-stat-card__top">
+    <span class="fs-stat-card__label">{{ label }}</span>
+    @if (icon) {
+      <span
+        class="fs-icon fs-stat-card__icon"
+        [style.--_icon]="'url(' + icon + ')'"
+        aria-hidden="true"
+      ></span>
+    }
+  </div>
+
+  <div class="fs-stat-card__value">{{ value }}</div>
+
+  @if (delta) {
+    <span class="fs-stat-card__delta" [attr.data-tone]="deltaTone">{{ delta }}</span>
+  }
+</div>

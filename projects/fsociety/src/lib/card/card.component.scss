@@ -1,0 +1,201 @@
+// ---------------------------------------------------------------------------
+// fs-card — configurable CSS custom properties
+//
+//   fs-card {
+//     --fs-card-bg:      var(--fs-color-surface);
+//     --fs-card-border:  var(--fs-color-border);
+//     --fs-card-radius:  var(--fs-radius-xl);
+//     --fs-card-pad:     20px;
+//   }
+//
+// Tone tints mix into the surface rather than using a fixed light shade, which
+// is what keeps them readable on [data-theme="dark"] as well.
+// ---------------------------------------------------------------------------
+
+:host {
+  display: block;
+}
+
+.fs-card {
+  --fs-card-bg:     var(--fs-color-surface);
+  --fs-card-border: var(--fs-color-border);
+  --fs-card-radius: var(--fs-radius-xl);
+  --fs-card-pad:    20px;
+
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--fs-card-bg);
+  border: 1px solid var(--fs-card-border);
+  border-radius: var(--fs-card-radius);
+  box-shadow: var(--fs-shadow-sm);
+  // Clips the media and the footer background to the rounded corners.
+  overflow: hidden;
+
+  // ─── Media ───────────────────────────────────────────────────────────────
+  &__media {
+    display: none;
+    aspect-ratio: 16 / 9;
+    background: var(--fs-color-surface-alt);
+
+    &:has(> *) {
+      display: block;
+    }
+
+    > * {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  // ─── Body ────────────────────────────────────────────────────────────────
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+    padding: var(--fs-card-pad);
+  }
+
+  &__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 6px;
+  }
+
+  &__icon {
+    display: inline-grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    border-radius: var(--fs-radius-lg);
+    background: color-mix(in srgb, var(--fs-color-primary) 12%, transparent);
+    color: var(--fs-color-primary);
+
+    .fs-icon {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  &__tone-dot {
+    display: inline-grid;
+    place-items: center;
+    width: 24px;
+    height: 24px;
+    border-radius: var(--fs-radius-full);
+
+    .fs-icon {
+      width: 14px;
+      height: 14px;
+    }
+  }
+
+  &__icon,
+  &__tone-dot {
+    &[data-tone='success'] {
+      background: color-mix(in srgb, var(--fs-color-success) 14%, transparent);
+      color: var(--fs-color-success);
+    }
+
+    &[data-tone='danger'] {
+      background: color-mix(in srgb, var(--fs-color-error) 14%, transparent);
+      color: var(--fs-color-error);
+    }
+
+    &[data-tone='warning'] {
+      background: color-mix(in srgb, var(--fs-color-warning) 16%, transparent);
+      color: var(--fs-color-warning);
+    }
+
+    &[data-tone='info'] {
+      background: color-mix(in srgb, var(--fs-color-primary) 12%, transparent);
+      color: var(--fs-color-primary);
+    }
+  }
+
+  &__title {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1.35;
+    color: var(--fs-color-text-primary);
+  }
+
+  &__subtitle {
+    margin: 0;
+    font-size: 12.5px;
+    line-height: 1.5;
+    color: var(--fs-color-text-secondary);
+  }
+
+  &__content {
+    margin-top: 4px;
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--fs-color-text-secondary);
+
+    &:empty {
+      display: none;
+    }
+  }
+
+  // ─── Footer ──────────────────────────────────────────────────────────────
+  &__foot {
+    display: none;
+    padding: 14px var(--fs-card-pad);
+    border-top: 1px solid var(--fs-card-border);
+    background: var(--fs-color-surface-alt);
+    // Pins the footer to the bottom when a row of cards stretches to match the
+    // tallest one.
+    margin-top: auto;
+
+    &:has(> *) {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+  }
+
+  // ─── Tone ────────────────────────────────────────────────────────────────
+  &[data-tone='success'] {
+    border-color: color-mix(in srgb, var(--fs-color-success) 32%, var(--fs-card-border));
+  }
+
+  &[data-tone='danger'] {
+    border-color: color-mix(in srgb, var(--fs-color-error) 32%, var(--fs-card-border));
+  }
+
+  &[data-tone='warning'] {
+    border-color: color-mix(in srgb, var(--fs-color-warning) 36%, var(--fs-card-border));
+  }
+
+  &[data-tone='info'] {
+    border-color: color-mix(in srgb, var(--fs-color-primary) 32%, var(--fs-card-border));
+  }
+
+  // ─── Interactive ─────────────────────────────────────────────────────────
+  &--interactive {
+    cursor: pointer;
+    transition: border-color 150ms ease, box-shadow 150ms ease, transform 100ms ease;
+
+    &:hover {
+      border-color: var(--fs-color-primary);
+      box-shadow: var(--fs-shadow-md);
+      transform: translateY(-1px);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+
+      &:hover {
+        transform: none;
+      }
+    }
+  }
+}
