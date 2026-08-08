@@ -21,7 +21,6 @@
   padding: 0;
   border: none;
   background: none;
-  display: flex;
   color: var(--fs-color-text-primary);
 
   // Only the backdrop fades on the dialog itself; the panel slides. Keeping the
@@ -29,6 +28,17 @@
   transition:
     overlay 260ms allow-discrete,
     display 260ms allow-discrete;
+
+  // `display` belongs here and nowhere else. On the base rule it would beat the
+  // UA's `dialog:not([open]) { display: none }`, and a closed drawer would stay
+  // in the layout as an invisible full-viewport layer that swallows every click
+  // on the page behind it — including the one meant to open it.
+  //
+  // The exit animation survives because `display` is in the transition above
+  // with allow-discrete, so the browser holds `flex` until the slide finishes.
+  &[open] {
+    display: flex;
+  }
 
   &::backdrop {
     background: color-mix(in srgb, #0a0a12 52%, transparent);
