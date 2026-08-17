@@ -1,0 +1,101 @@
+// ---------------------------------------------------------------------------
+// fs-progress — configurable CSS custom properties
+//
+//   fs-progress {
+//     --fs-progress-track:    var(--fs-color-surface-alt);
+//     --fs-progress-fill:     var(--fs-color-primary);
+//     --fs-progress-height:   8px;
+//     --fs-progress-radius:   var(--fs-radius-full);
+//     --fs-progress-gap:      7px;
+//     --fs-progress-duration: 1.3s;   // indeterminate loop
+//   }
+//
+// `tone` only repoints --fs-progress-fill, so overriding that property wins
+// over any tone without having to add one.
+// ---------------------------------------------------------------------------
+
+:host {
+  --fs-progress-track:    var(--fs-color-surface-alt);
+  --fs-progress-fill:     var(--fs-color-primary);
+  --fs-progress-height:   8px;
+  --fs-progress-radius:   var(--fs-radius-full);
+  --fs-progress-gap:      7px;
+  --fs-progress-duration: 1.3s;
+
+  display:        flex;
+  width:          100%;
+  flex-direction: column;
+  gap:            var(--fs-progress-gap);
+}
+
+// ─── Tones ──────────────────────────────────────────────────────────────────
+
+:host([data-tone='success']) { --fs-progress-fill: var(--fs-color-success); }
+:host([data-tone='warning']) { --fs-progress-fill: var(--fs-color-warning); }
+:host([data-tone='danger'])  { --fs-progress-fill: var(--fs-color-error); }
+:host([data-tone='neutral']) { --fs-progress-fill: var(--fs-color-border-strong); }
+
+// ─── Sizes ──────────────────────────────────────────────────────────────────
+
+:host([data-size='sm']) { --fs-progress-height: 5px; }
+:host([data-size='lg']) { --fs-progress-height: 12px; }
+
+// ─── Header ─────────────────────────────────────────────────────────────────
+
+.fs-progress__header {
+  display:         flex;
+  justify-content: space-between;
+  align-items:     baseline;
+  gap:             12px;
+  font-size:       12.5px;
+  line-height:     1.4;
+  color:           var(--fs-color-text-secondary);
+}
+
+.fs-progress__value {
+  font-weight:            650;
+  color:                  var(--fs-color-text-primary);
+  // Tabular figures stop the percentage from jittering as the digits change.
+  font-variant-numeric:   tabular-nums;
+}
+
+// ─── Bar ────────────────────────────────────────────────────────────────────
+
+.fs-progress__track {
+  height:        var(--fs-progress-height);
+  border-radius: var(--fs-progress-radius);
+  background:    var(--fs-progress-track);
+  overflow:      hidden;
+}
+
+.fs-progress__bar {
+  height:        100%;
+  border-radius: inherit;
+  background:    var(--fs-progress-fill);
+  transition:    width var(--fs-duration-slow) cubic-bezier(0.3, 0.7, 0.4, 1);
+}
+
+.fs-progress__bar--indeterminate {
+  width:      40%;
+  transition: none;
+  animation:  fs-progress-indeterminate var(--fs-progress-duration) ease-in-out infinite;
+}
+
+@keyframes fs-progress-indeterminate {
+  from { margin-left: -40%; }
+  to   { margin-left: 100%; }
+}
+
+// A determinate bar still communicates without the tween. An indeterminate one
+// is nothing but motion, so it stays put and reads as a filled track instead.
+@media (prefers-reduced-motion: reduce) {
+  .fs-progress__bar {
+    transition: none;
+  }
+
+  .fs-progress__bar--indeterminate {
+    width:      100%;
+    animation:  none;
+    opacity:    0.55;
+  }
+}

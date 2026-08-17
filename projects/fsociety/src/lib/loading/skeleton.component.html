@@ -1,0 +1,8 @@
+@for (bar of bars; track $index) {
+  <span
+    class="fs-skeleton__bar"
+    [style.width]="barWidth($index)"
+    [style.height]="barHeight"
+    [style.borderRadius]="radius"
+  ></span>
+}

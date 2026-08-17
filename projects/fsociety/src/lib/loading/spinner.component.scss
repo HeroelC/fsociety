@@ -1,0 +1,48 @@
+// ---------------------------------------------------------------------------
+// fs-spinner — configurable CSS custom properties
+//
+//   fs-spinner {
+//     --fs-spinner-size:     16px;
+//     --fs-spinner-duration: 0.7s;
+//   }
+//
+// La duración NO sale de --fs-duration-slow. Ese token vale 350ms y describe
+// una transición: un cambio de estado que ocurre una sola vez. Acá el valor es
+// el período de un giro continuo, donde 350ms son ~170 RPM y se lee nervioso.
+// Son dos magnitudes distintas aunque las dos se midan en milisegundos.
+//
+// The arc is drawn with `currentColor`, so it takes the colour of whatever it
+// sits in — no tone input, and it stays right inside a button of any variant.
+// ---------------------------------------------------------------------------
+
+:host {
+  --fs-spinner-size:     16px;
+  --fs-spinner-duration: 0.7s;
+
+  display:     inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  line-height: 0;
+}
+
+:host(.fs-spinner--sm) { --fs-spinner-size: 12px; }
+:host(.fs-spinner--lg) { --fs-spinner-size: 24px; }
+
+.fs-spinner__svg {
+  width:     var(--fs-spinner-size);
+  height:    var(--fs-spinner-size);
+  animation: fs-spinner-rotate var(--fs-spinner-duration) linear infinite;
+}
+
+@keyframes fs-spinner-rotate {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+// A spinner that cannot spin says nothing, so instead of freezing it this
+// slows it down to a rate that no longer reads as motion sickness bait.
+@media (prefers-reduced-motion: reduce) {
+  .fs-spinner__svg {
+    animation-duration: 2.4s;
+  }
+}

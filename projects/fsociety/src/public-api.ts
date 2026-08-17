@@ -111,3 +111,12 @@ export { FsRowCardComponent } from './lib/card/row-card.component';
 
 export { FsStatCardComponent } from './lib/card/stat-card.component';
 export type { FsStatDeltaTone } from './lib/card/stat-card.component';
+
+export { FsSkeletonComponent } from './lib/loading/skeleton.component';
+export type { FsSkeletonVariant, FsSkeletonAnimation } from './lib/loading/skeleton.component';
+
+export { FsSpinnerComponent } from './lib/loading/spinner.component';
+export type { FsSpinnerSize } from './lib/loading/spinner.component';
+
+export { FsProgressComponent } from './lib/loading/progress.component';
+export type { FsProgressTone, FsProgressSize } from './lib/loading/progress.component';

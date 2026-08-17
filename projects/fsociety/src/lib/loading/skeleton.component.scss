@@ -1,0 +1,112 @@
+// ---------------------------------------------------------------------------
+// fs-skeleton — configurable CSS custom properties
+//
+//   fs-skeleton {
+//     --fs-skeleton-bg:          var(--fs-color-border);
+//     --fs-skeleton-highlight:   ...;   // sweep colour, see below
+//     --fs-skeleton-radius:      var(--fs-radius-sm);
+//     --fs-skeleton-duration:    1.4s;
+//     --fs-skeleton-text-height: 0.72em;  // bar height on the text variant
+//     --fs-skeleton-gap:         0.55em;  // space between text bars
+//     --fs-skeleton-size:        38px;    // circle diameter
+//     --fs-skeleton-rect-height: 88px;
+//   }
+//
+// The text variant sizes itself in `em`, so it inherits the typography of
+// whatever it stands in for. Drop it where the copy goes and it matches; no
+// pixel values to keep in sync with the real content.
+//
+// The highlight mixes into the surface instead of using a fixed light shade,
+// which is what keeps the sweep visible on [data-theme="dark"] too.
+// ---------------------------------------------------------------------------
+
+:host {
+  --fs-skeleton-bg:          var(--fs-color-border);
+  --fs-skeleton-highlight:   color-mix(in srgb, var(--fs-skeleton-bg) 55%, var(--fs-color-surface));
+  --fs-skeleton-radius:      var(--fs-radius-sm);
+  --fs-skeleton-duration:    1.4s;
+  --fs-skeleton-text-height: 0.72em;
+  --fs-skeleton-gap:         0.55em;
+  --fs-skeleton-size:        38px;
+  --fs-skeleton-rect-height: 88px;
+
+  display: block;
+}
+
+:host(.fs-skeleton--circle) {
+  display: inline-block;
+  line-height: 0;
+}
+
+.fs-skeleton__bar {
+  display:       block;
+  position:      relative;
+  overflow:      hidden;
+  width:         100%;
+  background:    var(--fs-skeleton-bg);
+  border-radius: var(--fs-skeleton-radius);
+}
+
+// ─── Variants ───────────────────────────────────────────────────────────────
+
+:host(.fs-skeleton--text) .fs-skeleton__bar {
+  height: var(--fs-skeleton-text-height);
+}
+
+:host(.fs-skeleton--text) .fs-skeleton__bar + .fs-skeleton__bar {
+  margin-top: var(--fs-skeleton-gap);
+}
+
+:host(.fs-skeleton--circle) .fs-skeleton__bar {
+  width:         var(--fs-skeleton-size);
+  height:        var(--fs-skeleton-size);
+  border-radius: var(--fs-radius-full);
+}
+
+:host(.fs-skeleton--rect) .fs-skeleton__bar {
+  height: var(--fs-skeleton-rect-height);
+}
+
+// ─── Animation ──────────────────────────────────────────────────────────────
+// The sweep is a pseudo-element rather than a moving background-position: it
+// composites on the GPU and leaves the bar's own colour alone.
+
+:host([data-animation='shimmer']) .fs-skeleton__bar::after {
+  content:    '';
+  position:   absolute;
+  inset:      0;
+  transform:  translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--fs-skeleton-highlight),
+    transparent
+  );
+  animation: fs-skeleton-shimmer var(--fs-skeleton-duration) ease-in-out infinite;
+}
+
+:host([data-animation='pulse']) .fs-skeleton__bar {
+  animation: fs-skeleton-pulse var(--fs-skeleton-duration) ease-in-out infinite;
+}
+
+@keyframes fs-skeleton-shimmer {
+  to { transform: translateX(100%); }
+}
+
+@keyframes fs-skeleton-pulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.45; }
+}
+
+// An infinite shimmer is exactly the kind of motion that triggers vestibular
+// problems, so the preference overrides the input rather than softening it.
+@media (prefers-reduced-motion: reduce) {
+  :host .fs-skeleton__bar,
+  :host .fs-skeleton__bar::after {
+    animation: none;
+  }
+
+  :host([data-animation='shimmer']) .fs-skeleton__bar::after {
+    content: none;
+  }
+}
