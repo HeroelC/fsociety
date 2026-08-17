@@ -53,3 +53,7 @@ projects/fsociety/documentation.json
 # Local agent tooling state
 .atl/
 .claude/settings.local.json
+
+# Índice de CodeGraph. Es un SQLite atado a la ruta absoluta de este checkout,
+# así que cada worktree necesita el suyo — compartirlo no sirve.
+.codegraph/
