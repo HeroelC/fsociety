@@ -162,15 +162,7 @@
   // Elementos internos
   // -------------------------------------------------------------------------
 
-  &__spinner {
-    display:     flex;
-    align-items: center;
-    flex-shrink: 0;
-
-    svg {
-      animation: fs-spin t.$fs-duration-slow linear infinite;
-    }
-  }
+  // El layout y la animación los aporta fs-spinner; acá solo queda el hueco.
 
   &__icon {
     width:      16px;
@@ -187,13 +179,4 @@
     gap:         t.$fs-space-1;
     transition:  opacity t.$fs-duration-fast t.$fs-ease-default;
   }
-}
-
-// ---------------------------------------------------------------------------
-// Animación spinner
-// ---------------------------------------------------------------------------
-
-@keyframes fs-spin {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
 }

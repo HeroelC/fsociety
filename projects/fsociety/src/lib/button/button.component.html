@@ -8,13 +8,9 @@
   [attr.aria-label]="iconOnly ? (ariaLabel ?? label) : null"
   (click)="onClick($event)"
 >
-  <!-- spinner (solo cuando loading) -->
-  <span *ngIf="loading" class="fs-btn__spinner" aria-hidden="true">
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-      <circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-        stroke-dasharray="28" stroke-dashoffset="10" />
-    </svg>
-  </span>
+  <!-- spinner (solo cuando loading) — el botón ya expone aria-busy, así que
+       el spinner va sin label para no duplicar el anuncio -->
+  <fs-spinner *ngIf="loading" class="fs-btn__spinner"></fs-spinner>
 
   <!-- ícono izquierdo -->
   <span

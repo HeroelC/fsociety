@@ -7,6 +7,7 @@ import {
   HostBinding,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FsSpinnerComponent } from '../loading/spinner.component';
 
 export type FsButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger' | 'link';
 export type FsButtonSize    = 'sm' | 'md' | 'lg';
@@ -15,7 +16,7 @@ export type FsButtonType    = 'button' | 'submit' | 'reset';
 @Component({
   selector: 'fs-button',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FsSpinnerComponent],
   templateUrl: './button.component.html',
   styleUrl: './button.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
