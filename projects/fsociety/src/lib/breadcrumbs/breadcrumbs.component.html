@@ -1,0 +1,59 @@
+<!-- El contenido de un item es el mismo sea link, texto o página actual, así que
+     vive una sola vez acá y lo estampan los tres. -->
+<ng-template #content let-item>
+  @if (item.icon) {
+    <span
+      class="fs-icon fs-breadcrumbs__icon"
+      [style.--_icon]="'url(' + item.icon + ')'"
+      aria-hidden="true"
+    ></span>
+  }
+  @if (showsText(item)) {
+    <span class="fs-breadcrumbs__label">{{ item.label }}</span>
+  }
+</ng-template>
+
+@if (items.length) {
+  <nav class="fs-breadcrumbs" [attr.aria-label]="label || null">
+    <!-- Una lista ordenada, porque el orden ES la información: cada item es un
+         nivel más arriba que el siguiente. -->
+    <ol class="fs-breadcrumbs__list">
+      @for (item of items; track $index) {
+        <li class="fs-breadcrumbs__item">
+          @if (isCurrent($index)) {
+            <span
+              class="fs-breadcrumbs__current"
+              aria-current="page"
+              [attr.aria-label]="accessibleName(item)"
+            >
+              <ng-container *ngTemplateOutlet="content; context: { $implicit: item }"></ng-container>
+            </span>
+          } @else if (item.href) {
+            <a
+              class="fs-breadcrumbs__link"
+              [href]="item.href"
+              [attr.aria-label]="accessibleName(item)"
+              (click)="onNavigate($event, item, $index)"
+            >
+              <ng-container *ngTemplateOutlet="content; context: { $implicit: item }"></ng-container>
+            </a>
+          } @else {
+            <span class="fs-breadcrumbs__text" [attr.aria-label]="accessibleName(item)">
+              <ng-container *ngTemplateOutlet="content; context: { $implicit: item }"></ng-container>
+            </span>
+          }
+
+          <!-- El separador es decoración: aria-hidden, y dentro del <li> para no
+               meter un item de más en la lista. -->
+          @if (!isCurrent($index)) {
+            <span
+              class="fs-icon fs-breadcrumbs__separator"
+              [style.--_icon]="'url(' + separator + ')'"
+              aria-hidden="true"
+            ></span>
+          }
+        </li>
+      }
+    </ol>
+  </nav>
+}

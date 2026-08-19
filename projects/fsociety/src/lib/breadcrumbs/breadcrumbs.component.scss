@@ -1,0 +1,133 @@
+// ---------------------------------------------------------------------------
+// fs-breadcrumbs — configurable CSS custom properties
+//
+//   fs-breadcrumbs {
+//     --fs-breadcrumbs-gap:            8px;
+//     --fs-breadcrumbs-size:           14px;
+//     --fs-breadcrumbs-icon:           16px;
+//     --fs-breadcrumbs-separator-size: 14px;
+//     --fs-breadcrumbs-color:          var(--fs-color-text-secondary);
+//     --fs-breadcrumbs-color-hover:    var(--fs-color-text-primary);
+//     --fs-breadcrumbs-color-current:  var(--fs-color-text-primary);
+//     --fs-breadcrumbs-separator:      var(--fs-color-border-strong);
+//   }
+//
+// Every default resolves to a semantic token, so light and dark follow
+// [data-theme] with no extra configuration.
+//
+// Touch targets: a breadcrumb made of text is inline text, which WCAG 2.2
+// SC 2.5.8 exempts by name. An icon-only one is not — it is a discrete target
+// sitting on its own — so the link keeps a min-height of 24px and enough
+// padding to reach 24px across at the default icon size. Same AA line the
+// carousel dots hold, and the reasoning lives in that file.
+// ---------------------------------------------------------------------------
+
+:host {
+  display: block;
+}
+
+.fs-breadcrumbs {
+  --fs-breadcrumbs-gap:            8px;
+  --fs-breadcrumbs-size:           14px;
+  --fs-breadcrumbs-icon:           16px;
+  --fs-breadcrumbs-separator-size: 14px;
+  --fs-breadcrumbs-color:          var(--fs-color-text-secondary);
+  --fs-breadcrumbs-color-hover:    var(--fs-color-text-primary);
+  --fs-breadcrumbs-color-current:  var(--fs-color-text-primary);
+  --fs-breadcrumbs-separator:      var(--fs-color-border-strong);
+  --fs-breadcrumbs-radius:         var(--fs-radius-sm);
+
+  font-size: var(--fs-breadcrumbs-size);
+  line-height: 1.4;
+
+  &__list {
+    display: flex;
+    // Wrapping instead of scrolling: a trail that runs past the viewport is
+    // still readable on a second line, and a horizontal scroller with no
+    // affordance is not. Collapsing the middle is the consumer's call — they
+    // know which levels matter, so they slice the array.
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0 var(--fs-breadcrumbs-gap);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: var(--fs-breadcrumbs-gap);
+    min-width: 0;
+  }
+
+  // ─── Item bodies ─────────────────────────────────────────────────────────
+  &__link,
+  &__text,
+  &__current {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-width: 0;
+    // 24px of height, and the padding carries the width past 24 at the default
+    // 16px icon — which is what an icon-only item needs to be a legal target.
+    min-height: 24px;
+    padding: 2px 4px;
+    margin-inline: -4px;
+    border-radius: var(--fs-breadcrumbs-radius);
+  }
+
+  &__link,
+  &__text {
+    color: var(--fs-breadcrumbs-color);
+  }
+
+  &__link {
+    text-decoration: none;
+    transition: color var(--fs-duration-fast, 120ms) ease;
+
+    &:hover {
+      color: var(--fs-breadcrumbs-color-hover);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--fs-color-primary);
+      outline-offset: 1px;
+    }
+  }
+
+  &__current {
+    color: var(--fs-breadcrumbs-color-current);
+    font-weight: 500;
+  }
+
+  &__label {
+    // A long crumb truncates instead of pushing the trail sideways; the full
+    // text is still the element's accessible name.
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__icon {
+    width: var(--fs-breadcrumbs-icon);
+    height: var(--fs-breadcrumbs-icon);
+  }
+
+  &__separator {
+    width: var(--fs-breadcrumbs-separator-size);
+    height: var(--fs-breadcrumbs-separator-size);
+    color: var(--fs-breadcrumbs-separator);
+    // The gap on the item already spaces it; without this the flex item would
+    // also stretch and pull the chevron off the text baseline.
+    flex-shrink: 0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &__link {
+      transition: none;
+    }
+  }
+}

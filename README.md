@@ -124,7 +124,7 @@ export class MyComponent {}
 
 **Acción y estado** — [fs-button](#fs-button) · [fs-badge](#fs-badge) · [fs-alert](#fs-alert) · [toast](#fstoastservice--fs-toast-stack) · [fs-tooltip](#fs-tooltip) · [skeleton · spinner · progress](#carga--fs-skeleton-fs-spinner-fs-progress)
 
-**Layout y navegación** — [fs-tabs](#fs-tabs) · [fs-steps](#fs-steps) · [fs-accordion](#fs-accordion) · [fs-divider](#fs-divider) · [card · row-card · stat-card](#cards--fs-card-fs-row-card-fs-stat-card) · [fs-carousel](#fs-carousel)
+**Layout y navegación** — [fs-tabs](#fs-tabs) · [fs-steps](#fs-steps) · [fs-accordion](#fs-accordion) · [fs-divider](#fs-divider) · [card · row-card · stat-card](#cards--fs-card-fs-row-card-fs-stat-card) · [fs-carousel](#fs-carousel) · [fs-breadcrumbs](#fs-breadcrumbs)
 
 **Overlays** — [fs-modal](#fs-modal) · [fs-drawer](#fs-drawer)
 
@@ -1566,6 +1566,96 @@ contra la caja real de cada slide, así que anchos parciales y `gap` no lo rompe
 > puntos a 44px son 352px, más ancho que un teléfono de 360, y el strip de
 > puntitos terminaría scrolleando. El ancho sostiene la línea AA porque compite
 > por espacio; el alto se toma los 44 porque es gratis.
+
+---
+
+### `<fs-breadcrumbs>`
+
+Ruta de navegación. Cada item puede ser solo texto, texto con ícono o solo
+ícono, y cada uno decide por su cuenta si es link o no.
+
+```typescript
+import { FsBreadcrumbsComponent, FsBreadcrumb } from '@heroelc/fsociety';
+
+const CDN = 'https://api.iconify.design';
+
+ruta: FsBreadcrumb[] = [
+  { label: 'Inicio', icon: `${CDN}/tabler:home.svg`, iconOnly: true, href: '/' },
+  { label: 'Equipo', icon: `${CDN}/tabler:users.svg`, href: '/equipo' },
+  { label: 'Archivados' },
+  { label: 'Contrato.pdf' },
+];
+```
+
+```html
+<fs-breadcrumbs [items]="ruta" (navigate)="ir($event)"></fs-breadcrumbs>
+```
+
+| Input | Tipo | Default | Descripción |
+|---|---|---|---|
+| `items` | `FsBreadcrumb[]` | `[]` | La ruta, de la raíz a la página actual |
+| `label` | `string` | `'Ruta de navegación'` | Nombre accesible del `<nav>` |
+| `separator` | `string` | chevron de Tabler | URL del ícono separador |
+
+| Output | Tipo | Descripción |
+|---|---|---|
+| `navigate` | `EventEmitter<FsBreadcrumbNavigation>` | `{ item, index, event }` del item clickeado |
+
+`FsBreadcrumb`:
+
+| Campo | Tipo | Descripción |
+|---|---|---|
+| `label` | `string` | Texto del item. **Siempre obligatorio** |
+| `icon` | `string?` | URL completa del ícono |
+| `iconOnly` | `boolean?` | Esconde el texto. Se ignora si no hay `icon` |
+| `href` | `string?` | Lo convierte en link. Sin esto, es texto plano |
+
+Las cuatro combinaciones:
+
+```html
+<!-- solo label, con link -->      { label: 'Equipo', href: '/equipo' }
+<!-- label + ícono, con link -->   { label: 'Equipo', icon: iconoUsers, href: '/equipo' }
+<!-- solo ícono, con link -->      { label: 'Inicio', icon: iconoHome, iconOnly: true, href: '/' }
+<!-- sin link -->                  { label: 'Archivados' }
+```
+
+| Custom property | Default |
+|---|---|
+| `--fs-breadcrumbs-gap` | `8px` |
+| `--fs-breadcrumbs-size` | `14px` |
+| `--fs-breadcrumbs-icon` | `16px` |
+| `--fs-breadcrumbs-separator-size` | `14px` |
+| `--fs-breadcrumbs-color` / `-color-hover` / `-color-current` | tokens de texto |
+| `--fs-breadcrumbs-separator` | `var(--fs-color-border-strong)` |
+
+> **`label` es obligatorio incluso con `iconOnly`.** El ícono se pinta con
+> `mask-image` y va `aria-hidden`, así que cuando el texto no está no queda nada
+> que anunciar: el label pasa a ser el `aria-label`. Un link sin nombre accesible
+> se lee como "link" y nada más, y un breadcrumb de casita es exactamente el caso
+> donde eso pasa.
+
+> **El último item nunca es link, ni aunque le pases `href`.** Es la página
+> actual — un link a donde ya estás no lleva a ningún lado — y es lo que marca
+> `aria-current="page"`. Si necesitás que sea navegable, es porque no es el
+> último: agregá el nivel que falta.
+
+> **No usa `RouterLink`.** La librería tiene dos peer dependencies,
+> `@angular/common` y `@angular/core`, y sumarle `@angular/router` a todo el
+> paquete por un componente sería caro para quien no lo usa. Los items son
+> `<a href>` de verdad: andan solos, se abren en pestaña nueva con ctrl+click y
+> se pueden copiar. Para routear, interceptá:
+>
+> ```typescript
+> ir({ item, event }: FsBreadcrumbNavigation) {
+>   event.preventDefault();
+>   this.router.navigateByUrl(item.href!);
+> }
+> ```
+
+> **La lista wrapea, no scrollea.** Una ruta que no entra sigue siendo legible en
+> la segunda línea; un scroller horizontal sin señal de que scrollea, no.
+> Colapsar el medio con un `…` es decisión tuya, que sabés qué niveles importan
+> — se hace cortando el array antes de pasarlo.
 
 ---
 
