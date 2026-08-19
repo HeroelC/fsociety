@@ -1378,6 +1378,106 @@ Con `tone`, el glifo de estado pisa al `icon`: una fila de estado se lee como es
 
 ---
 
+### Carga — `<fs-skeleton>`, `<fs-spinner>`, `<fs-progress>`
+
+Tres formas de mostrar que algo está pasando, según cuánto sepas del trabajo:
+**skeleton** cuando conocés la forma de lo que va a llegar, **spinner** cuando
+no sabés cuánto falta, **progress** cuando sí.
+
+#### `<fs-skeleton>`
+
+Placeholder con la silueta del contenido real.
+
+```html
+<fs-skeleton variant="text" [lines]="3"></fs-skeleton>
+<fs-skeleton variant="circle" size="48px"></fs-skeleton>
+<fs-skeleton variant="rect" height="180px" radius="12px"></fs-skeleton>
+```
+
+| Input | Tipo | Default | Descripción |
+|---|---|---|---|
+| `variant` | `'text' \| 'circle' \| 'rect'` | `'text'` | `text` toma la altura del font size heredado |
+| `lines` | `number` | `1` | Cantidad de barras. Solo en `text` |
+| `width` | `string` | — | Cualquier longitud CSS |
+| `height` | `string` | — | Solo tiene sentido en `rect` |
+| `size` | `string` | — | Diámetro del `circle` |
+| `radius` | `string` | — | Pisa `--fs-skeleton-radius` |
+| `animation` | `'shimmer' \| 'pulse' \| 'none'` | `'shimmer'` | Reduced-motion siempre gana y cae a `none` |
+| `lastLineWidth` | `string` | `'65%'` | Última línea corta. Solo con más de una |
+
+| Custom property | Default |
+|---|---|
+| `--fs-skeleton-bg` | `var(--fs-color-border)` |
+| `--fs-skeleton-highlight` | mezcla de `bg` y `surface` |
+| `--fs-skeleton-radius` | `var(--fs-radius-sm)` |
+| `--fs-skeleton-duration` | `1.4s` |
+| `--fs-skeleton-text-height` / `-gap` | `0.72em` / `0.55em` |
+| `--fs-skeleton-size` / `-rect-height` | `38px` / `88px` |
+
+> **El skeleton es `aria-hidden`.** Un placeholder no tiene nada que anunciar.
+> El estado de carga es del contenedor que es dueño de los datos, y se comunica
+> con `aria-busy` — si no, cada barra aparece como ruido en el árbol de
+> accesibilidad.
+>
+> `variant="text"` saca la altura del font size heredado, así que la barra
+> queda alineada con el texto que va a reemplazar sin que le pases medidas.
+
+#### `<fs-spinner>`
+
+```html
+<fs-spinner size="md" label="Cargando resultados"></fs-spinner>
+```
+
+| Input | Tipo | Default | Descripción |
+|---|---|---|---|
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | `12px` / `16px` / `24px` |
+| `label` | `string` | `''` | Nombre accesible. Vacío = decorativo |
+
+| Custom property | Default |
+|---|---|
+| `--fs-spinner-size` | `16px` |
+| `--fs-spinner-duration` | `0.7s` |
+
+> **Sin `label` el spinner es `aria-hidden`, con `label` es un `role="status"`.**
+> Una live region que nunca dice nada es peor que ninguna. Dejalo vacío cuando
+> está adentro de un control que ya describe la espera — un `fs-button` en
+> loading, por ejemplo, que ya lleva `aria-busy`.
+>
+> Para cualquier tamaño fuera de los tres pasos, usá `--fs-spinner-size`.
+
+#### `<fs-progress>`
+
+```html
+<fs-progress [value]="subido" [max]="total" label="Subiendo" [showValue]="true"></fs-progress>
+<fs-progress [indeterminate]="true" label="Procesando"></fs-progress>
+```
+
+| Input | Tipo | Default | Descripción |
+|---|---|---|---|
+| `value` | `number` | `0` | Se clampea a `0…max` antes de llegar al DOM |
+| `max` | `number` | `100` | |
+| `indeterminate` | `boolean` | `false` | Trabajo de duración desconocida: la barra loopea |
+| `label` | `string` | `''` | Se muestra arriba y es el nombre accesible |
+| `showValue` | `boolean` | `false` | Agrega el porcentaje. Se ignora en indeterminate |
+| `tone` | `'primary' \| 'success' \| 'warning' \| 'danger' \| 'neutral'` | `'primary'` | |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | |
+
+| Custom property | Default |
+|---|---|
+| `--fs-progress-track` | `var(--fs-color-surface-alt)` |
+| `--fs-progress-fill` | `var(--fs-color-primary)` |
+| `--fs-progress-height` | `8px` |
+| `--fs-progress-radius` | `var(--fs-radius-full)` |
+| `--fs-progress-gap` | `7px` |
+| `--fs-progress-duration` | `1.3s` |
+
+> **En indeterminate no se emiten `aria-valuenow`, `-valuemin` ni `-valuemax`.**
+> Un `progressbar` sin valores es exactamente cómo se declara que el progreso
+> es desconocido. Mandar un `0` sería mentir: un lector de pantalla lo lee como
+> "0 por ciento", que es un dato, no una ausencia de dato.
+
+---
+
 ### `<fs-carousel>`
 
 Carrusel horizontal montado sobre **scroll-snap nativo**. El gesto, el momentum
@@ -1755,6 +1855,7 @@ Documentación visual en Storybook: [heroelc.github.io/fsociety](https://heroelc
 - [x] `fs-accordion` — altura con grid 0fr→1fr, sin medir en JS, panel cerrado inerte
 - [x] `fs-divider` — sólido/punteado, con label, y vertical que estira con la fila
 - [x] `fs-card` + `fs-row-card` + `fs-stat-card` — tres formas, tintes de estado que aguantan dark
+- [x] `fs-skeleton` + `fs-spinner` + `fs-progress` — placeholder aria-hidden, spinner que solo habla con label, indeterminate sin valuenow
 - [x] `fs-carousel` — scroll-snap nativo, template por slide con preload, tap vs swipe
 - [x] Temas light y dark vía `data-theme`, con capa semántica de tokens
 - [x] `[fsAnchoredPopover]` — overlays en el top layer, sin recortes
