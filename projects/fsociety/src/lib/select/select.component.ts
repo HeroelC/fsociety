@@ -42,6 +42,12 @@ export class FsSelectComponent implements ControlValueAccessor {
   @Input() label = '';
   @Input() placeholder = 'Seleccionar...';
   @Input() hint = '';
+  /**
+   * URL completa del ícono — se envuelve en `url()` y se pinta con
+   * `mask-image`, así que hereda el color del texto.
+   * Ej: 'https://api.iconify.design/tabler:user.svg' o 'assets/user.svg'.
+   * No es un nombre de Tabler: pasar "user" no renderiza nada ni avisa.
+   */
   @Input() iconLeft = '';
   @Input() searchable = false;
   @Input() disabled = false;

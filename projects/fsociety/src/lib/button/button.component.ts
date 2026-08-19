@@ -41,10 +41,15 @@ export class FsButtonComponent {
   /** Texto del botón (alternativa al content projection) */
   @Input() label?: string;
 
-  /** Ícono izquierdo — string SVG path o nombre de ícono */
+  /**
+   * URL completa del ícono — se envuelve en `url()` y se pinta con
+   * `mask-image`, así que hereda el color del texto.
+   * Ej: 'https://api.iconify.design/tabler:user.svg' o 'assets/user.svg'.
+   * No es un nombre de Tabler: pasar "user" no renderiza nada ni avisa.
+   */
   @Input() iconLeft?: string;
 
-  /** Ícono derecho */
+  /** URL completa, igual que `iconLeft`. */
   @Input() iconRight?: string;
 
   /** Ancho completo del contenedor */

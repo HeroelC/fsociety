@@ -45,10 +45,16 @@ export class FsBadgeComponent implements OnChanges {
   /** Muestra punto de estado a la izquierda */
   @Input() dot = false;
 
-  /** SVG path del ícono izquierdo (viewBox 0 0 24 24) */
+  /**
+   * Atención: `fs-badge` es la excepción de la librería. Acá `iconLeft` es el
+   * atributo `d` de un `<path>` crudo, con viewBox 0 0 24 24 — no una URL.
+   * El resto de los componentes (`fs-button`, `fs-input`, `fs-select`,
+   * `fs-multi-select`) esperan la URL del SVG. Para pasar una URL acá, usá
+   * `imgLeft`, que además tiene prioridad sobre este input.
+   */
   @Input() iconLeft?: string;
 
-  /** SVG path del ícono derecho (viewBox 0 0 24 24) */
+  /** SVG path crudo, igual que `iconLeft`. Para una URL, usá `imgRight`. */
   @Input() iconRight?: string;
 
   /**

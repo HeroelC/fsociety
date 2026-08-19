@@ -36,7 +36,12 @@ export class FsInputComponent implements ControlValueAccessor {
   @Input() label = '';
   @Input() placeholder = '';
   @Input() hint = '';
-  /** Nombre del ícono Tabler sin el prefijo "ti", ej: "user", "mail", "lock" */
+  /**
+   * URL completa del ícono — se envuelve en `url()` y se pinta con
+   * `mask-image`, así que hereda el color del texto.
+   * Ej: 'https://api.iconify.design/tabler:user.svg' o 'assets/user.svg'.
+   * No es un nombre de Tabler: pasar "user" no renderiza nada ni avisa.
+   */
   @Input() iconLeft = '';
   @Input() clearable = false;
   @Input() disabled = false;
