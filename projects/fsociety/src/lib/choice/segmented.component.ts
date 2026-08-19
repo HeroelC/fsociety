@@ -1,4 +1,4 @@
-import { Component, Input, forwardRef } from '@angular/core';
+import { Component, EventEmitter, Input, Output, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
@@ -27,6 +27,13 @@ export class FsSegmentedComponent implements ControlValueAccessor {
   @Input() disabled = false;
   @Input() label = '';
 
+  /**
+   * Mirrors the CVA change for consumers that are not using a form. Matches
+   * `fs-slider`, which exposes the same pair, so a control does not have to
+   * be wrapped in a FormControl just to observe it.
+   */
+  @Output() valueChange = new EventEmitter<string>();
+
   value = '';
 
   private _onChange: (v: string) => void = () => {};
@@ -37,6 +44,7 @@ export class FsSegmentedComponent implements ControlValueAccessor {
     this.value = opt.value;
     this._onChange(opt.value);
     this._onTouched();
+    this.valueChange.emit(opt.value);
   }
 
   writeValue(v: string): void { this.value = v ?? ''; }
