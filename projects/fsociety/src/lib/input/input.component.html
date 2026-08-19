@@ -6,6 +6,7 @@
 
   <div
     class="fs-input__wrapper"
+    [attr.data-corners]="corners"
     [class.fs-input__wrapper--error]="state === 'error'"
     [class.fs-input__wrapper--success]="state === 'success'"
     [class.fs-input__wrapper--disabled]="disabled"

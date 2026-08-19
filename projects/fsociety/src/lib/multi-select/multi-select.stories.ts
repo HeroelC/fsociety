@@ -12,6 +12,12 @@ const meta: Meta<FsMultiSelectComponent> = {
     }),
   ],
   tags: ['autodocs'],
+  argTypes: {
+    corners: {
+      control: { type: 'inline-radio' },
+      options: ['all', 'none', 'top', 'bottom', 'start', 'end'],
+    },
+  },
 };
 
 export default meta;
@@ -31,11 +37,14 @@ const techs = [
 // ─── Default ─────────────────────────────────────────────────────────────────
 
 export const Default: Story = {
-  render: () => ({
-    props: { sel: ['angular', 'typescript'], options: techs },
+  args: {
+    corners: 'all',
+  },
+  render: (args) => ({
+    props: { ...args, sel: ['angular', 'typescript'], options: techs },
     template: `
       <div style="max-width:380px;">
-        <fs-multi-select
+        <fs-multi-select [corners]="corners"
           placeholder="Seleccionar tecnologías..."
           [options]="options"
           [(ngModel)]="sel"

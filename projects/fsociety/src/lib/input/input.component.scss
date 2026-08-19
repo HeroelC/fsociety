@@ -6,6 +6,7 @@
 //   }
 // ---------------------------------------------------------------------------
 
+@use '../../styles/corners' as corners;
 
 .fs-input {
   --_radius: var(--fs-input-radius, var(--fs-radius-md));
@@ -160,5 +161,7 @@
   }
 }
 
+// ─── Corners ─────────────────────────────────────────────────────────────────
 // Emitido a nivel superior y no anidado, para que el bloque de arriba pueda
 // seguir declarando propiedades después del radio.
+@include corners.presets('.fs-input__wrapper');

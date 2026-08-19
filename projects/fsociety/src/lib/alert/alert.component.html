@@ -1,5 +1,6 @@
 <div
   class="fs-alert"
+  [attr.data-corners]="corners"
   [class.fs-alert--exiting]="isExiting"
   [attr.data-tone]="tone"
   [attr.role]="tone === 'danger' ? 'alert' : 'status'"

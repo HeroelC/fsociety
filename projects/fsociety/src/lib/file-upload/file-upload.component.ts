@@ -9,6 +9,7 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { FsCorners } from '../corners';
 
 const CDN = 'https://api.iconify.design';
 const ICONS = {
@@ -83,6 +84,14 @@ export class FsFileUploadComponent implements ControlValueAccessor {
   @Input() title = 'Arrastrá archivos';
   @Input() subtitle = 'o hacé clic para subir';
   @Input() removeLabel = 'Quitar';
+
+  /**
+   * Qué esquinas van redondeadas. Sirve para apoyar el componente contra otra
+   * cosa sin que quede una esquina redonda adentro de otra.
+   *
+   * `start` y `end` son lógicas: en RTL se dan vuelta solas.
+   */
+  @Input() corners: FsCorners = 'all';
 
   @Output() valueChange = new EventEmitter<File[]>();
 

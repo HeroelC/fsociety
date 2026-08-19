@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter, HostListener, ElementRef, forwa
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { FsAnchoredPopoverDirective } from '../overlay/anchored-popover.directive';
+import { FsCorners } from '../corners';
 
 const CDN = 'https://api.iconify.design';
 const ICONS = {
@@ -56,6 +57,14 @@ export class FsSelectComponent implements ControlValueAccessor {
   @Input() successMessage = '';
   @Input() emptyText = 'Sin resultados';
   @Input() options: FsSelectOption[] = [];
+
+  /**
+   * Qué esquinas van redondeadas. Sirve para apoyar el componente contra otra
+   * cosa sin que quede una esquina redonda adentro de otra.
+   *
+   * `start` y `end` son lógicas: en RTL se dan vuelta solas.
+   */
+  @Input() corners: FsCorners = 'all';
 
   @Output() valueChange = new EventEmitter<string>();
 

@@ -6,6 +6,10 @@ const meta: Meta<FsProfileCardComponent> = {
   component: FsProfileCardComponent,
   tags:      ['autodocs'],
   argTypes: {
+    corners: {
+      control: { type: 'inline-radio' },
+      options: ['all', 'none', 'top', 'bottom', 'start', 'end'],
+    },
     verified:    { control: 'boolean' },
     showActions: { control: 'boolean' },
   },
@@ -61,6 +65,7 @@ const FAKE_STATS = [
 
 export const Playground: Story = {
   args: {
+    corners: 'all',
     name:        'John Doe',
     handle:      'johndoe',
     role:        'Frontend Developer',

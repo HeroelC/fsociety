@@ -15,6 +15,7 @@
 // [data-theme] with no extra configuration.
 // ---------------------------------------------------------------------------
 
+@use '../../styles/corners' as corners;
 
 :host {
   display: block;
@@ -137,5 +138,7 @@
   }
 }
 
+// ─── Corners ─────────────────────────────────────────────────────────────────
 // Emitido a nivel superior y no anidado, para que el bloque de arriba pueda
 // seguir declarando propiedades después del radio.
+@include corners.presets('.fs-accordion');

@@ -12,6 +12,7 @@
 // is what keeps them readable on [data-theme="dark"] as well.
 // ---------------------------------------------------------------------------
 
+@use '../../styles/corners' as corners;
 
 :host {
   display: block;
@@ -201,5 +202,7 @@
   }
 }
 
+// ─── Corners ─────────────────────────────────────────────────────────────────
 // Emitido a nivel superior y no anidado, para que el bloque de arriba pueda
 // seguir declarando propiedades después del radio.
+@include corners.presets('.fs-card');

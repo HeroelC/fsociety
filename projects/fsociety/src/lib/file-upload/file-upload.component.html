@@ -9,6 +9,7 @@
        from flickering as the pointer crosses the icon and the text. -->
   <button
     class="fs-up__dropzone"
+    [attr.data-corners]="corners"
     [class.fs-up__dropzone--dragging]="dragging"
     [class.fs-up__dropzone--error]="state === 'error'"
     type="button"

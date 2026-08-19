@@ -5,6 +5,9 @@
 export * from './lib/fsociety.service';
 export * from './lib/fsociety.component';
 
+// Compartido por todos los componentes con el input `corners`.
+export type { FsCorners } from './lib/corners';
+
 export * from './lib/button/button.component';
 export type { FsButtonVariant, FsButtonSize, FsButtonType } from './lib/button/button.component';
 

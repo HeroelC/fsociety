@@ -11,6 +11,7 @@
 // shorthand has to be passed to --fs-segmented-item-radius as well.
 // ---------------------------------------------------------------------------
 
+@use '../../styles/corners' as corners;
 
 .fs-seg {
   --_radius: var(--fs-segmented-radius, var(--fs-radius-md));
@@ -89,5 +90,7 @@
   }
 }
 
+// ─── Corners ─────────────────────────────────────────────────────────────────
 // Emitido a nivel superior y no anidado, para que el bloque de arriba pueda
 // seguir declarando propiedades después del radio.
+@include corners.presets('.fs-seg__track');

@@ -314,6 +314,7 @@ Poné `alertAction` en **cada** botón: el slot los separa entre sí. Si en camb
 | `title` | `string` | `''` | Título en negrita |
 | `dismissible` | `boolean` | `false` | Muestra botón X para cerrar |
 | `autoDismiss` | `number` | `0` | Auto-cierre en ms — muestra progress bar (0 = off) |
+| `corners` | `FsCorners` | `'all'` | Qué esquinas redondear |
 
 | Slot | Selector | Descripción |
 |---|---|---|
@@ -372,6 +373,7 @@ iconLock = `${CDN}/tabler:lock.svg`;
 | `state` | `'default' \| 'error' \| 'success'` | `'default'` | Estado de validación |
 | `errorMessage` | `string` | `''` | Mensaje de error (visible cuando `state='error'`) |
 | `successMessage` | `string` | `''` | Mensaje de éxito (visible cuando `state='success'`) |
+| `corners` | `FsCorners` | `'all'` | Qué esquinas redondear |
 
 | Custom property | Default |
 |---|---|
@@ -424,6 +426,7 @@ options: FsSelectOption[] = [
 | `errorMessage` | `string` | `''` | Mensaje de error |
 | `successMessage` | `string` | `''` | Mensaje de éxito |
 | `emptyText` | `string` | `'Sin resultados'` | Texto cuando no hay opciones que coincidan |
+| `corners` | `FsCorners` | `'all'` | Qué esquinas redondear |
 
 | Output | Tipo | Descripción |
 |---|---|---|
@@ -478,6 +481,7 @@ que anda con `[(ngModel)]` y con formularios reactivos. El valor del modelo es u
 | `readonly` | `boolean` | `false` | Solo lectura — no se tipea ni se abre |
 | `state` | `'default' \| 'error' \| 'success'` | `'default'` | Estado de validación |
 | `errorMessage` / `successMessage` | `string` | `''` | Mensajes de validación |
+| `corners` | `FsCorners` | `'all'` | Qué esquinas redondear |
 
 | Output | Tipo | Descripción |
 |---|---|---|
@@ -550,6 +554,7 @@ presets: FsDateRangePreset[] = [
 | `disabled` / `readonly` | `boolean` | `false` | |
 | `state` | `'default' \| 'error' \| 'success'` | `'default'` | |
 | `errorMessage` / `successMessage` | `string` | `''` | |
+| `corners` | `FsCorners` | `'all'` | Qué esquinas redondear |
 
 | Output | Tipo | Descripción |
 |---|---|---|
@@ -889,6 +894,7 @@ modelo es un `number`, o `null` cuando está vacío.
 | `state` | `'default' \| 'error' \| 'success'` | `'default'` | Estado de validación |
 | `errorMessage` / `successMessage` | `string` | `''` | Mensajes |
 | `decrementLabel` / `incrementLabel` | `string` | `'Disminuir'` / `'Aumentar'` | `aria-label` de los botones |
+| `corners` | `FsCorners` | `'all'` | Qué esquinas redondear |
 
 | Output | Tipo | Descripción |
 |---|---|---|
@@ -937,6 +943,7 @@ Implementa `ControlValueAccessor`.
 | `disabled` / `readonly` | `boolean` | `false` | |
 | `state` | `'default' \| 'error' \| 'success'` | `'default'` | |
 | `errorMessage` / `successMessage` | `string` | `''` | |
+| `corners` | `FsCorners` | `'all'` | Qué esquinas redondear |
 
 | Output | Tipo | Descripción |
 |---|---|---|
@@ -990,6 +997,7 @@ puede subir.
 | `disabled` | `boolean` | `false` | |
 | `state` | `'default' \| 'error'` | `'default'` | |
 | `errorMessage` | `string` | `''` | Mensaje de error |
+| `corners` | `FsCorners` | `'all'` | Qué esquinas redondear |
 
 | Output | Tipo | Descripción |
 |---|---|---|
@@ -1120,6 +1128,7 @@ views: FsSegmentOption[] = [
 | `options` | `FsSegmentOption[]` | `[]` | Array `{ value, label, icon? }` |
 | `label` | `string` | `''` | Etiqueta visible encima del control |
 | `disabled` | `boolean` | `false` | Deshabilita toda la selección |
+| `corners` | `FsCorners` | `'all'` | Qué esquinas redondear |
 
 | Output | Tipo | Descripción |
 |---|---|---|
@@ -1307,6 +1316,7 @@ options: FsMultiSelectOption[] = [
 | `max` | `number` | `0` | Límite de selecciones (0 = sin límite) |
 | `disabled` | `boolean` | `false` | Estado deshabilitado |
 | `emptyText` | `string` | `'Sin resultados'` | Texto cuando no hay coincidencias |
+| `corners` | `FsCorners` | `'all'` | Qué esquinas redondear |
 
 | Custom property | Default | |
 |---|---|---|
@@ -1368,6 +1378,7 @@ abiertos = ['cancel'];
 | `items` | `FsAccordionItem[]` | `[]` | `{ id, title, content?, disabled? }` |
 | `multiple` | `boolean` | `false` | Permite más de un panel abierto |
 | `open` | `string[]` | `[]` | Ids abiertos. Two-way: `[(open)]` |
+| `corners` | `FsCorners` | `'all'` | Qué esquinas redondear |
 
 | Output | Tipo | Descripción |
 |---|---|---|
@@ -1472,6 +1483,7 @@ pie, la horizontal tiene una acción inline, y la de métrica es un número.
 | `subtitle` | `string` | `''` | Bajada |
 | `tone` | `'success' \| 'danger' \| 'warning' \| 'info'` | — | Tiñe el borde y agrega el glifo de estado |
 | `interactive` | `boolean` | `false` | Señal visual de hover |
+| `corners` | `FsCorners` | `'all'` | Qué esquinas redondear |
 
 | Slot | Selector | Descripción |
 |---|---|---|
@@ -1488,6 +1500,7 @@ pie, la horizontal tiene una acción inline, y la de métrica es un número.
 ```
 
 Mismos `icon`, `title`, `subtitle` y `tone`. El slot de la acción es `[cardAction]`.
+También toma `corners`, igual que `<fs-card>`.
 Con `tone`, el glifo de estado pisa al `icon`: una fila de estado se lee como estado.
 
 #### `<fs-stat-card>`
@@ -1503,6 +1516,7 @@ Con `tone`, el glifo de estado pisa al `icon`: una fila de estado se lee como es
 | `delta` | `string` | `''` | Pill de variación. Vacío, no se muestra |
 | `deltaTone` | `'success' \| 'danger' \| 'neutral'` | `'success'` | Si esa variación es buena o mala |
 | `icon` | `string` | — | URL del ícono, al lado del label |
+| `corners` | `FsCorners` | `'all'` | Qué esquinas redondear |
 
 > `deltaTone` **no** se deduce del signo, y es a propósito: un churn que sube es
 > `+0.4%` y sigue siendo malo. El tono lo decide quien conoce la métrica.
@@ -1639,7 +1653,7 @@ componente.
 | `label` | `string` | `''` | Nombre accesible del grupo |
 | `startAt` | `number` | `0` | Slide inicial. Se lee **una sola vez** |
 | `preloadRadius` | `number` | `1` | Cuántas slides a cada lado reportan `shouldLoad` |
-| `corners` | `FsCarouselCorners` | `'all'` | Qué esquinas redondear |
+| `corners` | `FsCorners` | `'all'` | Qué esquinas redondear |
 
 | Output | Tipo | Descripción |
 |---|---|---|
@@ -1853,6 +1867,7 @@ experience = {
 | `variant` | `'full' \| 'compact'` | `'full'` | full = con bullets · compact = solo header |
 | `timeline` | `boolean` | `false` | Línea y dot de timeline |
 | `timelineLast` | `boolean` | `false` | Último item (oculta la línea inferior) |
+| `corners` | `FsCorners` | `'all'` | Qué esquinas redondear |
 
 **CSS custom properties configurables:**
 
@@ -1899,6 +1914,7 @@ stats = [
 ];
 ```
 
+Toma `corners` para elegir qué esquinas van redondeadas, igual que el resto de
 las cards. Ver «Redondeo por componente», más abajo.
 
 **CSS custom properties configurables:**
@@ -2040,13 +2056,17 @@ configurables son `$fs-primary-hex`, `$fs-secondary-hex`, `$fs-tertiary-hex`,
 Cada componente resuelve su radio contra el token global, pero deja dos formas
 de pisarlo sin tocar el resto del sistema.
 
+**El input `corners`** elige qué esquinas van redondeadas. Sirve para apoyar un
 componente contra otro sin que quede una esquina redonda adentro de otra, con
 una medialuna de fondo entre las dos:
 
 ```html
+<fs-card corners="top">
+  <fs-input corners="bottom"></fs-input>
 </fs-card>
 ```
 
+`FsCorners` es `'all' \| 'none' \| 'top' \| 'bottom' \| 'start' \| 'end'`.
 
 > **`start` y `end` son lógicas**, no `left`/`right`: siguen la dirección de
 > escritura, así que en RTL se dan vuelta solas.
@@ -2059,6 +2079,7 @@ una medialuna de fondo entre las dos:
 ```
 
 Acepta el shorthand entero de `border-radius` — los cuatro valores, arrancando
+arriba a la izquierda y siguiendo el reloj. Eso vale con `corners="all"`: los
 otros presets apagan esquinas puntuales con longhands y pisarían el shorthand.
 
 > La excepción es `--fs-segmented-item-radius`: el segmento interior se deriva

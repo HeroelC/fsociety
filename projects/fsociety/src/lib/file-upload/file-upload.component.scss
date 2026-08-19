@@ -10,6 +10,7 @@
 // underneath it.
 // ---------------------------------------------------------------------------
 
+@use '../../styles/corners' as corners;
 
 .fs-up {
   --_radius: var(--fs-file-upload-radius, calc(var(--fs-radius-lg) + 4px));
@@ -229,5 +230,7 @@
   }
 }
 
+// ─── Corners ─────────────────────────────────────────────────────────────────
 // Emitido a nivel superior y no anidado, para que el bloque de arriba pueda
 // seguir declarando propiedades después del radio.
+@include corners.presets('.fs-up__dropzone');

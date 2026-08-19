@@ -6,6 +6,7 @@
 
   <div
     class="fs-ta__wrapper"
+    [attr.data-corners]="corners"
     [class.fs-ta__wrapper--error]="state === 'error'"
     [class.fs-ta__wrapper--success]="state === 'success'"
     [class.fs-ta__wrapper--disabled]="disabled"

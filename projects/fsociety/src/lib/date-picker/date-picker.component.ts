@@ -25,6 +25,7 @@ import {
   weekdayNames,
   type FsCalendarDay,
 } from './calendar.util';
+import { FsCorners } from '../corners';
 
 // Re-exported so `import { FsCalendarDay } from '@heroelc/fsociety'` keeps
 // working now that the type lives in the shared calendar module.
@@ -127,6 +128,14 @@ export class FsDatePickerComponent implements ControlValueAccessor {
 
   @Input({ transform: todayLabelInput }) todayLabel = 'Hoy';
   @Input({ transform: clearLabelInput }) clearLabel = 'Limpiar';
+
+  /**
+   * Qué esquinas van redondeadas. Sirve para apoyar el componente contra otra
+   * cosa sin que quede una esquina redonda adentro de otra.
+   *
+   * `start` y `end` son lógicas: en RTL se dan vuelta solas.
+   */
+  @Input() corners: FsCorners = 'all';
 
   @Output() valueChange = new EventEmitter<Date | null>();
 

@@ -13,6 +13,10 @@ const meta: Meta<FsDatePickerComponent> = {
   ],
   tags: ['autodocs'],
   argTypes: {
+    corners: {
+      control: { type: 'inline-radio' },
+      options: ['all', 'none', 'top', 'bottom', 'start', 'end'],
+    },
     state: { control: 'select', options: ['default', 'error', 'success'] },
     locale: { control: 'text' },
     firstDayOfWeek: { control: { type: 'number', min: 0, max: 6 } },
@@ -39,6 +43,7 @@ export const Default: Story = {
   // missing resolves to undefined, and for a DOM property like placeholder the
   // browser stringifies that — the empty field would read "undefined".
   args: {
+    corners: 'all',
     label: 'Fecha de nacimiento',
     hint: 'Podés tipearla o elegirla del calendario.',
     placeholder: 'dd/mm/aaaa',
@@ -54,7 +59,7 @@ export const Default: Story = {
     props: args,
     template: `
       <div style="max-width:320px;">
-        <fs-date-picker
+        <fs-date-picker [corners]="corners"
           [label]="label"
           [hint]="hint"
           [placeholder]="placeholder"

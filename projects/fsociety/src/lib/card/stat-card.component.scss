@@ -8,23 +8,25 @@
 //   }
 // ---------------------------------------------------------------------------
 
+@use '../../styles/corners' as corners;
+
 :host {
   display: block;
 }
 
 .fs-stat-card {
-  --fs-stat-bg:     var(--fs-color-surface);
-  --fs-stat-border: var(--fs-color-border);
-  --fs-stat-radius: var(--fs-radius-lg);
+  --_bg: var(--fs-stat-bg, var(--fs-color-surface));
+  --_border: var(--fs-stat-border, var(--fs-color-border));
+  --_radius: var(--fs-stat-radius, var(--fs-radius-lg));
 
   display: flex;
   flex-direction: column;
   gap: 10px;
   height: 100%;
   padding: 18px 20px;
-  background: var(--fs-stat-bg);
-  border: 1px solid var(--fs-stat-border);
-  border-radius: var(--fs-stat-radius);
+  background: var(--_bg);
+  border: 1px solid var(--_border);
+  border-radius: var(--_radius);
 
   &__top {
     display: flex;
@@ -78,3 +80,8 @@
     }
   }
 }
+
+// ─── Corners ─────────────────────────────────────────────────────────────────
+// Emitido a nivel superior y no anidado, para que el bloque de arriba pueda
+// seguir declarando propiedades después del radio.
+@include corners.presets('.fs-stat-card');

@@ -9,6 +9,7 @@ import {
   ChangeDetectorRef,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FsCorners } from '../corners';
 
 const CDN = 'https://api.iconify.design';
 const ICONS = {
@@ -36,6 +37,14 @@ export class FsAlertComponent implements OnInit, OnDestroy {
   @Input() title = '';
   @Input() dismissible = false;
   @Input() autoDismiss = 0;
+
+  /**
+   * Qué esquinas van redondeadas. Sirve para apoyar el componente contra otra
+   * cosa sin que quede una esquina redonda adentro de otra.
+   *
+   * `start` y `end` son lógicas: en RTL se dan vuelta solas.
+   */
+  @Input() corners: FsCorners = 'all';
 
   @Output() dismissed = new EventEmitter<void>();
 

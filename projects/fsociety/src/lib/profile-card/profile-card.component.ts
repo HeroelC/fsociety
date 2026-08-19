@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FsBadgeComponent, FsBadgeColor } from '../badge/badge.component';
+import { FsCorners } from '../corners';
 
 export interface FsProfileStat {
   value: string | number;
@@ -69,6 +70,14 @@ export class FsProfileCardComponent {
   @Input() showActions = false;
   @Input() primaryActionLabel = 'Seguir';
   @Input() secondaryActionLabel = 'Mensaje';
+
+  /**
+   * Qué esquinas van redondeadas. Sirve para apoyar el componente contra otra
+   * cosa sin que quede una esquina redonda adentro de otra.
+   *
+   * `start` y `end` son lógicas: en RTL se dan vuelta solas.
+   */
+  @Input() corners: FsCorners = 'all';
 
   @Output() primaryAction   = new EventEmitter<void>();
   @Output() secondaryAction = new EventEmitter<void>();

@@ -28,6 +28,10 @@ const meta: Meta<FsAccordionComponent> = {
   decorators: [moduleMetadata({ imports: [FsAccordionComponent, FsButtonComponent] })],
   tags: ['autodocs'],
   argTypes: {
+    corners: {
+      control: { type: 'inline-radio' },
+      options: ['all', 'none', 'top', 'bottom', 'start', 'end'],
+    },
     items: { control: false },
     open: { control: false },
   },
@@ -39,11 +43,11 @@ type Story = StoryObj<FsAccordionComponent>;
 // ─── Default ─────────────────────────────────────────────────────────────────
 
 export const Default: Story = {
-  args: { multiple: false },
+  args: { corners: 'all', multiple: false },
   render: (args) => ({
     props: { ...args, items: FAQ, open: ['cancel'] },
     template: `
-      <fs-accordion [items]="items" [multiple]="multiple" [(open)]="open"></fs-accordion>
+      <fs-accordion [corners]="corners" [items]="items" [multiple]="multiple" [(open)]="open"></fs-accordion>
     `,
   }),
   parameters: { layout: 'padded' },

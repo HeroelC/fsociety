@@ -9,6 +9,7 @@ import {
   TemplateRef,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FsCorners } from '../corners';
 
 const CDN = 'https://api.iconify.design';
 const ICONS = {
@@ -47,6 +48,14 @@ export class FsAccordionComponent implements OnChanges {
 
   /** Allows more than one panel open at a time. */
   @Input() multiple = false;
+
+  /**
+   * Qué esquinas van redondeadas. Sirve para apoyar el componente contra otra
+   * cosa sin que quede una esquina redonda adentro de otra.
+   *
+   * `start` y `end` son lógicas: en RTL se dan vuelta solas.
+   */
+  @Input() corners: FsCorners = 'all';
 
   /** Ids of the open panels. Two-way: `[(open)]`. */
   @Input()

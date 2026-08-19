@@ -6,6 +6,7 @@
 //   }
 // ---------------------------------------------------------------------------
 
+@use '../../styles/corners' as corners;
 
 .fs-ta {
   --_radius: var(--fs-textarea-radius, var(--fs-radius-md));
@@ -150,5 +151,7 @@
   }
 }
 
+// ─── Corners ─────────────────────────────────────────────────────────────────
 // Emitido a nivel superior y no anidado, para que el bloque de arriba pueda
 // seguir declarando propiedades después del radio.
+@include corners.presets('.fs-ta__wrapper');

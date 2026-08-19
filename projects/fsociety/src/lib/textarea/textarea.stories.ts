@@ -11,6 +11,10 @@ const meta: Meta<FsTextareaComponent> = {
   ],
   tags: ['autodocs'],
   argTypes: {
+    corners: {
+      control: { type: 'inline-radio' },
+      options: ['all', 'none', 'top', 'bottom', 'start', 'end'],
+    },
     state: { control: 'select', options: ['default', 'error', 'success'] },
     resize: { control: 'select', options: ['vertical', 'none', 'auto'] },
     rows: { control: { type: 'number', min: 1, max: 12 } },
@@ -25,6 +29,7 @@ type Story = StoryObj<FsTextareaComponent>;
 
 export const Default: Story = {
   args: {
+    corners: 'all',
     label: 'Comentario',
     placeholder: 'Contanos qué te pareció…',
     hint: 'Se puede arrastrar el borde inferior para agrandarlo.',
@@ -39,7 +44,7 @@ export const Default: Story = {
     props: { ...args, value: '' },
     template: `
       <div style="max-width:420px;">
-        <fs-textarea
+        <fs-textarea [corners]="corners"
           [label]="label"
           [placeholder]="placeholder"
           [hint]="hint"

@@ -8,6 +8,7 @@
     <div
       #anchor
       class="fs-dp__wrapper"
+      [attr.data-corners]="corners"
       [class.fs-dp__wrapper--error]="state === 'error'"
       [class.fs-dp__wrapper--success]="state === 'success'"
       [class.fs-dp__wrapper--disabled]="disabled"

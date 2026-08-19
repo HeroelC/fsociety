@@ -8,6 +8,7 @@
     <div
       #anchor
       class="fs-select__wrapper"
+      [attr.data-corners]="corners"
       [class.fs-select__wrapper--error]="state === 'error'"
       [class.fs-select__wrapper--success]="state === 'success'"
       [class.fs-select__wrapper--disabled]="disabled"

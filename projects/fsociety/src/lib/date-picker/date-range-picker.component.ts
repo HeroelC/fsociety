@@ -23,6 +23,7 @@ import {
   weekdayNames,
   type FsCalendarDay,
 } from './calendar.util';
+import { FsCorners } from '../corners';
 
 const CDN = 'https://api.iconify.design';
 const ICONS = {
@@ -131,6 +132,14 @@ export class FsDateRangePickerComponent implements ControlValueAccessor {
   @Input() presets: FsDateRangePreset[] = [];
 
   @Input({ transform: clearLabelInput }) clearLabel = 'Limpiar';
+
+  /**
+   * Qué esquinas van redondeadas. Sirve para apoyar el componente contra otra
+   * cosa sin que quede una esquina redonda adentro de otra.
+   *
+   * `start` y `end` son lógicas: en RTL se dan vuelta solas.
+   */
+  @Input() corners: FsCorners = 'all';
 
   @Output() valueChange = new EventEmitter<FsDateRange>();
 

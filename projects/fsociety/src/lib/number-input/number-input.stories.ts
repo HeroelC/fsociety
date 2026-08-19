@@ -11,6 +11,10 @@ const meta: Meta<FsNumberInputComponent> = {
   ],
   tags: ['autodocs'],
   argTypes: {
+    corners: {
+      control: { type: 'inline-radio' },
+      options: ['all', 'none', 'top', 'bottom', 'start', 'end'],
+    },
     state: { control: 'select', options: ['default', 'error', 'success'] },
     min: { control: 'number' },
     max: { control: 'number' },
@@ -25,6 +29,7 @@ type Story = StoryObj<FsNumberInputComponent>;
 
 export const Default: Story = {
   args: {
+    corners: 'all',
     label: 'Cantidad',
     hint: 'Usá los botones, las flechas o tipeá.',
     placeholder: '0',
@@ -42,7 +47,7 @@ export const Default: Story = {
     props: { ...args, value: 1 },
     template: `
       <div style="max-width:200px;">
-        <fs-number-input
+        <fs-number-input [corners]="corners"
           [label]="label"
           [hint]="hint"
           [placeholder]="placeholder"

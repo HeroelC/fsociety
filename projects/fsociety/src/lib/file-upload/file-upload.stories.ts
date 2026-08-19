@@ -11,6 +11,10 @@ const meta: Meta<FsFileUploadComponent> = {
   ],
   tags: ['autodocs'],
   argTypes: {
+    corners: {
+      control: { type: 'inline-radio' },
+      options: ['all', 'none', 'top', 'bottom', 'start', 'end'],
+    },
     state: { control: 'select', options: ['default', 'error'] },
     maxSize: { control: 'number' },
     maxFiles: { control: 'number' },
@@ -32,6 +36,7 @@ type Story = StoryObj<FsFileUploadComponent>;
 
 export const Default: Story = {
   args: {
+    corners: 'all',
     label: 'Adjuntos',
     accept: '',
     multiple: true,
@@ -47,7 +52,7 @@ export const Default: Story = {
     props: args,
     template: `
       <div style="max-width:460px;">
-        <fs-file-upload
+        <fs-file-upload [corners]="corners"
           [label]="label"
           [accept]="accept"
           [multiple]="multiple"

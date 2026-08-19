@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FsCorners } from '../corners';
 
 export type FsStatDeltaTone = 'success' | 'danger' | 'neutral';
 
@@ -29,4 +30,12 @@ export class FsStatCardComponent {
 
   /** Icon URL, shown muted beside the label. */
   @Input() icon?: string;
+
+  /**
+   * Qué esquinas van redondeadas. Sirve para apoyar el componente contra otra
+   * cosa sin que quede una esquina redonda adentro de otra.
+   *
+   * `start` y `end` son lógicas: en RTL se dan vuelta solas.
+   */
+  @Input() corners: FsCorners = 'all';
 }

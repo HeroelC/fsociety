@@ -4,7 +4,7 @@
     <span class="fs-seg__label">{{ label }}</span>
   }
 
-  <div class="fs-seg__track" role="group">
+  <div class="fs-seg__track" role="group" [attr.data-corners]="corners">
     @for (opt of options; track opt.value) {
       <button
         type="button"

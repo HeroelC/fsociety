@@ -46,6 +46,10 @@ const meta: Meta<FsDateRangePickerComponent> = {
   ],
   tags: ['autodocs'],
   argTypes: {
+    corners: {
+      control: { type: 'inline-radio' },
+      options: ['all', 'none', 'top', 'bottom', 'start', 'end'],
+    },
     state: { control: 'select', options: ['default', 'error', 'success'] },
     months: { control: 'select', options: [1, 2] },
     presets: { control: false },
@@ -69,6 +73,7 @@ type Story = StoryObj<FsDateRangePickerComponent>;
 
 export const Default: Story = {
   args: {
+    corners: 'all',
     label: 'Período',
     hint: 'Dos clics: inicio y fin. El rango se previsualiza mientras movés el mouse.',
     startPlaceholder: 'Desde',
@@ -86,7 +91,7 @@ export const Default: Story = {
     props: args,
     template: `
       <div style="max-width:360px;">
-        <fs-date-range-picker
+        <fs-date-range-picker [corners]="corners"
           [label]="label"
           [hint]="hint"
           [startPlaceholder]="startPlaceholder"

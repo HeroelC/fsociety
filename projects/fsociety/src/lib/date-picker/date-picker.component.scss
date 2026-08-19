@@ -7,6 +7,7 @@
 //   }
 // ---------------------------------------------------------------------------
 
+@use '../../styles/corners' as corners;
 
 @use '../../styles/overlay' as overlay;
 
@@ -315,5 +316,7 @@
   }
 }
 
+// ─── Corners ─────────────────────────────────────────────────────────────────
 // Emitido a nivel superior y no anidado, para que el bloque de arriba pueda
 // seguir declarando propiedades después del radio.
+@include corners.presets('.fs-dp__wrapper');

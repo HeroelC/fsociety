@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FsCardTone } from './card.component';
+import { FsCorners } from '../corners';
 
 const CDN = 'https://api.iconify.design';
 const TONE_ICONS: Record<FsCardTone, string> = {
@@ -32,6 +33,14 @@ export class FsRowCardComponent {
   @Input() subtitle = '';
 
   @Input() tone?: FsCardTone;
+
+  /**
+   * Qué esquinas van redondeadas. Sirve para apoyar el componente contra otra
+   * cosa sin que quede una esquina redonda adentro de otra.
+   *
+   * `start` y `end` son lógicas: en RTL se dan vuelta solas.
+   */
+  @Input() corners: FsCorners = 'all';
 
   /** The tone glyph wins, matching the reference: a status row reads as status. */
   get resolvedIcon(): string | null {

@@ -13,7 +13,9 @@ import {
   TemplateRef,
   ViewChild,
 } from '@angular/core';
+
 import { CommonModule } from '@angular/common';
+import { FsCorners } from '../corners';
 
 const CDN = 'https://api.iconify.design';
 const ICONS = {
@@ -28,10 +30,12 @@ const ICONS = {
 const TAP_SLOP_PX = 8;
 
 /**
- * Qué esquinas van redondeadas. `start` y `end` son lógicas: siguen la
- * dirección de escritura, así que en RTL se dan vuelta solas.
+ * Qué esquinas van redondeadas.
+ *
+ * Alias de {@link FsCorners}, el tipo que comparten todos los componentes con
+ * `corners`. Se mantiene el nombre para no romper imports existentes.
  */
-export type FsCarouselCorners = 'all' | 'none' | 'top' | 'bottom' | 'start' | 'end';
+export type FsCarouselCorners = FsCorners;
 
 /** What every slide template receives. */
 export interface FsCarouselSlideContext {

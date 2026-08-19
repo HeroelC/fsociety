@@ -6,6 +6,7 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FsBadgeComponent, FsBadgeColor } from '../badge/badge.component';
+import { FsCorners } from '../corners';
 
 export interface FsExperienceBadge {
   label:        string;
@@ -69,6 +70,14 @@ export class FsExperienceCardComponent implements OnInit {
 
   /** Si es el último item del timeline (no dibuja la línea hacia abajo) */
   @Input() timelineLast = false;
+
+  /**
+   * Qué esquinas van redondeadas. Sirve para apoyar el componente contra otra
+   * cosa sin que quede una esquina redonda adentro de otra.
+   *
+   * `start` y `end` son lógicas: en RTL se dan vuelta solas.
+   */
+  @Input() corners: FsCorners = 'all';
 
   expanded = false;
 

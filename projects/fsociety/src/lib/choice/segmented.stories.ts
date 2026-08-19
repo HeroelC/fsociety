@@ -35,6 +35,10 @@ const meta: Meta<FsSegmentedComponent> = {
   ],
   tags: ['autodocs'],
   argTypes: {
+    corners: {
+      control: { type: 'inline-radio' },
+      options: ['all', 'none', 'top', 'bottom', 'start', 'end'],
+    },
     options: { control: false },
   },
 };
@@ -48,10 +52,10 @@ export const Default: Story = {
   render: (args) => ({
     props: { ...args, model: 'list' },
     template: `
-      <fs-segmented [options]="options" [(ngModel)]="model"></fs-segmented>
+      <fs-segmented [corners]="corners" [options]="options" [(ngModel)]="model"></fs-segmented>
     `,
   }),
-  args: { options: VIEWS },
+  args: { corners: 'all', options: VIEWS },
 };
 
 // ─── With label ───────────────────────────────────────────────────────────────

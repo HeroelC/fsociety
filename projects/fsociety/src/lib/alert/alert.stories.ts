@@ -13,6 +13,10 @@ const meta: Meta<FsAlertComponent> = {
   ],
   tags: ['autodocs'],
   argTypes: {
+    corners: {
+      control: { type: 'inline-radio' },
+      options: ['all', 'none', 'top', 'bottom', 'start', 'end'],
+    },
     tone: {
       control: 'select',
       options: ['info', 'success', 'warning', 'danger'],
@@ -28,6 +32,7 @@ type Story = StoryObj<FsAlertComponent>;
 
 export const Default: Story = {
   args: {
+    corners: 'all',
     tone:        'info',
     title:       'Nueva versión disponible',
     dismissible: true,
@@ -35,7 +40,7 @@ export const Default: Story = {
   render: (args) => ({
     props: args,
     template: `
-      <fs-alert [tone]="tone" [title]="title" [dismissible]="dismissible"
+      <fs-alert [corners]="corners" [tone]="tone" [title]="title" [dismissible]="dismissible"
                 (dismissed)="dismissed($event)">
         Actualizá para acceder a las últimas funciones y correcciones.
       </fs-alert>

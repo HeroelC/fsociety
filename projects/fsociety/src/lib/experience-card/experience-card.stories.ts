@@ -109,6 +109,10 @@ const meta: Meta<FsExperienceCardComponent> = {
   component: FsExperienceCardComponent,
   tags:      ['autodocs'],
   argTypes: {
+    corners: {
+      control: { type: 'inline-radio' },
+      options: ['all', 'none', 'top', 'bottom', 'start', 'end'],
+    },
     variant: {
       control:     'radio',
       options:     ['full', 'compact'],
@@ -135,6 +139,7 @@ type Story = StoryObj<FsExperienceCardComponent>;
 export const Playground: Story = {
   name: 'Playground',
   args: {
+    corners: 'all',
     experience: EXPERIENCE_CURRENT,
     variant:    'full',
     timeline:   false,

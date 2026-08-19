@@ -10,6 +10,7 @@
 // property set on the host still inherits into it.
 // ---------------------------------------------------------------------------
 
+@use '../../styles/corners' as corners;
 
 @use '../../styles/overlay' as overlay;
 
@@ -293,5 +294,7 @@
   }
 }
 
+// ─── Corners ─────────────────────────────────────────────────────────────────
 // Emitido a nivel superior y no anidado, para que el bloque de arriba pueda
 // seguir declarando propiedades después del radio.
+@include corners.presets('.fs-ms__wrapper');

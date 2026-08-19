@@ -48,6 +48,10 @@ const meta: Meta<FsSelectComponent> = {
   ],
   tags: ['autodocs'],
   argTypes: {
+    corners: {
+      control: { type: 'inline-radio' },
+      options: ['all', 'none', 'top', 'bottom', 'start', 'end'],
+    },
     state: {
       control: 'select',
       options: ['default', 'error', 'success'],
@@ -63,6 +67,7 @@ type Story = StoryObj<FsSelectComponent>;
 
 export const Default: Story = {
   args: {
+    corners: 'all',
     label: 'Rol de usuario',
     placeholder: 'Seleccionar rol...',
     hint: 'Define los permisos del usuario en el sistema.',
