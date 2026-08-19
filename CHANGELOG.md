@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.12.0](https://github.com/heroelc/fsociety/compare/v0.11.0...v0.12.0) (2026-08-19)
+
+### Features
+
+* **breadcrumbs:** add fs-breadcrumbs ([4ccd8ef](https://github.com/heroelc/fsociety/commit/4ccd8ef65ddd41cc66264289c87903d60ebec7b6))
+* **carousel:** let the rounded corners be chosen ([8ee8d67](https://github.com/heroelc/fsociety/commit/8ee8d67df2283e43eeecdc3dce8dd332e70ae43a))
+* let every component with an outer box choose its corners ([18a8985](https://github.com/heroelc/fsociety/commit/18a89859be5e35c3593dd92a4fc51457fb7e86d1))
+
+### Bug Fixes
+
+* **carousel:** make the custom properties actually overridable ([043376f](https://github.com/heroelc/fsociety/commit/043376fadf7ce3e042f37a73e093cd96b2bcc3df))
+* **styles:** let every component's custom properties be overridden ([1941c9f](https://github.com/heroelc/fsociety/commit/1941c9f5bcfe31f0fb08820d32674ed47013818a))
+
 ## [0.11.0](https://github.com/heroelc/fsociety/compare/v0.10.0...v0.11.0) (2026-08-19)
 
 ### Features
