@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.11.0](https://github.com/heroelc/fsociety/compare/v0.10.0...v0.11.0) (2026-08-19)
+
+### Features
+
+* **segmented:** add a valueChange output ([c29c7dd](https://github.com/heroelc/fsociety/commit/c29c7dd723c6b47d867b08d64a635b8ccf19c4ba))
+
+### Bug Fixes
+
+* **dialog:** measure in dvh, expose the drawer cap, clear the safe area ([3cab6bf](https://github.com/heroelc/fsociety/commit/3cab6bf2ef4473fe12b12ea2773168d24bf4cf8e))
+* **tokens:** let data-theme be the only thing that picks a theme ([5edf1fe](https://github.com/heroelc/fsociety/commit/5edf1fe71decca876d9c4a2591dce41b4bfbaacf))
+* **tokens:** serve the real dark palette to [data-theme=dark] ([84265ed](https://github.com/heroelc/fsociety/commit/84265ed17a90257611581a0e188b99bb5ff4b3da))
+
 ## [0.10.0](https://github.com/heroelc/fsociety/compare/v0.9.0...v0.10.0) (2026-08-19)
 
 ### Features
