@@ -51,12 +51,14 @@ export const Default: Story = {
     label: 'Galería de ejemplo',
     startAt: 0,
     preloadRadius: 1,
+    corners: 'all',
   },
   render: (args) => ({
     props: { ...args, gradients, panelStyle },
     template: `
       <div style="max-width: 460px">
-        <fs-carousel [count]="count" [label]="label" [startAt]="startAt" [preloadRadius]="preloadRadius">
+        <fs-carousel [count]="count" [label]="label" [startAt]="startAt"
+                     [preloadRadius]="preloadRadius" [corners]="corners">
           <ng-template fsCarouselSlide let-i>
             <div [style]="panelStyle" [style.background]="gradients[i % gradients.length]">
               {{ i + 1 }}
@@ -78,6 +80,7 @@ export const StartAt: Story = {
     label: 'Galería de ejemplo',
     startAt: 2,
     preloadRadius: 1,
+    corners: 'all',
   },
   parameters: {
     docs: {
@@ -99,6 +102,7 @@ export const LazyImages: Story = {
     label: 'Fotos del lugar',
     startAt: 0,
     preloadRadius: 1,
+    corners: 'all',
   },
   parameters: {
     docs: {
@@ -113,7 +117,8 @@ export const LazyImages: Story = {
     props: { ...args },
     template: `
       <div style="max-width: 460px">
-        <fs-carousel [count]="count" [label]="label" [startAt]="startAt" [preloadRadius]="preloadRadius">
+        <fs-carousel [count]="count" [label]="label" [startAt]="startAt"
+                     [preloadRadius]="preloadRadius" [corners]="corners">
           <ng-template fsCarouselSlide let-i let-shouldLoad="shouldLoad">
             <div style="height: 260px; background: var(--fs-color-surface-alt)">
               @if (shouldLoad) {

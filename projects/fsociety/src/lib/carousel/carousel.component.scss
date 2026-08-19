@@ -46,26 +46,38 @@
 }
 
 .fs-carousel {
-  --fs-carousel-radius:         var(--fs-radius-lg);
-  --fs-carousel-gap:            0px;
-  --fs-carousel-slide-width:    100%;
-  --fs-carousel-arrow-size:     28px;
-  --fs-carousel-arrow-bg:       color-mix(in srgb, #000 45%, transparent);
-  --fs-carousel-arrow-bg-hover: color-mix(in srgb, #000 65%, transparent);
-  --fs-carousel-arrow-color:    #fff;
-  --fs-carousel-dot:            6px;
-  --fs-carousel-dot-active:     14px;
-  --fs-carousel-dot-target:     16px;
-  --fs-carousel-dot-hit-inline: 24px;
-  --fs-carousel-dot-hit-block:  24px;
-  --fs-carousel-dot-color:      color-mix(in srgb, #fff 55%, transparent);
-  --fs-carousel-dot-color-on:   #fff;
-  --fs-carousel-scrim:          color-mix(in srgb, #000 45%, transparent);
-  --fs-carousel-focus:          var(--fs-color-primary);
+  // ─── Capa privada de resolución ──────────────────────────────────────────
+  // Las `--fs-carousel-*` públicas NO se declaran acá, y eso es el punto.
+  //
+  // Este div es interno; el consumidor escribe sobre el host, `fs-carousel`.
+  // Una custom property se hereda, pero una declaración sobre el elemento le
+  // gana siempre al valor heredado — así que declararlas acá hacía que el valor
+  // del consumidor no llegara nunca, ni por selector ni inline. El default
+  // ganaba y no había forma de pisarlo.
+  //
+  // Cada `--_x` lee la pública con `var(nombre, default)`. Como la pública no
+  // está declarada en este elemento, el `var()` ve el valor heredado del host
+  // si existe, y cae al default si no.
+  --_radius:         var(--fs-carousel-radius, var(--fs-radius-lg));
+  --_gap:            var(--fs-carousel-gap, 0px);
+  --_slide-width:    var(--fs-carousel-slide-width, 100%);
+  --_arrow-size:     var(--fs-carousel-arrow-size, 28px);
+  --_arrow-bg:       var(--fs-carousel-arrow-bg, color-mix(in srgb, #000 45%, transparent));
+  --_arrow-bg-hover: var(--fs-carousel-arrow-bg-hover, color-mix(in srgb, #000 65%, transparent));
+  --_arrow-color:    var(--fs-carousel-arrow-color, #fff);
+  --_dot:            var(--fs-carousel-dot, 6px);
+  --_dot-active:     var(--fs-carousel-dot-active, 14px);
+  --_dot-target:     var(--fs-carousel-dot-target, 16px);
+  --_dot-hit-inline: var(--fs-carousel-dot-hit-inline, 24px);
+  --_dot-hit-block:  var(--fs-carousel-dot-hit-block, 24px);
+  --_dot-color:      var(--fs-carousel-dot-color, color-mix(in srgb, #fff 55%, transparent));
+  --_dot-color-on:   var(--fs-carousel-dot-color-on, #fff);
+  --_scrim:          var(--fs-carousel-scrim, color-mix(in srgb, #000 45%, transparent));
+  --_focus:          var(--fs-carousel-focus, var(--fs-color-primary));
 
   position:      relative;
   overflow:      hidden;
-  border-radius: var(--fs-carousel-radius);
+  border-radius: var(--_radius);
 
   // ─── Esquinas ────────────────────────────────────────────────────────────
   // Metido arriba de una card, el carrusel tiene que dejar de redondear por
@@ -111,7 +123,7 @@
     // two only share a coordinate space while this holds.
     position:              relative;
     display:               flex;
-    gap:                   var(--fs-carousel-gap);
+    gap:                   var(--_gap);
     overflow-x:            auto;
     overflow-y:            hidden;
     scroll-snap-type:      x mandatory;
@@ -140,7 +152,7 @@
   }
 
   &__slide {
-    flex:              0 0 var(--fs-carousel-slide-width);
+    flex:              0 0 var(--_slide-width);
     min-width:         0;
     scroll-snap-align: start;
     // Keeps a fast flick from flying past a slide, so the index the dots show
@@ -155,13 +167,13 @@
     translate:     0 -50%;
     display:       grid;
     place-items:   center;
-    inline-size:   var(--fs-carousel-arrow-size);
-    block-size:    var(--fs-carousel-arrow-size);
+    inline-size:   var(--_arrow-size);
+    block-size:    var(--_arrow-size);
     padding:       0;
     border:        0;
     border-radius: 999px;
-    background:    var(--fs-carousel-arrow-bg);
-    color:         var(--fs-carousel-arrow-color);
+    background:    var(--_arrow-bg);
+    color:         var(--_arrow-color);
     cursor:        pointer;
     appearance:    none;
     opacity:       0;
@@ -171,13 +183,13 @@
     &--next { right: 8px; }
 
     &:hover {
-      background: var(--fs-carousel-arrow-bg-hover);
+      background: var(--_arrow-bg-hover);
     }
 
     // Keyboard focus has no hover to ride on, so it reveals the arrow itself.
     &:focus-visible {
       opacity:        1;
-      outline:        2px solid var(--fs-carousel-focus);
+      outline:        2px solid var(--_focus);
       outline-offset: 2px;
     }
 
@@ -217,7 +229,7 @@
     padding:         14px 12px 10px;
     // A white dot disappears over a bright photo. The scrim is what keeps the
     // control readable whatever the consumer renders underneath.
-    background:      linear-gradient(to top, var(--fs-carousel-scrim), transparent);
+    background:      linear-gradient(to top, var(--_scrim), transparent);
     // Inert, or it would swallow a swipe that starts along the bottom edge.
     pointer-events:  none;
   }
@@ -226,8 +238,8 @@
     position:       relative;
     display:        grid;
     place-items:    center;
-    inline-size:    var(--fs-carousel-dot-target);
-    block-size:     var(--fs-carousel-dot-target);
+    inline-size:    var(--_dot-target);
+    block-size:     var(--_dot-target);
     padding:        0;
     border:         0;
     background:     none;
@@ -240,30 +252,30 @@
     &::before {
       content:      '';
       position:     absolute;
-      inset-inline: calc((var(--fs-carousel-dot-target) - var(--fs-carousel-dot-hit-inline)) / 2);
-      inset-block:  calc((var(--fs-carousel-dot-target) - var(--fs-carousel-dot-hit-block)) / 2);
+      inset-inline: calc((var(--_dot-target) - var(--_dot-hit-inline)) / 2);
+      inset-block:  calc((var(--_dot-target) - var(--_dot-hit-block)) / 2);
     }
 
     &:focus-visible {
-      outline:        2px solid var(--fs-carousel-focus);
+      outline:        2px solid var(--_focus);
       outline-offset: 1px;
       border-radius:  999px;
     }
   }
 
   &__pip {
-    inline-size:   var(--fs-carousel-dot);
-    block-size:    var(--fs-carousel-dot);
+    inline-size:   var(--_dot);
+    block-size:    var(--_dot);
     border-radius: 999px;
-    background:    var(--fs-carousel-dot-color);
+    background:    var(--_dot-color);
     transition:    inline-size 180ms ease, background 180ms ease;
   }
 
   // The active dot stretches into a pill instead of only changing colour —
   // shape survives a busy photo behind it, colour alone does not.
   &__dot[aria-current='true'] &__pip {
-    inline-size: var(--fs-carousel-dot-active);
-    background:  var(--fs-carousel-dot-color-on);
+    inline-size: var(--_dot-active);
+    background:  var(--_dot-color-on);
   }
 
   // No hover to reveal the arrows, and 28px would be under the minimum
@@ -274,8 +286,10 @@
     }
   }
 
+  // El default sube en punteros gruesos, pero sigue resolviendo la pública
+  // primero: si el consumidor la fijó, gana también acá.
   @media (pointer: coarse) {
-    --fs-carousel-dot-hit-block: 44px;
+    --_dot-hit-block: var(--fs-carousel-dot-hit-block, 44px);
   }
 
   @media (prefers-reduced-motion: reduce) {
