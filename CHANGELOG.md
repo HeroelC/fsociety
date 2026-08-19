@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.10.0](https://github.com/heroelc/fsociety/compare/v0.9.0...v0.10.0) (2026-08-19)
+
+### Features
+
+* **carousel:** add fs-carousel on native scroll-snap ([fdece75](https://github.com/heroelc/fsociety/commit/fdece75509c9b7d8a838e0dee0a8f7568738f2c2))
+
 ## [0.9.0](https://github.com/heroelc/fsociety/compare/v0.8.0...v0.9.0) (2026-08-17)
 
 ### Features
