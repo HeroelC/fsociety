@@ -1,0 +1,79 @@
+<div
+  class="fs-carousel"
+  role="group"
+  aria-roledescription="carrusel"
+  [attr.aria-label]="label || null"
+>
+  <!-- The track is the scroller, so it is also what listens: the swipe never
+       reaches JavaScript, only its side effects do. -->
+  <div
+    class="fs-carousel__track"
+    #track
+    (scroll)="onScroll()"
+    (pointerdown)="onPointerDown($event)"
+    (pointermove)="onPointerMove($event)"
+    (pointerup)="onPointerUp()"
+    (pointercancel)="onPointerCancel()"
+  >
+    @for (ctx of contexts; track ctx.$implicit) {
+      <div
+        class="fs-carousel__slide"
+        role="group"
+        aria-roledescription="slide"
+        [attr.aria-label]="slideLabel(ctx.$implicit)"
+      >
+        @if (slideTemplate) {
+          <ng-container *ngTemplateOutlet="slideTemplate; context: ctx"></ng-container>
+        }
+      </div>
+    }
+  </div>
+
+  <!-- Arrows are a pointer affordance only — the stylesheet drops them under
+       (hover: none), where they would be a 28px target. -->
+  @if (count > 1) {
+    <button
+      type="button"
+      class="fs-carousel__arrow fs-carousel__arrow--prev"
+      aria-label="Slide anterior"
+      [disabled]="atStart"
+      (click)="prev()"
+    >
+      <span
+        class="fs-icon fs-carousel__arrow-icon"
+        [style.--_icon]="'url(' + Icons.chevronLeft + ')'"
+        aria-hidden="true"
+      ></span>
+    </button>
+
+    <button
+      type="button"
+      class="fs-carousel__arrow fs-carousel__arrow--next"
+      aria-label="Slide siguiente"
+      [disabled]="atEnd"
+      (click)="next()"
+    >
+      <span
+        class="fs-icon fs-carousel__arrow-icon"
+        [style.--_icon]="'url(' + Icons.chevronRight + ')'"
+        aria-hidden="true"
+      ></span>
+    </button>
+
+    <!-- The scrim itself is inert, or it would swallow the swipe along the
+         bottom edge of the carousel. Only the buttons take pointer events. -->
+    <div class="fs-carousel__dots">
+      @for (ctx of contexts; track ctx.$implicit) {
+        <button
+          type="button"
+          class="fs-carousel__dot"
+          [attr.aria-label]="slideLabel(ctx.$implicit)"
+          [attr.aria-current]="ctx.$implicit === current ? 'true' : null"
+          (click)="goTo(ctx.$implicit)"
+        >
+          <span class="fs-carousel__pip" aria-hidden="true"></span>
+        </button>
+      }
+    </div>
+  }
+</div>

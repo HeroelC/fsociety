@@ -1378,6 +1378,90 @@ Con `tone`, el glifo de estado pisa al `icon`: una fila de estado se lee como es
 
 ---
 
+### `<fs-carousel>`
+
+Carrusel horizontal montado sobre **scroll-snap nativo**. El gesto, el momentum
+y el enganche son del navegador: no hay un solo handler de drag en el
+componente.
+
+```html
+<fs-carousel [count]="fotos.length" label="Fotos del lugar" [startAt]="0">
+  <ng-template fsCarouselSlide let-i let-shouldLoad="shouldLoad">
+    @if (shouldLoad) {
+      <img [src]="fotos[i].url" [alt]="fotos[i].alt" />
+    }
+  </ng-template>
+</fs-carousel>
+```
+
+| Input | Tipo | Default | Descripción |
+|---|---|---|---|
+| `count` | `number` | `0` | Cuántas veces se estampa el template |
+| `label` | `string` | `''` | Nombre accesible del grupo |
+| `startAt` | `number` | `0` | Slide inicial. Se lee **una sola vez** |
+| `preloadRadius` | `number` | `1` | Cuántas slides a cada lado reportan `shouldLoad` |
+
+| Output | Tipo | Descripción |
+|---|---|---|
+| `tapped` | `EventEmitter<void>` | Un toque que **no** fue swipe |
+
+El `<ng-template fsCarouselSlide>` recibe un contexto tipado — `FsCarouselSlideContext`:
+
+| Variable | Tipo | Descripción |
+|---|---|---|
+| `$implicit` | `number` | Índice de la slide. `let-i` |
+| `shouldLoad` | `boolean` | `true` si la slide está dentro del `preloadRadius` |
+
+La librería no sabe qué es una imagen. Dice **cuándo** llegó el momento; qué
+hacer con eso lo decidís vos: un `<img>`, un `<video>`, un iframe, o nada.
+
+| Custom property | Default |
+|---|---|
+| `--fs-carousel-radius` | `var(--fs-radius-lg)` |
+| `--fs-carousel-slide-width` | `100%` |
+| `--fs-carousel-gap` | `0px` |
+| `--fs-carousel-arrow-size` | `28px` |
+| `--fs-carousel-dot` / `-dot-active` | `6px` / `14px` |
+| `--fs-carousel-dot-target` | `16px` |
+| `--fs-carousel-dot-hit-inline` / `-hit-block` | `24px` / `24px` |
+
+Bajar `--fs-carousel-slide-width` deja asomar la siguiente. El índice se calcula
+contra la caja real de cada slide, así que anchos parciales y `gap` no lo rompen:
+
+```html
+<fs-carousel [count]="6" label="Galería"
+             style="--fs-carousel-slide-width: 78%; --fs-carousel-gap: 12px">
+```
+
+> **`startAt` posiciona un carrusel que se está creando, no maneja uno que ya
+> existe.** Se lee en el primer render, contra el ancho real del track, y nunca
+> más. Desde el primer frame el scroll es del usuario, y pisárselo después
+> sería arrancarle el gesto de la mano.
+
+> **`touch-action` tiene que dejar pasar el paneo horizontal.** El stylesheet
+> declara `pan-x pan-y pinch-zoom`. Si alguien lo baja a `pan-y`, el navegador
+> deja de scrollear el track de costado y manda los gestos horizontales a la
+> aplicación como pointer events — pero acá el swipe **es** scroll nativo, no
+> hay ningún handler esperándolos. Nadie los consume y el carrusel se queda
+> quieto en touch. Está comentado en el SCSS por la misma razón.
+
+> **`tapped` contra el swipe.** En touch la discriminación la hace el propio
+> navegador: cuando se queda con el gesto para scrollear dispara
+> `pointercancel` y el `pointerup` nunca llega, así que no hay tap. El umbral
+> de 8px que mide el recorrido es el respaldo para el drag con mouse, donde ese
+> traspaso no existe.
+
+> **Targets táctiles.** Las flechas se ocultan bajo `@media (hover: none)` —
+> miden 28px y no hay hover que las revele — así que en touch los puntitos son
+> el único control discreto. El pip sigue midiendo 6px, pero el área de impacto
+> crece a **24px de ancho y 44px de alto** en punteros gruesos. Los 24 son la
+> línea de WCAG 2.2 SC 2.5.8 (nivel AA); los 44×44 son AAA, y no entran: ocho
+> puntos a 44px son 352px, más ancho que un teléfono de 360, y el strip de
+> puntitos terminaría scrolleando. El ancho sostiene la línea AA porque compite
+> por espacio; el alto se toma los 44 porque es gratis.
+
+---
+
 ### `<fs-experience-card>`
 
 ```typescript
@@ -1671,6 +1755,7 @@ Documentación visual en Storybook: [heroelc.github.io/fsociety](https://heroelc
 - [x] `fs-accordion` — altura con grid 0fr→1fr, sin medir en JS, panel cerrado inerte
 - [x] `fs-divider` — sólido/punteado, con label, y vertical que estira con la fila
 - [x] `fs-card` + `fs-row-card` + `fs-stat-card` — tres formas, tintes de estado que aguantan dark
+- [x] `fs-carousel` — scroll-snap nativo, template por slide con preload, tap vs swipe
 - [x] Temas light y dark vía `data-theme`, con capa semántica de tokens
 - [x] `[fsAnchoredPopover]` — overlays en el top layer, sin recortes
 - [x] Storybook en GitHub Pages, con paleta de marca en vivo

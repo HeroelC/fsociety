@@ -1,0 +1,256 @@
+// ---------------------------------------------------------------------------
+// fs-carousel — configurable CSS custom properties
+//
+//   fs-carousel {
+//     --fs-carousel-radius:           var(--fs-radius-lg);
+//     --fs-carousel-gap:              0px;
+//     --fs-carousel-slide-width:      100%;
+//     --fs-carousel-arrow-size:       28px;
+//     --fs-carousel-dot:              6px;
+//     --fs-carousel-dot-active:       14px;
+//     --fs-carousel-dot-target:       16px;
+//     --fs-carousel-dot-hit-inline:   24px;
+//     --fs-carousel-dot-hit-block:    24px;
+//   }
+//
+// Every default resolves to a semantic token, so light and dark follow
+// [data-theme] with no extra configuration.
+//
+// ---------------------------------------------------------------------------
+// TOUCH TARGETS — decision, and why
+//
+// The 16px dot target does not pass. On a touch device the arrows are gone,
+// which leaves the dots as the only discrete control, and 16px is below every
+// bar there is. So they grow — but to 24px, not 44px:
+//
+//   · WCAG 2.2 SC 2.5.8 "Target Size (Minimum)", level AA, asks for 24x24 CSS
+//     px, or for 24px of clear space between the centres of adjacent targets.
+//     That is the conformance line this library aims at.
+//   · The 44x44 figure is SC 2.5.5 (level AAA) and the Apple HIG. It does not
+//     fit here: eight dots at 44px is 352px, wider than a 360px phone, so the
+//     dot strip itself would start scrolling — one accessibility problem
+//     traded for a worse one.
+//
+// What ships: the pip stays 6px so the design does not change, and each button
+// carries an invisible ::before that is 24px wide and 44px tall on coarse
+// pointers. Width is what competes for room, so it holds the AA line at 24;
+// height is free, so it takes the comfortable 44. The 8px gap on a 16px button
+// also puts 24px between centres, which satisfies the spacing clause of 2.5.8.
+//
+// Past roughly a dozen slides the dots stop being a usable control at any
+// size — that is a case for a counter, and it belongs to the consumer.
+// ---------------------------------------------------------------------------
+
+:host {
+  display: block;
+}
+
+.fs-carousel {
+  --fs-carousel-radius:         var(--fs-radius-lg);
+  --fs-carousel-gap:            0px;
+  --fs-carousel-slide-width:    100%;
+  --fs-carousel-arrow-size:     28px;
+  --fs-carousel-arrow-bg:       color-mix(in srgb, #000 45%, transparent);
+  --fs-carousel-arrow-bg-hover: color-mix(in srgb, #000 65%, transparent);
+  --fs-carousel-arrow-color:    #fff;
+  --fs-carousel-dot:            6px;
+  --fs-carousel-dot-active:     14px;
+  --fs-carousel-dot-target:     16px;
+  --fs-carousel-dot-hit-inline: 24px;
+  --fs-carousel-dot-hit-block:  24px;
+  --fs-carousel-dot-color:      color-mix(in srgb, #fff 55%, transparent);
+  --fs-carousel-dot-color-on:   #fff;
+  --fs-carousel-scrim:          color-mix(in srgb, #000 45%, transparent);
+  --fs-carousel-focus:          var(--fs-color-primary);
+
+  position:      relative;
+  overflow:      hidden;
+  border-radius: var(--fs-carousel-radius);
+
+  // ─── Track ───────────────────────────────────────────────────────────────
+  // The scroller. Everything that makes this feel native — the momentum, the
+  // rubber band, the snap — belongs to the browser, not to us.
+  &__track {
+    // Positioned so the slides take the track as their offset parent: the
+    // component compares slide.offsetLeft against track.scrollLeft, and those
+    // two only share a coordinate space while this holds.
+    position:              relative;
+    display:               flex;
+    gap:                   var(--fs-carousel-gap);
+    overflow-x:            auto;
+    overflow-y:            hidden;
+    scroll-snap-type:      x mandatory;
+    scroll-behavior:       smooth;
+    overscroll-behavior-x: contain;
+
+    // ---------------------------------------------------------------------
+    // DO NOT narrow this to `pan-y`.
+    //
+    // touch-action declares which gestures the browser keeps for itself.
+    // `pan-y` hands the horizontal ones to the application as pointer events
+    // instead of panning the track — and here the swipe IS native scrolling,
+    // there is no JS drag handler waiting to receive them. Nothing consumes
+    // them, so the carousel simply stops moving on touch. The horizontal pan
+    // has to stay with the browser.
+    // ---------------------------------------------------------------------
+    touch-action: pan-x pan-y pinch-zoom;
+
+    // Showing where you are is the dots' job here, so the scrollbar is noise.
+    scrollbar-width:    none;
+    -ms-overflow-style: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  &__slide {
+    flex:              0 0 var(--fs-carousel-slide-width);
+    min-width:         0;
+    scroll-snap-align: start;
+    // Keeps a fast flick from flying past a slide, so the index the dots show
+    // is always one the user actually stopped on.
+    scroll-snap-stop:  always;
+  }
+
+  // ─── Arrows ──────────────────────────────────────────────────────────────
+  &__arrow {
+    position:      absolute;
+    top:           50%;
+    translate:     0 -50%;
+    display:       grid;
+    place-items:   center;
+    inline-size:   var(--fs-carousel-arrow-size);
+    block-size:    var(--fs-carousel-arrow-size);
+    padding:       0;
+    border:        0;
+    border-radius: 999px;
+    background:    var(--fs-carousel-arrow-bg);
+    color:         var(--fs-carousel-arrow-color);
+    cursor:        pointer;
+    appearance:    none;
+    opacity:       0;
+    transition:    opacity 150ms ease, background 150ms ease;
+
+    &--prev { left:  8px; }
+    &--next { right: 8px; }
+
+    &:hover {
+      background: var(--fs-carousel-arrow-bg-hover);
+    }
+
+    // Keyboard focus has no hover to ride on, so it reveals the arrow itself.
+    &:focus-visible {
+      opacity:        1;
+      outline:        2px solid var(--fs-carousel-focus);
+      outline-offset: 2px;
+    }
+
+    &:disabled {
+      cursor:         default;
+      pointer-events: none;
+    }
+  }
+
+  &__arrow-icon {
+    inline-size: 16px;
+    block-size:  16px;
+  }
+
+  // Revealed by the container, not by the arrow: aiming at something invisible
+  // is not an interaction.
+  &:hover &__arrow {
+    opacity: 1;
+
+    // The hover rule outranks `&__arrow:disabled` on its own, so the end of the
+    // run has to be spelled out here.
+    &:disabled {
+      opacity: 0;
+    }
+  }
+
+  // ─── Dots ────────────────────────────────────────────────────────────────
+  &__dots {
+    position:        absolute;
+    inset-inline:    0;
+    bottom:          0;
+    display:         flex;
+    flex-wrap:       wrap;
+    justify-content: center;
+    align-items:     center;
+    gap:             8px;
+    padding:         14px 12px 10px;
+    // A white dot disappears over a bright photo. The scrim is what keeps the
+    // control readable whatever the consumer renders underneath.
+    background:      linear-gradient(to top, var(--fs-carousel-scrim), transparent);
+    // Inert, or it would swallow a swipe that starts along the bottom edge.
+    pointer-events:  none;
+  }
+
+  &__dot {
+    position:       relative;
+    display:        grid;
+    place-items:    center;
+    inline-size:    var(--fs-carousel-dot-target);
+    block-size:     var(--fs-carousel-dot-target);
+    padding:        0;
+    border:         0;
+    background:     none;
+    cursor:         pointer;
+    appearance:     none;
+    pointer-events: auto;
+
+    // Expanded hit area — see the touch-target note at the top of this file.
+    // Negative insets, so the target grows without moving the pip a pixel.
+    &::before {
+      content:      '';
+      position:     absolute;
+      inset-inline: calc((var(--fs-carousel-dot-target) - var(--fs-carousel-dot-hit-inline)) / 2);
+      inset-block:  calc((var(--fs-carousel-dot-target) - var(--fs-carousel-dot-hit-block)) / 2);
+    }
+
+    &:focus-visible {
+      outline:        2px solid var(--fs-carousel-focus);
+      outline-offset: 1px;
+      border-radius:  999px;
+    }
+  }
+
+  &__pip {
+    inline-size:   var(--fs-carousel-dot);
+    block-size:    var(--fs-carousel-dot);
+    border-radius: 999px;
+    background:    var(--fs-carousel-dot-color);
+    transition:    inline-size 180ms ease, background 180ms ease;
+  }
+
+  // The active dot stretches into a pill instead of only changing colour —
+  // shape survives a busy photo behind it, colour alone does not.
+  &__dot[aria-current='true'] &__pip {
+    inline-size: var(--fs-carousel-dot-active);
+    background:  var(--fs-carousel-dot-color-on);
+  }
+
+  // No hover to reveal the arrows, and 28px would be under the minimum
+  // anyway — the dots take over here.
+  @media (hover: none) {
+    &__arrow {
+      display: none;
+    }
+  }
+
+  @media (pointer: coarse) {
+    --fs-carousel-dot-hit-block: 44px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &__track {
+      scroll-behavior: auto;
+    }
+
+    &__pip,
+    &__arrow {
+      transition: none;
+    }
+  }
+}
