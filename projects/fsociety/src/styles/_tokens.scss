@@ -122,6 +122,60 @@ $fs-light-mix: #ffffff !default;
 
 
 // -----------------------------------------------------------------------------
+// 4b. MIXIN — emit-alias-tokens-dark()
+// -----------------------------------------------------------------------------
+//
+// El mismo contrato semántico, leído desde el otro extremo de la escala: sobre
+// una superficie oscura el "muted" que era casi blanco pasa a ser casi negro, y
+// el "contrast" que era casi negro pasa a ser casi blanco.
+//
+// No es un espejo exacto. `soft` se queda en el 400 en los dos temas porque es
+// el stop de íconos, placeholders y disabled, y ese rol vive en el medio de la
+// escala mire desde donde se mire.
+//
+// Va como mixin y no escrito a mano porque escrito a mano ya se desincronizó:
+// hasta la 0.10.0 primary, secondary y tertiary invertían sus 10 alias, neutral
+// solo 6, y danger/success/warning solo 4. Los que faltaban se quedaban en su
+// stop claro y pintaban un parche casi blanco sobre fondo oscuro.
+
+@mixin emit-alias-tokens-dark($name) {
+  --fs-#{$name}-muted:    var(--fs-#{$name}-900);
+  --fs-#{$name}-subtle:   var(--fs-#{$name}-800);
+  --fs-#{$name}-tint:     var(--fs-#{$name}-700);
+  --fs-#{$name}-light:    var(--fs-#{$name}-600);
+  --fs-#{$name}-soft:     var(--fs-#{$name}-400);
+  --fs-#{$name}-base:     var(--fs-#{$name}-500);
+  --fs-#{$name}-hover:    var(--fs-#{$name}-400);
+  --fs-#{$name}-active:   var(--fs-#{$name}-300);
+  --fs-#{$name}-emphasis: var(--fs-#{$name}-200);
+  --fs-#{$name}-contrast: var(--fs-#{$name}-50);
+}
+
+
+// -----------------------------------------------------------------------------
+// 4c. MIXIN — emit-dark-aliases()
+// -----------------------------------------------------------------------------
+//
+// El tema oscuro completo, en un solo lugar. Se emite dos veces —  por
+// preferencia del sistema y por elección explícita — y tiene que ser el mismo
+// cuerpo en las dos, así que no puede estar escrito dos veces.
+//
+// No re-emite las escalas: `emit-scale()` es función pura de (nombre, hex) y no
+// recibe el tema, así que dentro del bloque oscuro producía los mismos 70
+// valores que ya están en `:root`.
+
+@mixin emit-dark-aliases {
+  @include emit-alias-tokens-dark('primary');
+  @include emit-alias-tokens-dark('secondary');
+  @include emit-alias-tokens-dark('tertiary');
+  @include emit-alias-tokens-dark('neutral');
+  @include emit-alias-tokens-dark('success');
+  @include emit-alias-tokens-dark('warning');
+  @include emit-alias-tokens-dark('danger');
+}
+
+
+// -----------------------------------------------------------------------------
 // 5. VARIABLES SASS — acceso directo en tiempo de compilación
 // -----------------------------------------------------------------------------
 //
@@ -395,79 +449,35 @@ $fs-z-tooltip: 600;
 // 14. DARK MODE
 // -----------------------------------------------------------------------------
 
+// El tema oscuro se activa por dos caminos, y el orden entre ellos importa.
+//
+// 1 · Preferencia del sistema operativo.
+//     Guardado con :root:not([data-theme='light']) — (0,2,0) — para que una app
+//     que fija el tema a mano le gane al SO. Sin ese guard, la regla del media
+//     query y la de :root puntúan igual (0,1,0) y gana la que viene después en
+//     el archivo: la oscura. Un consumidor con data-theme="light" en una
+//     máquina con el SO en oscuro terminaba con superficies claras y alias de
+//     marca oscuros.
+//
+// 2 · Elección explícita del consumidor.
+//     Emitido de verdad, no puenteado. Hasta la 0.10.0 esto era:
+//
+//         [data-theme='dark'] { @extend :root; }
+//
+//     que no hace lo que parece. Sass no puede extender hacia adentro de un
+//     @media: saltea el bloque oscuro en silencio, sin warning, y pega el
+//     selector a las reglas :root que están afuera — las claras. El resultado
+//     era un [data-theme="dark"] sirviendo la paleta clara.
+//
+// El selector explícito va sin prefijo de :root a propósito, para que también
+// funcione cuando el consumidor pone el atributo en <body> y no en <html>.
+
 @media (prefers-color-scheme: dark) {
-  :root {
-    // En dark mode los alias invierten su lógica visual:
-    // el "muted" que era casi blanco pasa a ser casi negro,
-    // y el "contrast" que era muy oscuro pasa a ser casi blanco.
-
-    @include emit-scale('primary',   $fs-primary-hex);
-    @include emit-scale('secondary', $fs-secondary-hex);
-    @include emit-scale('tertiary',  $fs-tertiary-hex);
-    @include emit-scale('neutral',   $fs-neutral-hex);
-    @include emit-scale('success',   $fs-success-hex);
-    @include emit-scale('warning',   $fs-warning-hex);
-    @include emit-scale('danger',    $fs-danger-hex);
-
-    // Alias invertidos para dark
-    --fs-primary-muted:    var(--fs-primary-900);
-    --fs-primary-subtle:   var(--fs-primary-800);
-    --fs-primary-tint:     var(--fs-primary-700);
-    --fs-primary-light:    var(--fs-primary-600);
-    --fs-primary-soft:     var(--fs-primary-400);
-    --fs-primary-base:     var(--fs-primary-500);
-    --fs-primary-hover:    var(--fs-primary-400);
-    --fs-primary-active:   var(--fs-primary-300);
-    --fs-primary-emphasis: var(--fs-primary-200);
-    --fs-primary-contrast: var(--fs-primary-50);
-
-    --fs-secondary-muted:    var(--fs-secondary-900);
-    --fs-secondary-subtle:   var(--fs-secondary-800);
-    --fs-secondary-tint:     var(--fs-secondary-700);
-    --fs-secondary-light:    var(--fs-secondary-600);
-    --fs-secondary-soft:     var(--fs-secondary-400);
-    --fs-secondary-base:     var(--fs-secondary-500);
-    --fs-secondary-hover:    var(--fs-secondary-400);
-    --fs-secondary-active:   var(--fs-secondary-300);
-    --fs-secondary-emphasis: var(--fs-secondary-200);
-    --fs-secondary-contrast: var(--fs-secondary-50);
-
-    --fs-tertiary-muted:    var(--fs-tertiary-900);
-    --fs-tertiary-subtle:   var(--fs-tertiary-800);
-    --fs-tertiary-tint:     var(--fs-tertiary-700);
-    --fs-tertiary-light:    var(--fs-tertiary-600);
-    --fs-tertiary-soft:     var(--fs-tertiary-400);
-    --fs-tertiary-base:     var(--fs-tertiary-500);
-    --fs-tertiary-hover:    var(--fs-tertiary-400);
-    --fs-tertiary-active:   var(--fs-tertiary-300);
-    --fs-tertiary-emphasis: var(--fs-tertiary-200);
-    --fs-tertiary-contrast: var(--fs-tertiary-50);
-
-    --fs-neutral-muted:    var(--fs-neutral-900);
-    --fs-neutral-subtle:   var(--fs-neutral-800);
-    --fs-neutral-base:     var(--fs-neutral-500);
-    --fs-neutral-hover:    var(--fs-neutral-400);
-    --fs-neutral-active:   var(--fs-neutral-300);
-    --fs-neutral-contrast: var(--fs-neutral-50);
-
-    --fs-danger-muted:    var(--fs-danger-900);
-    --fs-danger-base:     var(--fs-danger-500);
-    --fs-danger-hover:    var(--fs-danger-400);
-    --fs-danger-contrast: var(--fs-danger-50);
-
-    --fs-success-muted:    var(--fs-success-900);
-    --fs-success-base:     var(--fs-success-500);
-    --fs-success-hover:    var(--fs-success-400);
-    --fs-success-contrast: var(--fs-success-50);
-
-    --fs-warning-muted:    var(--fs-warning-900);
-    --fs-warning-base:     var(--fs-warning-500);
-    --fs-warning-hover:    var(--fs-warning-400);
-    --fs-warning-contrast: var(--fs-warning-50);
+  :root:not([data-theme='light']) {
+    @include emit-dark-aliases;
   }
 }
 
-// Soporte para clase manual [data-theme="dark"] en Angular
 [data-theme='dark'] {
-  @extend :root; // hereda todo el bloque de dark mode arriba si se necesita
+  @include emit-dark-aliases;
 }
