@@ -156,9 +156,8 @@ $fs-light-mix: #ffffff !default;
 // 4c. MIXIN — emit-dark-aliases()
 // -----------------------------------------------------------------------------
 //
-// El tema oscuro completo, en un solo lugar. Se emite dos veces —  por
-// preferencia del sistema y por elección explícita — y tiene que ser el mismo
-// cuerpo en las dos, así que no puede estar escrito dos veces.
+// El tema oscuro completo, en un solo lugar: las siete paletas por el mismo
+// mixin, para que no puedan volver a desincronizarse.
 //
 // No re-emite las escalas: `emit-scale()` es función pura de (nombre, hex) y no
 // recibe el tema, así que dentro del bloque oscuro producía los mismos 70
@@ -449,34 +448,41 @@ $fs-z-tooltip: 600;
 // 14. DARK MODE
 // -----------------------------------------------------------------------------
 
-// El tema oscuro se activa por dos caminos, y el orden entre ellos importa.
+// El tema se elige con `data-theme` en la raíz del documento, y con nada más.
+// Sin el atributo, claro.
 //
-// 1 · Preferencia del sistema operativo.
-//     Guardado con :root:not([data-theme='light']) — (0,2,0) — para que una app
-//     que fija el tema a mano le gane al SO. Sin ese guard, la regla del media
-//     query y la de :root puntúan igual (0,1,0) y gana la que viene después en
-//     el archivo: la oscura. Un consumidor con data-theme="light" en una
-//     máquina con el SO en oscuro terminaba con superficies claras y alias de
-//     marca oscuros.
+// No hay `@media (prefers-color-scheme: dark)` acá, y la ausencia es la
+// decisión. Hasta la 0.10.0 sí lo había, pero solo en este archivo: la capa
+// semántica de `global.scss` — superficies, texto, bordes — nunca miró la
+// preferencia del sistema. Las dos capas seguían reglas distintas, así que una
+// app que no fijaba `data-theme` en una máquina con el SO en oscuro recibía
+// alias de marca oscuros sobre superficies claras. Media capa de tema no es
+// medio tema: es un tema roto.
 //
-// 2 · Elección explícita del consumidor.
-//     Emitido de verdad, no puenteado. Hasta la 0.10.0 esto era:
+// De los dos arreglos posibles, este es el que hace verdadera la documentación
+// que ya está publicada ("Sin el atributo, se usa el tema claro"), y el que no
+// le cambia la cara a un consumidor que hoy no fija nada.
 //
-//         [data-theme='dark'] { @extend :root; }
+// Una app que sí quiera seguir al sistema lo puede hacer en una línea, y así
+// además decide cuándo:
 //
-//     que no hace lo que parece. Sass no puede extender hacia adentro de un
-//     @media: saltea el bloque oscuro en silencio, sin warning, y pega el
-//     selector a las reglas :root que están afuera — las claras. El resultado
-//     era un [data-theme="dark"] sirviendo la paleta clara.
+//   const dark = matchMedia('(prefers-color-scheme: dark)');
+//   const apply = () =>
+//     document.documentElement.dataset['theme'] = dark.matches ? 'dark' : 'light';
+//   apply();
+//   dark.addEventListener('change', apply);
 //
-// El selector explícito va sin prefijo de :root a propósito, para que también
-// funcione cuando el consumidor pone el atributo en <body> y no en <html>.
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme='light']) {
-    @include emit-dark-aliases;
-  }
-}
+// El selector va sin prefijo de :root a propósito, para que también funcione
+// cuando el consumidor pone el atributo en <body> y no en <html>.
+//
+// Y va emitido de verdad, no puenteado. Hasta la 0.10.0 esto era:
+//
+//     [data-theme='dark'] { @extend :root; }
+//
+// que no hace lo que parece. Sass no puede extender hacia adentro de un @media:
+// salteaba el bloque oscuro en silencio, sin warning, y pegaba el selector a
+// las reglas :root que están afuera — las claras. El resultado era un
+// [data-theme="dark"] sirviendo la paleta clara.
 
 [data-theme='dark'] {
   @include emit-dark-aliases;

@@ -59,7 +59,21 @@ Los componentes siguen el atributo `data-theme` en la raíz del documento:
 <html data-theme="dark">
 ```
 
-Sin el atributo, se usa el tema claro.
+Sin el atributo, se usa el tema claro. **La librería no mira
+`prefers-color-scheme`**, a propósito: el tema lo decide la app, en un solo
+lugar, y las dos capas de tokens — la de marca y la semántica — siempre
+coinciden.
+
+Para seguir al sistema operativo, la app lo pide y además decide cuándo:
+
+```typescript
+const dark = matchMedia('(prefers-color-scheme: dark)');
+const apply = () =>
+  (document.documentElement.dataset['theme'] = dark.matches ? 'dark' : 'light');
+
+apply();
+dark.addEventListener('change', apply);
+```
 
 ### 1c. Cargar las tipografías
 
