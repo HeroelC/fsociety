@@ -14,7 +14,7 @@
   // padding and no background: a backdrop click has to land here, and only here.
   width: var(--fs-modal-width);
   max-width: calc(100vw - 32px);
-  max-height: calc(100vh - 48px);
+  max-height: calc(100dvh - 48px);
   padding: 0;
   border: none;
   background: none;
@@ -65,7 +65,7 @@
     flex-direction: column;
     // Bounded by the dialog so a long body scrolls inside instead of pushing the
     // header and footer off screen.
-    max-height: calc(100vh - 48px);
+    max-height: calc(100dvh - 48px);
     background: var(--fs-color-surface);
     border: 1px solid var(--fs-color-border);
     border-radius: calc(var(--fs-radius-lg) + 4px);
@@ -146,6 +146,10 @@
     display: none;
     flex-shrink: 0;
     padding: 16px 20px;
+    // The modal is capped at `100dvh - 48px`, so it clears the bottom edge by
+    // 24px — less than the ~34px an iPhone home indicator occupies. Same guard
+    // as the drawer footer, for the same reason.
+    padding-bottom: max(16px, env(safe-area-inset-bottom));
     border-top: 1px solid var(--fs-color-border);
 
     &:has(> *) {

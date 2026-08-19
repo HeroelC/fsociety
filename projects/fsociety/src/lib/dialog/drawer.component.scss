@@ -8,15 +8,29 @@
 .fs-drawer {
   --fs-drawer-size: 400px;
 
+  // `--fs-drawer-max-size` caps the panel on whichever axis the side uses:
+  // max-width for left/right, max-height for top/bottom. It is read through a
+  // var() fallback rather than declared here, so one value set on `fs-drawer`
+  // reaches both axes without a per-side declaration outranking it.
+  //
+  //   fs-drawer { --fs-drawer-max-size: 100dvh; }   // full-height sheet
+
   // The dialog is stretched over the whole viewport so the backdrop is clickable
   // everywhere the panel is not. A native dialog is centred and auto-sized by
   // default, which is why max-width/height and margin all have to be reset.
+  //
+  // dvh, not vh. `100vh` is the viewport with the URL bar collapsed, reported
+  // whether it is collapsed or not, so on a phone the dialog ends up taller
+  // than the visible area. Every <dialog> carries `overflow: auto` from the
+  // user-agent stylesheet, so that extra height does not clip — it scrolls.
+  // With side="bottom" the panel hugs the bottom edge of that oversized box,
+  // which sits below the fold, and the sheet's footer goes with it.
   position: fixed;
   inset: 0;
   width: 100vw;
   max-width: 100vw;
-  height: 100vh;
-  max-height: 100vh;
+  height: 100dvh;
+  max-height: 100dvh;
   margin: 0;
   padding: 0;
   border: none;
@@ -76,7 +90,7 @@
 
     .fs-drawer__panel {
       width: var(--fs-drawer-size);
-      max-width: calc(100vw - 40px);
+      max-width: var(--fs-drawer-max-size, calc(100dvw - 40px));
       height: 100%;
       border-left: 1px solid var(--fs-color-border);
       transform: translateX(100%);
@@ -93,7 +107,7 @@
 
     .fs-drawer__panel {
       width: var(--fs-drawer-size);
-      max-width: calc(100vw - 40px);
+      max-width: var(--fs-drawer-max-size, calc(100dvw - 40px));
       height: 100%;
       border-right: 1px solid var(--fs-color-border);
       transform: translateX(-100%);
@@ -111,7 +125,7 @@
     .fs-drawer__panel {
       width: 100%;
       height: var(--fs-drawer-size);
-      max-height: calc(100vh - 40px);
+      max-height: var(--fs-drawer-max-size, calc(100dvh - 40px));
       border-bottom: 1px solid var(--fs-color-border);
       transform: translateY(-100%);
     }
@@ -128,7 +142,7 @@
     .fs-drawer__panel {
       width: 100%;
       height: var(--fs-drawer-size);
-      max-height: calc(100vh - 40px);
+      max-height: var(--fs-drawer-max-size, calc(100dvh - 40px));
       border-top: 1px solid var(--fs-color-border);
       transform: translateY(100%);
     }
@@ -211,6 +225,11 @@
     display: none;
     flex-shrink: 0;
     padding: 16px 20px;
+    // A bottom sheet that reaches the edge of the screen lands underneath the
+    // home indicator, and the actions are what ends up covered. max() keeps the
+    // normal 16px everywhere the inset is zero — which is every device without
+    // one — so this costs nothing where it is not needed.
+    padding-bottom: max(16px, env(safe-area-inset-bottom));
     border-top: 1px solid var(--fs-color-border);
 
     &:has(> *) {
