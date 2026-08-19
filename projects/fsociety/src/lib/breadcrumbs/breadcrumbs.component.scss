@@ -27,17 +27,20 @@
 }
 
 .fs-breadcrumbs {
-  --fs-breadcrumbs-gap:            8px;
-  --fs-breadcrumbs-size:           14px;
-  --fs-breadcrumbs-icon:           16px;
-  --fs-breadcrumbs-separator-size: 14px;
-  --fs-breadcrumbs-color:          var(--fs-color-text-secondary);
-  --fs-breadcrumbs-color-hover:    var(--fs-color-text-primary);
-  --fs-breadcrumbs-color-current:  var(--fs-color-text-primary);
-  --fs-breadcrumbs-separator:      var(--fs-color-border-strong);
-  --fs-breadcrumbs-radius:         var(--fs-radius-sm);
+  --_gap: var(--fs-breadcrumbs-gap, 8px);
+  --_size: var(--fs-breadcrumbs-size, 14px);
+  // Nombrada `--_icon-size` y no `--_icon`: esa ya es la variable con la que
+  // `.fs-icon` recibe su mask-image, y declararla acá se la pisaba por
+  // herencia a todos los iconos de adentro.
+  --_icon-size: var(--fs-breadcrumbs-icon, 16px);
+  --_separator-size: var(--fs-breadcrumbs-separator-size, 14px);
+  --_color: var(--fs-breadcrumbs-color, var(--fs-color-text-secondary));
+  --_color-hover: var(--fs-breadcrumbs-color-hover, var(--fs-color-text-primary));
+  --_color-current: var(--fs-breadcrumbs-color-current, var(--fs-color-text-primary));
+  --_separator: var(--fs-breadcrumbs-separator, var(--fs-color-border-strong));
+  --_radius: var(--fs-breadcrumbs-radius, var(--fs-radius-sm));
 
-  font-size: var(--fs-breadcrumbs-size);
+  font-size: var(--_size);
   line-height: 1.4;
 
   &__list {
@@ -48,7 +51,7 @@
     // know which levels matter, so they slice the array.
     flex-wrap: wrap;
     align-items: center;
-    gap: 0 var(--fs-breadcrumbs-gap);
+    gap: 0 var(--_gap);
     margin: 0;
     padding: 0;
     list-style: none;
@@ -57,7 +60,7 @@
   &__item {
     display: flex;
     align-items: center;
-    gap: var(--fs-breadcrumbs-gap);
+    gap: var(--_gap);
     min-width: 0;
   }
 
@@ -74,12 +77,12 @@
     min-height: 24px;
     padding: 2px 4px;
     margin-inline: -4px;
-    border-radius: var(--fs-breadcrumbs-radius);
+    border-radius: var(--_radius);
   }
 
   &__link,
   &__text {
-    color: var(--fs-breadcrumbs-color);
+    color: var(--_color);
   }
 
   &__link {
@@ -87,7 +90,7 @@
     transition: color var(--fs-duration-fast, 120ms) ease;
 
     &:hover {
-      color: var(--fs-breadcrumbs-color-hover);
+      color: var(--_color-hover);
       text-decoration: underline;
       text-underline-offset: 2px;
     }
@@ -99,7 +102,7 @@
   }
 
   &__current {
-    color: var(--fs-breadcrumbs-color-current);
+    color: var(--_color-current);
     font-weight: 500;
   }
 
@@ -112,14 +115,14 @@
   }
 
   &__icon {
-    width: var(--fs-breadcrumbs-icon);
-    height: var(--fs-breadcrumbs-icon);
+    width: var(--_icon-size);
+    height: var(--_icon-size);
   }
 
   &__separator {
-    width: var(--fs-breadcrumbs-separator-size);
-    height: var(--fs-breadcrumbs-separator-size);
-    color: var(--fs-breadcrumbs-separator);
+    width: var(--_separator-size);
+    height: var(--_separator-size);
+    color: var(--_separator);
     // The gap on the item already spaces it; without this the flex item would
     // also stretch and pull the chevron off the text baseline.
     flex-shrink: 0;

@@ -8,11 +8,11 @@
 // ---------------------------------------------------------------------------
 
 .fs-modal {
-  --fs-modal-width: 520px;
+  --_width: var(--fs-modal-width, 520px);
 
   // The dialog is the full-viewport box the browser centres content in. No
   // padding and no background: a backdrop click has to land here, and only here.
-  width: var(--fs-modal-width);
+  width: var(--_width);
   max-width: calc(100vw - 32px);
   max-height: calc(100dvh - 48px);
   padding: 0;

@@ -15,30 +15,34 @@
 // ---------------------------------------------------------------------------
 
 :host {
-  --fs-progress-track:    var(--fs-color-surface-alt);
-  --fs-progress-fill:     var(--fs-color-primary);
-  --fs-progress-height:   8px;
-  --fs-progress-radius:   var(--fs-radius-full);
-  --fs-progress-gap:      7px;
-  --fs-progress-duration: 1.3s;
+  --_track: var(--fs-progress-track, var(--fs-color-surface-alt));
+  // El tono y el tamaño aportan el default; el valor del consumidor le gana a
+  // los dos. Declarar la pública desde la variante invertía esa precedencia.
+  --_fill-tone: var(--fs-color-primary);
+  --_fill: var(--fs-progress-fill, var(--_fill-tone));
+  --_height-step: 8px;
+  --_height: var(--fs-progress-height, var(--_height-step));
+  --_radius: var(--fs-progress-radius, var(--fs-radius-full));
+  --_gap: var(--fs-progress-gap, 7px);
+  --_duration: var(--fs-progress-duration, 1.3s);
 
   display:        flex;
   width:          100%;
   flex-direction: column;
-  gap:            var(--fs-progress-gap);
+  gap:            var(--_gap);
 }
 
 // ─── Tones ──────────────────────────────────────────────────────────────────
 
-:host([data-tone='success']) { --fs-progress-fill: var(--fs-color-success); }
-:host([data-tone='warning']) { --fs-progress-fill: var(--fs-color-warning); }
-:host([data-tone='danger'])  { --fs-progress-fill: var(--fs-color-error); }
-:host([data-tone='neutral']) { --fs-progress-fill: var(--fs-color-border-strong); }
+:host([data-tone='success']) { --_fill-tone: var(--fs-color-success); }
+:host([data-tone='warning']) { --_fill-tone: var(--fs-color-warning); }
+:host([data-tone='danger'])  { --_fill-tone: var(--fs-color-error); }
+:host([data-tone='neutral']) { --_fill-tone: var(--fs-color-border-strong); }
 
 // ─── Sizes ──────────────────────────────────────────────────────────────────
 
-:host([data-size='sm']) { --fs-progress-height: 5px; }
-:host([data-size='lg']) { --fs-progress-height: 12px; }
+:host([data-size='sm']) { --_height-step: 5px; }
+:host([data-size='lg']) { --_height-step: 12px; }
 
 // ─── Header ─────────────────────────────────────────────────────────────────
 
@@ -62,23 +66,23 @@
 // ─── Bar ────────────────────────────────────────────────────────────────────
 
 .fs-progress__track {
-  height:        var(--fs-progress-height);
-  border-radius: var(--fs-progress-radius);
-  background:    var(--fs-progress-track);
+  height:        var(--_height);
+  border-radius: var(--_radius);
+  background:    var(--_track);
   overflow:      hidden;
 }
 
 .fs-progress__bar {
   height:        100%;
   border-radius: inherit;
-  background:    var(--fs-progress-fill);
+  background:    var(--_fill);
   transition:    width var(--fs-duration-slow) cubic-bezier(0.3, 0.7, 0.4, 1);
 }
 
 .fs-progress__bar--indeterminate {
   width:      40%;
   transition: none;
-  animation:  fs-progress-indeterminate var(--fs-progress-duration) ease-in-out infinite;
+  animation:  fs-progress-indeterminate var(--_duration) ease-in-out infinite;
 }
 
 @keyframes fs-progress-indeterminate {

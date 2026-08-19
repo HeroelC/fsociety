@@ -13,10 +13,10 @@
   // A named amber rather than a semantic token: this is a rating, not a warning,
   // and mapping it to --fs-color-warning would drag it along whenever the warning
   // hue changes. Overridable, and it reads on both themes.
-  --fs-rating-color: #f5a623;
-  --fs-rating-empty: var(--fs-color-border-strong);
-  --fs-rating-size:  26px;
-  --fs-rating-gap:   3px;
+  --_color: var(--fs-rating-color, #f5a623);
+  --_empty: var(--fs-rating-empty, var(--fs-color-border-strong));
+  --_size: var(--fs-rating-size, 26px);
+  --_gap: var(--fs-rating-gap, 3px);
 
   display: flex;
   flex-direction: column;
@@ -61,8 +61,8 @@
 
   &__layer {
     display: inline-flex;
-    gap: var(--fs-rating-gap);
-    color: var(--fs-rating-empty);
+    gap: var(--_gap);
+    color: var(--_empty);
     // The fill layer is clipped by width, so the row must not reflow.
     white-space: nowrap;
     pointer-events: none;
@@ -71,7 +71,7 @@
       position: absolute;
       inset: 0 auto 0 0;
       overflow: hidden;
-      color: var(--fs-rating-color);
+      color: var(--_color);
       transition: width 120ms ease;
     }
 
@@ -79,8 +79,8 @@
   }
 
   &__glyph {
-    width: var(--fs-rating-size);
-    height: var(--fs-rating-size);
+    width: var(--_size);
+    height: var(--_size);
     flex-shrink: 0;
   }
 
@@ -91,12 +91,12 @@
     position: absolute;
     inset: 0;
     display: inline-flex;
-    gap: var(--fs-rating-gap);
+    gap: var(--_gap);
   }
 
   &__hit {
-    width: var(--fs-rating-size);
-    height: var(--fs-rating-size);
+    width: var(--_size);
+    height: var(--_size);
     flex-shrink: 0;
     padding: 0;
     border: none;

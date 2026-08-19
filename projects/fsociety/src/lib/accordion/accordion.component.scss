@@ -15,31 +15,32 @@
 // [data-theme] with no extra configuration.
 // ---------------------------------------------------------------------------
 
+
 :host {
   display: block;
 }
 
 .fs-accordion {
-  --fs-accordion-bg:       var(--fs-color-surface);
-  --fs-accordion-border:   var(--fs-color-border);
-  --fs-accordion-radius:   var(--fs-radius-lg);
-  --fs-accordion-hover-bg: var(--fs-color-surface-alt);
-  --fs-accordion-accent:   var(--fs-color-primary);
-  --fs-accordion-pad-x:    18px;
-  --fs-accordion-pad-y:    15px;
+  --_bg: var(--fs-accordion-bg, var(--fs-color-surface));
+  --_border: var(--fs-accordion-border, var(--fs-color-border));
+  --_radius: var(--fs-accordion-radius, var(--fs-radius-lg));
+  --_hover-bg: var(--fs-accordion-hover-bg, var(--fs-color-surface-alt));
+  --_accent: var(--fs-accordion-accent, var(--fs-color-primary));
+  --_pad-x: var(--fs-accordion-pad-x, 18px);
+  --_pad-y: var(--fs-accordion-pad-y, 15px);
 
   display: flex;
   flex-direction: column;
-  background: var(--fs-accordion-bg);
-  border: 1px solid var(--fs-accordion-border);
-  border-radius: var(--fs-accordion-radius);
+  background: var(--_bg);
+  border: 1px solid var(--_border);
+  border-radius: var(--_radius);
   // Clips the first and last header's hover background to the rounded corners.
   overflow: hidden;
 
   // ─── Item ────────────────────────────────────────────────────────────────
   // Divider on the adjacent sibling, so the outer border is never doubled.
   &__item + &__item {
-    border-top: 1px solid var(--fs-accordion-border);
+    border-top: 1px solid var(--_border);
   }
 
   &__item--disabled {
@@ -58,7 +59,7 @@
     justify-content: space-between;
     gap: 12px;
     width: 100%;
-    padding: var(--fs-accordion-pad-y) var(--fs-accordion-pad-x);
+    padding: var(--_pad-y) var(--_pad-x);
     border: none;
     background: transparent;
     font: inherit;
@@ -68,7 +69,7 @@
     transition: background 120ms ease;
 
     &:hover:not(:disabled) {
-      background: var(--fs-accordion-hover-bg);
+      background: var(--_hover-bg);
     }
 
     &:disabled {
@@ -76,7 +77,7 @@
     }
 
     &:focus-visible {
-      outline: 2px solid var(--fs-accordion-accent);
+      outline: 2px solid var(--_accent);
       // Negative, because the button fills the item edge to edge and a positive
       // offset would be clipped by the container's overflow.
       outline-offset: -2px;
@@ -99,7 +100,7 @@
 
   &__item--open &__chevron {
     transform: rotate(180deg);
-    color: var(--fs-accordion-accent);
+    color: var(--_accent);
   }
 
   // ─── Panel ───────────────────────────────────────────────────────────────
@@ -121,7 +122,7 @@
   }
 
   &__panel {
-    padding: 0 var(--fs-accordion-pad-x) 16px;
+    padding: 0 var(--_pad-x) 16px;
     font-size: 14px;
     line-height: 1.6;
     color: var(--fs-color-text-secondary);
@@ -135,3 +136,6 @@
     }
   }
 }
+
+// Emitido a nivel superior y no anidado, para que el bloque de arriba pueda
+// seguir declarando propiedades después del radio.

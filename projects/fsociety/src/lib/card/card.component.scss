@@ -12,22 +12,23 @@
 // is what keeps them readable on [data-theme="dark"] as well.
 // ---------------------------------------------------------------------------
 
+
 :host {
   display: block;
 }
 
 .fs-card {
-  --fs-card-bg:     var(--fs-color-surface);
-  --fs-card-border: var(--fs-color-border);
-  --fs-card-radius: var(--fs-radius-xl);
-  --fs-card-pad:    20px;
+  --_bg: var(--fs-card-bg, var(--fs-color-surface));
+  --_border: var(--fs-card-border, var(--fs-color-border));
+  --_radius: var(--fs-card-radius, var(--fs-radius-xl));
+  --_pad: var(--fs-card-pad, 20px);
 
   display: flex;
   flex-direction: column;
   height: 100%;
-  background: var(--fs-card-bg);
-  border: 1px solid var(--fs-card-border);
-  border-radius: var(--fs-card-radius);
+  background: var(--_bg);
+  border: 1px solid var(--_border);
+  border-radius: var(--_radius);
   box-shadow: var(--fs-shadow-sm);
   // Clips the media and the footer background to the rounded corners.
   overflow: hidden;
@@ -56,7 +57,7 @@
     flex-direction: column;
     gap: 6px;
     flex: 1;
-    padding: var(--fs-card-pad);
+    padding: var(--_pad);
   }
 
   &__head {
@@ -147,8 +148,8 @@
   // ─── Footer ──────────────────────────────────────────────────────────────
   &__foot {
     display: none;
-    padding: 14px var(--fs-card-pad);
-    border-top: 1px solid var(--fs-card-border);
+    padding: 14px var(--_pad);
+    border-top: 1px solid var(--_border);
     background: var(--fs-color-surface-alt);
     // Pins the footer to the bottom when a row of cards stretches to match the
     // tallest one.
@@ -164,19 +165,19 @@
 
   // ─── Tone ────────────────────────────────────────────────────────────────
   &[data-tone='success'] {
-    border-color: color-mix(in srgb, var(--fs-color-success) 32%, var(--fs-card-border));
+    border-color: color-mix(in srgb, var(--fs-color-success) 32%, var(--_border));
   }
 
   &[data-tone='danger'] {
-    border-color: color-mix(in srgb, var(--fs-color-error) 32%, var(--fs-card-border));
+    border-color: color-mix(in srgb, var(--fs-color-error) 32%, var(--_border));
   }
 
   &[data-tone='warning'] {
-    border-color: color-mix(in srgb, var(--fs-color-warning) 36%, var(--fs-card-border));
+    border-color: color-mix(in srgb, var(--fs-color-warning) 36%, var(--_border));
   }
 
   &[data-tone='info'] {
-    border-color: color-mix(in srgb, var(--fs-color-primary) 32%, var(--fs-card-border));
+    border-color: color-mix(in srgb, var(--fs-color-primary) 32%, var(--_border));
   }
 
   // ─── Interactive ─────────────────────────────────────────────────────────
@@ -199,3 +200,6 @@
     }
   }
 }
+
+// Emitido a nivel superior y no anidado, para que el bloque de arriba pueda
+// seguir declarando propiedades después del radio.

@@ -1,3 +1,16 @@
+// ---------------------------------------------------------------------------
+// fs-multi-select — configurable CSS custom properties
+//
+//   fs-multi-select {
+//     --fs-multi-select-radius:      var(--fs-radius-md);
+//     --fs-multi-select-menu-radius: var(--fs-radius-lg);
+//   }
+//
+// The menu is painted in the top layer but stays a DOM descendant, so a custom
+// property set on the host still inherits into it.
+// ---------------------------------------------------------------------------
+
+
 @use '../../styles/overlay' as overlay;
 
 @keyframes fs-ms-in {
@@ -6,6 +19,9 @@
 }
 
 .fs-ms {
+  --_radius: var(--fs-multi-select-radius, var(--fs-radius-md));
+  --_menu-radius: var(--fs-multi-select-menu-radius, var(--fs-radius-lg));
+
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -23,7 +39,7 @@
     min-height: 40px;
     padding: 4px 8px 4px 13px;
     border: 1px solid var(--fs-color-border-field);
-    border-radius: var(--fs-radius-md);
+    border-radius: var(--_radius);
     background: var(--fs-color-surface);
     transition: border-color 180ms ease, box-shadow 180ms ease;
     cursor: pointer;
@@ -133,7 +149,7 @@
     box-sizing: border-box;
     background: var(--fs-color-surface);
     border: 1px solid var(--fs-color-border);
-    border-radius: var(--fs-radius-lg);
+    border-radius: var(--_menu-radius);
     padding: 5px;
     box-shadow: var(--fs-color-shadow-pop);
     display: flex;
@@ -276,3 +292,6 @@
     font-size: 12.5px;
   }
 }
+
+// Emitido a nivel superior y no anidado, para que el bloque de arriba pueda
+// seguir declarando propiedades después del radio.

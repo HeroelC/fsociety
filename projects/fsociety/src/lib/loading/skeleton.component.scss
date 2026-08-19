@@ -21,14 +21,14 @@
 // ---------------------------------------------------------------------------
 
 :host {
-  --fs-skeleton-bg:          var(--fs-color-border);
-  --fs-skeleton-highlight:   color-mix(in srgb, var(--fs-skeleton-bg) 55%, var(--fs-color-surface));
-  --fs-skeleton-radius:      var(--fs-radius-sm);
-  --fs-skeleton-duration:    1.4s;
-  --fs-skeleton-text-height: 0.72em;
-  --fs-skeleton-gap:         0.55em;
-  --fs-skeleton-size:        38px;
-  --fs-skeleton-rect-height: 88px;
+  --_bg: var(--fs-skeleton-bg, var(--fs-color-border));
+  --_highlight: var(--fs-skeleton-highlight, color-mix(in srgb, var(--_bg) 55%, var(--fs-color-surface)));
+  --_radius: var(--fs-skeleton-radius, var(--fs-radius-sm));
+  --_duration: var(--fs-skeleton-duration, 1.4s);
+  --_text-height: var(--fs-skeleton-text-height, 0.72em);
+  --_gap: var(--fs-skeleton-gap, 0.55em);
+  --_size: var(--fs-skeleton-size, 38px);
+  --_rect-height: var(--fs-skeleton-rect-height, 88px);
 
   display: block;
 }
@@ -43,28 +43,28 @@
   position:      relative;
   overflow:      hidden;
   width:         100%;
-  background:    var(--fs-skeleton-bg);
-  border-radius: var(--fs-skeleton-radius);
+  background:    var(--_bg);
+  border-radius: var(--_radius);
 }
 
 // ─── Variants ───────────────────────────────────────────────────────────────
 
 :host(.fs-skeleton--text) .fs-skeleton__bar {
-  height: var(--fs-skeleton-text-height);
+  height: var(--_text-height);
 }
 
 :host(.fs-skeleton--text) .fs-skeleton__bar + .fs-skeleton__bar {
-  margin-top: var(--fs-skeleton-gap);
+  margin-top: var(--_gap);
 }
 
 :host(.fs-skeleton--circle) .fs-skeleton__bar {
-  width:         var(--fs-skeleton-size);
-  height:        var(--fs-skeleton-size);
+  width:         var(--_size);
+  height:        var(--_size);
   border-radius: var(--fs-radius-full);
 }
 
 :host(.fs-skeleton--rect) .fs-skeleton__bar {
-  height: var(--fs-skeleton-rect-height);
+  height: var(--_rect-height);
 }
 
 // ─── Animation ──────────────────────────────────────────────────────────────
@@ -79,14 +79,14 @@
   background: linear-gradient(
     90deg,
     transparent,
-    var(--fs-skeleton-highlight),
+    var(--_highlight),
     transparent
   );
-  animation: fs-skeleton-shimmer var(--fs-skeleton-duration) ease-in-out infinite;
+  animation: fs-skeleton-shimmer var(--_duration) ease-in-out infinite;
 }
 
 :host([data-animation='pulse']) .fs-skeleton__bar {
-  animation: fs-skeleton-pulse var(--fs-skeleton-duration) ease-in-out infinite;
+  animation: fs-skeleton-pulse var(--_duration) ease-in-out infinite;
 }
 
 @keyframes fs-skeleton-shimmer {

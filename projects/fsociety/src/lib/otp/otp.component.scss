@@ -1,4 +1,16 @@
+// ---------------------------------------------------------------------------
+// fs-otp — configurable CSS custom properties
+//
+//   fs-otp {
+//     --fs-otp-radius: var(--fs-radius-md);
+//   }
+//
+// The radius belongs to each cell, not to the group.
+// ---------------------------------------------------------------------------
+
 .fs-otp {
+  --_radius: var(--fs-otp-radius, var(--fs-radius-md));
+
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -32,7 +44,7 @@
     color: var(--fs-color-text-primary);
     background: var(--fs-color-surface);
     border: 1px solid var(--fs-color-border-field);
-    border-radius: var(--fs-radius-md);
+    border-radius: var(--_radius);
     outline: none;
     transition: border-color 150ms ease, box-shadow 150ms ease, background 150ms ease;
 

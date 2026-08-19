@@ -24,16 +24,16 @@
 
 .fs-tabs {
   // Valores por defecto — se pueden pisar desde fuera sin tocar la lib
-  --fs-tab-bg:             var(--fs-color-bg);
-  --fs-tab-color:          var(--fs-color-text-secondary);
-  --fs-tab-color-hover:    color-mix(in srgb, var(--fs-color-text-primary) 70%, transparent);
-  --fs-tab-color-active:   var(--fs-color-text-primary);
-  --fs-tab-border:         var(--fs-color-border);
-  --fs-tab-hover-bg:       color-mix(in srgb, var(--fs-color-text-primary) 5%, transparent);
-  --fs-tab-indicator-from: var(--fs-primary-base);
-  --fs-tab-indicator-to:   var(--fs-tertiary-base);
-  --fs-tab-indicator-glow: color-mix(in srgb, var(--fs-tab-indicator-to) 45%, transparent);
-  --fs-tab-radius:         #{t.$fs-radius-lg};
+  --_bg: var(--fs-tab-bg, var(--fs-color-bg));
+  --_color: var(--fs-tab-color, var(--fs-color-text-secondary));
+  --_color-hover: var(--fs-tab-color-hover, color-mix(in srgb, var(--fs-color-text-primary) 70%, transparent));
+  --_color-active: var(--fs-tab-color-active, var(--fs-color-text-primary));
+  --_border: var(--fs-tab-border, var(--fs-color-border));
+  --_hover-bg: var(--fs-tab-hover-bg, color-mix(in srgb, var(--fs-color-text-primary) 5%, transparent));
+  --_indicator-from: var(--fs-tab-indicator-from, var(--fs-primary-base));
+  --_indicator-to: var(--fs-tab-indicator-to, var(--fs-tertiary-base));
+  --_indicator-glow: var(--fs-tab-indicator-glow, color-mix(in srgb, var(--_indicator-to) 45%, transparent));
+  --_radius: var(--fs-tab-radius, #{t.$fs-radius-lg});
 
   display:        flex;
   flex-direction: column;
@@ -47,9 +47,9 @@
     display:       flex;
     position:      relative;
     width:         100%;
-    background:    var(--fs-tab-bg);
-    border-radius: var(--fs-tab-radius) var(--fs-tab-radius) 0 0;
-    border-bottom: 1px solid var(--fs-tab-border);
+    background:    var(--_bg);
+    border-radius: var(--_radius) var(--_radius) 0 0;
+    border-bottom: 1px solid var(--_border);
     overflow:      hidden;
   }
 
@@ -62,7 +62,7 @@
     padding:        14px 8px;
     font-size:      t.$fs-text-sm;
     font-weight:    t.$fs-font-medium;
-    color:          var(--fs-tab-color);
+    color:          var(--_color);
     background:     transparent;
     border:         none;
     cursor:         pointer;
@@ -79,12 +79,12 @@
     line-height:    1;
 
     &:hover:not(&--disabled):not(&--active) {
-      color:      var(--fs-tab-color-hover);
-      background: var(--fs-tab-hover-bg);
+      color:      var(--_color-hover);
+      background: var(--_hover-bg);
     }
 
     &--active {
-      color:       var(--fs-tab-color-active);
+      color:       var(--_color-active);
       font-weight: t.$fs-font-semi;
     }
 
@@ -96,7 +96,7 @@
 
     &:focus-visible {
       // Sits on the tab header, so the inner ring matches its background.
-      @include t.focus-ring($color: var(--fs-primary-base), $inner: var(--fs-tab-bg));
+      @include t.focus-ring($color: var(--fs-primary-base), $inner: var(--_bg));
     }
   }
 
@@ -111,10 +111,10 @@
     border-radius: 2px 2px 0 0;
     background:    linear-gradient(
       90deg,
-      var(--fs-tab-indicator-from) 0%,
-      var(--fs-tab-indicator-to)   100%
+      var(--_indicator-from) 0%,
+      var(--_indicator-to)   100%
     );
-    box-shadow: 0 0 10px var(--fs-tab-indicator-glow);
+    box-shadow: 0 0 10px var(--_indicator-glow);
     transition:
       left  260ms #{t.$fs-ease-default},
       width 260ms #{t.$fs-ease-default};

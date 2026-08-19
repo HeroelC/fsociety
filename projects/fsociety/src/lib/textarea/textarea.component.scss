@@ -1,4 +1,15 @@
+// ---------------------------------------------------------------------------
+// fs-textarea — configurable CSS custom properties
+//
+//   fs-textarea {
+//     --fs-textarea-radius: var(--fs-radius-md);
+//   }
+// ---------------------------------------------------------------------------
+
+
 .fs-ta {
+  --_radius: var(--fs-textarea-radius, var(--fs-radius-md));
+
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -18,7 +29,7 @@
     align-items: stretch;
     padding: 2px;
     border: 1px solid var(--fs-color-border-field);
-    border-radius: var(--fs-radius-md);
+    border-radius: var(--_radius);
     background: var(--fs-color-surface);
     transition: border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
 
@@ -138,3 +149,6 @@
     &--near { color: var(--fs-color-warning); }
   }
 }
+
+// Emitido a nivel superior y no anidado, para que el bloque de arriba pueda
+// seguir declarando propiedades después del radio.

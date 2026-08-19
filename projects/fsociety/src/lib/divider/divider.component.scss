@@ -11,16 +11,16 @@
 // ---------------------------------------------------------------------------
 
 :host {
-  --fs-divider-color:       var(--fs-color-border);
-  --fs-divider-dash-color:  var(--fs-color-border-strong);
-  --fs-divider-label-color: var(--fs-color-text-placeholder);
-  --fs-divider-gap:         12px;
-  --fs-divider-inset:       28px;
+  --_color: var(--fs-divider-color, var(--fs-color-border));
+  --_dash-color: var(--fs-divider-dash-color, var(--fs-color-border-strong));
+  --_label-color: var(--fs-divider-label-color, var(--fs-color-text-placeholder));
+  --_gap: var(--fs-divider-gap, 12px);
+  --_inset: var(--fs-divider-inset, 28px);
 
   display: block;
   width: 100%;
   height: 1px;
-  background: var(--fs-divider-color);
+  background: var(--_color);
 }
 
 // A dashed rule cannot be a background, so the box collapses to zero height and
@@ -28,7 +28,7 @@
 :host(.fs-divider--dashed) {
   height: 0;
   background: none;
-  border-top: 1px dashed var(--fs-divider-dash-color);
+  border-top: 1px dashed var(--_dash-color);
 }
 
 // ─── Vertical ───────────────────────────────────────────────────────────────
@@ -39,7 +39,7 @@
   width: 1px;
   height: auto;
   align-self: stretch;
-  background: var(--fs-divider-color);
+  background: var(--_color);
   border-top: 0;
 }
 
@@ -47,7 +47,7 @@
   width: 0;
   background: none;
   border-top: 0;
-  border-left: 1px dashed var(--fs-divider-dash-color);
+  border-left: 1px dashed var(--_dash-color);
 }
 
 // ─── Labelled ───────────────────────────────────────────────────────────────
@@ -56,7 +56,7 @@
 :host(.fs-divider--labelled) {
   display: flex;
   align-items: center;
-  gap: var(--fs-divider-gap);
+  gap: var(--_gap);
   height: auto;
   background: none;
   border-top: 0;
@@ -65,18 +65,18 @@
 .fs-divider__line {
   flex: 1;
   height: 1px;
-  background: var(--fs-divider-color);
+  background: var(--_color);
 }
 
 :host(.fs-divider--dashed) .fs-divider__line {
   height: 0;
   background: none;
-  border-top: 1px dashed var(--fs-divider-dash-color);
+  border-top: 1px dashed var(--_dash-color);
 }
 
 :host(.fs-divider--left) .fs-divider__line:first-child,
 :host(.fs-divider--right) .fs-divider__line:last-child {
-  flex: 0 0 var(--fs-divider-inset);
+  flex: 0 0 var(--_inset);
 }
 
 .fs-divider__label {
@@ -86,7 +86,7 @@
   font-size: 12.5px;
   font-weight: 600;
   line-height: 1.4;
-  color: var(--fs-divider-label-color);
+  color: var(--_label-color);
   white-space: nowrap;
 }
 

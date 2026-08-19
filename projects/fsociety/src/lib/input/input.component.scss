@@ -1,4 +1,15 @@
+// ---------------------------------------------------------------------------
+// fs-input — configurable CSS custom properties
+//
+//   fs-input {
+//     --fs-input-radius: var(--fs-radius-md);
+//   }
+// ---------------------------------------------------------------------------
+
+
 .fs-input {
+  --_radius: var(--fs-input-radius, var(--fs-radius-md));
+
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -20,7 +31,7 @@
     height: 40px;
     padding: 0 13px;
     border: 1px solid var(--fs-color-border-field);
-    border-radius: var(--fs-radius-md);
+    border-radius: var(--_radius);
     background: var(--fs-color-surface);
     transition: border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
 
@@ -148,3 +159,6 @@
     &--success { color: var(--fs-color-success); }
   }
 }
+
+// Emitido a nivel superior y no anidado, para que el bloque de arriba pueda
+// seguir declarando propiedades después del radio.

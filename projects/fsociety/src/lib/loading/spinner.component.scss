@@ -16,8 +16,13 @@
 // ---------------------------------------------------------------------------
 
 :host {
-  --fs-spinner-size:     16px;
-  --fs-spinner-duration: 0.7s;
+  // Tres capas, en este orden: el valor del consumidor gana siempre, el `size`
+  // del componente aporta el default, y 16px es el piso. Antes las variantes
+  // declaraban la pública, así que con size="sm" el valor del consumidor perdía
+  // — justo lo contrario de lo que promete el input.
+  --_step: 16px;
+  --_size: var(--fs-spinner-size, var(--_step));
+  --_duration: var(--fs-spinner-duration, 0.7s);
 
   display:     inline-flex;
   align-items: center;
@@ -25,13 +30,13 @@
   line-height: 0;
 }
 
-:host(.fs-spinner--sm) { --fs-spinner-size: 12px; }
-:host(.fs-spinner--lg) { --fs-spinner-size: 24px; }
+:host(.fs-spinner--sm) { --_step: 12px; }
+:host(.fs-spinner--lg) { --_step: 24px; }
 
 .fs-spinner__svg {
-  width:     var(--fs-spinner-size);
-  height:    var(--fs-spinner-size);
-  animation: fs-spinner-rotate var(--fs-spinner-duration) linear infinite;
+  width:     var(--_size);
+  height:    var(--_size);
+  animation: fs-spinner-rotate var(--_duration) linear infinite;
 }
 
 @keyframes fs-spinner-rotate {

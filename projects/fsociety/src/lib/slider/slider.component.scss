@@ -12,12 +12,12 @@
 // ---------------------------------------------------------------------------
 
 .fs-sl {
-  --fs-slider-track:      var(--fs-color-surface-alt);
+  --_track: var(--fs-slider-track, var(--fs-color-surface-alt));
   // A light knob on purpose, in both themes: it reads as a physical control, and
   // a surface-coloured thumb would vanish into the track in dark.
-  --fs-slider-thumb:      #ffffff;
-  --fs-slider-thumb-size: 20px;
-  --fs-slider-height:     7px;
+  --_thumb: var(--fs-slider-thumb, #ffffff);
+  --_thumb-size: var(--fs-slider-thumb-size, 20px);
+  --_height: var(--fs-slider-height, 7px);
 
   display: flex;
   flex-direction: column;
@@ -57,7 +57,7 @@
     display: flex;
     align-items: center;
     // Room for the thumb to overhang the track without being clipped.
-    height: var(--fs-slider-thumb-size);
+    height: var(--_thumb-size);
   }
 
   // ─── The range input ─────────────────────────────────────────────────────
@@ -69,11 +69,11 @@
     position: relative;
     z-index: 1;
     width: 100%;
-    height: var(--fs-slider-height);
+    height: var(--_height);
     margin: 0;
     border-radius: var(--fs-radius-full);
     border: 1px solid var(--fs-color-border);
-    background: var(--fs-slider-track);
+    background: var(--_track);
     outline: none;
     cursor: pointer;
 
@@ -85,10 +85,10 @@
     &::-webkit-slider-thumb {
       appearance: none;
       -webkit-appearance: none;
-      width: var(--fs-slider-thumb-size);
-      height: var(--fs-slider-thumb-size);
+      width: var(--_thumb-size);
+      height: var(--_thumb-size);
       border-radius: 50%;
-      background: var(--fs-slider-thumb);
+      background: var(--_thumb);
       border: 1px solid var(--fs-color-border-strong);
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
       cursor: grab;
@@ -101,10 +101,10 @@
     }
 
     &::-moz-range-thumb {
-      width: var(--fs-slider-thumb-size);
-      height: var(--fs-slider-thumb-size);
+      width: var(--_thumb-size);
+      height: var(--_thumb-size);
       border-radius: 50%;
-      background: var(--fs-slider-thumb);
+      background: var(--_thumb);
       border: 1px solid var(--fs-color-border-strong);
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
       cursor: grab;

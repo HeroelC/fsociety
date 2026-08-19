@@ -6,7 +6,7 @@
 // ---------------------------------------------------------------------------
 
 .fs-drawer {
-  --fs-drawer-size: 400px;
+  --_size: var(--fs-drawer-size, 400px);
 
   // `--fs-drawer-max-size` caps the panel on whichever axis the side uses:
   // max-width for left/right, max-height for top/bottom. It is read through a
@@ -89,7 +89,7 @@
     justify-content: flex-end;
 
     .fs-drawer__panel {
-      width: var(--fs-drawer-size);
+      width: var(--_size);
       max-width: var(--fs-drawer-max-size, calc(100dvw - 40px));
       height: 100%;
       border-left: 1px solid var(--fs-color-border);
@@ -106,7 +106,7 @@
     justify-content: flex-start;
 
     .fs-drawer__panel {
-      width: var(--fs-drawer-size);
+      width: var(--_size);
       max-width: var(--fs-drawer-max-size, calc(100dvw - 40px));
       height: 100%;
       border-right: 1px solid var(--fs-color-border);
@@ -124,7 +124,7 @@
 
     .fs-drawer__panel {
       width: 100%;
-      height: var(--fs-drawer-size);
+      height: var(--_size);
       max-height: var(--fs-drawer-max-size, calc(100dvh - 40px));
       border-bottom: 1px solid var(--fs-color-border);
       transform: translateY(-100%);
@@ -141,7 +141,7 @@
 
     .fs-drawer__panel {
       width: 100%;
-      height: var(--fs-drawer-size);
+      height: var(--_size);
       max-height: var(--fs-drawer-max-size, calc(100dvh - 40px));
       border-top: 1px solid var(--fs-color-border);
       transform: translateY(100%);

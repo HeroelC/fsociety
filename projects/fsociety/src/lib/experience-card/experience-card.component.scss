@@ -1,3 +1,4 @@
+
 @use '../../styles/tokens' as t;
 
 // ---------------------------------------------------------------------------
@@ -7,25 +8,25 @@
 // ---------------------------------------------------------------------------
 
 .fs-exp {
-  --fs-exp-bg:            var(--fs-color-surface);
-  --fs-exp-border:        var(--fs-color-border);
-  --fs-exp-company:       var(--fs-color-text-secondary);
-  --fs-exp-role:          var(--fs-color-text-primary);
-  --fs-exp-date:          var(--fs-color-text-secondary);
-  --fs-exp-duration:      var(--fs-color-text-placeholder);
-  --fs-exp-bullet:        var(--fs-color-text-secondary);
-  --fs-exp-bullet-arrow:  var(--fs-primary-base);
-  --fs-exp-divider:       var(--fs-color-border);
-  --fs-exp-logo-bg:       var(--fs-color-surface-alt);
-  --fs-exp-logo-border:   var(--fs-color-border);
-  --fs-exp-logo-text:     var(--fs-color-text-secondary);
-  --fs-exp-toggle:        var(--fs-primary-base);
-  --fs-exp-dot-current:   var(--fs-success-base);
-  --fs-exp-dot-past:      var(--fs-color-border-strong);
-  --fs-exp-border-hover:  var(--fs-color-border-strong);
+  --_bg: var(--fs-exp-bg, var(--fs-color-surface));
+  --_border: var(--fs-exp-border, var(--fs-color-border));
+  --_company: var(--fs-exp-company, var(--fs-color-text-secondary));
+  --_role: var(--fs-exp-role, var(--fs-color-text-primary));
+  --_date: var(--fs-exp-date, var(--fs-color-text-secondary));
+  --_duration: var(--fs-exp-duration, var(--fs-color-text-placeholder));
+  --_bullet: var(--fs-exp-bullet, var(--fs-color-text-secondary));
+  --_bullet-arrow: var(--fs-exp-bullet-arrow, var(--fs-primary-base));
+  --_divider: var(--fs-exp-divider, var(--fs-color-border));
+  --_logo-bg: var(--fs-exp-logo-bg, var(--fs-color-surface-alt));
+  --_logo-border: var(--fs-exp-logo-border, var(--fs-color-border));
+  --_logo-text: var(--fs-exp-logo-text, var(--fs-color-text-secondary));
+  --_toggle: var(--fs-exp-toggle, var(--fs-primary-base));
+  --_dot-current: var(--fs-exp-dot-current, var(--fs-success-base));
+  --_dot-past: var(--fs-exp-dot-past, var(--fs-color-border-strong));
+  --_border-hover: var(--fs-exp-border-hover, var(--fs-color-border-strong));
 
   // Radio configurable — ponelo en 0 si la card va a full width
-  --fs-exp-radius: #{t.$fs-radius-xl};
+  --_radius: var(--fs-exp-radius, #{t.$fs-radius-xl});
 
   position: relative;
   width:    100%;
@@ -40,7 +41,7 @@
     top:        20px;
     bottom:     -16px;
     width:      1px;
-    background: var(--fs-exp-border);
+    background: var(--_border);
     .fs-exp--timeline-last & { display: none; }
   }
 
@@ -51,12 +52,12 @@
     width:         9px;
     height:        9px;
     border-radius: t.$fs-radius-full;
-    background:    var(--fs-exp-dot-past);
-    border:        2px solid var(--fs-exp-bg);
+    background:    var(--_dot-past);
+    border:        2px solid var(--_bg);
     flex-shrink:   0;
 
     &--current {
-      background: var(--fs-exp-dot-current);
+      background: var(--_dot-current);
       box-shadow: 0 0 6px rgba(34, 197, 94, 0.5);
     }
   }
@@ -67,13 +68,13 @@
 
   &__card {
     flex:          1;
-    background:    var(--fs-exp-bg);
-    border:        0.5px solid var(--fs-exp-border);
-    border-radius: var(--fs-exp-radius);
+    background:    var(--_bg);
+    border:        0.5px solid var(--_border);
+    border-radius: var(--_radius);
     padding:       t.$fs-space-6;    // era space-5 → más padding
     transition:    border-color t.$fs-duration-fast t.$fs-ease-default;
 
-    &:hover { border-color: var(--fs-exp-border-hover); }
+    &:hover { border-color: var(--_border-hover); }
   }
 
   // -------------------------------------------------------------------------
@@ -93,8 +94,8 @@
     width:           52px;    // era 44px
     height:          52px;
     border-radius:   t.$fs-radius-lg;
-    background:      var(--fs-exp-logo-bg);
-    border:          0.5px solid var(--fs-exp-logo-border);
+    background:      var(--_logo-bg);
+    border:          0.5px solid var(--_logo-border);
     display:         flex;
     align-items:     center;
     justify-content: center;
@@ -112,7 +113,7 @@
   &__logo-text {
     font-size:      10px;    // era 9px
     font-weight:    t.$fs-font-bold;
-    color:          var(--fs-exp-logo-text);
+    color:          var(--_logo-text);
     letter-spacing: -0.5px;
     text-align:     center;
     line-height:    1.2;
@@ -124,7 +125,7 @@
 
   &__company {
     font-size:     t.$fs-text-sm;    // era text-xs → 14px
-    color:         var(--fs-exp-company);
+    color:         var(--_company);
     margin-bottom: t.$fs-space-1;
     font-family:   t.$fs-font-sans;
   }
@@ -132,7 +133,7 @@
   &__role {
     font-size:     t.$fs-text-lg;    // era text-base → 18px
     font-weight:   t.$fs-font-semi;
-    color:         var(--fs-exp-role);
+    color:         var(--_role);
     margin-bottom: t.$fs-space-2;
     font-family:   t.$fs-font-sans;
     overflow:      hidden;
@@ -141,7 +142,7 @@
 
   &__date {
     font-size:   t.$fs-text-sm;      // era text-xs → 14px
-    color:       var(--fs-exp-date);
+    color:       var(--_date);
     display:     flex;
     align-items: center;
     gap:         t.$fs-space-1;
@@ -153,16 +154,16 @@
     width:         7px;
     height:        7px;
     border-radius: t.$fs-radius-full;
-    background:    var(--fs-exp-dot-past);
+    background:    var(--_dot-past);
     flex-shrink:   0;
 
     &--current {
-      background: var(--fs-exp-dot-current);
+      background: var(--_dot-current);
       box-shadow: 0 0 4px rgba(34, 197, 94, 0.6);
     }
   }
 
-  &__duration { color: var(--fs-exp-duration); }
+  &__duration { color: var(--_duration); }
 
   // -------------------------------------------------------------------------
   // Divider
@@ -170,7 +171,7 @@
 
   &__divider {
     height:        0.5px;
-    background:    var(--fs-exp-divider);
+    background:    var(--_divider);
     margin-bottom: t.$fs-space-4;
   }
 
@@ -189,7 +190,7 @@
 
   &__bullet {
     font-size:   t.$fs-text-sm;      // era text-xs → 14px
-    color:       var(--fs-exp-bullet);
+    color:       var(--_bullet);
     display:     flex;
     gap:         t.$fs-space-2;
     line-height: 1.6;
@@ -197,7 +198,7 @@
   }
 
   &__bullet-arrow {
-    color:       var(--fs-exp-bullet-arrow);
+    color:       var(--_bullet-arrow);
     flex-shrink: 0;
     margin-top:  2px;
     font-size:   11px;
@@ -213,7 +214,7 @@
     gap:           t.$fs-space-1;
     font-size:     t.$fs-text-sm;    // era text-xs → 14px
     font-weight:   t.$fs-font-medium;
-    color:         var(--fs-exp-toggle);
+    color:         var(--_toggle);
     background:    transparent;
     border:        none;
     cursor:        pointer;
@@ -224,7 +225,7 @@
 
     &:hover { color: var(--fs-primary-hover); }
     // Sits on the card, so the inner ring matches the card background.
-    &:focus-visible { @include t.focus-ring($color: var(--fs-primary-base), $inner: var(--fs-exp-bg)); }
+    &:focus-visible { @include t.focus-ring($color: var(--fs-primary-base), $inner: var(--_bg)); }
   }
 
   &__toggle-icon {
@@ -244,3 +245,6 @@
     margin-top: t.$fs-space-1;
   }
 }
+
+// Emitido a nivel superior y no anidado, para que el bloque de arriba pueda
+// seguir declarando propiedades después del radio.

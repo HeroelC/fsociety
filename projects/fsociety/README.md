@@ -324,6 +324,10 @@ Poné `alertAction` en **cada** botón: el slot los separa entre sí. Si en camb
 |---|---|---|
 | `dismissed` | `EventEmitter<void>` | Emite al cerrarse (botón X o auto-dismiss) |
 
+| Custom property | Default |
+|---|---|
+| `--fs-alert-radius` | `var(--fs-radius-md)` |
+
 ---
 
 ### `<fs-input>`
@@ -368,6 +372,10 @@ iconLock = `${CDN}/tabler:lock.svg`;
 | `state` | `'default' \| 'error' \| 'success'` | `'default'` | Estado de validación |
 | `errorMessage` | `string` | `''` | Mensaje de error (visible cuando `state='error'`) |
 | `successMessage` | `string` | `''` | Mensaje de éxito (visible cuando `state='success'`) |
+
+| Custom property | Default |
+|---|---|
+| `--fs-input-radius` | `var(--fs-radius-md)` |
 
 ---
 
@@ -420,6 +428,11 @@ options: FsSelectOption[] = [
 | Output | Tipo | Descripción |
 |---|---|---|
 | `valueChange` | `EventEmitter<string>` | Emite el valor seleccionado |
+
+| Custom property | Default | |
+|---|---|---|
+| `--fs-select-radius` | `var(--fs-radius-md)` | Trigger |
+| `--fs-select-menu-radius` | `var(--fs-radius-lg)` | Menú desplegable |
 
 ---
 
@@ -490,6 +503,11 @@ año) · `Enter` selecciona · `Esc` cierra.
 > El calendario se renderiza en el **top layer** vía [`[fsAnchoredPopover]`](#fsanchoredpopover),
 > así que no lo recorta ningún contenedor con `overflow` o `transform`.
 
+| Custom property | Default | |
+|---|---|---|
+| `--fs-date-picker-radius` | `var(--fs-radius-md)` | Campo |
+| `--fs-date-picker-panel-radius` | `var(--fs-radius-lg)` | Panel del calendario |
+
 ---
 
 ### `<fs-date-range-picker>`
@@ -553,6 +571,11 @@ tope quedan **deshabilitados**, no rechazados después del clic. Clickear un dí
 anterior al inicio se toma como nuevo inicio, y un rango tipeado al revés se
 ordena en el blur en vez de descartarse.
 
+| Custom property | Default | |
+|---|---|---|
+| `--fs-date-range-picker-radius` | `var(--fs-radius-md)` | Campo |
+| `--fs-date-range-picker-panel-radius` | `var(--fs-radius-lg)` | Panel del calendario |
+
 ---
 
 ### `<fs-otp>`
@@ -600,6 +623,10 @@ que entrega todo el código a un solo campo, funcione.
 `Backspace` sobre una celda llena la vacía y **se queda ahí**; solo retrocede si
 ya estaba vacía. Si saltara siempre, borrar dos caracteres seguidos se vuelve
 impredecible.
+
+| Custom property | Default | |
+|---|---|---|
+| `--fs-otp-radius` | `var(--fs-radius-md)` | Cada celda, no el grupo |
 
 ---
 
@@ -874,6 +901,10 @@ que diez pasos de `0.1` dan `1` y no `0.9999999999999999`.
 no se toca; el valor se acota y redondea al salir del campo. Los botones se
 deshabilitan solos en los límites, y `PageUp` / `PageDown` mueven diez pasos.
 
+| Custom property | Default |
+|---|---|
+| `--fs-number-input-radius` | `var(--fs-radius-md)` |
+
 ---
 
 ### `<fs-textarea>`
@@ -914,6 +945,10 @@ Implementa `ControlValueAccessor`.
 El contador pasa a color de advertencia al llegar al 90% del límite. El pie
 comparte una línea entre el mensaje y el contador, así que un hint largo y la
 cuenta no se pelean por el espacio.
+
+| Custom property | Default |
+|---|---|
+| `--fs-textarea-radius` | `var(--fs-radius-md)` |
 
 ---
 
@@ -972,6 +1007,11 @@ Los rechazos también se muestran inline debajo de la dropzone.
 > La dropzone es un `<button>`, así que `Enter` y `Espacio` abren el selector. El
 > resaltado al arrastrar cuenta `dragenter` menos `dragleave`: un booleano simple
 > parpadea al pasar el puntero sobre el ícono o el texto.
+
+| Custom property | Default | |
+|---|---|---|
+| `--fs-file-upload-radius` | `calc(var(--fs-radius-lg) + 4px)` | Dropzone |
+| `--fs-file-upload-row-radius` | `var(--fs-radius-md)` | Cada archivo listado |
 
 ---
 
@@ -1088,6 +1128,11 @@ views: FsSegmentOption[] = [
 `fs-segmented` implementa `ControlValueAccessor`, así que dentro de un formulario
 alcanza con `[(ngModel)]` o `formControlName`. `valueChange` es para el caso
 suelto, sin `FormControl` alrededor solo para poder escuchar.
+
+| Custom property | Default | |
+|---|---|---|
+| `--fs-segmented-radius` | `var(--fs-radius-md)` | Track de `<fs-segmented>` |
+| `--fs-segmented-item-radius` | `calc(var(--fs-segmented-radius) - 3px)` | Segmento interior |
 
 ---
 
@@ -1262,6 +1307,11 @@ options: FsMultiSelectOption[] = [
 | `max` | `number` | `0` | Límite de selecciones (0 = sin límite) |
 | `disabled` | `boolean` | `false` | Estado deshabilitado |
 | `emptyText` | `string` | `'Sin resultados'` | Texto cuando no hay coincidencias |
+
+| Custom property | Default | |
+|---|---|---|
+| `--fs-multi-select-radius` | `var(--fs-radius-md)` | Trigger |
+| `--fs-multi-select-menu-radius` | `var(--fs-radius-lg)` | Menú desplegable |
 
 ---
 
@@ -1849,6 +1899,8 @@ stats = [
 ];
 ```
 
+las cards. Ver «Redondeo por componente», más abajo.
+
 **CSS custom properties configurables:**
 
 ```css
@@ -1983,6 +2035,36 @@ configurables son `$fs-primary-hex`, `$fs-secondary-hex`, `$fs-tertiary-hex`,
 > que recalculan el sistema entero al instante y te dan este mismo snippet listo
 > para copiar.
 
+### Redondeo por componente
+
+Cada componente resuelve su radio contra el token global, pero deja dos formas
+de pisarlo sin tocar el resto del sistema.
+
+componente contra otro sin que quede una esquina redonda adentro de otra, con
+una medialuna de fondo entre las dos:
+
+```html
+</fs-card>
+```
+
+
+> **`start` y `end` son lógicas**, no `left`/`right`: siguen la dirección de
+> escritura, así que en RTL se dan vuelta solas.
+
+**La custom property de radio** de cada componente cambia cuánto redondea:
+
+```html
+<fs-input style="--fs-input-radius: 0"></fs-input>
+<fs-card style="--fs-card-radius: 16px"></fs-card>
+```
+
+Acepta el shorthand entero de `border-radius` — los cuatro valores, arrancando
+otros presets apagan esquinas puntuales con longhands y pisarían el shorthand.
+
+> La excepción es `--fs-segmented-item-radius`: el segmento interior se deriva
+> con `calc()` para quedar concéntrico dentro del padding del track, y `calc()`
+> necesita un valor único. Si le pasás un shorthand al track, pasale otro al
+> ítem.
 ---
 
 ## Mixins y utilidades

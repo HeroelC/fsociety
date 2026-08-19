@@ -1,4 +1,21 @@
+// ---------------------------------------------------------------------------
+// fs-segmented — configurable CSS custom properties
+//
+//   fs-segmented {
+//     --fs-segmented-radius:      var(--fs-radius-md);
+//     --fs-segmented-item-radius: calc(var(--fs-segmented-radius) - 3px);
+//   }
+//
+// The inner pill is derived with calc() so it stays concentric inside the 3px
+// track padding. calc() needs a single length, so a four-value border-radius
+// shorthand has to be passed to --fs-segmented-item-radius as well.
+// ---------------------------------------------------------------------------
+
+
 .fs-seg {
+  --_radius: var(--fs-segmented-radius, var(--fs-radius-md));
+  --_item-radius: var(--fs-segmented-item-radius, calc(var(--_radius) - 3px));
+
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -23,7 +40,7 @@
     display: flex;
     background: var(--fs-color-surface-alt);
     border: 1px solid var(--fs-color-border);
-    border-radius: var(--fs-radius-md);
+    border-radius: var(--_radius);
     padding: 3px;
     gap: 2px;
   }
@@ -37,7 +54,7 @@
     gap: 6px;
     height: 32px;
     padding: 0 12px;
-    border-radius: calc(var(--fs-radius-md) - 3px);
+    border-radius: var(--_item-radius);
     border: none;
     background: none;
     font-family: inherit;
@@ -71,3 +88,6 @@
     height: 16px;
   }
 }
+
+// Emitido a nivel superior y no anidado, para que el bloque de arriba pueda
+// seguir declarando propiedades después del radio.

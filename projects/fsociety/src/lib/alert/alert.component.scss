@@ -1,4 +1,13 @@
+// ---------------------------------------------------------------------------
+// fs-alert — configurable CSS custom properties
+//
+//   fs-alert {
+//     --fs-alert-radius: var(--fs-radius-md);
+//   }
+// ---------------------------------------------------------------------------
+
 // ─── Entry animation ──────────────────────────────────────────────────────────
+
 @keyframes fs-alert-in {
   from { opacity: 0; transform: translateY(-6px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -16,10 +25,12 @@
 
 // ─── Base ─────────────────────────────────────────────────────────────────────
 .fs-alert {
+  --_radius: var(--fs-alert-radius, var(--fs-radius-md));
+
   display: flex;
   gap: 12px;
   padding: 14px 16px;
-  border-radius: var(--fs-radius-md);
+  border-radius: var(--_radius);
   border: 1px solid transparent;
   position: relative;
   overflow: hidden;
@@ -161,3 +172,6 @@
     .fs-alert[data-tone="danger"]  & { background: var(--fs-color-error); }
   }
 }
+
+// Emitido a nivel superior y no anidado, para que el bloque de arriba pueda
+// seguir declarando propiedades después del radio.

@@ -1,3 +1,4 @@
+
 @use '../../styles/tokens' as t;
 
 // ---------------------------------------------------------------------------
@@ -12,29 +13,29 @@
 // ---------------------------------------------------------------------------
 
 .fs-profile {
-  --fs-profile-bg:            var(--fs-color-surface);
-  --fs-profile-border:        var(--fs-color-border);
-  --fs-profile-banner-from:   #1e3a5f;
-  --fs-profile-banner-to:     #0f2035;
-  --fs-profile-avatar-bg:     #1d3557;
-  --fs-profile-avatar-color:  #60a5fa;
+  --_bg: var(--fs-profile-bg, var(--fs-color-surface));
+  --_border: var(--fs-profile-border, var(--fs-color-border));
+  --_banner-from: var(--fs-profile-banner-from, #1e3a5f);
+  --_banner-to: var(--fs-profile-banner-to, #0f2035);
+  --_avatar-bg: var(--fs-profile-avatar-bg, #1d3557);
+  --_avatar-color: var(--fs-profile-avatar-color, #60a5fa);
   // Recorta el avatar del fondo de la card, así que tiene que igualar --fs-profile-bg
-  --fs-profile-avatar-border: var(--fs-color-surface);
-  --fs-profile-name:          var(--fs-color-text-primary);
-  --fs-profile-handle:        var(--fs-color-text-placeholder);
-  --fs-profile-role:          var(--fs-color-text-secondary);
-  --fs-profile-link:          var(--fs-color-primary);
-  --fs-profile-stat-value:    var(--fs-color-text-primary);
-  --fs-profile-stat-label:    var(--fs-color-text-placeholder);
-  --fs-profile-stats-border:  var(--fs-color-border);
-  --fs-profile-divider:       var(--fs-color-border);
+  --_avatar-border: var(--fs-profile-avatar-border, var(--fs-color-surface));
+  --_name: var(--fs-profile-name, var(--fs-color-text-primary));
+  --_handle: var(--fs-profile-handle, var(--fs-color-text-placeholder));
+  --_role: var(--fs-profile-role, var(--fs-color-text-secondary));
+  --_link: var(--fs-profile-link, var(--fs-color-primary));
+  --_stat-value: var(--fs-profile-stat-value, var(--fs-color-text-primary));
+  --_stat-label: var(--fs-profile-stat-label, var(--fs-color-text-placeholder));
+  --_stats-border: var(--fs-profile-stats-border, var(--fs-color-border));
+  --_divider: var(--fs-profile-divider, var(--fs-color-border));
 
   // Radio configurable — ponelo en 0 si la card va a full width sin margen
-  --fs-profile-radius: #{t.$fs-radius-xl};
+  --_radius: var(--fs-profile-radius, #{t.$fs-radius-xl});
 
-  background:    var(--fs-profile-bg);
-  border:        0.5px solid var(--fs-profile-border);
-  border-radius: var(--fs-profile-radius);
+  background:    var(--_bg);
+  border:        0.5px solid var(--_border);
+  border-radius: var(--_radius);
   overflow:      hidden;
   width:         100%;
 
@@ -61,8 +62,8 @@
     height:     100%;
     background: linear-gradient(
       135deg,
-      var(--fs-profile-banner-from) 0%,
-      var(--fs-profile-banner-to)   100%
+      var(--_banner-from) 0%,
+      var(--_banner-to)   100%
     );
   }
 
@@ -102,8 +103,8 @@
     width:           120px;
     height:          120px;
     border-radius:   t.$fs-radius-full;
-    background:      var(--fs-profile-avatar-bg);
-    border:          3px solid var(--fs-profile-avatar-border);
+    background:      var(--_avatar-bg);
+    border:          3px solid var(--_avatar-border);
     display:         flex;
     align-items:     center;
     justify-content: center;
@@ -120,7 +121,7 @@
   &__avatar-initials {
     font-size:   34px;
     font-weight: t.$fs-font-bold;
-    color:       var(--fs-profile-avatar-color);
+    color:       var(--_avatar-color);
     font-family: t.$fs-font-sans;
     user-select: none;
   }
@@ -133,7 +134,7 @@
     height:          30px;
     border-radius:   t.$fs-radius-full;
     background:      var(--fs-primary-base);
-    border:          2px solid var(--fs-profile-avatar-border);
+    border:          2px solid var(--_avatar-border);
     display:         flex;
     align-items:     center;
     justify-content: center;
@@ -146,7 +147,7 @@
   &__name {
     font-size:     t.$fs-text-xl;    // era text-base (16px) → ahora 20px
     font-weight:   t.$fs-font-semi;
-    color:         var(--fs-profile-name);
+    color:         var(--_name);
     font-family:   t.$fs-font-sans;
     margin-bottom: t.$fs-space-1;
     line-height:   1.2;
@@ -154,7 +155,7 @@
 
   &__handle {
     font-size:     t.$fs-text-sm;    // era text-xs → ahora 14px
-    color:         var(--fs-profile-handle);
+    color:         var(--_handle);
     font-family:   t.$fs-font-sans;
     margin-bottom: t.$fs-space-2;
   }
@@ -162,7 +163,7 @@
   &__role {
     font-size:      t.$fs-text-sm;   // era text-xs → ahora 14px
     font-weight:    t.$fs-font-medium;
-    color:          var(--fs-profile-role);
+    color:          var(--_role);
     text-transform: uppercase;
     letter-spacing: 0.08em;
     font-family:    t.$fs-font-sans;
@@ -207,7 +208,7 @@
 
     &:focus-visible {
       // Sits on the card, so the inner ring matches the card background.
-      @include t.focus-ring($color: var(--fs-primary-base), $inner: var(--fs-profile-bg));
+      @include t.focus-ring($color: var(--fs-primary-base), $inner: var(--_bg));
     }
   }
 
@@ -227,7 +228,7 @@
     align-items:     center;
     gap:             t.$fs-space-2;
     font-size:       t.$fs-text-sm;
-    color:           var(--fs-profile-link);
+    color:           var(--_link);
     text-decoration: none;
     font-family:     t.$fs-font-sans;
     transition:      opacity t.$fs-duration-fast t.$fs-ease-default;
@@ -267,7 +268,7 @@
   // -------------------------------------------------------------------------
 
   &__stats {
-    border-top: 0.5px solid var(--fs-profile-stats-border);
+    border-top: 0.5px solid var(--_stats-border);
     display:    flex;
   }
 
@@ -275,7 +276,7 @@
     flex:           1;
     padding:        t.$fs-space-4 0;
     text-align:     center;
-    border-right:   0.5px solid var(--fs-profile-divider);
+    border-right:   0.5px solid var(--_divider);
     display:        flex;
     flex-direction: column;
     gap:            t.$fs-space-1;
@@ -286,14 +287,17 @@
   &__stat-value {
     font-size:   t.$fs-text-xl;      // era text-base → 20px
     font-weight: t.$fs-font-semi;
-    color:       var(--fs-profile-stat-value);
+    color:       var(--_stat-value);
     font-family: t.$fs-font-sans;
     line-height: 1;
   }
 
   &__stat-label {
     font-size:   t.$fs-text-xs;      // era 10px → ahora con token
-    color:       var(--fs-profile-stat-label);
+    color:       var(--_stat-label);
     font-family: t.$fs-font-sans;
   }
 }
+
+// Emitido a nivel superior y no anidado, para que el bloque de arriba pueda
+// seguir declarando propiedades después del radio.
