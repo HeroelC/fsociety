@@ -58,6 +58,33 @@ Los componentes siguen el atributo `data-theme` en la raíz del documento:
 
 Sin el atributo, se usa el tema claro.
 
+### 1c. Cargar las tipografías
+
+**La librería nombra tipografías pero no las incluye.** No hay ningún
+`@font-face` adentro del paquete, así que si no las cargás vos, todo cae al
+fallback de la stack y nadie avisa:
+
+| Dónde | Qué pide |
+|---|---|
+| `body` (en `styles/global`) | `Plus Jakarta Sans` |
+| `--fs-font-sans` | `Inter` |
+| `--fs-font-mono` | `JetBrains Mono` |
+
+```html
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+  href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap"
+  rel="stylesheet"
+>
+```
+
+O self-hosteadas, o las que quieras: pisá `--fs-font-sans` y la stack cambia
+entera.
+
+> `body` pide Plus Jakarta Sans y `--fs-font-sans` pide Inter. Son dos valores
+> distintos y es a propósito solo a medias — si querés una sola, declará las dos.
+
 ### 2. Importar componentes
 
 Los componentes son **standalone** — se importan directo en el `imports` del componente o módulo:
@@ -76,6 +103,18 @@ export class MyComponent {}
 ---
 
 ## Componentes
+
+### Índice
+
+**Formulario** — [fs-input](#fs-input) · [fs-textarea](#fs-textarea) · [fs-number-input](#fs-number-input) · [fs-select](#fs-select) · [fs-multi-select](#fs-multi-select) · [fs-date-picker](#fs-date-picker) · [fs-date-range-picker](#fs-date-range-picker) · [fs-otp](#fs-otp) · [fs-slider](#fs-slider) · [fs-rating](#fs-rating) · [fs-file-upload](#fs-file-upload) · [checkbox · radio · switch · segmented](#selección--fs-checkbox-fs-radio-group-fs-switch-fs-segmented) · [fs-hint · fs-field](#fs-hint-y-fs-field)
+
+**Acción y estado** — [fs-button](#fs-button) · [fs-badge](#fs-badge) · [fs-alert](#fs-alert) · [toast](#fstoastservice--fs-toast-stack) · [fs-tooltip](#fs-tooltip) · [skeleton · spinner · progress](#carga--fs-skeleton-fs-spinner-fs-progress)
+
+**Layout y navegación** — [fs-tabs](#fs-tabs) · [fs-steps](#fs-steps) · [fs-accordion](#fs-accordion) · [fs-divider](#fs-divider) · [card · row-card · stat-card](#cards--fs-card-fs-row-card-fs-stat-card) · [fs-carousel](#fs-carousel)
+
+**Overlays** — [fs-modal](#fs-modal) · [fs-drawer](#fs-drawer)
+
+**Compositions** — [fs-experience-card](#fs-experience-card) · [fs-profile-card](#fs-profile-card)
 
 ### `<fs-button>`
 
@@ -134,6 +173,10 @@ export class MyComponent {}
 | `color` | `'primary' \| 'secondary' \| 'tertiary' \| 'success' \| 'warning' \| 'danger' \| 'neutral'` | `'neutral'` | Color semántico |
 | `customColor` | `string` | — | Color hex personalizado — genera fondo, borde y texto automáticamente |
 | `variant` | `'filled' \| 'outline'` | `'filled'` | Variante visual |
+
+> Si venís de un handoff escrito para el bundle de React: lo que allá se llama
+> `soft` acá es `filled`. No hay alias — un mismo valor con dos nombres es deuda
+> que no se paga sola.
 | `size` | `'sm' \| 'md'` | `'md'` | Tamaño |
 | `dot` | `boolean` | `false` | Punto de estado |
 | `iconLeft` | `string` | — | SVG path ícono izquierdo (viewBox 0 0 24 24) |
@@ -603,6 +646,30 @@ el navegador cierra el diálogo por su cuenta.
 El scroll lock compensa el ancho de la barra con `padding-right`. Sin eso, esconder
 la barra reflowea la página y se ve como un salto lateral al abrir.
 
+| Custom property | Default |
+|---|---|
+| `--fs-drawer-size` | `400px` — ancho en left/right, alto en top/bottom |
+| `--fs-drawer-max-size` | `calc(100dvw - 40px)` en left/right, `calc(100dvh - 40px)` en top/bottom |
+
+`--fs-drawer-max-size` es el tope del panel sobre el eje que use el lado. Para una
+hoja de filtros a pantalla completa:
+
+```html
+<fs-drawer side="bottom" style="--fs-drawer-max-size: 100dvh">
+```
+
+> **Se mide en `dvh`, no en `vh`.** `100vh` es el viewport con la barra de URL
+> colapsada, lo reporte o no el navegador, así que en un teléfono el diálogo sale
+> más alto que el área visible. Y como todo `<dialog>` trae `overflow: auto` del
+> user-agent stylesheet, ese excedente no se recorta: scrollea. Con
+> `side="bottom"` el panel se ancla al borde inferior de esa caja agrandada, que
+> queda abajo del pliegue, y se lleva el footer con él.
+>
+> El footer despeja `env(safe-area-inset-bottom)` con `max(16px, …)`, así que en
+> un iPhone las acciones no quedan abajo del indicador de home. `fs-modal` hace
+> lo mismo: su tope es `100dvh - 48px`, que deja 24px de aire — menos que los
+> ~34px que ocupa el indicador.
+
 > **Los dos componentes usan `ViewEncapsulation.None`**, y no es un descuido:
 > `::backdrop` no es descendiente del componente, así que la encapsulación
 > emulada de Angular reescribe el selector a algo que nunca matchea. Es la única
@@ -968,6 +1035,14 @@ views: FsSegmentOption[] = [
 | `options` | `FsSegmentOption[]` | `[]` | Array `{ value, label, icon? }` |
 | `label` | `string` | `''` | Etiqueta visible encima del control |
 | `disabled` | `boolean` | `false` | Deshabilita toda la selección |
+
+| Output | Tipo | Descripción |
+|---|---|---|
+| `valueChange` | `EventEmitter<string>` | El valor elegido, para quien no usa formularios |
+
+`fs-segmented` implementa `ControlValueAccessor`, así que dentro de un formulario
+alcanza con `[(ngModel)]` o `formControlName`. `valueChange` es para el caso
+suelto, sin `FormControl` alrededor solo para poder escuchar.
 
 ---
 
@@ -1803,49 +1878,6 @@ npm run build-storybook && npm run deploy-storybook
 ```
 
 Storybook en: **https://heroelc.github.io/fsociety**
-
----
-
-## Roadmap
-
-- [x] `_tokens.scss` — sistema de color con 10 stops automáticos
-- [x] `_mixins.scss` — flexbox, spacing, tipografía, responsive, visual helpers
-- [x] `fs-button` — 5 variantes, 3 tamaños, loading, icons
-- [x] `fs-badge` — 7 colores, customColor hex, imgLeft/Right, iconOnly, dot, removable
-- [x] `fs-tabs` — degradé indicator, flex:1, 9 CSS custom properties
-- [x] `fs-alert` — filled/accent, autoDismiss con progress bar, animaciones
-- [x] `fs-experience-card` — full/compact, timeline, bullets expandibles
-- [x] `fs-profile-card` — avatarUrl, bannerUrl, links con imgUrl, badges con customColor
-- [x] `fs-input` — text/email/password/url/search, clearable, iconLeft, error/success
-- [x] `fs-select` — searchable, iconLeft, descripción por opción, error/success
-- [x] `fs-checkbox` — indeterminate, error, descripción
-- [x] `fs-radio-group` — opciones con descripción, error
-- [x] `fs-switch` — toggle on/off, descripción
-- [x] `fs-segmented` — control segmentado con íconos opcionales
-- [x] `fs-toast` — FsToastService + fs-toast-stack, 5 tonos, auto-dismiss
-- [x] `fs-tooltip` — top/bottom, alto contraste, top layer
-- [x] `fs-hint` + `fs-field` — mensajes de apoyo en 4 tonos, wrapper de campo
-- [x] `fs-multi-select` — chips removibles, buscador, checkboxes, max
-- [x] `fs-steps` — stepper multi-paso, completado/activo/pendiente
-- [x] `fs-date-picker` — campo tipeable + calendario, min/max, locale via Intl, teclado
-- [x] `fs-number-input` — stepper, prefijo/sufijo, decimales sin drift
-- [x] `fs-textarea` — contador, auto-grow, estados
-- [x] `fs-file-upload` — dropzone, File reales, validación de tipo/tamaño/cantidad
-- [x] `fs-date-range-picker` — dos meses, preview, presets, maxSpan
-- [x] `fs-otp` — código de verificación, autofill de SMS, pegado inteligente
-- [x] `fs-slider` — marcas, límites, formato propio, decimales sin drift
-- [x] `fs-rating` — fracciones en readonly, un solo tab stop, icono configurable
-- [x] `fs-modal` — <dialog> nativo: focus trap, fondo inerte, top layer
-- [x] `fs-drawer` — mismo dialog, panel en cualquiera de los 4 bordes
-- [x] `fs-accordion` — altura con grid 0fr→1fr, sin medir en JS, panel cerrado inerte
-- [x] `fs-divider` — sólido/punteado, con label, y vertical que estira con la fila
-- [x] `fs-card` + `fs-row-card` + `fs-stat-card` — tres formas, tintes de estado que aguantan dark
-- [x] `fs-skeleton` + `fs-spinner` + `fs-progress` — placeholder aria-hidden, spinner que solo habla con label, indeterminate sin valuenow
-- [x] `fs-carousel` — scroll-snap nativo, template por slide con preload, tap vs swipe
-- [x] Temas light y dark vía `data-theme`, con capa semántica de tokens
-- [x] `[fsAnchoredPopover]` — overlays en el top layer, sin recortes
-- [x] Storybook en GitHub Pages, con paleta de marca en vivo
-- [ ] GitHub Actions CI/CD
 
 ---
 
