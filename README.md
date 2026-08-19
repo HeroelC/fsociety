@@ -1507,6 +1507,7 @@ componente.
 | `label` | `string` | `''` | Nombre accesible del grupo |
 | `startAt` | `number` | `0` | Slide inicial. Se lee **una sola vez** |
 | `preloadRadius` | `number` | `1` | Cuántas slides a cada lado reportan `shouldLoad` |
+| `corners` | `FsCarouselCorners` | `'all'` | Qué esquinas redondear |
 
 | Output | Tipo | Descripción |
 |---|---|---|
@@ -1524,7 +1525,7 @@ hacer con eso lo decidís vos: un `<img>`, un `<video>`, un iframe, o nada.
 
 | Custom property | Default |
 |---|---|
-| `--fs-carousel-radius` | `var(--fs-radius-lg)` |
+| `--fs-carousel-radius` | `var(--fs-radius-lg)` — acepta el shorthand de 4 valores |
 | `--fs-carousel-slide-width` | `100%` |
 | `--fs-carousel-gap` | `0px` |
 | `--fs-carousel-arrow-size` | `28px` |
@@ -1539,6 +1540,28 @@ contra la caja real de cada slide, así que anchos parciales y `gap` no lo rompe
 <fs-carousel [count]="6" label="Galería"
              style="--fs-carousel-slide-width: 78%; --fs-carousel-gap: 12px">
 ```
+
+`corners` es `'all' \| 'none' \| 'top' \| 'bottom' \| 'start' \| 'end'`. Sirve para
+apoyar el carrusel contra otra cosa sin que quede una esquina redonda adentro de
+otra — el caso típico es arriba de una card:
+
+```html
+<fs-card title="Departamento en Palermo">
+  <div cardMedia>
+    <fs-carousel [count]="fotos.length" label="Fotos" corners="top">
+      <ng-template fsCarouselSlide let-i>…</ng-template>
+    </fs-carousel>
+  </div>
+</fs-card>
+```
+
+> **`start` y `end` son lógicas**, no `left`/`right`: siguen la dirección de
+> escritura, así que en RTL se dan vuelta solas.
+>
+> Para una combinación que no esté en la lista, `--fs-carousel-radius` acepta el
+> shorthand entero de `border-radius` — los cuatro valores, arrancando arriba a
+> la izquierda y siguiendo el reloj. Eso vale con `corners="all"`; los otros
+> valores apagan esquinas puntuales con longhands y pisarían el shorthand.
 
 > **`startAt` posiciona un carrusel que se está creando, no maneja uno que ya
 > existe.** Se lee en el primer render, contra el ancho real del track, y nunca

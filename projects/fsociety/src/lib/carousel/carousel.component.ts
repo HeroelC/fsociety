@@ -27,6 +27,12 @@ const ICONS = {
  */
 const TAP_SLOP_PX = 8;
 
+/**
+ * Qué esquinas van redondeadas. `start` y `end` son lógicas: siguen la
+ * dirección de escritura, así que en RTL se dan vuelta solas.
+ */
+export type FsCarouselCorners = 'all' | 'none' | 'top' | 'bottom' | 'start' | 'end';
+
 /** What every slide template receives. */
 export interface FsCarouselSlideContext {
   /** Zero-based index of the slide. `let-i` picks it up. */
@@ -84,6 +90,20 @@ export class FsCarouselComponent implements OnChanges {
 
   /** How many slides on each side of the current one report `shouldLoad`. */
   @Input() preloadRadius = 1;
+
+  /**
+   * Qué esquinas redondear. Por defecto las cuatro, que es el carrusel suelto.
+   *
+   * Metido arriba de una card querés `top`, para que el radio de la card siga
+   * de largo en vez de que aparezca una esquina redonda adentro de otra. `none`
+   * es para cuando el contenedor ya clipea.
+   *
+   * Para una combinación que no esté acá, `--fs-carousel-radius` acepta el
+   * shorthand entero de `border-radius` — cuatro valores, empezando arriba a la
+   * izquierda y siguiendo el reloj. Eso solo aplica con `corners="all"`: los
+   * otros valores apagan esquinas puntuales y pisarían el shorthand.
+   */
+  @Input() corners: FsCarouselCorners = 'all';
 
   /**
    * A press that did not turn into a swipe. Useful for opening a lightbox

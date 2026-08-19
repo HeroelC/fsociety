@@ -1,17 +1,22 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 import { moduleMetadata } from '@storybook/angular';
 import { FsCarouselComponent, FsCarouselSlideDirective } from './carousel.component';
+import { FsCardComponent } from '../card/card.component';
 
 const meta: Meta<FsCarouselComponent> = {
   title: 'Components/Carousel',
   component: FsCarouselComponent,
   decorators: [
     moduleMetadata({
-      imports: [FsCarouselComponent, FsCarouselSlideDirective],
+      imports: [FsCarouselComponent, FsCarouselSlideDirective, FsCardComponent],
     }),
   ],
   tags: ['autodocs'],
   argTypes: {
+    corners: {
+      control: { type: 'inline-radio' },
+      options: ['all', 'none', 'top', 'bottom', 'start', 'end'],
+    },
     count: { control: { type: 'number', min: 1, max: 12 } },
     startAt: { control: { type: 'number', min: 0, max: 11 } },
     preloadRadius: { control: { type: 'number', min: 0, max: 4 } },
@@ -199,6 +204,88 @@ export const Peek: Story = {
             </div>
           </ng-template>
         </fs-carousel>
+      </div>
+    `,
+  }),
+};
+
+// ─── Esquinas ────────────────────────────────────────────────────────────────
+
+export const Corners: Story = {
+  name: 'Esquinas',
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Por defecto van las cuatro. `top`, `bottom`, `start` y `end` apagan las ' +
+          'del lado opuesto, para que el carrusel se apoye contra otra cosa sin dejar ' +
+          'una esquina redonda adentro de otra. `start` y `end` son lógicas: en RTL ' +
+          'se dan vuelta solas.',
+      },
+    },
+  },
+  render: () => ({
+    props: { gradients, panelStyle, opciones: ['all', 'none', 'top', 'bottom', 'start', 'end'] },
+    template: `
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 760px">
+        @for (c of opciones; track c) {
+          <div style="display: grid; gap: 8px">
+            <code style="font-size: 12px; color: var(--fs-color-text-secondary)">corners="{{ c }}"</code>
+            <fs-carousel [count]="3" label="Galería de ejemplo" [corners]="c"
+                         style="--fs-carousel-radius: 20px">
+              <ng-template fsCarouselSlide let-i>
+                <div [style]="panelStyle" [style.height]="'150px'"
+                     [style.background]="gradients[i % gradients.length]">{{ i + 1 }}</div>
+              </ng-template>
+            </fs-carousel>
+          </div>
+        }
+      </div>
+    `,
+  }),
+};
+
+// ─── Dentro de una card ──────────────────────────────────────────────────────
+
+export const InsideCard: Story = {
+  name: 'Dentro de una card',
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'El caso para el que existe la opción. Con `corners="top"` el radio de la ' +
+          'card sigue de largo; sin eso queda una esquina redonda adentro de otra y ' +
+          'una medialuna de fondo entre las dos.',
+      },
+    },
+  },
+  render: () => ({
+    props: { gradients, panelStyle },
+    template: `
+      <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; max-width: 720px">
+        <fs-card title="Con corners=top" subtitle="El radio de la card sigue de largo">
+          <div cardMedia>
+            <fs-carousel [count]="4" label="Fotos del lugar" corners="top">
+              <ng-template fsCarouselSlide let-i>
+                <div [style]="panelStyle" [style.height]="'170px'"
+                     [style.background]="gradients[i % gradients.length]">{{ i + 1 }}</div>
+              </ng-template>
+            </fs-carousel>
+          </div>
+          Cuatro fotos del lugar, con el carrusel apoyado contra el borde de la card.
+        </fs-card>
+
+        <fs-card title="Sin la opción" subtitle="Esquina redonda adentro de otra">
+          <div cardMedia>
+            <fs-carousel [count]="4" label="Fotos del lugar">
+              <ng-template fsCarouselSlide let-i>
+                <div [style]="panelStyle" [style.height]="'170px'"
+                     [style.background]="gradients[i % gradients.length]">{{ i + 1 }}</div>
+              </ng-template>
+            </fs-carousel>
+          </div>
+          Mirá las dos esquinas de arriba: se ve la medialuna de fondo entre los radios.
+        </fs-card>
       </div>
     `,
   }),

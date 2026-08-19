@@ -122,7 +122,7 @@ export { FsProgressComponent } from './lib/loading/progress.component';
 export type { FsProgressTone, FsProgressSize } from './lib/loading/progress.component';
 
 export { FsCarouselComponent, FsCarouselSlideDirective } from './lib/carousel/carousel.component';
-export type { FsCarouselSlideContext } from './lib/carousel/carousel.component';
+export type { FsCarouselSlideContext, FsCarouselCorners } from './lib/carousel/carousel.component';
 
 export { FsBreadcrumbsComponent } from './lib/breadcrumbs/breadcrumbs.component';
 export type { FsBreadcrumb, FsBreadcrumbNavigation } from './lib/breadcrumbs/breadcrumbs.component';

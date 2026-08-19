@@ -2,7 +2,7 @@
 // fs-carousel — configurable CSS custom properties
 //
 //   fs-carousel {
-//     --fs-carousel-radius:           var(--fs-radius-lg);
+//     --fs-carousel-radius:           var(--fs-radius-lg);   // acepta el shorthand
 //     --fs-carousel-gap:              0px;
 //     --fs-carousel-slide-width:      100%;
 //     --fs-carousel-arrow-size:       28px;
@@ -66,6 +66,41 @@
   position:      relative;
   overflow:      hidden;
   border-radius: var(--fs-carousel-radius);
+
+  // ─── Esquinas ────────────────────────────────────────────────────────────
+  // Metido arriba de una card, el carrusel tiene que dejar de redondear por
+  // abajo o queda una esquina redonda adentro de otra, con una medialuna de
+  // fondo entre las dos.
+  //
+  // Longhands lógicas y no un shorthand por preset: `--fs-carousel-radius`
+  // acepta los cuatro valores de `border-radius`, y un shorthand por preset lo
+  // pisaría entero. Así cada preset apaga solo las esquinas que le tocan y el
+  // resto sale del valor que hayas puesto, sea uno o cuatro.
+  //
+  // `start`/`end` son lógicas de verdad: en RTL se dan vuelta solas.
+  &[data-corners='none'] {
+    border-radius: 0;
+  }
+
+  &[data-corners='top'] {
+    border-end-start-radius: 0;
+    border-end-end-radius: 0;
+  }
+
+  &[data-corners='bottom'] {
+    border-start-start-radius: 0;
+    border-start-end-radius: 0;
+  }
+
+  &[data-corners='start'] {
+    border-start-end-radius: 0;
+    border-end-end-radius: 0;
+  }
+
+  &[data-corners='end'] {
+    border-start-start-radius: 0;
+    border-end-start-radius: 0;
+  }
 
   // ─── Track ───────────────────────────────────────────────────────────────
   // The scroller. Everything that makes this feel native — the momentum, the
