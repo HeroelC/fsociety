@@ -9,6 +9,7 @@
         [id]="id"
         [checked]="checked"
         [disabled]="disabled"
+        [attr.aria-label]="ariaLabel || null"
         (change)="toggle()"
         (blur)="onBlur()"
       />

@@ -30,6 +30,13 @@ export class FsCheckboxComponent implements ControlValueAccessor {
   readonly Icons = ICONS;
 
   @Input() label = '';
+
+  /**
+   * Nombre accesible cuando no hay `label` visible — por ejemplo, la casilla
+   * suelta de una celda de tabla. Sin esto la casilla se anuncia sin nombre.
+   */
+  @Input() ariaLabel = '';
+
   @Input() description = '';
   @Input() disabled = false;
   @Input() indeterminate = false;
