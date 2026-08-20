@@ -11,7 +11,8 @@
   },
   "git": {
     "commitMessage": "chore: release v${version}",
-    "tagName": "v${version}"
+    "tagName": "v${version}",
+    "push": false
   },
   "npm": { "publish": false }
 }
