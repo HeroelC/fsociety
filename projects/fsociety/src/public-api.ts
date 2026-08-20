@@ -129,3 +129,17 @@ export type { FsCarouselSlideContext, FsCarouselCorners } from './lib/carousel/c
 
 export { FsBreadcrumbsComponent } from './lib/breadcrumbs/breadcrumbs.component';
 export type { FsBreadcrumb, FsBreadcrumbNavigation } from './lib/breadcrumbs/breadcrumbs.component';
+
+export { FsTableComponent } from './lib/table/table.component';
+export type {
+  FsTableSort,
+  FsSortDir,
+  FsTableDensity,
+  FsTableLayout,
+} from './lib/table/table.component';
+
+export { FsColumnDirective } from './lib/table/table-column.directive';
+export type { FsColumnAlign, FsCardSlot, FsCellContext } from './lib/table/table-column.directive';
+
+export { FsColumnFilterDirective } from './lib/table/table-column-filter.directive';
+export type { FsColumnFilterContext } from './lib/table/table-column-filter.directive';

@@ -144,6 +144,8 @@ El Storybook usa esas mismas dos secciones.
 
 **Layout y navegación** — [fs-tabs](#fs-tabs) · [fs-steps](#fs-steps) · [fs-accordion](#fs-accordion) · [fs-divider](#fs-divider) · [card · row-card · stat-card](#cards--fs-card-fs-row-card-fs-stat-card) · [fs-carousel](#fs-carousel) · [fs-breadcrumbs](#fs-breadcrumbs)
 
+**Datos** — [fs-table](#fs-table)
+
 **Overlays** — [fs-modal](#fs-modal) · [fs-drawer](#fs-drawer) · [fsAnchoredPopover](#fsanchoredpopover)
 
 **Compositions** — [fs-experience-card](#fs-experience-card) · [fs-profile-card](#fs-profile-card)
@@ -1992,6 +1994,270 @@ abajo, y queda contenido dentro del viewport. Si el navegador no soporta
 > Usá `popoverOpen` cuando el elemento se queda en el DOM y solo alterna
 > visibilidad: así el CSS puede transicionar `:popover-open` en los dos sentidos
 > con `transition-behavior: allow-discrete` y `@starting-style`.
+
+---
+
+### `<fs-table>`
+
+Tabla de datos con columnas declaradas por template. La tabla ubica, ordena y
+selecciona; qué hay adentro de cada celda lo escribís vos.
+
+```html
+<fs-table
+  [rows]="invoices"
+  rowKey="id"
+  caption="Facturas emitidas"
+  [selectable]="true"
+  [(selected)]="selectedIds"
+  [(sort)]="sort"
+  [clientSort]="true"
+>
+  <ng-template fsColumn="client" header="Cliente" cardSlot="title" [sortable]="true" let-row>
+    <a [routerLink]="['/facturas', row.id]">{{ row.client }}</a>
+  </ng-template>
+
+  <ng-template fsColumn="amount" header="Importe" align="end" cardSlot="value" [sortable]="true" let-row>
+    {{ row.amount | currency }}
+  </ng-template>
+
+  <ng-template fsColumn="status" header="Estado" cardSlot="status" let-row>
+    <fs-badge size="sm" [color]="colorFor(row.status)">{{ row.status }}</fs-badge>
+  </ng-template>
+
+  <ng-template fsColumn="issued" header="Emitida" cardSlot="meta" [sortable]="true" let-row>
+    {{ row.issued | date:'dd MMM' }}
+  </ng-template>
+</fs-table>
+```
+
+```typescript
+import { FsTableComponent, FsColumnDirective, FsTableSort } from '@heroelc/fsociety';
+
+sort: FsTableSort | null = { key: 'issued', dir: 'desc' };
+selectedIds: unknown[] = [];
+```
+
+#### Mobile: la misma tabla, en tarjetas
+
+Una tabla en un celular se ve mal, y achicar la fuente no lo arregla. Por debajo
+de **720px de contenedor** —container query, no viewport— las filas se
+reacomodan como tarjetas. No hay un template aparte para mobile: el acomodo sale
+del `cardSlot` de cada columna.
+
+```
+┌─────────────────────────────────────────┐
+│ ☐  ┌───────┐  US$ 289.000    [ Activa ] │  ← value            status
+│    │ media │  Casa 4 amb. — Villa Ade…  │  ← title
+│    └───────┘  Código: NP-0412           │  ← meta (con su etiqueta)
+│               Operación: Venta          │  ← meta
+│                                  ✎  ↗   │  ← actions
+└─────────────────────────────────────────┘
+```
+
+| `cardSlot` | Dónde cae en la tarjeta |
+|---|---|
+| `media` | Miniatura a la izquierda, a lo alto de la tarjeta |
+| `value` | Dato principal, arriba a la izquierda |
+| `status` | Badge o estado, arriba a la derecha |
+| `title` | Línea del título, debajo |
+| `meta` | Dato secundario apilado, con su etiqueta adelante. **Es el default** |
+| `actions` | Botones de fila, al pie |
+| `none` | La columna no se muestra en tarjeta |
+
+El orden de la tarjeta no depende del orden en que declarás las columnas: lo
+decide el `cardSlot`.
+
+`layout` fuerza el modo: `'auto'` (default), `'table'` o `'cards'`.
+
+#### Accesibilidad
+
+Es una `<table>` de verdad en todos los anchos, **incluso en modo tarjeta**. El
+`<thead>` no se esconde con `display: none` sino que se saca de la vista: sigue
+en el árbol de accesibilidad, así que un lector de pantalla anuncia
+«Precio, US$ 289.000» aunque en pantalla no quede ninguna columna dibujada.
+
+Por eso `caption` es obligatorio: es el nombre accesible de la tabla y de la
+región que scrollea, que además es focusable con teclado (WCAG 2.1.1 — una tabla
+que desborda tiene que poder scrollearse sin mouse).
+
+**La tabla no hace la fila entera focusable, a propósito.** `rowActivate` es un
+atajo de mouse: ignora solo los clicks que nacieron en un control, así que las
+acciones de la fila no necesitan `stopPropagation` una por una. Pero el camino
+accesible tiene que ser un `<a>` o un `<button>` adentro de alguna celda —
+normalmente el título. Así funcionan gratis el teclado, el click del medio y
+«abrir en pestaña nueva».
+
+#### Orden: controlado por defecto
+
+`sortChange` avisa, no ordena. El ciclo del encabezado es
+ascendente → descendente → sin orden, y quien recibe el evento decide qué hacer:
+llamar a la API, cambiar la query string, lo que sea. Es lo que hace que un
+`fs-select` de orden y el click en el encabezado puedan compartir el mismo
+estado.
+
+`[clientSort]="true"` ordena adentro de la tabla. **Solo si la lista ya está
+entera en memoria**: si paginás o filtrás en el servidor, dejalo apagado. Cada
+columna puede declarar cómo sacar su valor ordenable:
+
+```html
+<ng-template fsColumn="updated" header="Actualizada"
+             [sortable]="true" [sortValue]="byTimestamp" let-row>
+  {{ row.updated | date }}
+</ng-template>
+```
+
+```typescript
+byTimestamp = (row: Invoice) => new Date(row.updated).getTime();
+```
+
+Sin `sortValue` se lee `row[name]` y se compara como texto o número según lo que
+aparezca. Los nulos van al final.
+
+#### Filtros por columna
+
+La tabla pone el embudo en el encabezado, ancla el panel y se asegura de que
+haya uno solo abierto. **No filtra**: nunca toca `rows`. Vos leés lo que el
+panel cambió y le pasás la lista ya filtrada — igual que si la filtrara el
+servidor.
+
+```html
+<ng-template fsColumn="status" header="Estado" cardSlot="status"
+             [filterCount]="statusFilter.length" let-row>
+  <fs-badge size="sm" [color]="colorFor(row.status)">{{ row.status }}</fs-badge>
+</ng-template>
+
+<ng-template fsColumnFilter="status" panelWidth="200px" let-close>
+  @for (st of statuses; track st) {
+    <fs-checkbox [label]="label(st)" [ngModel]="statusFilter.includes(st)"
+                 (ngModelChange)="toggleStatus(st)" />
+  }
+  <fs-button size="sm" variant="ghost" (click)="clearStatus(); close()">Limpiar</fs-button>
+</ng-template>
+```
+
+El panel se enlaza a su columna **por nombre**: `fsColumnFilter="status"` busca
+la `fsColumn="status"`.
+
+`filterCount` es un número que le pasás. Con más de cero se dibuja el badge y la
+columna queda marcada — la tabla no cuenta nada por su cuenta porque no sabe qué
+estás filtrando.
+
+El template recibe `let-close`, que cierra el panel. Usalo después de aplicar o
+limpiar. La tabla ya cierra sola con `Escape` y con un click afuera.
+
+El panel se dibuja en el **top layer** del navegador, así que no lo recorta el
+`overflow-x` de la tabla ni ningún ancestro con `transform`, `filter` o
+`contain` — que es exactamente donde se rompen los dropdowns hechos con
+`position: fixed`.
+
+| Input de `ng-template[fsColumnFilter]` | Tipo | Default | Descripción |
+|---|---|---|---|
+| `fsColumnFilter` | `string` | `''` | Clave de la columna que filtra |
+| `panelWidth` | `string` | `'240px'` | Ancho del panel. Un filtro no tiene por qué medir lo que mide la columna |
+
+`openFilterChange` avisa qué panel quedó abierto, o `null` si ninguno.
+
+> **En modo tarjeta el encabezado se esconde, y con él los embudos.** Si tu tabla
+> filtra por columna, dale a mobile otra puerta de entrada — un botón «Filtros»
+> que abra un `fs-drawer side="bottom"` con los mismos paneles. Declará el
+> contenido en un `ng-template` propio y referencialo desde los dos lados con
+> `ngTemplateOutlet`, así no mantenés dos copias. Ver la story
+> **Compositions/PropertiesTable → Mobile**.
+>
+> Los botones de orden y filtro del encabezado **siguen siendo tabulables** en
+> modo tarjeta: sacarlos del tab order sería quitarle al teclado lo que el mouse
+> sí tiene. Para que el foco no se pierda en algo invisible, el encabezado se
+> muestra al recibir foco, como un skip link.
+
+#### Toolbar, footer y estado vacío
+
+Filtros, chips, acciones en lote y paginación **no son parte de la tabla**: si
+`fs-table` supiera qué es una «propiedad pausada», dejaría de servir para
+cualquier otra pantalla. Entran proyectados:
+
+```html
+<fs-table [rows]="rows" caption="Propiedades">
+  <div fsTableToolbar>…chips, buscador, acciones en lote…</div>
+
+  <ng-template fsColumn="…">…</ng-template>
+
+  <div fsTableEmpty>
+    <strong>No hay facturas vencidas</strong>
+    <fs-button size="sm" variant="secondary">Ver todas</fs-button>
+  </div>
+
+  <div fsTableFooter>…conteo y paginación…</div>
+</fs-table>
+```
+
+Sin `fsTableEmpty` sale un texto mínimo. Ver la story
+**Compositions/PropertiesTable** para el ejemplo completo.
+
+#### Inputs de `<fs-table>`
+
+| Input | Tipo | Default | Descripción |
+|---|---|---|---|
+| `rows` | `T[]` | `[]` | Las filas tal cual se muestran, salvo `clientSort` |
+| `rowKey` | `string` | `'id'` | Propiedad que identifica la fila (`track` y selección) |
+| `caption` | `string` | `''` | **Obligatorio.** Nombre accesible de la tabla |
+| `captionVisible` | `boolean` | `false` | Muestra el `caption`, además de anunciarlo |
+| `selectable` | `boolean` | `false` | Columna de checkboxes con encabezado tri-estado |
+| `selected` | `unknown[]` | `[]` | Claves marcadas. Two-way con `selectedChange` |
+| `selectLabel` | `(row: T) => string` | `() => 'Seleccionar fila'` | Etiqueta accesible del checkbox de cada fila |
+| `sort` | `FsTableSort \| null` | `null` | Estado de orden. Two-way con `sortChange` |
+| `clientSort` | `boolean` | `false` | Ordena adentro en vez de solo avisar |
+| `density` | `'comfortable' \| 'compact'` | `'comfortable'` | Alto de fila 62px / 44px |
+| `layout` | `'auto' \| 'table' \| 'cards'` | `'auto'` | Ver «Mobile» |
+| `hoverable` | `boolean` | `true` | Resalta la fila al hover |
+| `zebra` | `boolean` | `false` | Filas alternadas |
+| `stickyHeader` | `boolean` | `false` | Encabezado fijo. **Necesita `maxHeight`** |
+| `maxHeight` | `string` | `''` | Alto máximo del área que scrollea |
+| `minWidth` | `string` | `'760px'` | Ancho mínimo antes de scrollear en horizontal |
+| `loading` | `boolean` | `false` | Filas skeleton |
+| `skeletonRows` | `number` | `4` | Cuántas filas skeleton |
+| `corners` | `FsCorners` | `'all'` | Qué esquinas van redondeadas |
+
+| Output | Tipo | Descripción |
+|---|---|---|
+| `sortChange` | `FsTableSort \| null` | Click en un encabezado ordenable |
+| `selectedChange` | `unknown[]` | Cambió la selección |
+| `rowActivate` | `T` | Click en la fila, fuera de cualquier control |
+
+#### Inputs de `ng-template[fsColumn]`
+
+| Input | Tipo | Default | Descripción |
+|---|---|---|---|
+| `fsColumn` | `string` | `''` | Clave de la columna. Es lo que viaja en `sortChange.key` |
+| `header` | `string` | `''` | Texto del encabezado. También la etiqueta en tarjeta |
+| `headerHidden` | `boolean` | `false` | Esconde el texto pero lo deja para el lector de pantalla |
+| `sortable` | `boolean` | `false` | Botón de orden en el encabezado |
+| `align` | `'start' \| 'center' \| 'end'` | `'start'` | Alineación. En tarjeta no aplica |
+| `width` | `string` | `''` | Ancho CSS de la columna |
+| `cardSlot` | `FsCardSlot` | `'meta'` | Ver la tabla de arriba |
+| `cardLabel` | `string` | `header` | Etiqueta en tarjeta. `''` no dibuja ninguna |
+| `sortValue` | `(row: T) => …` | — | Cómo sacar el valor ordenable. Solo con `clientSort` |
+| `filterCount` | `number` | `0` | Valores activos del filtro. Con más de cero, badge en el embudo |
+
+El template recibe `let-row` (o `let-x` por `$implicit`) e `index`.
+
+**CSS custom properties configurables:**
+
+```css
+fs-table {
+  --fs-table-radius:            var(--fs-radius-lg);
+  --fs-table-row-height:        62px;   /* 44px con density="compact" */
+  --fs-table-cell-padding:      12px;
+  --fs-table-head-bg:           var(--fs-color-surface-alt);
+  --fs-table-selected-bg:       …;
+  --fs-table-hover-bg:          …;
+  --fs-table-media-width:       56px;   /* miniatura en modo tabla */
+  --fs-table-media-height:      42px;
+  --fs-table-card-radius:       var(--fs-radius-lg);
+  --fs-table-card-media-width:  92px;   /* miniatura en modo tarjeta */
+  --fs-table-card-media-height: 76px;
+  --fs-table-card-gap:          8px;
+}
+```
 
 ---
 

@@ -1,0 +1,209 @@
+<div
+  class="fs-table"
+  [attr.data-corners]="corners"
+  [attr.data-density]="density"
+  [attr.data-layout]="layout"
+  [class.fs-table--hoverable]="hoverable"
+  [class.fs-table--zebra]="zebra"
+  [class.fs-table--clickable]="rowsClickable"
+  [class.fs-table--sticky]="stickyHeader"
+  [style.--fs-table-min-width]="minWidth || null"
+  [style.--fs-table-max-height]="maxHeight || null"
+>
+
+  <ng-content select="[fsTableToolbar]" />
+
+  <div
+    class="fs-table__scroll"
+    role="region"
+    tabindex="0"
+    [attr.aria-label]="caption || null"
+  >
+    <table
+      class="fs-table__table"
+      role="table"
+      [attr.aria-busy]="loading ? 'true' : null"
+    >
+      <caption class="fs-table__caption" [class.fs-table__sr]="!captionVisible">{{ caption }}</caption>
+
+      <thead class="fs-table__head" role="rowgroup">
+        <tr class="fs-table__head-row" role="row">
+
+          @if (selectable) {
+            <th class="fs-table__cell fs-table__cell--select" role="columnheader" scope="col">
+              <fs-checkbox
+                ariaLabel="Seleccionar todas las filas"
+                [ngModel]="allSelected"
+                [indeterminate]="someSelected"
+                (ngModelChange)="toggleAll()"
+              />
+            </th>
+          }
+
+          @for (col of columns; track col.name) {
+            <th
+              class="fs-table__cell fs-table__cell--head"
+              role="columnheader"
+              scope="col"
+              [attr.aria-sort]="ariaSort(col)"
+              [attr.data-align]="col.align"
+              [style.width]="col.width || null"
+            >
+              <span class="fs-table__head-inner">
+
+                @if (col.sortable) {
+                  <button
+                    type="button"
+                    class="fs-table__sort"
+                    [class.fs-table__sort--active]="isColumnActive(col)"
+                    (click)="toggleSort(col)"
+                  >
+                    <span [class.fs-table__sr]="col.headerHidden">{{ col.header }}</span>
+                    <span
+                      class="fs-icon fs-table__sort-icon"
+                      [style.--_icon]="'url(' + sortIcon(col) + ')'"
+                      aria-hidden="true"
+                    ></span>
+                  </button>
+                } @else {
+                  <span
+                    class="fs-table__head-label"
+                    [class.fs-table__head-label--active]="isColumnActive(col)"
+                    [class.fs-table__sr]="col.headerHidden"
+                  >{{ col.header }}</span>
+                }
+
+                @if (filterOf(col); as panel) {
+                  <button
+                    #filterAnchor
+                    type="button"
+                    class="fs-table__filter"
+                    [class.fs-table__filter--active]="col.filterCount > 0"
+                    [attr.aria-expanded]="openFilter === col.name"
+                    [attr.aria-label]="
+                      (col.filterCount > 0
+                        ? 'Filtrar ' + col.header + ', ' + col.filterCount + ' activos'
+                        : 'Filtrar ' + col.header)
+                    "
+                    (click)="toggleFilter(col)"
+                  >
+                    <span
+                      class="fs-icon fs-table__filter-icon"
+                      [style.--_icon]="'url(' + Icons.filter + ')'"
+                      aria-hidden="true"
+                    ></span>
+                    @if (col.filterCount > 0) {
+                      <span class="fs-table__filter-count" aria-hidden="true">{{ col.filterCount }}</span>
+                    }
+                  </button>
+
+                  @if (openFilter === col.name) {
+                    <div
+                      class="fs-table__filter-panel"
+                      role="group"
+                      [attr.aria-label]="'Filtro de ' + col.header"
+                      [style.width]="panel.panelWidth"
+                      [fsAnchoredPopover]="filterAnchor"
+                      [popoverMatchWidth]="false"
+                      popoverAlign="start"
+                    >
+                      <ng-container
+                        [ngTemplateOutlet]="panel.template"
+                        [ngTemplateOutletContext]="{ $implicit: closeFilter, close: closeFilter, column: col.name }"
+                      />
+                    </div>
+                  }
+                }
+
+              </span>
+            </th>
+          }
+
+        </tr>
+      </thead>
+
+      <tbody class="fs-table__body" role="rowgroup">
+
+        @if (loading) {
+
+          @for (line of skeletonList; track line) {
+            <tr class="fs-table__row fs-table__row--skeleton" role="row" aria-hidden="true">
+              @if (selectable) {
+                <td class="fs-table__cell fs-table__cell--select" role="cell">
+                  <span class="fs-table__skeleton fs-table__skeleton--box"></span>
+                </td>
+              }
+              @for (col of columns; track col.name) {
+                <td
+                  class="fs-table__cell"
+                  role="cell"
+                  [attr.data-slot]="col.cardSlot"
+                  [attr.data-align]="col.align"
+                >
+                  <span
+                    class="fs-table__skeleton"
+                    [class.fs-table__skeleton--media]="col.cardSlot === 'media'"
+                  ></span>
+                </td>
+              }
+            </tr>
+          }
+
+        } @else if (displayRows.length === 0) {
+
+          <tr class="fs-table__row fs-table__row--empty" role="row">
+            <td class="fs-table__cell fs-table__cell--empty" role="cell" [attr.colspan]="columnCount">
+              <ng-content select="[fsTableEmpty]">
+                <p class="fs-table__empty-text">Sin resultados</p>
+              </ng-content>
+            </td>
+          </tr>
+
+        } @else {
+
+          @for (row of displayRows; track keyOf(row); let i = $index) {
+            <tr
+              class="fs-table__row"
+              role="row"
+              [class.fs-table__row--selected]="selectable && isSelected(row)"
+              (click)="onRowClick(row, $event)"
+            >
+              @if (selectable) {
+                <td class="fs-table__cell fs-table__cell--select" role="cell">
+                  <fs-checkbox
+                    [ariaLabel]="selectLabel(row)"
+                    [ngModel]="isSelected(row)"
+                    (ngModelChange)="toggleRow(row)"
+                  />
+                </td>
+              }
+              @for (col of columns; track col.name) {
+                <td
+                  class="fs-table__cell"
+                  role="cell"
+                  [attr.data-slot]="col.cardSlot"
+                  [attr.data-align]="col.align"
+                  [attr.data-label]="cardLabelOf(col) || null"
+                >
+                  <ng-container
+                    [ngTemplateOutlet]="col.template"
+                    [ngTemplateOutletContext]="{ $implicit: row, row: row, index: i }"
+                  />
+                </td>
+              }
+            </tr>
+          }
+
+        }
+
+      </tbody>
+    </table>
+  </div>
+
+  @if (loading) {
+    <p class="fs-table__sr" role="status">Cargando datos</p>
+  }
+
+  <ng-content select="[fsTableFooter]" />
+
+</div>

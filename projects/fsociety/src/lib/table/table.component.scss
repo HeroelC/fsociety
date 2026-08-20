@@ -1,0 +1,609 @@
+// ---------------------------------------------------------------------------
+// fs-table — configurable CSS custom properties
+//
+//   fs-table {
+//     --fs-table-radius:            var(--fs-radius-lg);
+//     --fs-table-row-height:        62px;   // 44px con density="compact"
+//     --fs-table-cell-padding:      12px;
+//     --fs-table-head-bg:           var(--fs-color-surface-alt);
+//     --fs-table-selected-bg:       ...;
+//     --fs-table-media-width:       56px;
+//     --fs-table-media-height:      42px;
+//     --fs-table-card-radius:       var(--fs-radius-lg);
+//     --fs-table-card-media-width:  92px;
+//     --fs-table-card-media-height: 76px;
+//     --fs-table-card-gap:          8px;
+//   }
+//
+// El borde y el radio viven en `.fs-table__scroll`, no en el contenedor de
+// afuera: así el toolbar y el footer proyectados quedan fuera del recorte y un
+// panel de filtro puede desbordar sin que se lo coma un `overflow: hidden`.
+// ---------------------------------------------------------------------------
+
+@use '../../styles/corners' as corners;
+@use '../../styles/overlay' as overlay;
+
+// El modo tarjeta se emite dos veces: una forzado por `layout="cards"` y otra
+// bajo la container query para `layout="auto"`. La query mira el ancho real
+// del contenedor, no el del viewport — una tabla adentro de un panel angosto
+// pasa a tarjetas aunque la pantalla sea grande.
+//
+// El sujeto de cada selector tiene que ser descendiente de `.fs-table`, porque
+// `.fs-table` es el contenedor y un contenedor no matchea sus propias queries.
+@mixin card-layout($root) {
+
+  #{$root} .fs-table__scroll {
+    border: none;
+    border-radius: 0;
+    background: none;
+  }
+
+  #{$root} .fs-table__table {
+    display: block;
+    min-width: 0;
+  }
+
+  // El thead no se esconde con `display: none`: se saca de la vista pero se
+  // deja en el árbol de accesibilidad. Es lo que permite que el lector de
+  // pantalla siga anunciando "Precio, US$ 180.000" cuando ya no hay ninguna
+  // columna dibujada.
+  #{$root} .fs-table__head {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  // El `thead` está fuera de la vista pero sus botones de orden y filtro siguen
+  // siendo tabulables: un teclado caería en controles invisibles. En vez de
+  // sacarlos del tab order — que sería quitarle al teclado lo que el mouse sí
+  // tiene — el encabezado se muestra al recibir foco, como un skip link. El
+  // lector de pantalla lo sigue teniendo siempre; el mouse no lo ve nunca.
+  #{$root} .fs-table__head:focus-within {
+    position: static;
+    width: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    clip: auto;
+    display: block;
+    margin-bottom: var(--_card-gap);
+    padding: 8px;
+    border: 1px solid var(--fs-color-border);
+    border-radius: var(--_card-radius);
+    background: var(--_head-bg);
+  }
+
+  #{$root} .fs-table__head:focus-within .fs-table__head-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 14px;
+  }
+
+  #{$root} .fs-table__head:focus-within .fs-table__cell--head {
+    display: inline-block;
+    width: auto;
+    height: auto;
+    padding: 0;
+  }
+
+  // La casilla de "seleccionar todas" ya vive en cada tarjeta.
+  #{$root} .fs-table__head:focus-within .fs-table__cell--select {
+    display: none;
+  }
+
+  #{$root} .fs-table__body {
+    display: block;
+  }
+
+  #{$root} .fs-table__row {
+    display: grid;
+    // 1 selección · 2 miniatura · 3 contenido · 4 estado
+    grid-template-columns: auto auto minmax(0, 1fr) auto;
+    align-items: center;
+    column-gap: 0;
+    row-gap: 3px;
+    height: auto;
+    padding: 12px;
+    margin-bottom: var(--_card-gap);
+    border: 1px solid var(--fs-color-border);
+    border-radius: var(--_card-radius);
+    background: var(--fs-color-surface);
+  }
+
+  #{$root} .fs-table__row:last-child {
+    margin-bottom: 0;
+  }
+
+  #{$root} .fs-table__cell {
+    display: block;
+    width: auto;
+    height: auto;
+    padding: 0;
+    border: none;
+    white-space: normal;
+  }
+
+  // Selección y miniatura ocupan el alto entero de la tarjeta, a la izquierda.
+  #{$root} .fs-table__cell--select {
+    grid-column: 1;
+    grid-row: 1 / span 4;
+    align-self: start;
+    margin-inline-end: 8px;
+  }
+
+  #{$root} .fs-table__cell[data-slot='media'] {
+    grid-column: 2;
+    grid-row: 1 / span 4;
+    align-self: start;
+    margin-inline-end: 12px;
+  }
+
+  // El resto se auto-ubica. `order` manda sobre el orden del DOM, así que la
+  // tarjeta sale igual sin importar en qué orden se declararon las columnas.
+  #{$root} .fs-table__cell[data-slot='value'] {
+    grid-column: 3;
+    order: 1;
+    text-align: start;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--fs-color-text-primary);
+  }
+
+  #{$root} .fs-table__cell[data-slot='status'] {
+    grid-column: 4;
+    order: 2;
+    justify-self: end;
+    padding-inline-start: 8px;
+  }
+
+  #{$root} .fs-table__cell[data-slot='title'] {
+    grid-column: 3 / -1;
+    order: 3;
+    text-align: start;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  #{$root} .fs-table__cell[data-slot='meta'] {
+    grid-column: 3 / -1;
+    order: 4;
+    text-align: start;
+    font-size: 12.5px;
+    color: var(--fs-color-text-secondary);
+  }
+
+  // Sin encabezado visible, cada dato secundario necesita decir qué es.
+  #{$root} .fs-table__cell[data-slot='meta'][data-label]:not([data-label=''])::before {
+    content: attr(data-label) ': ';
+    font-weight: 500;
+  }
+
+  #{$root} .fs-table__cell[data-slot='actions'] {
+    grid-column: 3 / -1;
+    order: 5;
+    justify-self: end;
+    padding-top: 4px;
+  }
+
+  #{$root} .fs-table__cell[data-slot='none'] {
+    display: none;
+  }
+
+  #{$root} .fs-table__cell[data-slot='media'] ::ng-deep img,
+  #{$root} .fs-table__cell[data-slot='media'] ::ng-deep .fs-table__media {
+    width: var(--_card-media-w);
+    height: var(--_card-media-h);
+  }
+
+  // Las acciones viven siempre visibles: en táctil no hay hover que las revele.
+  #{$root} .fs-table__row .fs-table__cell[data-slot='actions'] {
+    opacity: 1;
+  }
+
+  #{$root} .fs-table__cell--empty {
+    display: block;
+    padding: var(--fs-space-8) var(--fs-space-4);
+  }
+
+  #{$root} .fs-table__row--empty {
+    display: block;
+    border: 1px solid var(--fs-color-border);
+    border-radius: var(--_card-radius);
+    padding: 0;
+  }
+
+  #{$root} .fs-table__row--skeleton {
+    grid-template-columns: auto auto minmax(0, 1fr) auto;
+  }
+}
+
+
+.fs-table {
+  --_radius:        var(--fs-table-radius, var(--fs-radius-lg));
+  --_row-h:         var(--fs-table-row-height, 62px);
+  --_pad:           var(--fs-table-cell-padding, 12px);
+  --_head-bg:       var(--fs-table-head-bg, var(--fs-color-surface-alt));
+  --_selected-bg:   var(--fs-table-selected-bg, color-mix(in srgb, var(--fs-color-primary) 8%, transparent));
+  --_hover-bg:      var(--fs-table-hover-bg, color-mix(in srgb, var(--fs-color-text-primary) 4%, transparent));
+  --_media-w:       var(--fs-table-media-width, 56px);
+  --_media-h:       var(--fs-table-media-height, 42px);
+  --_card-radius:   var(--fs-table-card-radius, var(--fs-radius-lg));
+  --_card-media-w:  var(--fs-table-card-media-width, 92px);
+  --_card-media-h:  var(--fs-table-card-media-height, 76px);
+  --_card-gap:      var(--fs-table-card-gap, 8px);
+
+  // Contenedor de la container query del modo `auto`.
+  container-type: inline-size;
+  container-name: fs-table;
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--fs-space-3);
+  font-family: var(--fs-font-sans);
+  color: var(--fs-color-text-primary);
+
+  &[data-density='compact'] {
+    --_row-h: var(--fs-table-row-height, 44px);
+    --_pad:   var(--fs-table-cell-padding, 10px);
+  }
+
+  // ─── Área que scrollea ───────────────────────────────────────────────────
+  // Es `role="region"` con `tabindex="0"`: una tabla que desborda tiene que
+  // poder scrollearse con el teclado, y para eso necesita foco y nombre.
+  &__scroll {
+    position: relative;
+    overflow-x: auto;
+    overflow-y: auto;
+    max-height: var(--fs-table-max-height, none);
+    border: 1px solid var(--fs-color-border);
+    border-radius: var(--_radius);
+    background: var(--fs-color-surface);
+
+    &:focus-visible {
+      outline: 2px solid var(--fs-color-primary);
+      outline-offset: 2px;
+    }
+  }
+
+  &__table {
+    width: 100%;
+    min-width: var(--fs-table-min-width, 760px);
+    border-collapse: collapse;
+    text-align: start;
+  }
+
+  &__caption {
+    padding: var(--_pad);
+    text-align: start;
+    font-size: 13px;
+    color: var(--fs-color-text-secondary);
+  }
+
+  // ─── Encabezado ──────────────────────────────────────────────────────────
+  &__head {
+    background: var(--_head-bg);
+  }
+
+  &__cell--head {
+    font-size: 11.5px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--fs-color-text-secondary);
+    white-space: nowrap;
+  }
+
+  &__sort {
+    appearance: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 6px;
+    margin: -4px -6px;
+    background: none;
+    border: none;
+    border-radius: var(--fs-radius-sm);
+    font: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+    color: inherit;
+    cursor: pointer;
+
+    &:hover {
+      color: var(--fs-color-text-primary);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--fs-color-primary);
+      outline-offset: 1px;
+    }
+
+    &--active {
+      color: var(--fs-color-primary);
+    }
+  }
+
+  &__sort-icon {
+    width: 13px;
+    height: 13px;
+    opacity: 0.75;
+  }
+
+  // ─── Encabezado: etiqueta + embudo ───────────────────────────────────────
+  // El `th` sigue siendo celda de tabla; el flex vive en un span adentro, así
+  // no se toca el layout de la tabla.
+  &__head-inner {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    position: relative;
+  }
+
+  &__head-label--active {
+    color: var(--fs-color-primary);
+  }
+
+  &__filter {
+    appearance: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    padding: 3px 4px;
+    background: none;
+    border: none;
+    border-radius: var(--fs-radius-sm);
+    color: var(--fs-color-text-secondary);
+    cursor: pointer;
+
+    &:hover {
+      color: var(--fs-color-text-primary);
+      background: color-mix(in srgb, var(--fs-color-text-primary) 6%, transparent);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--fs-color-primary);
+      outline-offset: 1px;
+    }
+
+    &--active {
+      color: var(--fs-color-primary);
+    }
+  }
+
+  &__filter-icon {
+    width: 14px;
+    height: 14px;
+  }
+
+  &__filter-count {
+    min-width: 15px;
+    height: 15px;
+    padding: 0 4px;
+    border-radius: var(--fs-radius-full);
+    background: var(--fs-color-primary);
+    color: var(--fs-color-bg);
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 15px;
+    text-align: center;
+    letter-spacing: 0;
+  }
+
+  // El panel sube al top layer: no lo recorta el `overflow-x` de la tabla ni
+  // ningún ancestro con `transform` o `contain`.
+  &__filter-panel {
+    @include overlay.popover-surface;
+
+    padding: 12px;
+    border: 1px solid var(--fs-color-border);
+    border-radius: var(--fs-radius-md);
+    background: var(--fs-color-surface);
+    box-shadow: var(--fs-color-shadow-pop, var(--fs-shadow-lg));
+    text-transform: none;
+    letter-spacing: normal;
+    font-weight: 400;
+    font-size: 13.5px;
+    text-align: start;
+    white-space: normal;
+    color: var(--fs-color-text-primary);
+  }
+
+  // ─── Celdas ──────────────────────────────────────────────────────────────
+  &__cell {
+    height: var(--_row-h);
+    padding-inline: var(--_pad);
+    text-align: start;
+    vertical-align: middle;
+    font-size: 13.5px;
+    border-bottom: 1px solid var(--fs-color-border);
+
+    &[data-align='center'] { text-align: center; }
+    &[data-align='end']    { text-align: end; }
+
+    &--select {
+      width: 1%;
+      padding-inline-end: 0;
+      white-space: nowrap;
+    }
+
+    &[data-slot='title'] {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--fs-color-text-primary);
+    }
+
+    &[data-slot='value'] {
+      font-weight: 600;
+      color: var(--fs-color-text-primary);
+    }
+
+    &[data-slot='media'] {
+      width: 1%;
+    }
+
+    // La miniatura la escribe quien usa la tabla, así que llega proyectada y
+    // con su propio atributo de encapsulación. Sin `::ng-deep` la regla no la
+    // alcanza y el thumbnail sale en 0x0. El ancestro sí queda scopeado a esta
+    // celda, así que no se escapa nada al resto de la página.
+    &[data-slot='media'] ::ng-deep img,
+    &[data-slot='media'] ::ng-deep .fs-table__media {
+      display: block;
+      width: var(--_media-w);
+      height: var(--_media-h);
+      object-fit: cover;
+      border-radius: var(--fs-radius-sm);
+      background: var(--fs-color-surface-alt);
+    }
+  }
+
+  // ─── Filas ───────────────────────────────────────────────────────────────
+  &__row {
+    background: transparent;
+    transition: background-color 100ms cubic-bezier(0.4, 0, 0.2, 1);
+
+    &:last-child .fs-table__cell {
+      border-bottom: none;
+    }
+
+    &--selected {
+      background: var(--_selected-bg);
+    }
+  }
+
+  &--zebra &__row:nth-child(even) {
+    background: var(--_head-bg);
+  }
+
+  &--hoverable &__row:not(&__row--empty):not(&__row--skeleton):hover {
+    background: var(--_hover-bg);
+  }
+
+  &--hoverable &__row--selected:hover {
+    background: var(--_selected-bg);
+  }
+
+  // El cursor es la única señal de que la fila responde al click. La fila no
+  // toma foco a propósito: el camino accesible es el link de la celda de
+  // título, no la fila entera.
+  &--clickable &__row:not(&__row--empty):not(&__row--skeleton) {
+    cursor: pointer;
+  }
+
+  // Las acciones aparecen al hover de la fila. En táctil no hay hover, así que
+  // `(hover: none)` las deja siempre a la vista.
+  &__cell[data-slot='actions'] {
+    opacity: 0.55;
+    transition: opacity 100ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  &__row:hover &__cell[data-slot='actions'],
+  &__row:focus-within &__cell[data-slot='actions'] {
+    opacity: 1;
+  }
+
+  // ─── Encabezado fijo ─────────────────────────────────────────────────────
+  // Solo hace algo si hay `maxHeight`: sin una altura que recorte, el que
+  // scrollea es el documento y no hay a qué pegarse.
+  &--sticky &__cell--head,
+  &--sticky &__head-row > * {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    background: var(--_head-bg);
+    // Con `border-collapse: collapse` el borde de la celda pegada se va con el
+    // scroll. La sombra interior viaja con el fondo y no.
+    box-shadow: inset 0 -1px 0 var(--fs-color-border);
+  }
+
+  // ─── Vacío ───────────────────────────────────────────────────────────────
+  &__cell--empty {
+    height: auto;
+    padding: var(--fs-space-8) var(--fs-space-4);
+    text-align: center;
+  }
+
+  &__empty-text {
+    margin: 0;
+    color: var(--fs-color-text-secondary);
+    font-size: 13.5px;
+  }
+
+  // ─── Cargando ────────────────────────────────────────────────────────────
+  &__skeleton {
+    display: block;
+    width: 100%;
+    max-width: 180px;
+    height: 12px;
+    border-radius: var(--fs-radius-sm);
+    background: linear-gradient(
+      90deg,
+      var(--fs-color-surface-alt) 25%,
+      color-mix(in srgb, var(--fs-color-text-primary) 8%, var(--fs-color-surface-alt)) 37%,
+      var(--fs-color-surface-alt) 63%
+    );
+    background-size: 400% 100%;
+    animation: fs-table-shimmer 1.4s ease infinite;
+
+    &--box {
+      width: 18px;
+      max-width: 18px;
+      height: 18px;
+    }
+
+    &--media {
+      width: var(--_media-w);
+      max-width: none;
+      height: var(--_media-h);
+    }
+  }
+
+  // ─── Solo para lectores de pantalla ──────────────────────────────────────
+  &__sr {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+}
+
+@keyframes fs-table-shimmer {
+  0%   { background-position: 100% 50%; }
+  100% { background-position: 0 50%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fs-table__skeleton {
+    animation: none;
+  }
+
+  .fs-table__row {
+    transition: none;
+  }
+}
+
+@media (hover: none) {
+  .fs-table__cell[data-slot='actions'] {
+    opacity: 1;
+  }
+}
+
+@include corners.presets('.fs-table__scroll');
+
+// Modo tarjeta forzado.
+@include card-layout('.fs-table[data-layout="cards"]');
+
+// Modo tarjeta automático, según el ancho real del contenedor.
+@container fs-table (max-width: 720px) {
+  @include card-layout('.fs-table[data-layout="auto"]');
+}
