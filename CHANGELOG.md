@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.13.0](https://github.com/heroelc/fsociety/compare/v0.12.0...v0.13.0) (2026-08-20)
+
+### Features
+
+* **choice:** dar nombre accesible al checkbox sin label ([f1e89bc](https://github.com/heroelc/fsociety/commit/f1e89bc2bc4b3d7164d8f6a6d73245dd0fa97391))
+* **table:** agregar fs-table ([9fc51bd](https://github.com/heroelc/fsociety/commit/9fc51bdd5c855972a9403618197338fbf05aa80f))
+
 ## [0.12.0](https://github.com/heroelc/fsociety/compare/v0.11.0...v0.12.0) (2026-08-19)
 
 ### Features
