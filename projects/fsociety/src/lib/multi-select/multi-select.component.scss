@@ -11,6 +11,7 @@
 // ---------------------------------------------------------------------------
 
 @use '../../styles/corners' as corners;
+@use '../../styles/control-size' as size;
 
 @use '../../styles/overlay' as overlay;
 
@@ -36,9 +37,11 @@
   &__wrapper {
     display: flex;
     align-items: center;
-    gap: 8px;
-    min-height: 40px;
-    padding: 4px 8px 4px 13px;
+    gap: var(--fs-control-gap);
+    min-height: var(--fs-control-h);
+    // El padding izquierdo sigue la escala; el derecho queda corto a propósito
+    // para que el chevron respire contra el borde.
+    padding: 4px 8px 4px var(--fs-control-pad-x);
     border: 1px solid var(--fs-color-border-field);
     border-radius: var(--_radius);
     background: var(--fs-color-surface);
@@ -64,8 +67,8 @@
 
   // ─── Left icon ──────────────────────────────────────────────────────────
   &__icon {
-    width: 18px;
-    height: 18px;
+    width: var(--fs-control-icon);
+    height: var(--fs-control-icon);
     color: var(--fs-color-text-secondary);
     flex-shrink: 0;
   }
@@ -83,7 +86,7 @@
   }
 
   &__placeholder {
-    font-size: 14px;
+    font-size: var(--fs-control-font);
     color: var(--fs-color-text-placeholder);
     line-height: 1;
   }
@@ -298,3 +301,9 @@
 // Emitido a nivel superior y no anidado, para que el bloque de arriba pueda
 // seguir declarando propiedades después del radio.
 @include corners.presets('.fs-ms__wrapper');
+
+// ─── Escala de tamaño ────────────────────────────────────────────────────────
+// Emitida a nivel superior y no anidada, por el mismo motivo que los corners:
+// deja que el bloque de arriba siga declarando propiedades sin caer en la
+// deprecación de Dart Sass.
+@include size.scale('.fs-ms');

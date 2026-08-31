@@ -1,0 +1,126 @@
+// =============================================================================
+// fsociety · _control-size.scss
+// La escala de tamaño que comparten TODOS los controles de formulario.
+//
+// Este partial NO emite CSS: solo define un mapa y un mixin. Por eso se puede
+// @use desde el SCSS de un componente sin arrastrar las clases utilitarias de
+// _mixins.scss.
+//
+//   @use '../../styles/control-size' as size;
+//   @include size.scale('.fs-input');
+//
+// -----------------------------------------------------------------------------
+// Por qué existe
+// -----------------------------------------------------------------------------
+// Antes cada campo escribía `height: 40px` a mano — input, select,
+// multi-select, number-input y date-picker tenían el mismo número copiado en
+// cinco stylesheets distintos — y el botón corría por su cuenta en 28/36/44.
+// El resultado es que NINGÚN tamaño de botón podía empatar con un campo: al
+// ponerlos uno al lado del otro siempre quedaban desparejos por 4px.
+//
+// Ahora los tres pasos salen de acá y el botón come del mismo mapa, así que
+// <fs-button size="md"> y <fs-input size="md"> miden exactamente lo mismo.
+//
+// -----------------------------------------------------------------------------
+// Cómo se consume
+// -----------------------------------------------------------------------------
+// `scale()` emite las custom properties sobre el elemento raíz del componente,
+// una regla por valor de `data-size` más una base sin atributo. El componente
+// después lee `var(--fs-control-h)` donde antes tenía el número fijo.
+//
+// INVARIANTE: las custom properties heredan, así que un control anidado dentro
+// de otro vería la escala del padre. Por eso todo componente que lea
+// `--fs-control-*` TIENE que incluir `scale()` sobre su propia raíz — al
+// redeclararlas sobre sí mismo corta la herencia. La regla base sin atributo
+// existe justamente para que eso funcione aunque el binding de `size` falte.
+// =============================================================================
+
+@use 'sass:map';
+
+// Alturas en grilla de 8px. Los tres pasos superan el mínimo de 24x24 que pide
+// WCAG 2.2 AA para el área de interacción.
+$steps: (
+  'sm': (
+    h:      32px,   // alto total del control
+    pad-x:  10px,   // padding horizontal del shell de un campo
+    pad-y:  7px,    // padding vertical — solo lo usa el textarea, que crece
+    btn-px: 12px,   // padding horizontal de un botón (más aire que un campo)
+    gap:    6px,    // separación entre ícono, texto y acciones
+    font:   13px,   // texto del valor
+    icon:   16px,   // ícono decorativo del campo
+    action: 22px,   // botón interno: limpiar, ver contraseña, abrir calendario
+    box:    16px,   // caja del checkbox / dot del radio
+    label:  12px,   // label de arriba
+    hint:   11.5px, // hint y mensajes de validación de abajo
+  ),
+  'md': (
+    h:      40px,
+    pad-x:  13px,
+    pad-y:  9px,
+    btn-px: 16px,
+    gap:    8px,
+    font:   14px,
+    icon:   18px,
+    action: 28px,
+    box:    18px,
+    label:  13px,
+    hint:   12.5px,
+  ),
+  'lg': (
+    h:      48px,
+    pad-x:  16px,
+    pad-y:  11px,
+    btn-px: 20px,
+    gap:    10px,
+    // 16px y no 15: Safari en iOS hace zoom al enfocar un input con menos de
+    // 16px, y en un control de 48px un texto de 15 se ve chico. De paso el
+    // botón lg conserva el tamaño de fuente que ya tenía.
+    font:   16px,
+    icon:   20px,
+    action: 32px,
+    box:    20px,
+    label:  14px,
+    hint:   13px,
+  ),
+);
+
+/// El paso por defecto cuando el consumidor no declara `size`.
+$default: 'md';
+
+// Escribe las custom properties de un paso.
+@mixin _vars($cfg) {
+  --fs-control-h:      #{map.get($cfg, h)};
+  --fs-control-pad-x:  #{map.get($cfg, pad-x)};
+  --fs-control-pad-y:  #{map.get($cfg, pad-y)};
+  --fs-control-btn-px: #{map.get($cfg, btn-px)};
+  --fs-control-gap:    #{map.get($cfg, gap)};
+  --fs-control-font:   #{map.get($cfg, font)};
+  --fs-control-icon:   #{map.get($cfg, icon)};
+  --fs-control-action: #{map.get($cfg, action)};
+  --fs-control-box:    #{map.get($cfg, box)};
+  --fs-control-label:  #{map.get($cfg, label)};
+  --fs-control-hint:   #{map.get($cfg, hint)};
+}
+
+// Emite la escala sobre la raíz de un componente.
+//
+// Se emite como regla de nivel superior y no anidada para que el bloque del
+// componente pueda seguir declarando propiedades después, sin caer en la
+// deprecación de Dart Sass por declaraciones mezcladas con reglas anidadas —
+// el mismo motivo por el que `corners.presets()` también va afuera.
+//
+// La regla base tiene menos especificidad (0,1,0) que las de atributo (0,2,0),
+// así que `data-size` siempre gana sin necesidad de `!important`.
+//
+// @param {String} $selector - Selector de la raíz del componente.
+@mixin scale($selector) {
+  #{$selector} {
+    @include _vars(map.get($steps, $default));
+  }
+
+  @each $key, $cfg in $steps {
+    #{$selector}[data-size='#{$key}'] {
+      @include _vars($cfg);
+    }
+  }
+}

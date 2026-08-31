@@ -1,6 +1,7 @@
 import { Component, Input, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { FsControlSize } from '../control-size';
 
 const CDN = 'https://api.iconify.design';
 const ICONS = {
@@ -42,6 +43,15 @@ export class FsCheckboxComponent implements ControlValueAccessor {
   @Input() indeterminate = false;
   @Input() state: FsCheckboxState = 'default';
   @Input() errorMessage = '';
+
+  /**
+   * Tamaño del control — 32 / 40 / 48px de alto.
+   *
+   * Es la escala compartida de la librería: un `fs-button` con el mismo `size`
+   * mide exactamente lo mismo, así que campo y botón quedan parejos al
+   * ponerlos uno al lado del otro.
+   */
+  @Input() size: FsControlSize = 'md';
 
   readonly id = `fs-cb-${++cbId}`;
   checked = false;

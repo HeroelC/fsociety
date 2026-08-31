@@ -7,6 +7,7 @@
 // ---------------------------------------------------------------------------
 
 @use '../../styles/corners' as corners;
+@use '../../styles/control-size' as size;
 
 .fs-ta {
   --_radius: var(--fs-textarea-radius, var(--fs-radius-md));
@@ -16,7 +17,7 @@
   gap: 6px;
 
   &__label {
-    font-size: 13px;
+    font-size: var(--fs-control-label);
     font-weight: 550;
     letter-spacing: -0.005em;
     color: var(--fs-color-text-primary);
@@ -65,8 +66,8 @@
     flex: 1;
     width: 100%;
     min-width: 0;
-    padding: 9px 11px;
-    font-size: 14px;
+    padding: var(--fs-control-pad-y) calc(var(--fs-control-pad-x) - 2px);
+    font-size: var(--fs-control-font);
     font-family: inherit;
     line-height: 1.55;
     color: var(--fs-color-text-primary);
@@ -123,7 +124,7 @@
   }
 
   &__hint {
-    font-size: 12.5px;
+    font-size: var(--fs-control-hint);
     color: var(--fs-color-text-secondary);
     line-height: 1.4;
   }
@@ -132,7 +133,7 @@
     display: flex;
     align-items: center;
     gap: 5px;
-    font-size: 12.5px;
+    font-size: var(--fs-control-hint);
     line-height: 1.4;
 
     &--error   { color: var(--fs-color-error); }
@@ -155,3 +156,9 @@
 // Emitido a nivel superior y no anidado, para que el bloque de arriba pueda
 // seguir declarando propiedades después del radio.
 @include corners.presets('.fs-ta__wrapper');
+
+// ─── Escala de tamaño ────────────────────────────────────────────────────────
+// Emitida a nivel superior y no anidada, por el mismo motivo que los corners:
+// deja que el bloque de arriba siga declarando propiedades sin caer en la
+// deprecación de Dart Sass.
+@include size.scale('.fs-ta');

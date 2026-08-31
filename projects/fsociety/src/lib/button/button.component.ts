@@ -8,9 +8,16 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FsSpinnerComponent } from '../loading/spinner.component';
+import { FsControlSize } from '../control-size';
 
 export type FsButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger' | 'link';
-export type FsButtonSize    = 'sm' | 'md' | 'lg';
+/**
+ * Alias de `FsControlSize`. El botón comparte la escala con el resto de los
+ * controles, así que `<fs-button size="md">` mide lo mismo que
+ * `<fs-input size="md">`. Se mantiene el nombre para no romper a quien ya
+ * importaba este tipo.
+ */
+export type FsButtonSize    = FsControlSize;
 export type FsButtonType    = 'button' | 'submit' | 'reset';
 
 @Component({
@@ -26,7 +33,12 @@ export class FsButtonComponent {
   /** Variante visual del botón */
   @Input() variant: FsButtonVariant = 'primary';
 
-  /** Tamaño del botón */
+  /**
+   * Tamaño del botón — 32 / 40 / 48px de alto.
+   *
+   * Es la misma escala que usan los campos, así que un botón y un input del
+   * mismo `size` quedan parejos al ponerlos uno al lado del otro.
+   */
   @Input() size: FsButtonSize = 'md';
 
   /** Tipo HTML nativo */
@@ -76,7 +88,6 @@ export class FsButtonComponent {
   get classes(): Record<string, boolean> {
     return {
       [`fs-btn--${this.variant}`]: true,
-      [`fs-btn--${this.size}`]:    true,
       'fs-btn--loading':           this.loading,
       'fs-btn--disabled':          this.isDisabled,
       'fs-btn--full-width':        this.fullWidth,

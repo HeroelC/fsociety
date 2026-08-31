@@ -24,6 +24,7 @@ import {
   type FsCalendarDay,
 } from './calendar.util';
 import { FsCorners } from '../corners';
+import { FsControlSize } from '../control-size';
 
 const CDN = 'https://api.iconify.design';
 const ICONS = {
@@ -140,6 +141,15 @@ export class FsDateRangePickerComponent implements ControlValueAccessor {
    * `start` y `end` son lógicas: en RTL se dan vuelta solas.
    */
   @Input() corners: FsCorners = 'all';
+
+  /**
+   * Tamaño del control — 32 / 40 / 48px de alto.
+   *
+   * Es la escala compartida de la librería: un `fs-button` con el mismo `size`
+   * mide exactamente lo mismo, así que campo y botón quedan parejos al
+   * ponerlos uno al lado del otro.
+   */
+  @Input() size: FsControlSize = 'md';
 
   @Output() valueChange = new EventEmitter<FsDateRange>();
 

@@ -11,6 +11,15 @@ const meta: Meta<FsNumberInputComponent> = {
   ],
   tags: ['autodocs'],
   argTypes: {
+    size: {
+      control: { type: 'inline-radio' },
+      options: ['sm', 'md', 'lg'],
+      description: 'Tamaño del control — 32 / 40 / 48px. Misma escala que fs-button.',
+      table: {
+        type:         { summary: 'FsControlSize' },
+        defaultValue: { summary: 'md' },
+      },
+    },
     corners: {
       control: { type: 'inline-radio' },
       options: ['all', 'none', 'top', 'bottom', 'start', 'end'],
@@ -30,6 +39,7 @@ type Story = StoryObj<FsNumberInputComponent>;
 export const Default: Story = {
   args: {
     corners: 'all',
+    size: 'md',
     label: 'Cantidad',
     hint: 'Usá los botones, las flechas o tipeá.',
     placeholder: '0',

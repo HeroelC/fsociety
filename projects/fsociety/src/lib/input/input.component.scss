@@ -7,6 +7,7 @@
 // ---------------------------------------------------------------------------
 
 @use '../../styles/corners' as corners;
+@use '../../styles/control-size' as size;
 
 .fs-input {
   --_radius: var(--fs-input-radius, var(--fs-radius-md));
@@ -17,7 +18,7 @@
 
   // ─── Label ───────────────────────────────────────────────────
   &__label {
-    font-size: 13px;
+    font-size: var(--fs-control-label);
     font-weight: 550;
     letter-spacing: -0.005em;
     color: var(--fs-color-text-primary);
@@ -28,9 +29,9 @@
   &__wrapper {
     display: flex;
     align-items: center;
-    gap: 8px;
-    height: 40px;
-    padding: 0 13px;
+    gap: var(--fs-control-gap);
+    height: var(--fs-control-h);
+    padding: 0 var(--fs-control-pad-x);
     border: 1px solid var(--fs-color-border-field);
     border-radius: var(--_radius);
     background: var(--fs-color-surface);
@@ -65,8 +66,8 @@
 
   // ─── Left icon ───────────────────────────────────────────────
   &__icon {
-    width: 18px;
-    height: 18px;
+    width: var(--fs-control-icon);
+    height: var(--fs-control-icon);
     color: var(--fs-color-text-secondary);
   }
 
@@ -74,7 +75,7 @@
   &__field {
     flex: 1;
     min-width: 0;
-    font-size: 14px;
+    font-size: var(--fs-control-font);
     font-family: inherit;
     line-height: 1;
     color: var(--fs-color-text-primary);
@@ -105,8 +106,8 @@
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    width: 28px;
-    height: 28px;
+    width: var(--fs-control-action);
+    height: var(--fs-control-action);
     margin-right: -4px;
     background: none;
     border: none;
@@ -143,7 +144,7 @@
 
   // ─── Hint ────────────────────────────────────────────────────
   &__hint {
-    font-size: 12.5px;
+    font-size: var(--fs-control-hint);
     color: var(--fs-color-text-secondary);
     line-height: 1.4;
   }
@@ -153,7 +154,7 @@
     display: flex;
     align-items: center;
     gap: 5px;
-    font-size: 12.5px;
+    font-size: var(--fs-control-hint);
     line-height: 1.4;
 
     &--error   { color: var(--fs-color-error); }
@@ -165,3 +166,9 @@
 // Emitido a nivel superior y no anidado, para que el bloque de arriba pueda
 // seguir declarando propiedades después del radio.
 @include corners.presets('.fs-input__wrapper');
+
+// ─── Escala de tamaño ────────────────────────────────────────────────────────
+// Emitida a nivel superior y no anidada, por el mismo motivo que los corners:
+// deja que el bloque de arriba siga declarando propiedades sin caer en la
+// deprecación de Dart Sass.
+@include size.scale('.fs-input');

@@ -1,3 +1,5 @@
+@use '../../styles/control-size' as size;
+
 .fs-rg {
   display: flex;
   flex-direction: column;
@@ -11,7 +13,7 @@
 
   // ─── Group header ─────────────────────────────────────────────
   &__label {
-    font-size: 13px;
+    font-size: var(--fs-control-label);
     font-weight: 550;
     letter-spacing: -0.005em;
     color: var(--fs-color-text-primary);
@@ -19,7 +21,7 @@
   }
 
   &__desc {
-    font-size: 13px;
+    font-size: calc(var(--fs-control-font) - 1px);
     color: var(--fs-color-text-secondary);
     line-height: 1.4;
     margin-top: -2px;
@@ -36,7 +38,8 @@
   &__item {
     display: flex;
     align-items: flex-start;
-    gap: 10px;
+    // Igual que el checkbox: el dot es chico y necesita separarse del texto.
+    gap: calc(var(--fs-control-gap) + 2px);
     padding: 8px 0;
     cursor: pointer;
     user-select: none;
@@ -50,8 +53,8 @@
   &__track {
     position: relative;
     flex-shrink: 0;
-    width: 18px;
-    height: 18px;
+    width: var(--fs-control-box);
+    height: var(--fs-control-box);
     margin-top: 1px;
   }
 
@@ -112,22 +115,28 @@
   }
 
   &__item-label {
-    font-size: 14px;
+    font-size: var(--fs-control-font);
     font-weight: 500;
     color: var(--fs-color-text-primary);
     line-height: 1.4;
   }
 
   &__item-desc {
-    font-size: 13px;
+    font-size: calc(var(--fs-control-font) - 1px);
     color: var(--fs-color-text-secondary);
     line-height: 1.45;
   }
 
   // ─── Error message ────────────────────────────────────────────
   &__error {
-    font-size: 12.5px;
+    font-size: var(--fs-control-hint);
     color: var(--fs-color-error);
     line-height: 1.4;
   }
 }
+
+// ─── Escala de tamaño ────────────────────────────────────────────────────────
+// Emitida a nivel superior y no anidada, por el mismo motivo que los corners:
+// deja que el bloque de arriba siga declarando propiedades sin caer en la
+// deprecación de Dart Sass.
+@include size.scale('.fs-rg');

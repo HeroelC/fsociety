@@ -10,6 +10,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormsModule } from '@angular/f
 import { CommonModule } from '@angular/common';
 import { FsAnchoredPopoverDirective } from '../overlay/anchored-popover.directive';
 import { FsCorners } from '../corners';
+import { FsControlSize } from '../control-size';
 
 const CDN = 'https://api.iconify.design';
 const ICONS = {
@@ -62,6 +63,15 @@ export class FsMultiSelectComponent implements ControlValueAccessor {
    * `start` y `end` son lógicas: en RTL se dan vuelta solas.
    */
   @Input() corners: FsCorners = 'all';
+
+  /**
+   * Tamaño del control — 32 / 40 / 48px de alto.
+   *
+   * Es la escala compartida de la librería: un `fs-button` con el mismo `size`
+   * mide exactamente lo mismo, así que campo y botón quedan parejos al
+   * ponerlos uno al lado del otro.
+   */
+  @Input() size: FsControlSize = 'md';
 
   @ViewChild('searchInput') searchInputRef?: ElementRef<HTMLInputElement>;
 

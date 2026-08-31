@@ -1,3 +1,5 @@
+@use '../../styles/control-size' as size;
+
 .fs-checkbox {
   display: inline-flex;
   flex-direction: column;
@@ -13,7 +15,9 @@
   &__row {
     display: inline-flex;
     align-items: flex-start;
-    gap: 10px;
+    // Dos píxeles más que el gap del shell de un campo: la caja del checkbox
+    // es chica y pegada al texto se lee como si fueran una sola cosa.
+    gap: calc(var(--fs-control-gap) + 2px);
     cursor: pointer;
     user-select: none;
   }
@@ -22,8 +26,8 @@
   &__track {
     position: relative;
     flex-shrink: 0;
-    width: 18px;
-    height: 18px;
+    width: var(--fs-control-box);
+    height: var(--fs-control-box);
     margin-top: 1px;
   }
 
@@ -73,8 +77,9 @@
   }
 
   &__icon {
-    width: 11px;
-    height: 11px;
+    // El tilde adentro de la caja, dejando el aire de siempre en los bordes.
+    width: calc(var(--fs-control-box) - 7px);
+    height: calc(var(--fs-control-box) - 7px);
     color: #fff;
   }
 
@@ -87,23 +92,30 @@
   }
 
   &__label {
-    font-size: 14px;
+    font-size: var(--fs-control-font);
     font-weight: 500;
     color: var(--fs-color-text-primary);
     line-height: 1.4;
   }
 
   &__description {
-    font-size: 13px;
+    font-size: calc(var(--fs-control-font) - 1px);
     color: var(--fs-color-text-secondary);
     line-height: 1.45;
   }
 
   // ─── Error message ────────────────────────────────────────────
   &__error {
-    font-size: 12.5px;
+    font-size: var(--fs-control-hint);
     color: var(--fs-color-error);
-    padding-left: 28px;
+    // Alineado con el texto del label: caja + el gap de la fila.
+    padding-left: calc(var(--fs-control-box) + var(--fs-control-gap) + 2px);
     line-height: 1.4;
   }
 }
+
+// ─── Escala de tamaño ────────────────────────────────────────────────────────
+// Emitida a nivel superior y no anidada, por el mismo motivo que los corners:
+// deja que el bloque de arriba siga declarando propiedades sin caer en la
+// deprecación de Dart Sass.
+@include size.scale('.fs-checkbox');

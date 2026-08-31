@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/angular';
 import { moduleMetadata } from '@storybook/angular';
 import { FormsModule } from '@angular/forms';
 import { FsInputComponent } from './input.component';
+import { FsButtonComponent } from '../button/button.component';
 
 const CDN = 'https://api.iconify.design';
 const I = {
@@ -23,6 +24,15 @@ const meta: Meta<FsInputComponent> = {
   ],
   tags: ['autodocs'],
   argTypes: {
+    size: {
+      control: { type: 'inline-radio' },
+      options: ['sm', 'md', 'lg'],
+      description: 'Tamaño del control — 32 / 40 / 48px. Misma escala que fs-button.',
+      table: {
+        type:         { summary: 'FsControlSize' },
+        defaultValue: { summary: 'md' },
+      },
+    },
     corners: {
       control: { type: 'inline-radio' },
       options: ['all', 'none', 'top', 'bottom', 'start', 'end'],
@@ -46,6 +56,7 @@ type Story = StoryObj<FsInputComponent>;
 export const Default: Story = {
   args: {
     corners: 'all',
+    size: 'md',
     label: 'Nombre',
     placeholder: 'Ada Lovelace',
     iconLeft: I.user,
@@ -178,6 +189,60 @@ export const AllVariants: Story = {
         <fs-input label="Cupón" [iconLeft]="I.check" state="success" successMessage="¡Cupón aplicado!" [(ngModel)]="cupon"></fs-input>
         <fs-input label="ID de cuenta" [disabled]="true" [(ngModel)]="idCuenta"></fs-input>
         <fs-input type="search" label="Buscar" [iconLeft]="I.search" [clearable]="true" [(ngModel)]="buscar"></fs-input>
+      </div>
+    `,
+  }),
+  parameters: {
+    layout: 'padded',
+  },
+};
+
+// ─── Sizes ───────────────────────────────────────────────────────────────────
+// La escala es compartida: un fs-input y un fs-button del mismo `size` miden
+// exactamente lo mismo. Esta historia existe para que eso se pueda verificar a
+// ojo, que es donde antes se notaba el desfasaje.
+
+export const Sizes: Story = {
+  decorators: [
+    moduleMetadata({ imports: [FsInputComponent, FsButtonComponent, FormsModule] }),
+  ],
+  render: () => ({
+    props: { I },
+    template: `
+      <div style="display:flex; flex-direction:column; gap:2rem; max-width:640px;">
+
+        <div>
+          <p style="font-size:12.5px; color:var(--fs-color-text-secondary); margin:0 0 10px;">
+            Los tres pasos de la escala: 32 / 40 / 48px.
+          </p>
+          <div style="display:flex; flex-direction:column; gap:1rem;">
+            <fs-input size="sm" label="Small" [iconLeft]="I.user" placeholder="32px de alto"></fs-input>
+            <fs-input size="md" label="Medium" [iconLeft]="I.user" placeholder="40px de alto"></fs-input>
+            <fs-input size="lg" label="Large" [iconLeft]="I.user" placeholder="48px de alto"></fs-input>
+          </div>
+        </div>
+
+        <div>
+          <p style="font-size:12.5px; color:var(--fs-color-text-secondary); margin:0 0 10px;">
+            Campo y botón del mismo tamaño, alineados por abajo. Antes el botón
+            quedaba 4px más bajo en cualquier combinación.
+          </p>
+          <div style="display:flex; flex-direction:column; gap:1rem;">
+            <div style="display:flex; align-items:flex-end; gap:.5rem;">
+              <fs-input size="sm" label="Small" placeholder="Buscar" style="flex:1"></fs-input>
+              <fs-button size="sm" label="Buscar"></fs-button>
+            </div>
+            <div style="display:flex; align-items:flex-end; gap:.5rem;">
+              <fs-input size="md" label="Medium" placeholder="Buscar" style="flex:1"></fs-input>
+              <fs-button size="md" label="Buscar"></fs-button>
+            </div>
+            <div style="display:flex; align-items:flex-end; gap:.5rem;">
+              <fs-input size="lg" label="Large" placeholder="Buscar" style="flex:1"></fs-input>
+              <fs-button size="lg" label="Buscar"></fs-button>
+            </div>
+          </div>
+        </div>
+
       </div>
     `,
   }),

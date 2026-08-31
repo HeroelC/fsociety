@@ -8,6 +8,7 @@
 // ---------------------------------------------------------------------------
 
 @use '../../styles/corners' as corners;
+@use '../../styles/control-size' as size;
 
 @use '../../styles/overlay' as overlay;
 
@@ -25,7 +26,7 @@
   gap: 6px;
 
   &__label {
-    font-size: 13px;
+    font-size: var(--fs-control-label);
     font-weight: 550;
     letter-spacing: -0.005em;
     color: var(--fs-color-text-primary);
@@ -39,8 +40,10 @@
     display: flex;
     align-items: center;
     gap: 6px;
-    height: 40px;
-    padding: 0 8px 0 13px;
+    height: var(--fs-control-h);
+    // Izquierda con la escala; derecha más corta para que el clear respire
+    // contra el borde.
+    padding: 0 8px 0 var(--fs-control-pad-x);
     border: 1px solid var(--fs-color-border-field);
     border-radius: var(--_radius);
     background: var(--fs-color-surface);
@@ -75,8 +78,8 @@
   }
 
   &__icon {
-    width: 18px;
-    height: 18px;
+    width: var(--fs-control-icon);
+    height: var(--fs-control-icon);
     color: var(--fs-color-text-secondary);
     flex-shrink: 0;
   }
@@ -93,7 +96,7 @@
     // inside the flex row instead of overflowing it.
     flex: 1 1 0;
     min-width: 0;
-    font-size: 14px;
+    font-size: var(--fs-control-font);
     font-family: inherit;
     font-variant-numeric: tabular-nums;
     line-height: 1;
@@ -112,8 +115,8 @@
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    width: 26px;
-    height: 26px;
+    width: calc(var(--fs-control-action) - 2px);
+    height: calc(var(--fs-control-action) - 2px);
     padding: 0;
     border: none;
     background: transparent;
@@ -343,7 +346,7 @@
 
   // ─── Hint / messages ─────────────────────────────────────────────────────
   &__hint {
-    font-size: 12.5px;
+    font-size: var(--fs-control-hint);
     color: var(--fs-color-text-secondary);
     line-height: 1.4;
   }
@@ -352,7 +355,7 @@
     display: flex;
     align-items: center;
     gap: 5px;
-    font-size: 12.5px;
+    font-size: var(--fs-control-hint);
     line-height: 1.4;
 
     &--error   { color: var(--fs-color-error); }
@@ -382,3 +385,9 @@
 // Emitido a nivel superior y no anidado, para que el bloque de arriba pueda
 // seguir declarando propiedades después del radio.
 @include corners.presets('.fs-dr__wrapper');
+
+// ─── Escala de tamaño ────────────────────────────────────────────────────────
+// Emitida a nivel superior y no anidada, por el mismo motivo que los corners:
+// deja que el bloque de arriba siga declarando propiedades sin caer en la
+// deprecación de Dart Sass.
+@include size.scale('.fs-dr');

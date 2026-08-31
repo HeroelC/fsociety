@@ -13,6 +13,15 @@ const meta: Meta<FsDatePickerComponent> = {
   ],
   tags: ['autodocs'],
   argTypes: {
+    size: {
+      control: { type: 'inline-radio' },
+      options: ['sm', 'md', 'lg'],
+      description: 'Tamaño del control — 32 / 40 / 48px. Misma escala que fs-button.',
+      table: {
+        type:         { summary: 'FsControlSize' },
+        defaultValue: { summary: 'md' },
+      },
+    },
     corners: {
       control: { type: 'inline-radio' },
       options: ['all', 'none', 'top', 'bottom', 'start', 'end'],
@@ -44,6 +53,7 @@ export const Default: Story = {
   // browser stringifies that — the empty field would read "undefined".
   args: {
     corners: 'all',
+    size: 'md',
     label: 'Fecha de nacimiento',
     hint: 'Podés tipearla o elegirla del calendario.',
     placeholder: 'dd/mm/aaaa',

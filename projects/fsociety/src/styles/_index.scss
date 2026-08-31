@@ -10,4 +10,8 @@
 // 'tokens'. Forwarding both names collided, which is why `@use '.../styles'`
 // failed to compile at all before.
 @forward 'mixins' hide focus-ring;
+// La escala de tamaño de los controles. No emite CSS, así que forwardearla
+// desde acá no agrega peso: solo deja que un consumidor construya un control
+// propio que alinee con los de la librería.
+@forward 'control-size';
 @forward 'global';

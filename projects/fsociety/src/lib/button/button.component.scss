@@ -1,4 +1,5 @@
 @use '../../styles/tokens' as t;
+@use '../../styles/control-size' as size;
 
 // ---------------------------------------------------------------------------
 // Base
@@ -8,7 +9,7 @@
   display:         inline-flex;
   align-items:     center;
   justify-content: center;
-  gap:             t.$fs-space-2;
+  gap:             var(--fs-control-gap);
   border:          1.5px solid transparent;
   border-radius:   t.$fs-radius-md;
   font-family:     t.$fs-font-sans;
@@ -27,26 +28,19 @@
   }
 
   // -------------------------------------------------------------------------
-  // Tamaños
+  // Tamaño
   // -------------------------------------------------------------------------
+  // Sale de la escala compartida, no de números propios. Antes el botón corría
+  // en 28/36/44 mientras los campos estaban clavados en 40, así que ningún
+  // tamaño podía empatar con un input. Ahora los dos leen el mismo mapa.
+  //
+  // El padding vertical es 0 a propósito: con `min-height` y `line-height: 1`
+  // el alto lo fija la escala, y `white-space: nowrap` garantiza una sola
+  // línea. Sumar padding acá volvería a desalinearlo del campo.
 
-  &--sm {
-    font-size:  t.$fs-text-xs;
-    padding:    t.$fs-space-1 t.$fs-space-3;
-    min-height: 28px;
-  }
-
-  &--md {
-    font-size:  t.$fs-text-sm;
-    padding:    t.$fs-space-2 t.$fs-space-4;
-    min-height: 36px;
-  }
-
-  &--lg {
-    font-size:  t.$fs-text-base;
-    padding:    t.$fs-space-3 t.$fs-space-6;
-    min-height: 44px;
-  }
+  min-height: var(--fs-control-h);
+  padding:    0 var(--fs-control-btn-px);
+  font-size:  var(--fs-control-font);
 
   // -------------------------------------------------------------------------
   // Variantes
@@ -130,9 +124,8 @@
     .fs-btn__icon--left    { margin-right: 0; }
     .fs-btn__icon--right   { margin-left: 0; }
 
-    &.fs-btn--sm { width: 28px; }
-    &.fs-btn--md { width: 36px; }
-    &.fs-btn--lg { width: 44px; }
+    // Cuadrado: el ancho es el alto que fijó la escala.
+    width: var(--fs-control-h);
   }
 
   // -------------------------------------------------------------------------
@@ -165,8 +158,11 @@
   // El layout y la animación los aporta fs-spinner; acá solo queda el hueco.
 
   &__icon {
-    width:      16px;
-    height:     16px;
+    // Dos píxeles menos que el ícono de un campo: el botón lleva el ícono
+    // pegado al texto, y a la par del label se ve más pesado que suelto en el
+    // shell de un input.
+    width:      calc(var(--fs-control-icon) - 2px);
+    height:     calc(var(--fs-control-icon) - 2px);
     flex-shrink: 0;
 
     &--left  { margin-right: -(t.$fs-space-1); }
@@ -180,3 +176,9 @@
     transition:  opacity t.$fs-duration-fast t.$fs-ease-default;
   }
 }
+
+// ─── Escala de tamaño ────────────────────────────────────────────────────────
+// Emitida a nivel superior y no anidada, por el mismo motivo que los corners:
+// deja que el bloque de arriba siga declarando propiedades sin caer en la
+// deprecación de Dart Sass.
+@include size.scale('.fs-btn');

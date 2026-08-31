@@ -13,6 +13,15 @@ const meta: Meta<FsMultiSelectComponent> = {
   ],
   tags: ['autodocs'],
   argTypes: {
+    size: {
+      control: { type: 'inline-radio' },
+      options: ['sm', 'md', 'lg'],
+      description: 'Tamaño del control — 32 / 40 / 48px. Misma escala que fs-button.',
+      table: {
+        type:         { summary: 'FsControlSize' },
+        defaultValue: { summary: 'md' },
+      },
+    },
     corners: {
       control: { type: 'inline-radio' },
       options: ['all', 'none', 'top', 'bottom', 'start', 'end'],
@@ -39,6 +48,7 @@ const techs = [
 export const Default: Story = {
   args: {
     corners: 'all',
+    size: 'md',
   },
   render: (args) => ({
     props: { ...args, sel: ['angular', 'typescript'], options: techs },
