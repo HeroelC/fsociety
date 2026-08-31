@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.15.0](https://github.com/heroelc/fsociety/compare/v0.14.0...v0.15.0) (2026-08-31)
+
+### Features
+
+* **empty-state:** agregar fs-empty-state ([2fd26a9](https://github.com/heroelc/fsociety/commit/2fd26a9d0395a33554582e291e5a151b3edb79d8))
+
+### Bug Fixes
+
+* **a11y:** cerrar con Escape en fs-multi-select y fs-date-range-picker ([76fa543](https://github.com/heroelc/fsociety/commit/76fa543733c8011cf7d09c97f30cf8ad723c9e5d))
+* **build:** publicar _control-size.scss, que rompía el build de los consumidores ([394d4e3](https://github.com/heroelc/fsociety/commit/394d4e36947a414a2e90951c19fe6426170dea85))
+
 ## [0.14.0](https://github.com/heroelc/fsociety/compare/v0.13.0...v0.14.0) (2026-08-31)
 
 ### ⚠ BREAKING CHANGES
