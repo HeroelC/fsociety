@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.16.0](https://github.com/heroelc/fsociety/compare/v0.15.0...v0.16.0) (2026-08-31)
+
+### Features
+
+* **empty-state:** usar fs-empty-state en los cuatro bloques vacíos internos ([4093057](https://github.com/heroelc/fsociety/commit/40930572dd7e2f1cd80c21a0abefccf8a8ae04a6))
+
 ## [0.15.0](https://github.com/heroelc/fsociety/compare/v0.14.0...v0.15.0) (2026-08-31)
 
 ### Features
