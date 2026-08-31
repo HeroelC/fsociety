@@ -128,7 +128,7 @@ export class MyComponent {}
 
 **Datos** — [fs-table](#fs-table)
 
-**Overlays** — [fs-modal](#fs-modal) · [fs-drawer](#fs-drawer)
+**Overlays** — [fs-modal](#fs-modal) · [fs-drawer](#fs-drawer) · [fs-menu](#fs-menu)
 
 **Compositions** — [fs-experience-card](#fs-experience-card) · [fs-profile-card](#fs-profile-card)
 
@@ -146,7 +146,7 @@ export class MyComponent {}
 | Input | Tipo | Default | Descripción |
 |---|---|---|---|
 | `variant` | `'primary' \| 'secondary' \| 'outline' \| 'ghost' \| 'danger'` | `'primary'` | Variante visual |
-| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Tamaño |
+| `size` | `FsControlSize` | `'md'` | Alto del botón: 32 / 40 / 48px — la misma escala que los campos |
 | `disabled` | `boolean` | `false` | Estado deshabilitado |
 | `loading` | `boolean` | `false` | Muestra spinner y deshabilita |
 | `fullWidth` | `boolean` | `false` | Ocupa el 100% del contenedor |
@@ -169,14 +169,13 @@ export class MyComponent {}
 
 <!-- con ícono monocromo — se tiñe con el color del badge -->
 <fs-badge color="danger"
-  imgLeft="https://api.iconify.design/simple-icons:angular.svg"
-  imgLeftAlt="Angular">
+  iconLeft="https://api.iconify.design/simple-icons:angular.svg">
   Angular
 </fs-badge>
 
 <!-- con color hex personalizado -->
 <fs-badge customColor="#7c3aed"
-  imgLeft="https://api.iconify.design/simple-icons:nestjs.svg">
+  iconLeft="https://api.iconify.design/simple-icons:nestjs.svg">
   NestJS
 </fs-badge>
 
@@ -195,12 +194,8 @@ export class MyComponent {}
 > que no se paga sola.
 | `size` | `'sm' \| 'md'` | `'md'` | Tamaño |
 | `dot` | `boolean` | `false` | Punto de estado |
-| `iconLeft` | `string` | — | SVG path ícono izquierdo (viewBox 0 0 24 24) |
-| `iconRight` | `string` | — | SVG path ícono derecho |
-| `imgLeft` | `string` | — | URL de ícono izquierdo (prioridad sobre iconLeft) |
-| `imgRight` | `string` | — | URL de ícono derecho |
-| `imgLeftAlt` | `string` | `''` | Descripción del ícono izquierdo |
-| `imgRightAlt` | `string` | `''` | Descripción del ícono derecho |
+| `iconLeft` | `string` | — | URL del ícono izquierdo (Iconify CDN) |
+| `iconRight` | `string` | — | URL del ícono derecho (Iconify CDN) |
 | `iconOnly` | `boolean` | `false` | Badge circular sin label |
 | `removable` | `boolean` | `false` | Muestra botón X |
 
@@ -208,11 +203,25 @@ export class MyComponent {}
 |---|---|---|
 | `removed` | `EventEmitter<void>` | Emite al clickear el X |
 
-> **`imgLeft` / `imgRight` esperan un ícono monocromo.** Se pintan con
-> `mask-image` tomando el color del texto del badge, así que se adaptan al tono y
-> al tema solos, sin necesidad de un color en la URL. Solo se usa la silueta, así
-> que no sirven para artwork a color. Son decorativos (`aria-hidden`), por eso el
-> `Alt` no se renderiza — el label del badge ya comunica el significado.
+> **`iconLeft` / `iconRight` esperan la URL de un ícono monocromo.** Se pintan
+> con `mask-image` tomando el color del texto del badge, así que se adaptan al
+> tono y al tema solos — y no hace falta un color en la URL. No sirven para
+> artwork a color: solo se usa la silueta.
+>
+> Por eso los ejemplos usan `api.iconify.design/simple-icons:*.svg` sin sufijo de
+> color. Un `<img>` no funcionaría: dentro de un `<img>` el SVG es un documento
+> aislado, `currentColor` no hereda, y el ícono queda del color que traiga
+> embebido — invisible cuando coincide con el fondo.
+>
+> Los íconos son decorativos (`aria-hidden`), así que el badge no expone un texto
+> alternativo: el label ya comunica el significado.
+
+> **Cambio incompatible desde la 0.13.** Antes `iconLeft` acá era el atributo `d`
+> de un `<path>` crudo y la URL iba en `imgLeft` — `fs-badge` era la única
+> excepción de la librería. Ahora `iconLeft` es una URL, igual que en
+> `fs-button`, `fs-input` y el resto. **Migración:** renombrá `imgLeft` a
+> `iconLeft` (el valor no cambia) y borrá `imgLeftAlt` / `imgRightAlt`, que no
+> renderizaban nada. Si pasabas un `path` crudo, reemplazalo por la URL del SVG.
 
 ---
 
@@ -348,6 +357,7 @@ iconLock = `${CDN}/tabler:lock.svg`;
 | `state` | `'default' \| 'error' \| 'success'` | `'default'` | Estado de validación |
 | `errorMessage` | `string` | `''` | Mensaje de error (visible cuando `state='error'`) |
 | `successMessage` | `string` | `''` | Mensaje de éxito (visible cuando `state='success'`) |
+| `size` | `FsControlSize` | `'md'` | Alto del control: 32 / 40 / 48px — la misma escala que `fs-button` |
 | `corners` | `FsCorners` | `'all'` | Qué esquinas redondear |
 
 | Custom property | Default |
@@ -401,6 +411,7 @@ options: FsSelectOption[] = [
 | `errorMessage` | `string` | `''` | Mensaje de error |
 | `successMessage` | `string` | `''` | Mensaje de éxito |
 | `emptyText` | `string` | `'Sin resultados'` | Texto cuando no hay opciones que coincidan |
+| `size` | `FsControlSize` | `'md'` | Alto del control: 32 / 40 / 48px — la misma escala que `fs-button` |
 | `corners` | `FsCorners` | `'all'` | Qué esquinas redondear |
 
 | Output | Tipo | Descripción |
@@ -454,6 +465,7 @@ que anda con `[(ngModel)]` y con formularios reactivos. El valor del modelo es u
 | `readonly` | `boolean` | `false` | Solo lectura — no se tipea ni se abre |
 | `state` | `'default' \| 'error' \| 'success'` | `'default'` | Estado de validación |
 | `errorMessage` / `successMessage` | `string` | `''` | Mensajes de validación |
+| `size` | `FsControlSize` | `'md'` | Alto del control: 32 / 40 / 48px — la misma escala que `fs-button` |
 | `corners` | `FsCorners` | `'all'` | Qué esquinas redondear |
 
 | Output | Tipo | Descripción |
@@ -525,6 +537,7 @@ presets: FsDateRangePreset[] = [
 | `disabled` / `readonly` | `boolean` | `false` | |
 | `state` | `'default' \| 'error' \| 'success'` | `'default'` | |
 | `errorMessage` / `successMessage` | `string` | `''` | |
+| `size` | `FsControlSize` | `'md'` | Alto del control: 32 / 40 / 48px — la misma escala que `fs-button` |
 | `corners` | `FsCorners` | `'all'` | Qué esquinas redondear |
 
 | Output | Tipo | Descripción |
@@ -730,6 +743,85 @@ animar la entrada.
 
 ---
 
+### `<fs-menu>`
+
+Menú de acciones anclado a un disparador. El caso típico es una tabla con
+acciones por fila.
+
+```typescript
+import { FsMenuComponent, FsMenuItem } from '@heroelc/fsociety';
+
+acciones: FsMenuItem[] = [
+  { id: 'view',    label: 'Ver detalle', icon: 'https://api.iconify.design/tabler:eye.svg' },
+  { id: 'edit',    label: 'Editar',      icon: 'https://api.iconify.design/tabler:pencil.svg', hint: '⌘E' },
+  { id: 'archive', label: 'Archivar',    icon: 'https://api.iconify.design/tabler:archive.svg', separatorBefore: true },
+  { id: 'delete',  label: 'Eliminar',    icon: 'https://api.iconify.design/tabler:trash.svg', danger: true, separatorBefore: true },
+];
+```
+
+```html
+<fs-menu [items]="acciones" ariaLabel="Acciones" (itemSelect)="onAccion($event)">
+  <span
+    class="fs-icon"
+    style="--_icon: url(https://api.iconify.design/tabler:dots-vertical.svg); width: 18px; height: 18px"
+  ></span>
+</fs-menu>
+```
+
+> **Proyectá el contenido del disparador, no un botón.** `fs-menu` ya renderiza
+> su propio `<button>` y le pone `aria-haspopup` y `aria-expanded`. Meterle un
+> `<fs-button>` adentro anida un control interactivo dentro de otro, y eso rompe
+> la navegación por teclado y el anuncio del lector de pantalla.
+
+| Input | Tipo | Default | Descripción |
+|---|---|---|---|
+| `items` | `FsMenuItem[]` | `[]` | Los ítems a mostrar |
+| `align` | `FsPopoverAlign` | `'start'` | Alineación horizontal contra el disparador |
+| `side` | `FsPopoverSide` | `'bottom'` | Lado preferido — se da vuelta solo si no entra |
+| `matchTriggerWidth` | `boolean` | `false` | Estira el panel al ancho del disparador |
+| `disabled` | `boolean` | `false` | Deshabilita el disparador |
+| `ariaLabel` | `string` | `'Abrir menú'` | Nombre accesible del disparador |
+
+| Output | Tipo | Descripción |
+|---|---|---|
+| `itemSelect` | `EventEmitter<FsMenuItem>` | El ítem elegido — no emite para los deshabilitados |
+| `openChange` | `EventEmitter<boolean>` | Emite al abrir y al cerrar |
+
+`FsMenuItem`:
+
+| Campo | Tipo | Descripción |
+|---|---|---|
+| `id` | `string` | Identificador que viaja en `itemSelect` |
+| `label` | `string` | Texto visible |
+| `icon` | `string?` | URL completa del ícono |
+| `hint` | `string?` | Texto secundario a la derecha: un atajo, un contador |
+| `disabled` | `boolean?` | Se ve apagado, no recibe foco y no emite |
+| `danger` | `boolean?` | Lo pinta con el color de peligro |
+| `separatorBefore` | `boolean?` | Dibuja un separador arriba del ítem |
+
+**Teclado**
+
+| Tecla | Qué hace |
+|---|---|
+| `Enter` / `Espacio` | Abre y cierra |
+| `↓` | Abre y va al primer ítem |
+| `↑` | Abre y va al último ítem |
+| `↓` / `↑` abierto | Recorre en círculo, salteando los deshabilitados |
+| `Home` / `End` | Primero / último |
+| `Esc` | Cierra y devuelve el foco al disparador |
+| `Tab` | Cierra y sigue el tab order |
+
+El panel sube al top layer vía `FsAnchoredPopoverDirective`, así que ningún
+ancestro con `overflow` o `transform` lo puede recortar — que es exactamente el
+caso de una fila de tabla o de una card con `overflow: hidden`.
+
+| Custom property | Default | |
+|---|---|---|
+| `--fs-menu-radius` | `var(--fs-radius-lg)` | Radio del panel |
+| `--fs-menu-min-width` | `180px` | Ancho mínimo del panel |
+
+---
+
 ### `<fs-slider>`
 
 Control de rango. Implementa `ControlValueAccessor`; el valor es un `number`.
@@ -865,6 +957,7 @@ modelo es un `number`, o `null` cuando está vacío.
 | `state` | `'default' \| 'error' \| 'success'` | `'default'` | Estado de validación |
 | `errorMessage` / `successMessage` | `string` | `''` | Mensajes |
 | `decrementLabel` / `incrementLabel` | `string` | `'Disminuir'` / `'Aumentar'` | `aria-label` de los botones |
+| `size` | `FsControlSize` | `'md'` | Alto del control: 32 / 40 / 48px — la misma escala que `fs-button` |
 | `corners` | `FsCorners` | `'all'` | Qué esquinas redondear |
 
 | Output | Tipo | Descripción |
@@ -914,6 +1007,7 @@ Implementa `ControlValueAccessor`.
 | `disabled` / `readonly` | `boolean` | `false` | |
 | `state` | `'default' \| 'error' \| 'success'` | `'default'` | |
 | `errorMessage` / `successMessage` | `string` | `''` | |
+| `size` | `FsControlSize` | `'md'` | Alto del control: 32 / 40 / 48px — la misma escala que `fs-button` |
 | `corners` | `FsCorners` | `'all'` | Qué esquinas redondear |
 
 | Output | Tipo | Descripción |
@@ -1023,6 +1117,7 @@ Todos implementan `ControlValueAccessor`.
 |---|---|---|---|
 | `label` | `string` | `''` | Etiqueta del checkbox |
 | `description` | `string` | `''` | Descripción secundaria |
+| `size` | `FsControlSize` | `'md'` | Alto del control: 32 / 40 / 48px — la misma escala que `fs-button` |
 | `disabled` | `boolean` | `false` | Estado deshabilitado |
 | `indeterminate` | `boolean` | `false` | Estado indeterminado (ej: "seleccionar todo" parcial) |
 | `state` | `'default' \| 'error'` | `'default'` | Estado de validación |
@@ -1054,6 +1149,7 @@ plans: FsRadioOption[] = [
 | `options` | `FsRadioOption[]` | `[]` | Array `{ value, label, description? }` |
 | `label` | `string` | `''` | Título del grupo |
 | `description` | `string` | `''` | Descripción del grupo |
+| `size` | `FsControlSize` | `'md'` | Alto del control: 32 / 40 / 48px — la misma escala que `fs-button` |
 | `disabled` | `boolean` | `false` | Deshabilita todas las opciones |
 | `state` | `'default' \| 'error'` | `'default'` | Estado de validación |
 | `errorMessage` | `string` | `''` | Mensaje de error |
@@ -1243,6 +1339,7 @@ options: FsMultiSelectOption[] = [
 | `searchable` | `boolean` | `true` | Muestra buscador |
 | `max` | `number` | `0` | Límite de selecciones (0 = sin límite) |
 | `disabled` | `boolean` | `false` | Estado deshabilitado |
+| `size` | `FsControlSize` | `'md'` | Alto del control: 32 / 40 / 48px — la misma escala que `fs-button` |
 | `corners` | `FsCorners` | `'all'` | Qué esquinas redondear |
 
 | Custom property | Default | |
@@ -1764,9 +1861,9 @@ experience = {
   ],
   bulletsPreview: 2,
   badges: [
-    { label: 'Angular',     color: 'danger',  imgLeft: 'https://api.iconify.design/simple-icons:angular.svg' },
-    { label: 'TypeScript',  color: 'primary', imgLeft: 'https://api.iconify.design/simple-icons:typescript.svg' },
-    { label: 'AWS',         customColor: '#ea580c', imgLeft: 'https://api.iconify.design/simple-icons:amazonaws.svg' },
+    { label: 'Angular',     color: 'danger',  iconLeft: 'https://api.iconify.design/simple-icons:angular.svg' },
+    { label: 'TypeScript',  color: 'primary', iconLeft: 'https://api.iconify.design/simple-icons:typescript.svg' },
+    { label: 'AWS',         customColor: '#ea580c', iconLeft: 'https://api.iconify.design/simple-icons:amazonaws.svg' },
     { label: 'ESLint',      color: 'neutral' },
   ],
 };
@@ -1823,9 +1920,9 @@ links = [
   { label: 'Buenos Aires, Argentina' },
 ];
 badges = [
-  { label: 'Angular',    color: 'danger',  imgLeft: 'https://api.iconify.design/simple-icons:angular.svg' },
-  { label: 'TypeScript', color: 'primary', imgLeft: 'https://api.iconify.design/simple-icons:typescript.svg' },
-  { label: 'NestJS',     customColor: '#7c3aed', imgLeft: 'https://api.iconify.design/simple-icons:nestjs.svg' },
+  { label: 'Angular',    color: 'danger',  iconLeft: 'https://api.iconify.design/simple-icons:angular.svg' },
+  { label: 'TypeScript', color: 'primary', iconLeft: 'https://api.iconify.design/simple-icons:typescript.svg' },
+  { label: 'NestJS',     customColor: '#7c3aed', iconLeft: 'https://api.iconify.design/simple-icons:nestjs.svg' },
 ];
 stats = [
   { value: '4+',  label: 'años exp.'  },
@@ -2149,6 +2246,57 @@ Familias configurables: `$fs-primary-hex`, `$fs-secondary-hex`,
 > Probá colores en vivo antes de decidir: **Foundations → Branding** en el
 > [Storybook](https://heroelc.github.io/fsociety) recalcula el sistema entero al
 > instante y te da este snippet listo para copiar.
+
+### Tamaño de los controles
+
+Todos los controles de formulario comparten una sola escala de alto, y el botón
+también. Un `fs-button` y un `fs-input` con el mismo `size` miden exactamente lo
+mismo, así que quedan parejos al ponerlos uno al lado del otro.
+
+| `size` | Alto | Fuente |
+|---|---|---|
+| `sm` | 32px | 13px |
+| `md` (default) | 40px | 14px |
+| `lg` | 48px | 16px |
+
+```html
+<div style="display: flex; align-items: flex-end; gap: .5rem">
+  <fs-input size="md" label="Buscar"></fs-input>
+  <fs-button size="md" label="Buscar"></fs-button>
+</div>
+```
+
+Lo aceptan `fs-button`, `fs-input`, `fs-select`, `fs-multi-select`,
+`fs-textarea`, `fs-number-input`, `fs-date-picker`, `fs-date-range-picker`,
+`fs-checkbox` y `fs-radio-group`.
+
+La escala vive en `styles/_control-size.scss` y es la única fuente de verdad de
+alto, padding, tipografía e íconos. Para construir un control propio que alinee
+con los de la librería:
+
+```scss
+@use '@heroelc/fsociety/styles/control-size' as size;
+
+@include size.scale('.mi-control');
+
+.mi-control__shell {
+  height: var(--fs-control-h);
+  padding: 0 var(--fs-control-pad-x);
+  font-size: var(--fs-control-font);
+}
+```
+
+El mixin emite las custom properties `--fs-control-*` por `data-size`, así que el
+componente tiene que bindear `[attr.data-size]="size"` en su raíz.
+
+> **`lg` usa 16px de fuente y no 15 a propósito:** Safari en iOS hace zoom al
+> enfocar un input con menos de 16px.
+
+> **Todo componente que lea `--fs-control-*` tiene que incluir `scale()` sobre su
+> propia raíz.** Las custom properties heredan, así que sin eso un control
+> anidado dentro de otro tomaría la escala del padre.
+
+---
 
 ### Redondeo por componente
 
