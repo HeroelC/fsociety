@@ -8,6 +8,9 @@ export * from './lib/fsociety.component';
 // Compartido por todos los componentes con el input `corners`.
 export type { FsCorners } from './lib/corners';
 
+// Compartido por todos los controles de formulario con el input `size`.
+export type { FsControlSize } from './lib/control-size';
+
 export * from './lib/button/button.component';
 export type { FsButtonVariant, FsButtonSize, FsButtonType } from './lib/button/button.component';
 
@@ -31,6 +34,9 @@ export type { FsInputType, FsInputState } from './lib/input/input.component';
 
 export { FsAnchoredPopoverDirective } from './lib/overlay/anchored-popover.directive';
 export type { FsPopoverAlign, FsPopoverSide } from './lib/overlay/anchored-popover.directive';
+
+export * from './lib/menu/menu.component';
+export type { FsMenuItem } from './lib/menu/menu.component';
 
 export { FsSelectComponent } from './lib/select/select.component';
 export type { FsSelectOption, FsSelectState } from './lib/select/select.component';

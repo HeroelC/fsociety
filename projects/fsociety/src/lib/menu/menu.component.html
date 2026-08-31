@@ -1,0 +1,71 @@
+<div class="fs-menu" #anchor>
+
+  <!-- El disparador es un <button> de verdad y el consumidor proyecta su
+       CONTENIDO, no otro botón: anidar un control interactivo adentro de otro
+       rompe la navegación por teclado y el anuncio del lector de pantalla.
+       Por eso aria-haspopup y aria-expanded viven acá, sobre el elemento que
+       realmente recibe el foco. -->
+  <button
+    class="fs-menu__trigger"
+    type="button"
+    [disabled]="disabled"
+    aria-haspopup="menu"
+    [attr.aria-expanded]="open"
+    [attr.aria-controls]="open ? menuId : null"
+    [attr.aria-label]="ariaLabel"
+    (click)="toggle()"
+    (keydown)="onTriggerKeydown($event)"
+  >
+    <ng-content></ng-content>
+  </button>
+
+  @if (open) {
+    <div
+      class="fs-menu__panel"
+      [id]="menuId"
+      role="menu"
+      [fsAnchoredPopover]="anchor"
+      [popoverAlign]="align"
+      [popoverSide]="side"
+      [popoverMatchWidth]="matchTriggerWidth"
+      (keydown)="onMenuKeydown($event)"
+    >
+      @for (item of items; track item.id) {
+
+        @if (item.separatorBefore && !$first) {
+          <div class="fs-menu__separator" role="separator"></div>
+        }
+
+        <button
+          #menuItem
+          class="fs-menu__item"
+          [class.fs-menu__item--danger]="item.danger"
+          type="button"
+          role="menuitem"
+          [disabled]="item.disabled"
+          [attr.tabindex]="activeIndex === $index ? 0 : -1"
+          (click)="select(item)"
+        >
+          @if (item.icon) {
+            <span
+              class="fs-icon fs-menu__item-icon"
+              [style.--_icon]="'url(' + item.icon + ')'"
+              aria-hidden="true"
+            ></span>
+          }
+
+          <span class="fs-menu__item-label">{{ item.label }}</span>
+
+          @if (item.hint) {
+            <span class="fs-menu__item-hint">{{ item.hint }}</span>
+          }
+        </button>
+      }
+
+      @if (!items.length) {
+        <div class="fs-menu__empty">Sin acciones</div>
+      }
+    </div>
+  }
+
+</div>
