@@ -1,0 +1,31 @@
+<div
+  class="fs-empty"
+  [ngClass]="classes"
+  [attr.role]="announce ? 'status' : null"
+>
+  @if (showIcon) {
+    <span class="fs-empty__icon" aria-hidden="true">
+      <span
+        class="fs-icon fs-empty__glyph"
+        [style.--_icon]="'url(' + icon + ')'"
+      ></span>
+    </span>
+  }
+
+  @if (title) {
+    <p class="fs-empty__title">{{ title }}</p>
+  }
+
+  @if (description) {
+    <p class="fs-empty__desc">{{ description }}</p>
+  }
+
+  <!-- Las acciones las trae el consumidor: el componente no conoce fs-button
+       ni le impone una variante. En `sm` y `md` va un solo botón; la acción
+       secundaria solo tiene sentido en `lg`.
+
+       Va en una línea a propósito: con el div indentado, la propia plantilla
+       deja nodos de texto adentro y `:empty` nunca aplicaría, así que el gap
+       del contenedor abriría un hueco aunque no se proyecte nada. -->
+  <div class="fs-empty__actions"><ng-content></ng-content></div>
+</div>

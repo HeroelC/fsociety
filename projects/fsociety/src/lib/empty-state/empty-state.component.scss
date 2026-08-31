@@ -1,0 +1,118 @@
+// ---------------------------------------------------------------------------
+// fs-empty-state — configurable CSS custom properties
+//
+//   fs-empty-state {
+//     --fs-empty-max-width: 42ch;
+//   }
+//
+// El tamaño sale de `size` y no de la escala de _control-size.scss: esa mide
+// el alto de un control de formulario, y acá lo que cambia es la densidad de
+// un bloque de contenido.
+// ---------------------------------------------------------------------------
+
+.fs-empty {
+  --_max-width: var(--fs-empty-max-width, 42ch);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  color: var(--fs-color-text-primary);
+
+  // ─── Ícono ────────────────────────────────────────────────────────────────
+  // El disco de fondo existe para que el ícono no flote suelto sobre la
+  // superficie: sin él, a tamaño lg queda un glifo perdido en el medio.
+  &__icon {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    border-radius: var(--fs-radius-full);
+    background: var(--fs-color-surface-alt);
+    border: 1px solid var(--fs-color-border);
+    color: var(--fs-color-text-secondary);
+  }
+
+  &__title {
+    margin: 0;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1.35;
+    color: var(--fs-color-text-primary);
+  }
+
+  &__desc {
+    margin: 0;
+    max-width: var(--_max-width);
+    color: var(--fs-color-text-secondary);
+    line-height: 1.5;
+  }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+
+    // Sin acciones proyectadas el contenedor desaparece, para que el `gap` del
+    // bloque no abra un hueco al final.
+    &:empty { display: none; }
+  }
+
+  // ─── Tamaños ──────────────────────────────────────────────────────────────
+
+  &--sm {
+    gap: 8px;
+    padding: 18px 12px;
+
+    .fs-empty__icon  { width: 32px; height: 32px; }
+    .fs-empty__glyph { width: 16px; height: 16px; }
+    .fs-empty__title { font-size: 13.5px; }
+    .fs-empty__desc  { font-size: 12.5px; }
+  }
+
+  &--md {
+    gap: 12px;
+    padding: 34px 20px;
+
+    .fs-empty__icon  { width: 44px; height: 44px; }
+    .fs-empty__glyph { width: 21px; height: 21px; }
+    .fs-empty__title { font-size: 15.5px; }
+    .fs-empty__desc  { font-size: 13.5px; }
+    .fs-empty__actions { margin-top: 4px; }
+  }
+
+  &--lg {
+    gap: 14px;
+    padding: 56px 24px;
+
+    .fs-empty__icon  { width: 60px; height: 60px; }
+    .fs-empty__glyph { width: 28px; height: 28px; }
+    .fs-empty__title { font-size: 19px; }
+    .fs-empty__desc  { font-size: 14.5px; }
+    .fs-empty__actions { margin-top: 8px; }
+  }
+
+  // ─── Compacto ─────────────────────────────────────────────────────────────
+  // Para huecos donde ni el `sm` entra. El ícono ya no se renderiza desde el
+  // template; acá solo se cierra el espaciado.
+  &--compact {
+    gap: 4px;
+    padding: 12px 10px;
+
+    .fs-empty__title { font-size: 13px; }
+    .fs-empty__desc  { font-size: 12.5px; }
+    .fs-empty__actions { margin-top: 2px; }
+  }
+
+  // ─── Tono de error ────────────────────────────────────────────────────────
+  // Solo el ícono. La caja no se pinta de rojo: un error de carga es
+  // informativo, no una alarma, y gritar en cada fallo de red hace que el
+  // usuario deje de leer los rojos que sí importan.
+  &--error {
+    .fs-empty__icon {
+      color: var(--fs-color-error);
+      border-color: color-mix(in srgb, var(--fs-color-error) 34%, transparent);
+      background: color-mix(in srgb, var(--fs-color-error) 9%, transparent);
+    }
+  }
+}

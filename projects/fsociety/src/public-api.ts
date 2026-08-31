@@ -38,6 +38,9 @@ export type { FsPopoverAlign, FsPopoverSide } from './lib/overlay/anchored-popov
 export * from './lib/menu/menu.component';
 export type { FsMenuItem } from './lib/menu/menu.component';
 
+export { FsEmptyStateComponent } from './lib/empty-state/empty-state.component';
+export type { FsEmptyStateTone, FsEmptyStateSize } from './lib/empty-state/empty-state.component';
+
 export { FsSelectComponent } from './lib/select/select.component';
 export type { FsSelectOption, FsSelectState } from './lib/select/select.component';
 
