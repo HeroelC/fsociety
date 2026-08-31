@@ -41,6 +41,12 @@
     "./styles/global": {
       "sass": "./global.scss"
     },
+    "./styles/corners": {
+      "sass": "./_corners.scss"
+    },
+    "./styles/control-size": {
+      "sass": "./_control-size.scss"
+    },
     "./styles": {
       "sass": "./_index.scss"
     }

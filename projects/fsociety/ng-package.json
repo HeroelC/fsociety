@@ -23,6 +23,16 @@
     },
     {
       "input": "src/styles",
+      "glob": "_corners.scss",
+      "output": "/"
+    },
+    {
+      "input": "src/styles",
+      "glob": "_control-size.scss",
+      "output": "/"
+    },
+    {
+      "input": "src/styles",
       "glob": "_index.scss",
       "output": "/"
     },
