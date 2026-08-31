@@ -143,6 +143,24 @@ export class FsMultiSelectComponent implements ControlValueAccessor {
     }
   }
 
+  /**
+   * Escape cierra el panel, igual que en `fs-select` y `fs-date-picker`.
+   *
+   * Va en `document` y no en el host por el mismo motivo que el click de
+   * afuera: el wrapper es un `div` sin `tabindex`, así que al abrir con el
+   * mouse el foco se queda en el `body` y un listener del host nunca vería la
+   * tecla. Con `searchable` el foco sí entra al buscador — que es descendiente
+   * del host — pero no se puede depender de eso, porque `searchable` es
+   * opcional.
+   */
+  @HostListener('document:keydown', ['$event'])
+  onDocumentKeydown(event: KeyboardEvent): void {
+    if (this.open && event.key === 'Escape') {
+      event.preventDefault();
+      this.close();
+    }
+  }
+
   writeValue(value: string[]): void {
     this.value = Array.isArray(value) ? value : [];
   }

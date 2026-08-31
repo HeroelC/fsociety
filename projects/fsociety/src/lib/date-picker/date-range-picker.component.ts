@@ -285,6 +285,21 @@ export class FsDateRangePickerComponent implements ControlValueAccessor {
     if (this.open && !this.el.nativeElement.contains(event.target)) this.close();
   }
 
+  /**
+   * Escape cierra el panel, igual que en `fs-date-picker`.
+   *
+   * Va en `document` y no en el host porque el panel se abre con el mouse
+   * sobre un wrapper que no recibe foco: un listener del host no vería la
+   * tecla mientras el foco siga en el `body`.
+   */
+  @HostListener('document:keydown', ['$event'])
+  onDocumentKeydown(event: KeyboardEvent): void {
+    if (this.open && event.key === 'Escape') {
+      event.preventDefault();
+      this.close();
+    }
+  }
+
   shiftMonth(delta: number): void {
     this.view = addMonths(this.view, delta);
   }
