@@ -17,16 +17,14 @@ const meta: Meta<FsBadgeComponent> = {
     },
     variant:     { control: 'radio',   options: ['filled','outline'] },
     size:        { control: 'radio',   options: ['sm','md'] },
-    imgLeft: {
+    iconLeft: {
       control: 'text',
-      description: 'URL de imagen izquierda — ej: https://api.iconify.design/simple-icons:angular.svg',
+      description: 'URL del ícono izquierdo — ej: https://api.iconify.design/simple-icons:angular.svg',
     },
-    imgRight: {
+    iconRight: {
       control: 'text',
-      description: 'URL de imagen derecha',
+      description: 'URL del ícono derecho',
     },
-    imgLeftAlt:  { control: 'text', description: 'Alt text para imgLeft' },
-    imgRightAlt: { control: 'text', description: 'Alt text para imgRight' },
     dot:         { control: 'boolean' },
     iconOnly:    { control: 'boolean' },
     removable:   { control: 'boolean' },
@@ -47,9 +45,8 @@ export const Playground: Story = {
     variant:    'filled',
     size:       'md',
     label:      'TypeScript',
-    imgLeft:    '',
-    imgRight:   '',
-    imgLeftAlt: '',
+    iconLeft:   '',
+    iconRight:  '',
   },
   render: (args) => ({
     props: args,
@@ -62,10 +59,8 @@ export const Playground: Story = {
         [dot]="dot"
         [iconOnly]="iconOnly"
         [removable]="removable"
-        [imgLeft]="imgLeft || undefined"
-        [imgRight]="imgRight || undefined"
-        [imgLeftAlt]="imgLeftAlt"
-        [imgRightAlt]="imgRightAlt"
+        [iconLeft]="iconLeft || undefined"
+        [iconRight]="iconRight || undefined"
         (removed)="removed($event)"
       >{{ label }}</fs-badge>
     `,
@@ -124,38 +119,32 @@ export const CustomColors: Story = {
 // ---------------------------------------------------------------------------
 
 export const WithImages: Story = {
-  name: 'Con imgLeft — logos de tecnologías',
+  name: 'Con iconLeft — logos de tecnologías',
   render: () => ({
     template: `
       <div style="display:flex; flex-wrap:wrap; gap:8px; align-items:center;">
         <fs-badge color="danger"
-          imgLeft="https://api.iconify.design/simple-icons:angular.svg"
-          imgLeftAlt="Angular">
+          iconLeft="https://api.iconify.design/simple-icons:angular.svg">
           Angular
         </fs-badge>
         <fs-badge color="primary"
-          imgLeft="https://api.iconify.design/simple-icons:typescript.svg"
-          imgLeftAlt="TypeScript">
+          iconLeft="https://api.iconify.design/simple-icons:typescript.svg">
           TypeScript
         </fs-badge>
         <fs-badge color="success"
-          imgLeft="https://api.iconify.design/simple-icons:nodedotjs.svg"
-          imgLeftAlt="Node.js">
+          iconLeft="https://api.iconify.design/simple-icons:nodedotjs.svg">
           Node.js
         </fs-badge>
         <fs-badge customColor="#7c3aed"
-          imgLeft="https://api.iconify.design/simple-icons:nestjs.svg"
-          imgLeftAlt="NestJS">
+          iconLeft="https://api.iconify.design/simple-icons:nestjs.svg">
           NestJS
         </fs-badge>
         <fs-badge customColor="#ea580c"
-          imgLeft="https://api.iconify.design/simple-icons:firebase.svg"
-          imgLeftAlt="Firebase">
+          iconLeft="https://api.iconify.design/simple-icons:firebase.svg">
           Firebase
         </fs-badge>
         <fs-badge customColor="#0ea5e9"
-          imgLeft="https://api.iconify.design/simple-icons:amazonaws.svg"
-          imgLeftAlt="AWS">
+          iconLeft="https://api.iconify.design/simple-icons:amazonaws.svg">
           AWS
         </fs-badge>
       </div>

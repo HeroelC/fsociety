@@ -43,9 +43,8 @@ export interface FsProfileBadge {
   label:        string;
   color?:       FsBadgeColor;
   customColor?: string;
+  /** URL completa del ícono, igual que en `fs-badge`. */
   iconLeft?:    string;
-  imgLeft?:     string;
-  imgLeftAlt?:  string;
 }
 
 @Component({

@@ -116,19 +116,17 @@ $badge-colors: (
     flex-shrink:   0;
   }
 
-  &__icon {
-    display:     inline-flex;
-    align-items: center;
-    flex-shrink: 0;
-  }
-
   // Enmascarado vía .fs-icon, así que hereda el color del texto del badge.
-  // object-fit ya no aplica: el sizing lo controla mask-size: contain.
-  &__img {
-    width:         12px;
-    height:        12px;
-    display:       block;
-    flex-shrink:   0;
+  // El sizing lo controla mask-size: contain.
+  //
+  // Antes esto eran dos elementos: un wrapper `__icon` con un `<svg><path>`
+  // adentro para el ícono "crudo", y un `__img` enmascarado para la URL. Al
+  // quedar una sola convención quedó un solo elemento, que es el que lleva
+  // .fs-icon y el tamaño.
+  &__icon {
+    flex-shrink: 0;
+    width:       12px;
+    height:      12px;
 
     .fs-badge--sm & { width: 11px; height: 11px; }
     .fs-badge--md & { width: 13px; height: 13px; }

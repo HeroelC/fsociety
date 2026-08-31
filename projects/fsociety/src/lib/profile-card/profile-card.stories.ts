@@ -48,10 +48,10 @@ const FAKE_LINKS = [
 ];
 
 const FAKE_BADGES = [
-  { label: 'Angular',    color: 'danger'  as const, imgLeft: 'https://api.iconify.design/simple-icons:angular.svg' },
-  { label: 'TypeScript', color: 'primary' as const, imgLeft: 'https://api.iconify.design/simple-icons:typescript.svg' },
-  { label: 'AWS',        customColor: '#ea580c',    imgLeft: 'https://api.iconify.design/simple-icons:amazonaws.svg' },
-  { label: 'NestJS',     customColor: '#7c3aed',    imgLeft: 'https://api.iconify.design/simple-icons:nestjs.svg' },
+  { label: 'Angular',    color: 'danger'  as const, iconLeft: 'https://api.iconify.design/simple-icons:angular.svg' },
+  { label: 'TypeScript', color: 'primary' as const, iconLeft: 'https://api.iconify.design/simple-icons:typescript.svg' },
+  { label: 'AWS',        customColor: '#ea580c',    iconLeft: 'https://api.iconify.design/simple-icons:amazonaws.svg' },
+  { label: 'NestJS',     customColor: '#7c3aed',    iconLeft: 'https://api.iconify.design/simple-icons:nestjs.svg' },
 ];
 
 const FAKE_STATS = [

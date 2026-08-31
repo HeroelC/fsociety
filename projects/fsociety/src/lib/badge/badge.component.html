@@ -3,38 +3,30 @@
   <!-- dot de estado -->
   <span *ngIf="dot" class="fs-badge__dot" aria-hidden="true"></span>
 
-  <!-- imagen izquierda (prioridad sobre iconLeft) -->
+  <!-- ícono izquierdo -->
   <!-- Se pinta con mask-image + currentColor, no con <img>: dentro de un <img>
        el SVG es un documento aislado, currentColor no hereda y el ícono queda
        del color que trae embebido — invisible cuando ese color coincide con el
        fondo. Enmascarado toma el color del texto del badge y sigue el tema. -->
-  <span *ngIf="imgLeft" class="fs-badge__icon fs-badge__icon--left" aria-hidden="true">
-    <span class="fs-icon fs-badge__img" [style.--_icon]="'url(' + imgLeft + ')'"></span>
-  </span>
-
-  <!-- ícono izquierdo SVG (solo si no hay imgLeft) -->
-  <span *ngIf="iconLeft && !imgLeft" class="fs-badge__icon fs-badge__icon--left" aria-hidden="true">
-    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
-      <path [attr.d]="iconLeft"/>
-    </svg>
-  </span>
+  <span
+    *ngIf="iconLeft"
+    class="fs-icon fs-badge__icon fs-badge__icon--left"
+    [style.--_icon]="'url(' + iconLeft + ')'"
+    aria-hidden="true"
+  ></span>
 
   <!-- label — oculto en iconOnly -->
   <span *ngIf="!iconOnly" class="fs-badge__label">
     <ng-content>{{ label }}</ng-content>
   </span>
 
-  <!-- imagen derecha (prioridad sobre iconRight) -->
-  <span *ngIf="imgRight" class="fs-badge__icon fs-badge__icon--right" aria-hidden="true">
-    <span class="fs-icon fs-badge__img" [style.--_icon]="'url(' + imgRight + ')'"></span>
-  </span>
-
-  <!-- ícono derecho SVG (solo si no hay imgRight) -->
-  <span *ngIf="iconRight && !imgRight" class="fs-badge__icon fs-badge__icon--right" aria-hidden="true">
-    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
-      <path [attr.d]="iconRight"/>
-    </svg>
-  </span>
+  <!-- ícono derecho -->
+  <span
+    *ngIf="iconRight"
+    class="fs-icon fs-badge__icon fs-badge__icon--right"
+    [style.--_icon]="'url(' + iconRight + ')'"
+    aria-hidden="true"
+  ></span>
 
   <!-- botón remove -->
   <button

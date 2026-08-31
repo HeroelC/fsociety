@@ -46,39 +46,23 @@ export class FsBadgeComponent implements OnChanges {
   @Input() dot = false;
 
   /**
-   * Atención: `fs-badge` es la excepción de la librería. Acá `iconLeft` es el
-   * atributo `d` de un `<path>` crudo, con viewBox 0 0 24 24 — no una URL.
-   * El resto de los componentes (`fs-button`, `fs-input`, `fs-select`,
-   * `fs-multi-select`) esperan la URL del SVG. Para pasar una URL acá, usá
-   * `imgLeft`, que además tiene prioridad sobre este input.
+   * URL completa del ícono — se envuelve en `url()` y se pinta con
+   * `mask-image`, así que hereda el color del texto.
+   * Ej: 'https://api.iconify.design/tabler:user.svg' o 'assets/user.svg'.
+   * No es un nombre de Tabler: pasar "user" no renderiza nada ni avisa.
+   *
+   * Hasta la v1 este input era el atributo `d` de un `<path>` crudo y `fs-badge`
+   * era la excepción de la librería: el mismo nombre significaba una cosa acá y
+   * otra en `fs-button`. Ahora significa lo mismo en todos lados.
    */
   @Input() iconLeft?: string;
 
-  /** SVG path crudo, igual que `iconLeft`. Para una URL, usá `imgRight`. */
+  /** URL completa, igual que `iconLeft`. */
   @Input() iconRight?: string;
 
   /**
-   * URL o ruta de imagen izquierda.
-   * Ejemplo: 'assets/icons/angular.svg' o 'https://api.iconify.design/simple-icons:angular.svg'
-   * Tiene prioridad sobre iconLeft si ambos están definidos.
-   */
-  @Input() imgLeft?: string;
-
-  /**
-   * URL o ruta de imagen derecha.
-   * Tiene prioridad sobre iconRight si ambos están definidos.
-   */
-  @Input() imgRight?: string;
-
-  /** Alt text para imgLeft — por defecto vacío (decorativo) */
-  @Input() imgLeftAlt = '';
-
-  /** Alt text para imgRight — por defecto vacío (decorativo) */
-  @Input() imgRightAlt = '';
-
-  /**
    * Modo solo ícono — oculta el label y hace el badge cuadrado/circular.
-   * Requiere iconLeft, iconRight, imgLeft o imgRight.
+   * Requiere iconLeft o iconRight.
    */
   @Input() iconOnly = false;
 
