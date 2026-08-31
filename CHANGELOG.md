@@ -1,5 +1,31 @@
 # Changelog
 
+## [0.14.0](https://github.com/heroelc/fsociety/compare/v0.13.0...v0.14.0) (2026-08-31)
+
+### ⚠ BREAKING CHANGES
+
+* **badge:** `imgLeft`, `imgRight`, `imgLeftAlt` e `imgRightAlt` se
+eliminaron, y `iconLeft` / `iconRight` ahora esperan una URL en vez del `d` de
+un path. Migración: renombrar `imgLeft` a `iconLeft` sin tocar el valor, borrar
+los `*Alt`, y reemplazar cualquier path crudo por la URL del SVG. Las
+interfaces FsExperienceBadge y FsProfileBadge pierden `imgLeft` e `imgLeftAlt`
+por el mismo motivo.
+* **controls:** la escala de fs-button pasa de 28/36/44px a 32/40/48px, así
+que un botón crece 4px en `md`. Se alineó al alto de los campos y no al revés
+porque los campos ya estaban en 40px y son el control que más se repite en un
+formulario. `FsButtonSize` se mantiene como alias de `FsControlSize`, así que
+los imports existentes siguen funcionando.
+
+### Features
+
+* **badge:** iconLeft pasa a ser una URL, igual que en el resto de la librería ([f2e6d20](https://github.com/heroelc/fsociety/commit/f2e6d204bfb66f6d254eda8881bbeefb49f53f24))
+* **controls:** unificar el tamaño de todos los controles en una escala compartida ([ee1a632](https://github.com/heroelc/fsociety/commit/ee1a632d7ef842486d1c1721457fc67a5a925374))
+* **menu:** agregar fs-menu ([620d06f](https://github.com/heroelc/fsociety/commit/620d06fb10a0d76c3765fa1b5a7ed826a51f476a))
+
+### Bug Fixes
+
+* **release:** desactivar el push automático de release-it ([64ca657](https://github.com/heroelc/fsociety/commit/64ca6579e4bc1eaa7c8299830034095042dab74d))
+
 ## [0.13.0](https://github.com/heroelc/fsociety/compare/v0.12.0...v0.13.0) (2026-08-20)
 
 ### Features
