@@ -102,7 +102,7 @@
 
         <div class="fs-ms__list">
           @if (filteredOptions.length === 0) {
-            <div class="fs-ms__empty">{{ emptyText }}</div>
+            <fs-empty-state size="sm" [icon]="Icons.search" [title]="emptyText"></fs-empty-state>
           }
 
           @for (opt of filteredOptions; track opt.value) {

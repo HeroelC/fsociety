@@ -19,6 +19,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { FsCheckboxComponent } from '../choice/checkbox.component';
 import { FsAnchoredPopoverDirective } from '../overlay/anchored-popover.directive';
+import { FsEmptyStateComponent } from '../empty-state/empty-state.component';
 import { FsColumnDirective } from './table-column.directive';
 import { FsColumnFilterDirective } from './table-column-filter.directive';
 import { FsCorners } from '../corners';
@@ -76,7 +77,7 @@ export type FsTableLayout = 'auto' | 'table' | 'cards';
 @Component({
   selector: 'fs-table',
   standalone: true,
-  imports: [CommonModule, FormsModule, FsCheckboxComponent, FsAnchoredPopoverDirective],
+  imports: [CommonModule, FormsModule, FsCheckboxComponent, FsAnchoredPopoverDirective, FsEmptyStateComponent],
   templateUrl: './table.component.html',
   styleUrl: './table.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

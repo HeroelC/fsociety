@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter, HostListener, ElementRef, forwa
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { FsAnchoredPopoverDirective } from '../overlay/anchored-popover.directive';
+import { FsEmptyStateComponent } from '../empty-state/empty-state.component';
 import { FsCorners } from '../corners';
 import { FsControlSize } from '../control-size';
 
@@ -29,7 +30,7 @@ let selectIdCounter = 0;
 @Component({
   selector: 'fs-select',
   standalone: true,
-  imports: [CommonModule, FormsModule, FsAnchoredPopoverDirective],
+  imports: [CommonModule, FormsModule, FsAnchoredPopoverDirective, FsEmptyStateComponent],
   templateUrl: './select.component.html',
   styleUrl: './select.component.scss',
   providers: [

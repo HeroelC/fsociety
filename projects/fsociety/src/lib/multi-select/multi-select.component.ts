@@ -9,6 +9,7 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { FsAnchoredPopoverDirective } from '../overlay/anchored-popover.directive';
+import { FsEmptyStateComponent } from '../empty-state/empty-state.component';
 import { FsCorners } from '../corners';
 import { FsControlSize } from '../control-size';
 
@@ -28,7 +29,7 @@ export interface FsMultiSelectOption {
 @Component({
   selector: 'fs-multi-select',
   standalone: true,
-  imports: [CommonModule, FormsModule, FsAnchoredPopoverDirective],
+  imports: [CommonModule, FormsModule, FsAnchoredPopoverDirective, FsEmptyStateComponent],
   templateUrl: './multi-select.component.html',
   styleUrl: './multi-select.component.scss',
   providers: [

@@ -100,7 +100,7 @@
 
         <div class="fs-select__list">
           @if (filteredOptions.length === 0) {
-            <div class="fs-select__empty">{{ emptyText }}</div>
+            <fs-empty-state size="sm" [icon]="Icons.search" [title]="emptyText"></fs-empty-state>
           }
 
           @for (option of filteredOptions; track option.value; let i = $index) {

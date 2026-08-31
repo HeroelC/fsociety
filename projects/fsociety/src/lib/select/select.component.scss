@@ -301,14 +301,6 @@
     transition: opacity 100ms ease;
   }
 
-  // ─── Empty state ──────────────────────────────────────────────
-  &__empty {
-    padding: 22px 12px;
-    text-align: center;
-    color: var(--fs-color-text-secondary);
-    font-size: 12.5px;
-  }
-
   // ─── Hint ─────────────────────────────────────────────────────
   &__hint {
     font-size: var(--fs-control-hint);

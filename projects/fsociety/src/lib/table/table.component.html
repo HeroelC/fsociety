@@ -153,8 +153,11 @@
 
           <tr class="fs-table__row fs-table__row--empty" role="row">
             <td class="fs-table__cell fs-table__cell--empty" role="cell" [attr.colspan]="columnCount">
+              <!-- El default es un fs-empty-state para que una tabla vacía
+                   se vea igual que cualquier otro hueco de la librería. El
+                   consumidor sigue pudiendo proyectar el suyo, con acciones. -->
               <ng-content select="[fsTableEmpty]">
-                <p class="fs-table__empty-text">Sin resultados</p>
+                <fs-empty-state size="md" title="Sin resultados"></fs-empty-state>
               </ng-content>
             </td>
           </tr>

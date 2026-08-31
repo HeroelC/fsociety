@@ -528,11 +528,6 @@
     text-align: center;
   }
 
-  &__empty-text {
-    margin: 0;
-    color: var(--fs-color-text-secondary);
-    font-size: 13.5px;
-  }
 
   // ─── Cargando ────────────────────────────────────────────────────────────
   &__skeleton {
@@ -606,4 +601,17 @@
 // Modo tarjeta automático, según el ancho real del contenedor.
 @container fs-table (max-width: 720px) {
   @include card-layout('.fs-table[data-layout="auto"]');
+}
+
+// ─── Celda vacía con fs-empty-state ─────────────────────────────────────────
+// La celda pone padding para lo que proyecte el consumidor, pero fs-empty-state
+// ya trae el suyo: sumar los dos infla el bloque al doble. `:has()` distingue
+// los dos casos sin pedir una clase extra, y acierta también cuando el
+// consumidor proyecta su propio fs-empty-state.
+//
+// Va a nivel superior y al final del archivo a propósito: la regla del modo
+// tarjeta vive dentro de un `@media`, que no suma especificidad, así que empata
+// y gana la que venga después.
+.fs-table__cell--empty:has(fs-empty-state) {
+  padding: 0;
 }

@@ -13,6 +13,7 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FsAnchoredPopoverDirective, FsPopoverAlign, FsPopoverSide } from '../overlay/anchored-popover.directive';
+import { FsEmptyStateComponent } from '../empty-state/empty-state.component';
 
 /** Un ítem del menú. */
 export interface FsMenuItem {
@@ -68,7 +69,7 @@ let menuIdCounter = 0;
 @Component({
   selector: 'fs-menu',
   standalone: true,
-  imports: [CommonModule, FsAnchoredPopoverDirective],
+  imports: [CommonModule, FsAnchoredPopoverDirective, FsEmptyStateComponent],
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
