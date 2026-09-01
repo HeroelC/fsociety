@@ -92,7 +92,7 @@ export class FsTableComponent<T = Record<string, unknown>> implements AfterConte
   filterDefs!: QueryList<FsColumnFilterDirective>;
 
   /** Las filas tal cual se muestran, salvo que `clientSort` esté prendido. */
-  @Input() rows: T[] = [];
+  @Input() rows: readonly T[] = [];
 
   /**
    * Propiedad que identifica a la fila. Es lo que sale en `selectedChange` y
@@ -114,7 +114,7 @@ export class FsTableComponent<T = Record<string, unknown>> implements AfterConte
   @Input() selectable = false;
 
   /** Claves (`rowKey`) de las filas marcadas. */
-  @Input() selected: unknown[] = [];
+  @Input() selected: readonly unknown[] = [];
   @Output() selectedChange = new EventEmitter<unknown[]>();
 
   /**
@@ -185,9 +185,9 @@ export class FsTableComponent<T = Record<string, unknown>> implements AfterConte
   private readonly el = inject<ElementRef<HTMLElement>>(ElementRef);
 
   /** Las filas ya ordenadas, si corresponde. */
-  displayRows: T[] = [];
+  displayRows: readonly T[] = [];
 
-  private sortedFrom: T[] | null = null;
+  private sortedFrom: readonly T[] | null = null;
   private sortedWith = '';
   private cachedColumns: FsColumnDirective<T>[] | null = null;
   private cachedFilters: Map<string, FsColumnFilterDirective> | null = null;
