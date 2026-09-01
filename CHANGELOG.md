@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.17.0](https://github.com/heroelc/fsociety/compare/v0.16.0...v0.17.0) (2026-09-01)
+
+### Features
+
+* **overlay:** agrega alineacion 'end' a FsPopoverAlign ([2bc8a70](https://github.com/heroelc/fsociety/commit/2bc8a7019e4579f26f429942637e95ee653aa229))
+* **table:** agrega rowsOf a fsColumn para inferir T ([82dcc4c](https://github.com/heroelc/fsociety/commit/82dcc4c9ddcb9f0c204c43e007813a40c0398662))
+
+### Bug Fixes
+
+* **menu:** corrige el JSDoc de fs-menu y acepta items readonly ([1dec78a](https://github.com/heroelc/fsociety/commit/1dec78adfd51c5e8f52f2333bab83b258b7f0416))
+* **table:** acepta rows y selected readonly ([e8eeb81](https://github.com/heroelc/fsociety/commit/e8eeb81fe9f43c5d2f81eff8a1fd8ad00bb72db3))
+
 ## [0.16.0](https://github.com/heroelc/fsociety/compare/v0.15.0...v0.16.0) (2026-08-31)
 
 ### Features
