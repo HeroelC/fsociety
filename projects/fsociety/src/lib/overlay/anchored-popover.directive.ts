@@ -11,7 +11,7 @@ import {
 } from '@angular/core';
 
 /** Horizontal alignment of the popover against its anchor. */
-export type FsPopoverAlign = 'start' | 'center';
+export type FsPopoverAlign = 'start' | 'center' | 'end';
 
 /** Side the popover prefers. It still flips when that side has no room. */
 export type FsPopoverSide = 'bottom' | 'top';
@@ -56,7 +56,7 @@ export class FsAnchoredPopoverDirective implements AfterViewInit, OnChanges, OnD
   /** Match the anchor's width. Disable for popovers that size themselves. */
   @Input() popoverMatchWidth = true;
 
-  /** Align the popover's left edge to the anchor's, or centre it. */
+  /** Align the popover's left edge to the anchor's, centre it, or align its right edge. */
   @Input() popoverAlign: FsPopoverAlign = 'start';
 
   /** Side to prefer. Either way it flips when that side has no room. */
@@ -143,7 +143,9 @@ export class FsAnchoredPopoverDirective implements AfterViewInit, OnChanges, OnD
 
     const left = this.popoverAlign === 'center'
       ? rect.left + rect.width / 2 - el.offsetWidth / 2
-      : rect.left;
+      : this.popoverAlign === 'end'
+        ? rect.right - el.offsetWidth
+        : rect.left;
 
     // Keep it inside the viewport when centring pushes it past an edge.
     const maxLeft = window.innerWidth - el.offsetWidth - 4;
