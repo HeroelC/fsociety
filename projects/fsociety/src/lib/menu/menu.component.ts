@@ -48,12 +48,13 @@ let menuIdCounter = 0;
 /**
  * Menú de acciones anclado a un disparador.
  *
- * El disparador lo proyecta el consumidor, así que puede ser un `fs-button`,
- * un ícono suelto o lo que sea:
+ * El disparador es el `<button>` que ya trae el componente: el consumidor
+ * proyecta su CONTENIDO, no otro control interactivo. Un ícono, texto, o lo
+ * que sea, pero nunca un `fs-button` — eso anidaría un botón dentro de otro:
  *
  * ```html
  * <fs-menu [items]="acciones" (itemSelect)="onAccion($event)">
- *   <fs-button menuTrigger iconOnly variant="ghost" [iconLeft]="dots"></fs-button>
+ *   <span class="fs-icon" [style.--_icon]="'url(' + dots + ')'"></span>
  * </fs-menu>
  * ```
  *
@@ -76,7 +77,7 @@ let menuIdCounter = 0;
 })
 export class FsMenuComponent {
   /** Los ítems a mostrar. */
-  @Input() items: FsMenuItem[] = [];
+  @Input() items: readonly FsMenuItem[] = [];
 
   /** Alinea el panel contra el disparador. */
   @Input() align: FsPopoverAlign = 'start';
