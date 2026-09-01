@@ -35,7 +35,7 @@ export interface FsCellContext<T> {
  *
  * ```html
  * <fs-table [rows]="items" caption="Propiedades">
- *   <ng-template fsColumn="title" header="Propiedad" cardSlot="title" [sortable]="true" let-row>
+ *   <ng-template fsColumn="title" header="Propiedad" cardSlot="title" [sortable]="true" [rowsOf]="items" let-row>
  *     <a [routerLink]="['/p', row.id]">{{ row.title }}</a>
  *   </ng-template>
  * </fs-table>
@@ -54,6 +54,21 @@ export class FsColumnDirective<T = unknown> {
    * que ser estable y única dentro de la tabla.
    */
   @Input('fsColumn') name = '';
+
+  /**
+   * Solo para inferencia de tipos: pasale el mismo arreglo que le pasás a
+   * `[rows]` en `fs-table`. Angular resuelve `T` a partir de este input, así
+   * que `let-row` llega tipado en vez de `unknown` — nunca se lee en runtime.
+   *
+   * ```html
+   * <fs-table [rows]="items">
+   *   <ng-template fsColumn="title" [rowsOf]="items" let-row>
+   *     {{ row.title }}
+   *   </ng-template>
+   * </fs-table>
+   * ```
+   */
+  @Input() rowsOf?: readonly T[];
 
   /** Texto del encabezado. También es la etiqueta de la celda en modo tarjeta. */
   @Input() header = '';
