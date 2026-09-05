@@ -104,6 +104,59 @@ export const Interactive: Story = {
   parameters: { layout: 'padded' },
 };
 
+// ─── Responsive ───────────────────────────────────────────────────────────────
+// El colapso lo decide una container query sobre el ancho del propio fs-steps,
+// no sobre el viewport: un stepper dentro de un panel angosto necesita el mismo
+// trato que uno a pantalla completa en un telefono. Por eso los tres tramos se
+// pueden ver a la vez, uno al lado del otro, sin tocar el tamano de la ventana.
+
+export const Responsive: Story = {
+  name: 'Responsive (tres tramos)',
+  render: () => ({
+    template: `
+      <div style="display:flex;flex-direction:column;gap:32px;">
+
+        <div>
+          <p style="font-size:12px;color:var(--fs-color-text-secondary);margin-bottom:12px">
+            Completo — arriba de 520px entran todas las etiquetas
+          </p>
+          <div style="width:640px;max-width:100%">
+            <fs-steps [steps]="steps" [current]="1"></fs-steps>
+          </div>
+        </div>
+
+        <div>
+          <p style="font-size:12px;color:var(--fs-color-text-secondary);margin-bottom:12px">
+            Compacto — hasta 520px solo el paso activo conserva etiqueta
+          </p>
+          <div style="width:420px;max-width:100%">
+            <fs-steps [steps]="steps" [current]="1"></fs-steps>
+          </div>
+        </div>
+
+        <div>
+          <p style="font-size:12px;color:var(--fs-color-text-secondary);margin-bottom:12px">
+            Solo puntos — hasta 300px no hay lugar para ninguna palabra
+          </p>
+          <div style="width:280px;max-width:100%">
+            <fs-steps [steps]="steps" [current]="1"></fs-steps>
+          </div>
+        </div>
+
+      </div>
+    `,
+    props: {
+      steps: [
+        { label: 'Datos' },
+        { label: 'Fotos' },
+        { label: 'Precio' },
+        { label: 'Publicar' },
+      ],
+    },
+  }),
+  parameters: { layout: 'padded' },
+};
+
 // ─── All variants ─────────────────────────────────────────────────────────────
 
 export const AllVariants: Story = {
