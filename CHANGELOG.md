@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.17.1](https://github.com/heroelc/fsociety/compare/v0.17.0...v0.17.1) (2026-09-05)
+
+### Bug Fixes
+
+* **multi-select:** trunca el label del chip y activa el chevron ([9792e24](https://github.com/heroelc/fsociety/commit/9792e24e1736bbbcc1bd35f6ec2ff6274af44026))
+* **select:** el chevron y el padding ahora abren el menu ([50426bd](https://github.com/heroelc/fsociety/commit/50426bd3db7257fc65cf65c8519174851546f2b7))
+
 ## [0.17.0](https://github.com/heroelc/fsociety/compare/v0.16.0...v0.17.0) (2026-09-01)
 
 ### Features
