@@ -1,6 +1,11 @@
 .fs-steps {
   display: flex;
   gap: 0;
+
+  // The component collapses against the box it was dropped into, not against
+  // the viewport — a stepper inside a narrow drawer needs the same treatment a
+  // full-width one gets on a phone.
+  container: fs-steps / inline-size;
 }
 
 .fs-step {
@@ -54,6 +59,12 @@
     color: var(--fs-color-text-primary);
     white-space: nowrap;
     line-height: 1.3;
+    // nowrap text without a clip leaves its box silently: flex then measures
+    // that box near zero, gives the room to the connector, and the glyphs paint
+    // over the line. The tiers below are what keeps labels whole; this is only
+    // the guard that stops an unexpectedly long one from escaping.
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   &[data-state="todo"] .fs-step__label {
@@ -81,7 +92,33 @@
   }
 }
 
-// ─── Responsive: hide descriptions on small screens ──────────────────────────
-@media (max-width: 640px) {
+// ─── Responsive collapse ─────────────────────────────────────────────────────
+// When the labels stop fitting, the useful information is *which step am I on*,
+// not what the other three are called. The active label answers that; the dots
+// carry position and progress. Thresholds are tuned for four short labels.
+
+// Compact: only the active step keeps a label. It stops growing so the elastic
+// space goes to the connectors instead of to its own track, and `0 1 auto` lets
+// it fall back to the ellipsis guard rather than overflow the row.
+@container fs-steps (max-width: 520px) {
   .fs-step__desc { display: none; }
+
+  .fs-step:not([data-state="active"]) {
+    gap: 0;
+
+    .fs-step__tx { display: none; }
+  }
+
+  .fs-step[data-state="active"] { flex: 0 1 auto; }
+}
+
+// Dots: no room for any word at all.
+@container fs-steps (max-width: 300px) {
+  .fs-step {
+    gap: 0;
+
+    &__tx { display: none; }
+
+    &[data-state="active"] { flex: 1; }
+  }
 }
