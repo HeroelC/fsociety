@@ -13,6 +13,7 @@
       [class.fs-select__wrapper--success]="state === 'success'"
       [class.fs-select__wrapper--disabled]="disabled"
       [class.fs-select__wrapper--open]="open"
+      (click)="onWrapperClick(trigger)"
     >
       @if (iconLeft) {
         <span
@@ -23,13 +24,13 @@
       }
 
       <button
+        #trigger
         [id]="selectId"
         class="fs-select__trigger"
         type="button"
         [disabled]="disabled"
         [attr.aria-expanded]="open"
         aria-haspopup="listbox"
-        (click)="toggle()"
         (keydown)="onTriggerKeydown($event)"
       >
         <span

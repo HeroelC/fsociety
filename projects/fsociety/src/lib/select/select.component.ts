@@ -113,6 +113,21 @@ export class FsSelectComponent implements ControlValueAccessor {
     this.open ? this.close() : this.openMenu();
   }
 
+  /**
+   * El click abre desde el wrapper y no desde el botón: el chevron y el padding
+   * viven fuera del `<button>`, así que con el handler en el trigger todo el
+   * borde derecho quedaba como zona muerta pese al `cursor: pointer`.
+   *
+   * El foco se lleva al botón a mano porque `onTriggerKeydown` escucha ahí: sin
+   * esto, abrir con un click sobre el chevron dejaba el foco en el `body` y las
+   * flechas del menú no respondían.
+   */
+  onWrapperClick(trigger: HTMLButtonElement): void {
+    if (this.disabled) return;
+    trigger.focus();
+    this.toggle();
+  }
+
   openMenu(): void {
     this.open = true;
     this.query = '';
