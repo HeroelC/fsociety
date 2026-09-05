@@ -160,6 +160,49 @@ export const FilterTags: Story = {
   parameters: { layout: 'padded' },
 };
 
+// ─── Contenedor angosto ───────────────────────────────────────────────────────
+
+const districts = [
+  { value: 'agch', label: 'Adolfo Gonzales Chaves (16)' },
+  { value: 'crna', label: 'Coronel de Marina L. Rosales (9)' },
+  { value: 'tapa', label: 'Tapalqué (4)' },
+  { value: 'azul', label: 'Azul (11)' },
+];
+
+export const LongLabel: Story = {
+  name: 'Label largo en sidebar (230px)',
+  render: () => ({
+    props: { sel: ['agch'], options: districts },
+    template: `
+      <div style="width:230px;">
+        <fs-multi-select
+          placeholder="Filtrar por partido..."
+          [options]="options"
+          [(ngModel)]="sel"
+        ></fs-multi-select>
+      </div>
+    `,
+  }),
+  parameters: { layout: 'padded' },
+};
+
+export const LongLabelWrapped: Story = {
+  name: 'Tres chips largos en sidebar (230px)',
+  render: () => ({
+    props: { sel: ['agch', 'crna', 'azul'], options: districts },
+    template: `
+      <div style="width:230px;">
+        <fs-multi-select
+          placeholder="Filtrar por partido..."
+          [options]="options"
+          [(ngModel)]="sel"
+        ></fs-multi-select>
+      </div>
+    `,
+  }),
+  parameters: { layout: 'padded' },
+};
+
 // ─── All variants ─────────────────────────────────────────────────────────────
 
 export const AllVariants: Story = {

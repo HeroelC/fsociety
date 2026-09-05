@@ -104,6 +104,19 @@
     font-size: 13px;
     font-weight: 600;
     white-space: nowrap;
+    // Un flex item arranca en `min-width: auto`, o sea que se niega a bajar de
+    // su ancho de contenido: sin esto el chip desborda el wrapper en cuanto el
+    // label es largo y el control vive en una columna angosta.
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  // El label va en su propio elemento porque `text-overflow` no actúa sobre los
+  // items de un contenedor flex — necesita un bloque propio que recorte.
+  &__chip-label {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   &__chip-x {
@@ -118,6 +131,8 @@
     background: transparent;
     color: currentColor;
     cursor: pointer;
+    // El botón de cerrar nunca se achica: el que cede es el label.
+    flex-shrink: 0;
     opacity: 0.7;
     transition: opacity 120ms ease, background 120ms ease;
 

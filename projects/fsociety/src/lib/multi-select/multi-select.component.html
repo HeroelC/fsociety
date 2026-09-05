@@ -7,6 +7,7 @@
       [attr.data-corners]="corners"
       [class.fs-ms__wrapper--open]="open"
       [class.fs-ms__wrapper--disabled]="disabled"
+      (click)="toggle()"
     >
       @if (iconLeft) {
         <span
@@ -22,7 +23,6 @@
         [attr.aria-expanded]="open"
         aria-haspopup="listbox"
         [attr.aria-disabled]="disabled || null"
-        (click)="toggle()"
       >
         @if (value.length === 0) {
           <span class="fs-ms__placeholder">{{ placeholder }}</span>
@@ -30,7 +30,7 @@
 
         @for (val of value; track val) {
           <span class="fs-ms__chip">
-            {{ labelOf(val) }}
+            <span class="fs-ms__chip-label" [title]="labelOf(val)">{{ labelOf(val) }}</span>
             @if (!disabled) {
               <button
                 class="fs-ms__chip-x"
