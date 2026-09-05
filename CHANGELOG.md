@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.18.0](https://github.com/HeroelC/fsociety/compare/v0.17.1...v0.18.0) (2026-09-05)
+
+### Bug Fixes
+
+* **steps:** colapsa los labels por container query en vez de solaparlos ([c48d06b](https://github.com/HeroelC/fsociety/commit/c48d06b2033c9144f51e5c69b9e009be4b271b94))
+* **table:** el estado va a su propio renglon cuando la tarjeta es angosta ([5a9241a](https://github.com/HeroelC/fsociety/commit/5a9241ac2bab8a053106181a0f9d2d1eb4ca96bd))
+
 ## [0.17.1](https://github.com/heroelc/fsociety/compare/v0.17.0...v0.17.1) (2026-09-05)
 
 ### Bug Fixes
