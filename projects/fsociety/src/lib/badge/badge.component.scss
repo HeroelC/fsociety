@@ -18,6 +18,13 @@ $badge-colors: (
   border-radius: t.$fs-radius-full;
   font-family:   t.$fs-font-sans;
   font-weight:   t.$fs-font-medium;
+  // Un badge con el texto partido se lee peor que cualquier alternativa, así que
+  // nunca envuelve. La contrapartida hay que tenerla presente al ubicarlo: el
+  // badge reclama todo el ancho que pide su texto y no cede nada, de modo que en
+  // cualquier layout donde comparta renglón con texto largo — un grid con una
+  // pista flexible al lado, un flex con `space-between` — el que se parte es el
+  // otro. Cuando el espacio es angosto, el badge va en su propio renglón; no
+  // alcanza con dejar que el layout negocie. Ver el modo tarjeta de fs-table.
   white-space:   nowrap;
   border:        1px solid transparent;
   line-height:   1;

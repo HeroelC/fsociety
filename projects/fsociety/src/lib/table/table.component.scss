@@ -162,6 +162,30 @@
     padding-inline-start: 8px;
   }
 
+  // El estado comparte renglón con el valor, y esa convivencia tiene un límite.
+  // La columna 4 es `auto` y fs-badge es `white-space: nowrap`, así que el badge
+  // se lleva todo el ancho que pide su texto; la que cede es la 3, cuyo mínimo es
+  // 0, y el valor se parte en dos renglones.
+  //
+  // El costo fijo de la tarjeta es ~152px (padding 24 + selección 24 + miniatura
+  // 92 + su margen 12). Un importe como `$ 355.000/mes` pide ~105px y un badge
+  // `Reservado` ~82px: por debajo de ~340px de contenedor no existe acomodo lado a
+  // lado que entre, y el umbral real sube con textos más largos.
+  //
+  // Por eso el estado se muda a su propio renglón, arriba del valor, en vez de
+  // competir por el ancho. Condicionado y no permanente: donde hay lugar, la
+  // lectura a la derecha es mejor. 420px deja margen sobre los ~340 calculados
+  // porque el punto de quiebre depende del largo del texto, y conviene errar
+  // hacia apilar — apilado nunca está roto, partido sí.
+  @container fs-table (max-width: 420px) {
+    #{$root} .fs-table__cell[data-slot='status'] {
+      grid-column: 3 / -1;
+      order: 0;
+      justify-self: start;
+      padding-inline-start: 0;
+    }
+  }
+
   #{$root} .fs-table__cell[data-slot='title'] {
     grid-column: 3 / -1;
     order: 3;
