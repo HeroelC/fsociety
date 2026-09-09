@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.19.0](https://github.com/HeroelC/fsociety/compare/v0.18.0...v0.19.0) (2026-09-09)
+
+### Features
+
+* **overlay:** los popovers se vuelven hoja en viewports de mobile ([58a39e7](https://github.com/HeroelC/fsociety/commit/58a39e70ef154adf42483e1cb1b753e97d33846f))
+
 ## [0.18.0](https://github.com/HeroelC/fsociety/compare/v0.17.1...v0.18.0) (2026-09-05)
 
 ### Bug Fixes
