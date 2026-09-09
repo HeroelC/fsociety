@@ -33,7 +33,8 @@ export { FsInputComponent } from './lib/input/input.component';
 export type { FsInputType, FsInputState } from './lib/input/input.component';
 
 export { FsAnchoredPopoverDirective } from './lib/overlay/anchored-popover.directive';
-export type { FsPopoverAlign, FsPopoverSide } from './lib/overlay/anchored-popover.directive';
+export type { FsPopoverAlign, FsPopoverSide, FsPopoverSheet } from './lib/overlay/anchored-popover.directive';
+export { FS_POPOVER_SHEET_QUERY } from './lib/overlay/anchored-popover.directive';
 
 export * from './lib/menu/menu.component';
 export type { FsMenuItem } from './lib/menu/menu.component';

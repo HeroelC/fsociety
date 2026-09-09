@@ -40,3 +40,96 @@
   background: none;
   color:      inherit;
 }
+
+
+// Convierte un popover anclado en una hoja apoyada contra el borde inferior de
+// la pantalla, para viewports donde anclarse a un trigger deja de tener sentido.
+//
+// Se activa por el atributo `data-fs-popover="sheet"` que escribe
+// FsAnchoredPopoverDirective, NO por una media query propia. Si el SCSS
+// decidiera por su cuenta habría un rango donde el JS ancla y el CSS aplana, y
+// el popover quedaría a mitad de camino entre las dos cosas. El JS decide, el
+// CSS pinta.
+//
+// EL PUNTO FINO — el teclado se descuenta con `bottom`, nunca con `transform`.
+// Un transform mueve los píxeles pero no la caja: el layout seguiría creyendo
+// que la hoja llega hasta el borde inferior, así que su `max-height` se
+// resolvería contra un alto que ya no está disponible y la hoja se saldría por
+// arriba. `bottom` sí es propiedad de caja, y el `min()` la acota contra el
+// espacio que queda de verdad.
+//
+// Incluir DESPUÉS de popover-surface y del resto de las declaraciones del
+// componente: los selectores de atributo pisan a los de clase por
+// especificidad, pero el orden deja claro que esto es el modo excepcional.
+//
+// @param $scroller  — selector del hijo que scrollea (ej. '.fs-select__list').
+//                     Si es null, scrollea la hoja misma.
+// @param $max       — tope de alto en reposo, como fracción del viewport.
+// @param $gap       — respiro de backdrop que queda arriba de la hoja. Es lo
+//                     que la mantiene leyéndose como hoja y no como pantalla
+//                     completa.
+// @param $pad       — piso del padding inferior, por debajo del cual no baja
+//                     aunque no haya safe area que respetar.
+@mixin popover-sheet($scroller: null, $max: 62%, $gap: 44px, $pad: 8px) {
+  // Declarados acá adentro y no a nivel raíz para que este partial siga sin
+  // emitir CSS por el solo hecho de hacerle @use. Sass los sube al root de la
+  // hoja del componente que incluya el mixin.
+  @keyframes fs-popover-sheet-in {
+    from { transform: translateY(100%); }
+  }
+
+  &[data-fs-popover='sheet'] {
+    top:    auto;
+    left:   0;
+    right:  0;
+    bottom: var(--fs-popover-keyboard, 0px);
+    width:  auto;
+
+    // El espacio real que queda arriba del teclado. Va por custom property
+    // porque Sass no toca el valor de una custom property: si el calc se
+    // escribe adentro del `min()`, Sass le saca el `calc()` al aplanar la
+    // expresión y el resultado depende de que el browser acepte math suelta.
+    //
+    // `100%` y no `100svh`: la directiva mide el teclado contra
+    // `window.innerHeight`, que es exactamente contra lo que resuelve el `100%`
+    // de un elemento fixed. Mezclar las dos referencias desincroniza la cuenta.
+    --_fs-sheet-room: calc(100% - var(--fs-popover-keyboard, 0px) - #{$gap});
+
+    max-height: min(#{$max}, var(--_fs-sheet-room));
+
+    border-width:  1px 0 0 0;
+    border-radius: var(--fs-radius-xl) var(--fs-radius-xl) 0 0;
+
+    // El teclado entra y sale animado, así que la hoja acompaña en vez de saltar.
+    transition:
+      bottom     220ms cubic-bezier(0.22, 0.75, 0.3, 1),
+      max-height 220ms cubic-bezier(0.22, 0.75, 0.3, 1);
+
+    animation: fs-popover-sheet-in 220ms cubic-bezier(0.22, 0.75, 0.3, 1);
+
+    // `max()` y no `env()` a secas: pisar el padding del componente con el
+    // env() lo deja en 0 donde no hay gesture bar, y la última opción de la
+    // lista queda pegada al borde. Así el piso se respeta siempre.
+    padding-bottom: max(#{$pad}, env(safe-area-inset-bottom));
+
+    @if $scroller {
+      // El tope de la hoja ya acota el alto total; el max-height del scroller
+      // pensado para el modo anclado acá sólo lo dejaría corto.
+      #{$scroller} {
+        max-height: none;
+        min-height: 0;
+      }
+    } @else {
+      overflow-y: auto;
+    }
+
+    &::backdrop {
+      background: rgb(0 0 0 / 0.42);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+      animation:  none;
+    }
+  }
+}

@@ -436,6 +436,10 @@
     text-align: start;
     white-space: normal;
     color: var(--fs-color-text-primary);
+
+    // El contenido lo pone el consumidor por template, así que no hay un
+    // scroller conocido: scrollea la hoja.
+    @include overlay.popover-sheet;
   }
 
   // ─── Celdas ──────────────────────────────────────────────────────────────

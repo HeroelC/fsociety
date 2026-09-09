@@ -83,6 +83,9 @@
     flex-direction: column;
     gap: 1px;
     animation: fs-menu-in 150ms cubic-bezier(0.2, 0.7, 0.3, 1);
+
+    // Sin scroller propio: la hoja scrollea sola.
+    @include overlay.popover-sheet;
   }
 
   // ─── Ítem ─────────────────────────────────────────────────────────────────

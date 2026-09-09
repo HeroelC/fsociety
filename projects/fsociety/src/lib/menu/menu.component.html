@@ -28,6 +28,7 @@
       [popoverAlign]="align"
       [popoverSide]="side"
       [popoverMatchWidth]="matchTriggerWidth"
+      popoverSheet="auto"
       (keydown)="onMenuKeydown($event)"
     >
       @for (item of items; track item.id) {

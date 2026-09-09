@@ -16,6 +16,29 @@ export type FsPopoverAlign = 'start' | 'center' | 'end';
 /** Side the popover prefers. It still flips when that side has no room. */
 export type FsPopoverSide = 'bottom' | 'top';
 
+/** Whether the popover may drop its anchor and become a bottom sheet. */
+export type FsPopoverSheet = 'never' | 'auto';
+
+/**
+ * Viewports where anchoring stops making sense.
+ *
+ * The width clause covers phones in portrait. The second one covers a phone in
+ * landscape, which is wide but only ~360px tall — the case where a flipped
+ * popover does the most damage. `pointer: coarse` keeps a merely small desktop
+ * window out of it.
+ */
+export const FS_POPOVER_SHEET_QUERY =
+  '(max-width: 640px), (pointer: coarse) and (max-height: 560px)';
+
+/**
+ * Keyboard inset the sheet has to clear, published by the directive and read by
+ * the `popover-sheet` mixin in `styles/_overlay.scss`.
+ *
+ * Not prefixed `--_` like a component-private variable: it is the contract
+ * between this directive and that mixin, so it has to survive both.
+ */
+const KEYBOARD_VAR = '--fs-popover-keyboard';
+
 /**
  * Renders the host element in the browser's top layer, anchored to a trigger.
  *
@@ -70,6 +93,20 @@ export class FsAnchoredPopoverDirective implements AfterViewInit, OnChanges, OnD
    */
   @Input() popoverOpen?: boolean;
 
+  /**
+   * Collapse into a bottom sheet on small, touch-first viewports.
+   *
+   * Anchoring is a desktop pattern: it assumes the viewport has room on one
+   * side of the trigger. On a phone with the keyboard up there is no such room,
+   * so the popover flips over the very field being edited. A sheet drops the
+   * anchor and takes the bottom edge of the screen as its origin instead.
+   *
+   * Defaults to `never`, so an existing anchored popover keeps its exact
+   * behaviour until it opts in. A tooltip should stay `never` for good: it is
+   * passive information, not a decision, and does not deserve the screen.
+   */
+  @Input() popoverSheet: FsPopoverSheet = 'never';
+
   private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
   private readonly zone = inject(NgZone);
 
@@ -87,6 +124,10 @@ export class FsAnchoredPopoverDirective implements AfterViewInit, OnChanges, OnD
     this.zone.runOutsideAngular(() => {
       window.addEventListener('scroll', this.reposition, true);
       window.addEventListener('resize', this.reposition);
+      // The on-screen keyboard resizes only the visual viewport, so `resize`
+      // on window never fires for it.
+      window.visualViewport?.addEventListener('resize', this.reposition);
+      window.visualViewport?.addEventListener('scroll', this.reposition);
     });
   }
 
@@ -98,6 +139,8 @@ export class FsAnchoredPopoverDirective implements AfterViewInit, OnChanges, OnD
   ngOnDestroy(): void {
     window.removeEventListener('scroll', this.reposition, true);
     window.removeEventListener('resize', this.reposition);
+    window.visualViewport?.removeEventListener('resize', this.reposition);
+    window.visualViewport?.removeEventListener('scroll', this.reposition);
     this.hide();
   }
 
@@ -116,8 +159,37 @@ export class FsAnchoredPopoverDirective implements AfterViewInit, OnChanges, OnD
     }
   }
 
+  /** Whether this popover should render as a sheet right now. */
+  private get asSheet(): boolean {
+    return this.popoverSheet === 'auto' && window.matchMedia(FS_POPOVER_SHEET_QUERY).matches;
+  }
+
+  /**
+   * How much of the bottom of the layout viewport the keyboard is covering.
+   *
+   * The keyboard shrinks the *visual* viewport and leaves the layout viewport
+   * alone, so an element pinned to the bottom stays behind it. That difference
+   * is the inset. `env(keyboard-inset-height)` would express this directly but
+   * is not shipped widely enough to depend on.
+   */
+  private keyboardInset(): number {
+    const vv = window.visualViewport;
+    if (!vv) return 0;
+    // Safari can briefly report a visual viewport taller than the layout one
+    // while the address bar retracts, which would push the sheet off-screen.
+    return Math.max(0, window.innerHeight - vv.height - vv.offsetTop);
+  }
+
   private position(): void {
     const el = this.host.nativeElement;
+
+    if (this.asSheet) {
+      this.positionAsSheet(el);
+      return;
+    }
+
+    this.clearSheet(el);
+
     const rect = this.anchor?.getBoundingClientRect();
     if (!rect) return;
 
@@ -150,6 +222,30 @@ export class FsAnchoredPopoverDirective implements AfterViewInit, OnChanges, OnD
     // Keep it inside the viewport when centring pushes it past an edge.
     const maxLeft = window.innerWidth - el.offsetWidth - 4;
     el.style.left = `${Math.max(4, Math.min(left, maxLeft))}px`;
+  }
+
+  /**
+   * Hands positioning over to the stylesheet.
+   *
+   * The inline `top` / `left` / `width` written by the anchored path beat any
+   * rule in the cascade, so they have to be cleared before the sheet rules can
+   * apply — a `@media` block in a component stylesheet could never win against
+   * them. From here the directive only decides *that* it is a sheet and how
+   * much keyboard to clear; the mixin decides what that looks like.
+   */
+  private positionAsSheet(el: HTMLElement): void {
+    el.style.top = '';
+    el.style.left = '';
+    el.style.width = '';
+    el.style.setProperty(KEYBOARD_VAR, `${this.keyboardInset()}px`);
+    el.dataset['fsPopover'] = 'sheet';
+  }
+
+  /** Undoes {@link positionAsSheet} when the viewport grows back. */
+  private clearSheet(el: HTMLElement): void {
+    if (el.dataset['fsPopover'] === undefined) return;
+    delete el.dataset['fsPopover'];
+    el.style.removeProperty(KEYBOARD_VAR);
   }
 
   private supportsPopover(el: HTMLElement): boolean {
