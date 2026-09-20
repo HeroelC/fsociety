@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.20.0](https://github.com/HeroelC/fsociety/compare/v0.19.0...v0.20.0) (2026-09-20)
+
+### Features
+
+* **otp:** agrega la animacion opcional de slots ([19ebcdb](https://github.com/HeroelC/fsociety/commit/19ebcdb4a4b25d5738f5bac0d1a9373ffc55b40d))
+* **rating:** suma labels por valor y la animacion opcional de peek ([23cb32d](https://github.com/HeroelC/fsociety/commit/23cb32db79ab6be08300edc9fa406d48aa1d7626))
+* **toast:** pausa el contador al hover, suma fuse y swipe para descartar ([0a8b806](https://github.com/HeroelC/fsociety/commit/0a8b806e5acc5e8f0cee0fa6f95ce680b42f7df6))
+
 ## [0.19.0](https://github.com/HeroelC/fsociety/compare/v0.18.0...v0.19.0) (2026-09-09)
 
 ### Features
