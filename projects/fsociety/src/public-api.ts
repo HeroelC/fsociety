@@ -90,7 +90,7 @@ export { FsSwitchComponent } from './lib/choice/switch.component';
 export { FsSegmentedComponent } from './lib/choice/segmented.component';
 export type { FsSegmentOption } from './lib/choice/segmented.component';
 
-export { FsToastService } from './lib/toast/toast.service';
+export { FsToastService, FS_TOAST_DEFAULT_DURATION, FS_TOAST_EXIT_MS } from './lib/toast/toast.service';
 export type { FsToastTone, FsToastItem, FsToastOptions } from './lib/toast/toast.service';
 export { FsToastStackComponent } from './lib/toast/toast-stack.component';
 

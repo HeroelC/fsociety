@@ -6,36 +6,60 @@
   aria-label="Notificaciones"
 >
   @for (toast of toastService.toasts(); track toast.id) {
-    <div class="fs-toast" [attr.data-tone]="toast.tone" role="status">
+    <div class="fs-toast-gate" [class.fs-toast-gate--leaving]="toast.leaving">
+      <div class="fs-toast-gate__inner">
 
-      <span
-        class="fs-icon fs-toast__icon"
-        [style.--_icon]="'url(' + iconFor(toast.tone) + ')'"
-        aria-hidden="true"
-      ></span>
+        <div
+          class="fs-toast"
+          [attr.data-tone]="toast.tone"
+          [class.fs-toast--leaving]="toast.leaving"
+          [class.fs-toast--paused]="isPaused(toast.id)"
+          [class.fs-toast--swipe]="swipeToDismiss"
+          role="status"
+          (mouseenter)="onPointerEnter(toast)"
+          (mouseleave)="onPointerLeave(toast)"
+          (focusin)="onFocusIn(toast)"
+          (focusout)="onFocusOut($event, toast)"
+          (pointerdown)="onPointerDown($event, toast)"
+        >
 
-      <div class="fs-toast__body">
-        @if (toast.title) {
-          <div class="fs-toast__title">{{ toast.title }}</div>
-        }
-        @if (toast.text) {
-          <div class="fs-toast__tx">{{ toast.text }}</div>
-        }
+          <span
+            class="fs-icon fs-toast__icon"
+            [style.--_icon]="'url(' + iconFor(toast.tone) + ')'"
+            aria-hidden="true"
+          ></span>
+
+          <div class="fs-toast__body">
+            @if (toast.title) {
+              <div class="fs-toast__title">{{ toast.title }}</div>
+            }
+            @if (toast.text) {
+              <div class="fs-toast__tx">{{ toast.text }}</div>
+            }
+          </div>
+
+          <button
+            class="fs-toast__close"
+            type="button"
+            aria-label="Cerrar"
+            (click)="dismissToast(toast.id)"
+          >
+            <span
+              class="fs-icon fs-toast__close-icon"
+              [style.--_icon]="'url(' + Icons.x + ')'"
+              aria-hidden="true"
+            ></span>
+          </button>
+
+          @if (showFuse(toast)) {
+            <span class="fs-toast__fuse" aria-hidden="true">
+              <span class="fs-toast__fuse-bar" [style.--_duration.ms]="toast.duration"></span>
+            </span>
+          }
+
+        </div>
+
       </div>
-
-      <button
-        class="fs-toast__close"
-        type="button"
-        aria-label="Cerrar"
-        (click)="toastService.remove(toast.id)"
-      >
-        <span
-          class="fs-icon fs-toast__close-icon"
-          [style.--_icon]="'url(' + Icons.x + ')'"
-          aria-hidden="true"
-        ></span>
-      </button>
-
     </div>
   }
 </div>

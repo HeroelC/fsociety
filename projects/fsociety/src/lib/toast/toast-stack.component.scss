@@ -1,8 +1,22 @@
 @use '../../styles/overlay' as overlay;
 
+// Kept in sync by hand with `FS_TOAST_EXIT_MS` in `toast.service.ts`: the
+// service removes the item after this long, so the transition must not outlast
+// it or the toast would be yanked mid-slide.
+$fs-toast-exit: 240ms;
+
+// The gap between stacked toasts. It lives on the gate's inner box (see below)
+// rather than on `.fs-toaster`, so it collapses along with the toast.
+$fs-toast-gap: 10px;
+
 @keyframes fs-toast-in {
   from { opacity: 0; transform: translateX(20px) scale(.96); }
   to   { opacity: 1; transform: none; }
+}
+
+@keyframes fs-toast-fuse {
+  from { transform: scaleX(1); }
+  to   { transform: scaleX(0); }
 }
 
 // Promoted to the top layer so no ancestor containing block can clip the stack.
@@ -18,7 +32,6 @@
   z-index: 80;
   display: flex;
   flex-direction: column;
-  gap: 10px;
   width: 340px;
   max-width: calc(100vw - 40px);
   pointer-events: none;
@@ -26,7 +39,40 @@
   > * { pointer-events: auto; }
 }
 
+// ─── Collapse gate ───────────────────────────────────────────────────────────
+// A dismissed toast used to disappear in one frame and the toasts below jumped.
+// Animating `grid-template-rows` from `1fr` to `0fr` is the one way to
+// transition an auto height in pure CSS, so the stack closes the gap smoothly.
+.fs-toast-gate {
+  display: grid;
+  grid-template-rows: 1fr;
+  transition: grid-template-rows $fs-toast-exit cubic-bezier(0.23, 1, 0.32, 1);
+
+  &--leaving { grid-template-rows: 0fr; }
+
+  // The gap lives INSIDE the collapsing box so it collapses with the toast. A
+  // `gap` on .fs-toaster would survive the collapse and leave a hole behind.
+  //
+  // The padding has to be transitioned away as well, and that is not optional:
+  // `min-height: 0` lets the row shrink, but padding is never subject to it, so
+  // on its own it pins the track open at exactly $fs-toast-gap and the stack
+  // closes to a 10px hole instead of closing all the way.
+  &__inner {
+    min-height: 0;
+    padding-top: $fs-toast-gap;
+    transition: padding-top $fs-toast-exit cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  // Only while collapsing: at rest `overflow: hidden` would clip the toast's
+  // box-shadow.
+  &--leaving &__inner {
+    overflow: hidden;
+    padding-top: 0;
+  }
+}
+
 .fs-toast {
+  position: relative;
   display: flex;
   gap: 11px;
   padding: 13px 14px;
@@ -36,12 +82,40 @@
   box-shadow: var(--fs-color-shadow-pop);
   animation: fs-toast-in 260ms cubic-bezier(.2,.8,.3,1) forwards;
 
+  // ─── Swipe to dismiss ──────────────────────────────────────────────────────
+  // `pan-y`, not `none`: a finger landing on a toast must still scroll the page
+  // vertically. Only the horizontal axis is ours to claim.
+  &--swipe {
+    touch-action: pan-y;
+    user-select: none;
+  }
+
+  // ─── Leaving ───────────────────────────────────────────────────────────────
+  &--leaving {
+    // `fs-toast-in` is `forwards`, so its filled transform would pin the
+    // element and nothing below would move. Drop it before transitioning out.
+    animation: none;
+    opacity: 0;
+    transform: translateX(110%);
+    transition:
+      transform $fs-toast-exit cubic-bezier(.2,.8,.3,1),
+      opacity $fs-toast-exit ease;
+    pointer-events: none;
+  }
+
   // ─── Tone icon colors ──────────────────────────────────────────────────────
   &[data-tone="success"] .fs-toast__icon { color: var(--fs-color-success); }
   &[data-tone="danger"]  .fs-toast__icon { color: var(--fs-color-error); }
   &[data-tone="warning"] .fs-toast__icon { color: var(--fs-color-warning); }
   &[data-tone="info"],
   &[data-tone="neutral"] { .fs-toast__icon { color: var(--fs-color-primary); } }
+
+  // ─── Tone fuse colors ──────────────────────────────────────────────────────
+  &[data-tone="success"] .fs-toast__fuse-bar { background: var(--fs-color-success); }
+  &[data-tone="danger"]  .fs-toast__fuse-bar { background: var(--fs-color-error); }
+  &[data-tone="warning"] .fs-toast__fuse-bar { background: var(--fs-color-warning); }
+  &[data-tone="info"],
+  &[data-tone="neutral"] { .fs-toast__fuse-bar { background: var(--fs-color-primary); } }
 
   // ─── Icon ──────────────────────────────────────────────────────────────────
   &__icon {
@@ -70,6 +144,30 @@
     line-height: 1.45;
     margin-top: 1px;
   }
+
+  // ─── Fuse ──────────────────────────────────────────────────────────────────
+  &__fuse {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2px;
+    overflow: hidden;
+    border-radius: 0 0 calc(var(--fs-radius-md) + 2px) calc(var(--fs-radius-md) + 2px);
+  }
+
+  &__fuse-bar {
+    display: block;
+    width: 100%;
+    height: 100%;
+    transform-origin: left center;
+    // An animation rather than a transition on purpose: only an animation can
+    // be frozen with `animation-play-state`, which is what keeps the bar and
+    // the service's JS timer paused at exactly the same instant.
+    animation: fs-toast-fuse var(--_duration, 4200ms) linear forwards;
+  }
+
+  &--paused &__fuse-bar { animation-play-state: paused; }
 
   // ─── Close button ──────────────────────────────────────────────────────────
   &__close {
@@ -103,4 +201,31 @@
     width: 15px;
     height: 15px;
   }
+}
+
+// ─── Reduced motion ──────────────────────────────────────────────────────────
+@media (prefers-reduced-motion: reduce) {
+  // Same name, so this definition wins wherever the query matches: the toast
+  // still fades in, it just no longer slides or scales.
+  @keyframes fs-toast-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  // The stack snaps closed instead of collapsing.
+  .fs-toast-gate,
+  .fs-toast-gate__inner {
+    transition: none;
+  }
+
+  .fs-toast--leaving {
+    transform: none;
+    transition: opacity $fs-toast-exit ease;
+  }
+
+  // The fuse is the one thing that survives here. It is not decoration: it is
+  // the only indication of how long the toast has left, and removing it would
+  // take information away from exactly the users this query is meant to help.
+  // It is a single linear shrink with no bounce, so it is already the calmest
+  // form the indicator can take.
 }
