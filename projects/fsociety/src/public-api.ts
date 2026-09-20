@@ -56,7 +56,7 @@ export type {
 } from './lib/date-picker/date-range-picker.component';
 
 export { FsOtpComponent } from './lib/otp/otp.component';
-export type { FsOtpState, FsOtpMode } from './lib/otp/otp.component';
+export type { FsOtpState, FsOtpMode, FsOtpMotion } from './lib/otp/otp.component';
 
 export { FsModalComponent } from './lib/dialog/modal.component';
 export type { FsModalSize } from './lib/dialog/modal.component';

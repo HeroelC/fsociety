@@ -13,6 +13,7 @@ const meta: Meta<FsOtpComponent> = {
     mode: { control: 'select', options: ['numeric', 'alphanumeric'] },
     length: { control: { type: 'number', min: 1, max: 12 } },
     groupAt: { control: 'number' },
+    motion: { control: 'inline-radio', options: ['none', 'slots'] },
   },
   parameters: {
     docs: {
@@ -39,6 +40,7 @@ export const Default: Story = {
     disabled: false,
     selectOnFocus: true,
     separator: '–',
+    motion: 'none',
   },
   render: (args) => ({
     props: args,
@@ -53,6 +55,7 @@ export const Default: Story = {
         [state]="state"
         [disabled]="disabled"
         [selectOnFocus]="selectOnFocus"
+        [motion]="motion"
       ></fs-otp>
     `,
   }),
@@ -213,4 +216,75 @@ export const Keyboard: Story = {
     `,
   }),
   parameters: { layout: 'padded' },
+};
+
+// ─── Motion ──────────────────────────────────────────────────────────────────
+
+export const Motion: Story = {
+  name: 'Animación opcional',
+  render: () => ({
+    props: { plain: '', fancy: '', state: 'default' },
+    template: `
+      <div style="display:flex; flex-direction:column; gap:30px; max-width:460px;">
+
+        <div style="display:flex; flex-direction:column; gap:10px;">
+          <fs-otp
+            label="motion=&quot;none&quot; — el default"
+            hint="Sin animación: sólo las transiciones de borde y foco."
+            [length]="6"
+            [(ngModel)]="plain"
+          ></fs-otp>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:10px;">
+          <fs-otp
+            label="motion=&quot;slots&quot;"
+            hint="Cada dígito aterriza con un pop y un wash del color primario."
+            [length]="6"
+            motion="slots"
+            [(ngModel)]="fancy"
+          ></fs-otp>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:10px; align-items:flex-start;">
+          <fs-otp
+            label="Error — la fila se sacude"
+            [length]="6"
+            motion="slots"
+            [state]="state"
+            errorMessage="El código no es válido o expiró."
+            (valueChange)="state = 'default'"
+          ></fs-otp>
+
+          <button
+            type="button"
+            (click)="state = 'error'"
+            style="font:inherit; font-size:12.5px; padding:6px 12px; cursor:pointer;
+                   color:var(--fs-color-text-primary); background:var(--fs-color-surface);
+                   border:1px solid var(--fs-color-border-field); border-radius:var(--fs-radius-md);"
+          >
+            Simular código inválido
+          </button>
+        </div>
+
+        <div style="font-size:12.5px; color:var(--fs-color-text-secondary); line-height:1.6;">
+          La animación es <b>opt-in por instancia</b>: <code>motion</code> arranca en
+          <code>'none'</code>, así que un <code>&lt;fs-otp&gt;</code> pelado no mueve nada.
+          Y aunque esté prendida, <code>prefers-reduced-motion</code> del sistema apaga
+          todo el movimiento y deja sólo el fundido — la preferencia del usuario gana
+          por encima de la del consumidor.
+        </div>
+
+      </div>
+    `,
+  }),
+  parameters: {
+    layout: 'padded',
+    docs: {
+      description: {
+        story:
+          'Adaptación del patrón *code slots*: el dígito aterriza con un pop, el error sacude la fila y el ícono de estado entra con escala. Cada efecto anima su propio elemento porque un `<input>` no admite pseudo-elementos, así que no hay dos animaciones compitiendo por el mismo nodo.',
+      },
+    },
+  },
 };

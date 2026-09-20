@@ -122,3 +122,81 @@
     &--success { color: var(--fs-color-success); }
   }
 }
+
+// ---------------------------------------------------------------------------
+// Optional motion — `motion="slots"`
+//
+// Everything below is inert unless the consumer opts in, so the default
+// `<fs-otp>` ships with no animation beyond the baseline border transitions.
+//
+// The cells are real `<input>` elements, which cannot carry ::before/::after,
+// so each effect animates its own element and no two ever stack on one node:
+// the fill lands on the cell, the shake on the row, the pop on the state icon.
+// ---------------------------------------------------------------------------
+
+.fs-otp--motion-slots {
+  .fs-otp__cell--filled:not(:disabled) {
+    // Replays on every re-fill: clearing a cell drops the class and re-adding it
+    // restarts the animation, so backspacing and retyping animates again.
+    animation: fs-otp-slot-in 260ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  // Fires when `state` flips to error. Holding the same error across two
+  // submissions will not replay it — send the control back to `default` while
+  // the user retypes, which is what the error message asks them to do anyway.
+  &.fs-otp--error .fs-otp__cells {
+    animation: fs-otp-slot-shake 360ms cubic-bezier(0.36, 0.07, 0.19, 0.97);
+  }
+
+  .fs-otp__state-icon {
+    animation: fs-otp-slot-icon 300ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+}
+
+@keyframes fs-otp-slot-in {
+  0% {
+    transform: scale(0.8);
+    background: color-mix(in srgb, var(--fs-color-primary) 18%, var(--fs-color-surface));
+  }
+  55% {
+    transform: scale(1.07);
+  }
+  100% {
+    transform: scale(1);
+    background: var(--fs-color-surface);
+  }
+}
+
+@keyframes fs-otp-slot-shake {
+  0%, 100% { transform: translateX(0); }
+  20%      { transform: translateX(-5px); }
+  40%      { transform: translateX(4px); }
+  60%      { transform: translateX(-3px); }
+  80%      { transform: translateX(2px); }
+}
+
+@keyframes fs-otp-slot-icon {
+  0%   { transform: scale(0.4); opacity: 0; }
+  60%  { transform: scale(1.12); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+// Motion is a preference, not a feature: the opt-in still yields to the OS.
+// Colour and opacity survive, movement does not.
+@media (prefers-reduced-motion: reduce) {
+  .fs-otp--motion-slots {
+    .fs-otp__cell--filled:not(:disabled),
+    &.fs-otp--error .fs-otp__cells {
+      animation: none;
+    }
+
+    .fs-otp__state-icon {
+      animation: fs-otp-slot-icon-fade 200ms ease;
+    }
+  }
+}
+
+@keyframes fs-otp-slot-icon-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}

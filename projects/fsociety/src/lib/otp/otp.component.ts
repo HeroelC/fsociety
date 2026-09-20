@@ -24,6 +24,16 @@ export type FsOtpState = 'default' | 'error' | 'success';
 /** Which characters a cell accepts. */
 export type FsOtpMode = 'numeric' | 'alphanumeric';
 
+/**
+ * Optional motion. Animations are off by default so a plain `<fs-otp>` stays
+ * silent — the consumer opts in per instance.
+ *
+ * - `none`  — no animation beyond the baseline border/focus transitions.
+ * - `slots` — each digit lands with a pop and a tinted wash, an error shakes
+ *             the row, and the state icon pops in.
+ */
+export type FsOtpMotion = 'none' | 'slots';
+
 let otpIdCounter = 0;
 
 function lengthInput(value: number | string | null | undefined): number {
@@ -61,6 +71,12 @@ export class FsOtpComponent implements ControlValueAccessor, OnChanges {
   @Input({ transform: lengthInput }) length = 6;
 
   @Input() mode: FsOtpMode = 'numeric';
+
+  /**
+   * Opt-in animation. Stays `none` so nothing in the library moves unless the
+   * consumer asks for it.
+   */
+  @Input() motion: FsOtpMotion = 'none';
 
   /** Draws a separator before this index — `3` splits 6 cells into 3 + 3. */
   @Input() groupAt?: number;

@@ -1,4 +1,8 @@
-<div class="fs-otp">
+<div
+  class="fs-otp"
+  [class.fs-otp--motion-slots]="motion === 'slots'"
+  [class.fs-otp--error]="state === 'error'"
+>
 
   @if (label) {
     <label class="fs-otp__label" [for]="inputId + '-0'">{{ label }}</label>
