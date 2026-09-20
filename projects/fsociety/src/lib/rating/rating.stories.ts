@@ -12,6 +12,7 @@ const meta: Meta<FsRatingComponent> = {
     state: { control: 'select', options: ['default', 'error'] },
     icon: { control: 'select', options: ['star', 'heart'] },
     count: { control: { type: 'number', min: 1, max: 20 } },
+    motion: { control: 'inline-radio', options: ['none', 'peek'] },
     formatValue: { control: false },
   },
 };
@@ -32,6 +33,7 @@ export const Default: Story = {
     showValue: false,
     state: 'default',
     disabled: false,
+    motion: 'none',
   },
   render: (args) => ({
     props: { ...args, value: 0 },
@@ -43,6 +45,7 @@ export const Default: Story = {
         [readonly]="readonly"
         [showValue]="showValue"
         [state]="state" [disabled]="disabled"
+        [motion]="motion"
         [(ngModel)]="value"
       ></fs-rating>
     `,
@@ -102,6 +105,48 @@ export const Keyboard: Story = {
           un solo tab stop: la referencia hacía cada estrella un botón tabulable, o
           sea cinco tabs para pasar un control.
         </div>
+      </div>
+    `,
+  }),
+  parameters: { layout: 'padded' },
+};
+
+// ─── Motion ──────────────────────────────────────────────────────────────────
+
+export const Motion: Story = {
+  name: 'Movimiento — peek con etiquetas',
+  render: () => ({
+    props: {
+      labels: ['Malo', 'Regular', 'Bueno', 'Muy bueno', 'Excelente'],
+      quieto: 0,
+      conPeek: 0,
+    },
+    template: `
+      <div style="display:flex; flex-wrap:wrap; gap:56px; padding-top:8px;">
+        <fs-rating
+          label="motion=&quot;none&quot;"
+          [labels]="labels"
+          motion="none"
+          [(ngModel)]="quieto"
+        ></fs-rating>
+
+        <fs-rating
+          label="motion=&quot;peek&quot;"
+          [labels]="labels"
+          motion="peek"
+          [(ngModel)]="conPeek"
+        ></fs-rating>
+      </div>
+
+      <div style="font-size:12.5px; color:var(--fs-color-text-secondary); line-height:1.6; max-width:460px; margin-top:26px;">
+        Los dos muestran la misma etiqueta: <code>labels</code> no depende de
+        <code>motion</code>, porque el texto es información y sólo el movimiento
+        es opcional. A la izquierda la etiqueta aparece quieta; a la derecha la
+        estrella sube un poco y la etiqueta entra deslizándose. Se puede enfocar
+        con <code>Tab</code> y mover con las flechas para ver la etiqueta sin
+        mouse, y la misma etiqueta viaja en el <code>aria-valuetext</code>. Con
+        <code>prefers-reduced-motion</code> no se mueve nada, pero la etiqueta
+        sigue apareciendo.
       </div>
     `,
   }),

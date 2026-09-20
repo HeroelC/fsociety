@@ -6,6 +6,7 @@
 //     --fs-rating-empty:       var(--fs-color-border-strong);
 //     --fs-rating-size:        26px;
 //     --fs-rating-gap:         3px;
+//     --fs-rating-lift:        6px;   // motion="peek" only
 //   }
 // ---------------------------------------------------------------------------
 
@@ -18,6 +19,17 @@
   --_size: var(--fs-rating-size, 26px);
   --_gap: var(--fs-rating-gap, 3px);
 
+  // How far the previewed glyph rises under `motion="peek"`. Everything that
+  // needs room above the row derives from it, so retuning the lift retunes the
+  // headroom with it and the glyph never ends up clipped or overlapping.
+  --_lift: var(--fs-rating-lift, 6px);
+  --_ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+
+  // Distance from the top of the row to the bottom of the tip.
+  --_tip-gap: calc(var(--_lift) + 4px);
+  // That distance plus the tip's own height, which is what the row reserves.
+  --_tip-room: calc(var(--_tip-gap) + 28px);
+
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -26,6 +38,15 @@
     opacity: 0.6;
     pointer-events: none;
   }
+
+  // Breathing room above the glyphs so the lift and the tip do not run into the
+  // label. It is padding on the row, not a transform on the glyphs, so the
+  // resting baseline of the two layers is untouched.
+  &--motion-peek > .fs-rate__row { padding-top: var(--_lift); }
+
+  // Declared after the rule above on purpose: when both classes are present the
+  // tip's reserve wins, and it already includes the lift.
+  &--has-tip > .fs-rate__row { padding-top: var(--_tip-room); }
 
   &__label {
     font-size: 13px;
@@ -104,6 +125,28 @@
     cursor: pointer;
   }
 
+  // ─── Tip ─────────────────────────────────────────────────────────────────
+  // Centred over the previewed glyph. `--_tip-i` is the 0-based index, sent
+  // from the component because the size and the gap live here and not there.
+  // Not gated on `motion`: without it the tip simply appears in place.
+  &__tip {
+    position: absolute;
+    bottom: calc(100% + var(--_tip-gap));
+    left: calc((var(--_size) + var(--_gap)) * var(--_tip-i, 0) + var(--_size) / 2);
+    transform: translateX(-50%);
+    z-index: 1;
+    padding: 5px 9px;
+    border-radius: 7px;
+    white-space: nowrap;
+    font-size: 12.5px;
+    font-weight: 500;
+    line-height: 1.3;
+    background: var(--fs-color-text-primary);
+    color: var(--fs-color-bg);
+    box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.18);
+    pointer-events: none;
+  }
+
   &__value {
     font-size: 13.5px;
     font-weight: 600;
@@ -125,4 +168,84 @@
     line-height: 1.4;
     color: var(--fs-color-error);
   }
+}
+
+// ---------------------------------------------------------------------------
+// Optional motion — `motion="peek"`
+//
+// Everything below is inert unless the consumer opts in, so the default
+// `<fs-rating>` ships with no animation beyond the fill transition.
+//
+// The glyph row is drawn twice — a muted base layer and the same row clipped to
+// a percentage on top — so a lift has to happen in both layers at once or the
+// filled half of a star stays down while its muted half rises. The template
+// binds `--lifted` in both loops and this block styles it once, which is what
+// keeps the two copies on the same transform and the same timing.
+// ---------------------------------------------------------------------------
+
+.fs-rate--motion-peek {
+  .fs-rate__glyph {
+    // Grows from the bottom edge, so the row keeps its baseline and only the
+    // top of the glyph moves.
+    transform-origin: 50% 100%;
+    transition:
+      transform 320ms var(--_ease-out),
+      color 160ms ease;
+  }
+
+  .fs-rate__glyph--lifted {
+    transform: translateY(calc(var(--_lift) * -1)) scale(1.06);
+  }
+
+  // The fill layer clips with `overflow: hidden`, which cuts vertically as well
+  // as horizontally, so a glyph translated upward inside it would lose its top.
+  // The layer is extended upward by the lift plus the headroom the 1.06 scale
+  // needs (0.06 of the glyph, taken at 0.1 for margin) and its glyphs are
+  // bottom-aligned, so the row still starts on the base layer's baseline while
+  // gaining room above. `width` resolves against the containing block and is
+  // unaffected by moving `top`, so the horizontal clip is untouched.
+  .fs-rate__layer--fill {
+    inset: calc((var(--_lift) + var(--_size) * 0.1) * -1) auto 0 0;
+    align-items: flex-end;
+  }
+
+  .fs-rate__tip {
+    animation: fs-rate-tip-in 180ms ease;
+  }
+}
+
+@keyframes fs-rate-tip-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 4px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+// ─── Reduced motion ──────────────────────────────────────────────────────────
+// No glyph transform and no travel on the tip. The tip still fades in, because
+// it carries the label and the label is information: only the movement was ever
+// the opt-in part.
+@media (prefers-reduced-motion: reduce) {
+  .fs-rate--motion-peek {
+    .fs-rate__glyph {
+      transition: color 160ms ease;
+    }
+
+    .fs-rate__glyph--lifted {
+      transform: none;
+    }
+
+    .fs-rate__tip {
+      animation: fs-rate-tip-fade 180ms ease;
+    }
+  }
+}
+
+@keyframes fs-rate-tip-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }

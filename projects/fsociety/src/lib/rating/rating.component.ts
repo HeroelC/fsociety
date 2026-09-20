@@ -20,6 +20,19 @@ export type FsRatingState = 'default' | 'error';
 /** The glyph. `star` and `heart` are built in; pass a URL for anything else. */
 export type FsRatingIcon = 'star' | 'heart';
 
+/**
+ * Optional motion. Animations are off by default so a plain `<fs-rating>` stays
+ * still — the consumer opts in per instance.
+ *
+ * - `none` — no animation beyond the baseline fill transition.
+ * - `peek` — the glyph being previewed rises and grows a little from its bottom
+ *            edge, and the tip carrying its label slides in.
+ *
+ * Only the movement is opt-in. The tip itself renders whenever `labels` are
+ * supplied, because the label is information and not decoration.
+ */
+export type FsRatingMotion = 'none' | 'peek';
+
 let ratingIdCounter = 0;
 
 function countInput(value: number | string | null | undefined): number {
@@ -71,6 +84,18 @@ export class FsRatingComponent implements ControlValueAccessor {
   /** Formats that readout. Defaults to one decimal when fractional. */
   @Input() formatValue?: (value: number) => string;
 
+  @Input() motion: FsRatingMotion = 'none';
+
+  /**
+   * Per-value labels, index 0 = value 1. `['Malo', 'Regular', 'Bueno']`.
+   *
+   * They surface twice from this one source: as the tip above the glyph being
+   * previewed, and appended to `aria-valuetext`, so the pointer and the screen
+   * reader never drift apart. Shorter than `count` is fine — the values past the
+   * end simply have no label.
+   */
+  @Input() labels: string[] = [];
+
   @Output() valueChange = new EventEmitter<number>();
 
   readonly inputId = `fs-rating-${++ratingIdCounter}`;
@@ -79,6 +104,9 @@ export class FsRatingComponent implements ControlValueAccessor {
 
   /** Glyph under the pointer, previewing what a click would set. */
   hovered = 0;
+
+  /** The group holds focus, so the keyboard is driving the preview. */
+  focused = false;
 
   private _onChange: (value: number) => void = () => {};
   private _onTouched: () => void = () => {};
@@ -124,8 +152,47 @@ export class FsRatingComponent implements ControlValueAccessor {
     return this.interactive ? 0 : -1;
   }
 
+  /**
+   * The glyph currently being previewed, 1-based, or 0 for none.
+   *
+   * The pointer wins while it is over the row; otherwise focus previews the
+   * current value, which is what gives a keyboard user the same lift and the
+   * same label a mouse user gets. Nothing previews when the control is inert.
+   */
+  get peeked(): number {
+    if (!this.interactive) return 0;
+    return this.hovered || (this.focused ? Math.round(this.value) : 0);
+  }
+
+  /** The label for a value, or '' when `labels` does not reach that far. */
+  labelFor(n: number): string {
+    if (n < 1 || n > this.labels.length) return '';
+    return this.labels[n - 1] ?? '';
+  }
+
+  /** Text of the tip. Empty means there is nothing to show and no tip renders. */
+  get tipText(): string {
+    return this.labelFor(this.peeked);
+  }
+
+  /** Reserves the row's headroom only when a tip can actually appear. */
+  get hasTip(): boolean {
+    return this.interactive && this.labels.length > 0;
+  }
+
+  /**
+   * Which glyph the tip sits over, as a string so it lands in a custom property
+   * verbatim. The stylesheet turns it into an offset with the configured size
+   * and gap, which are CSS and not known here.
+   */
+  get tipIndex(): string {
+    return String(Math.max(0, this.peeked - 1));
+  }
+
   ariaLabelFor(n: number): string {
-    return `${n} de ${this.count}`;
+    const label = this.labelFor(n);
+    // One source for the tip and the announcement, so they cannot disagree.
+    return label ? `${n} de ${this.count} — ${label}` : `${n} de ${this.count}`;
   }
 
   // ─── Interaction ──────────────────────────────────────────────────────────
@@ -186,8 +253,14 @@ export class FsRatingComponent implements ControlValueAccessor {
     }
   }
 
+  onFocus(): void {
+    if (!this.interactive) return;
+    this.focused = true;
+  }
+
   onBlur(): void {
     this.hovered = 0;
+    this.focused = false;
     this._onTouched();
   }
 

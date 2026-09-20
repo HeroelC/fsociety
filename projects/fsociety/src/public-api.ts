@@ -68,7 +68,7 @@ export { FsSliderComponent } from './lib/slider/slider.component';
 export type { FsSliderState, FsSliderValuePosition } from './lib/slider/slider.component';
 
 export { FsRatingComponent } from './lib/rating/rating.component';
-export type { FsRatingState, FsRatingIcon } from './lib/rating/rating.component';
+export type { FsRatingState, FsRatingIcon, FsRatingMotion } from './lib/rating/rating.component';
 
 export { FsNumberInputComponent } from './lib/number-input/number-input.component';
 export type { FsNumberInputState } from './lib/number-input/number-input.component';

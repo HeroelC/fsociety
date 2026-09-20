@@ -1,4 +1,9 @@
-<div class="fs-rate" [class.fs-rate--disabled]="disabled">
+<div
+  class="fs-rate"
+  [class.fs-rate--disabled]="disabled"
+  [class.fs-rate--motion-peek]="motion === 'peek'"
+  [class.fs-rate--has-tip]="hasTip"
+>
 
   @if (label) {
     <span class="fs-rate__label" [id]="inputId + '-label'">{{ label }}</span>
@@ -22,13 +27,18 @@
       [attr.aria-disabled]="disabled || null"
       (keydown)="onKeydown($event)"
       (mouseleave)="onLeave()"
+      (focus)="onFocus()"
       (blur)="onBlur()"
     >
-      <!-- Base layer: every glyph muted. -->
+      <!-- Base layer: every glyph muted. The lift class is bound here and in the
+           fill layer with the same expression: the two layers are the same row
+           drawn twice, so lifting one glyph in only one of them would tear the
+           filled half away from the muted half. -->
       <span class="fs-rate__layer" aria-hidden="true">
         @for (n of items; track n) {
           <span
             class="fs-icon fs-rate__glyph"
+            [class.fs-rate__glyph--lifted]="n === peeked"
             [style.--_icon]="'url(' + iconUrl + ')'"
           ></span>
         }
@@ -46,10 +56,24 @@
         @for (n of items; track n) {
           <span
             class="fs-icon fs-rate__glyph"
+            [class.fs-rate__glyph--lifted]="n === peeked"
             [style.--_icon]="'url(' + iconUrl + ')'"
           ></span>
         }
       </span>
+
+      <!-- Tip with the label for the previewed value. It renders whenever
+           `labels` cover that value, with or without motion: the label is
+           information and only its entrance is decoration. aria-hidden because
+           the same text already reaches the screen reader through
+           aria-valuetext, and a live tip would say it twice. -->
+      @if (tipText) {
+        <span
+          class="fs-rate__tip"
+          aria-hidden="true"
+          [style.--_tip-i]="tipIndex"
+        >{{ tipText }}</span>
+      }
 
       <!-- Hit areas, on top and transparent. Buttons only when interactive, so
            readonly has nothing focusable. -->
